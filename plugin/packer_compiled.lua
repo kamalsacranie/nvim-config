@@ -114,6 +114,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/lspkind-nvim"
   },
+  ["lspsaga.nvim"] = {
+    loaded = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/lualine.nvim"
@@ -125,6 +129,10 @@ _G.packer_plugins = {
   ["nvim-cmp"] = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/nvim-cmp"
+  },
+  ["nvim-lint"] = {
+    loaded = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/nvim-lint"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -154,6 +162,20 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-commentary"
   },
+  ["vim-pandoc"] = {
+    after = { "vim-pandoc-syntax" },
+    loaded = false,
+    needs_bufread = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/vim-pandoc"
+  },
+  ["vim-pandoc-syntax"] = {
+    load_after = {
+      ["vim-pandoc"] = true
+    },
+    loaded = false,
+    needs_bufread = false,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/vim-pandoc-syntax"
+  },
   ["vim-python-pep8-indent"] = {
     loaded = false,
     needs_bufread = false,
@@ -170,8 +192,15 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType python ++once lua require("packer.load")({'vim-python-pep8-indent', 'black'}, { ft = "python" }, _G.packer_plugins)]]
+vim.cmd [[au FileType python ++once lua require("packer.load")({'black', 'vim-python-pep8-indent'}, { ft = "python" }, _G.packer_plugins)]]
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'vim-pandoc'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType md ++once lua require("packer.load")({'vim-pandoc'}, { ft = "md" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
+vim.cmd("augroup END")
+vim.cmd [[augroup filetypedetect]]
+time([[Sourcing ftdetect script at: /Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/vim-pandoc/ftdetect/pandoc.vim]], true)
+vim.cmd [[source /Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/vim-pandoc/ftdetect/pandoc.vim]]
+time([[Sourcing ftdetect script at: /Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/vim-pandoc/ftdetect/pandoc.vim]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end
 

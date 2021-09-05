@@ -25,7 +25,7 @@ local cfg = {
     extra_trigger_chars = {}, -- Array of extra characters that will trigger signature completion, e.g., {"(", ","}
     -- deprecate !!
     -- decorator = {"`", "`"}  -- this is no longer needed as nvim give me a handler and it allow me to highlight active parameter in floating_window
-    zindex = 200, -- by default it will be on top of all floating windows, set to 50 send it to bottom
+    zindex = 999, -- by default it will be on top of all floating windows, set to 50 send it to bottom
     debug = false, -- set to true to enable debug logging
     log_path = "debug_log_file_path", -- debug log path
     padding = ' ', -- character to pad on left and right of signature can be ' ', or '|'  etc

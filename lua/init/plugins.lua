@@ -21,13 +21,29 @@ return require('packer').startup(function(use)
     -- Nice status line
     -- A NOTE: we can see that the dependency is optional becauase the parent will call the dependency
     -- so we dont have to do it automatically and we optimise our startup
-    use {'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
+    use {
+        'hoob3rt/lualine.nvim',
+        requires = {'kyazdani42/nvim-web-devicons', opt = true}
+    }
 
     -- ==================PYTHON=================
     -- Proper python bracket indent
     use {'Vimjas/vim-python-pep8-indent', ft = {'python'}, opt = true}
     use {'ambv/black', ft = {'python'}, opt = true}
     -- =========================================
+
+    -- =================MARKDOWN================
+
+    use {
+        'vim-pandoc/vim-pandoc',
+        opt = true,
+        ft = {'md', 'markdown'},
+        requires = 'vim-pandoc/vim-pandoc-syntax'
+    }
+    -- =========================================
+
+    -- 3rd party linter because wtf LSP DIAGNOSTICS?????
+    use 'mfussenegger/nvim-lint'
 
     -- Treesitter
     use 'nvim-treesitter/nvim-treesitter'
@@ -45,7 +61,13 @@ return require('packer').startup(function(use)
     use 'kabouzeid/nvim-lspinstall'
 
     -- CMP completion
-    use {"hrsh7th/nvim-cmp", requires = {"hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", 'hrsh7th/cmp-path', 'hrsh7th/cmp-nvim-lua'}}
+    use {
+        "hrsh7th/nvim-cmp",
+        requires = {
+            "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", 'hrsh7th/cmp-path',
+            'hrsh7th/cmp-nvim-lua'
+        }
+    }
     -- VSCode like icons for completion
     use 'onsails/lspkind-nvim'
 
