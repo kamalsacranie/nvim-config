@@ -1,3 +1,4 @@
+vim.g.mapleader = ' '
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = 'yes' -- Adds extra gutter space for like git shit and stuff

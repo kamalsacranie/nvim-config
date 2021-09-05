@@ -1,12 +1,13 @@
 -- My commands
+vim.api.nvim_set_keymap('v', '<leader>yc', '\"*y', {noremap = true})
 vim.cmd('filetype plugin on')
 vim.cmd('filetype indent on')
 
+-- Packcer config
+require('init')
+
 -- Loading all plugin configs (not sure why we can do this before we load plugins)
 require('plugin-config')
-
--- Pakcer config
-require('init')
 
 -- Language specific things idk yet how you can conditionally load stuff yet
 require('lang')
