@@ -154,13 +154,25 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/packer.nvim"
   },
+  ["plenary.nvim"] = {
+    loaded = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/plenary.nvim"
+  },
   rainbow = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/rainbow"
   },
+  ["telescope.nvim"] = {
+    loaded = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+  },
   ["vim-commentary"] = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-commentary"
+  },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-fugitive"
   },
   ["vim-pandoc"] = {
     after = { "vim-pandoc-syntax" },
@@ -192,9 +204,9 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType python ++once lua require("packer.load")({'black', 'vim-python-pep8-indent'}, { ft = "python" }, _G.packer_plugins)]]
-vim.cmd [[au FileType markdown ++once lua require("packer.load")({'vim-pandoc'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType python ++once lua require("packer.load")({'vim-python-pep8-indent', 'black'}, { ft = "python" }, _G.packer_plugins)]]
 vim.cmd [[au FileType md ++once lua require("packer.load")({'vim-pandoc'}, { ft = "md" }, _G.packer_plugins)]]
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'vim-pandoc'}, { ft = "markdown" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 vim.cmd [[augroup filetypedetect]]

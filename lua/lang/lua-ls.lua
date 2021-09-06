@@ -2,7 +2,8 @@
 -- NOTE: that we have to use the LspInstall referenced name from the plugin
 -- To make sure that our config is applied
 USER = vim.fn.expand('$USER')
-require'lspconfig'.lua.setup {
+
+require'lspconfig'.lua.setup({
     settings = {
         Lua = {
             runtime = {
@@ -18,13 +19,16 @@ require'lspconfig'.lua.setup {
             workspace = {
                 -- Make the server aware of Neovim runtime files
                 library = {
-                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                    [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
+                    [vim.fn
+                        .expand('/usr/local/opt/nvim/share/nvim/runtime/lua')] = true,
+                    [vim.fn.expand(
+                        '/usr/local/opt/nvim/share/nvim/runtime/lua/vim/lsp')] = true
                 }
             }
         }
-    }
-}
+    },
+    on_attach = require('modular-settings/lspattatch').attach()
+})
 
 -- Setting up autoformatting
 require"lspconfig".efm.setup {

@@ -1,5 +1,5 @@
+vim.g.mapleader = ' '
 -- My commands
-vim.api.nvim_set_keymap('v', '<leader>yc', '\"*y', {noremap = true})
 vim.cmd('filetype plugin on')
 vim.cmd('filetype indent on')
 

@@ -25,6 +25,7 @@ return require('packer').startup(function(use)
         'hoob3rt/lualine.nvim',
         requires = {'kyazdani42/nvim-web-devicons', opt = true}
     }
+    vim.inspect()
 
     -- ==================PYTHON=================
     -- Proper python bracket indent
@@ -33,7 +34,6 @@ return require('packer').startup(function(use)
     -- =========================================
 
     -- =================MARKDOWN================
-
     use {
         'vim-pandoc/vim-pandoc',
         opt = true,
@@ -54,6 +54,9 @@ return require('packer').startup(function(use)
     -- LSP saga
     use 'glepnir/lspsaga.nvim'
 
+    -- Telescope fzf
+    use {'nvim-telescope/telescope.nvim', requires = {'nvim-lua/plenary.nvim'}}
+
     -- Autoshow signature
     use 'ray-x/lsp_signature.nvim'
 
@@ -68,6 +71,10 @@ return require('packer').startup(function(use)
             'hrsh7th/cmp-nvim-lua'
         }
     }
+
+    -- Git signs for when we change shit. VeryNAAAIIICE
+    use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}}
+
     -- VSCode like icons for completion
     use 'onsails/lspkind-nvim'
 

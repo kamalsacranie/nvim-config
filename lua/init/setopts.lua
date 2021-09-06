@@ -1,4 +1,3 @@
-vim.g.mapleader = ' '
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = 'yes' -- Adds extra gutter space for like git shit and stuff
@@ -12,3 +11,4 @@ vim.opt.expandtab = true
 -- Makes your unwritten buffer hidded when swapping about so you dont have to always
 -- write
 vim.opt.hidden = true
+vim.opt.scrolloff = 12
