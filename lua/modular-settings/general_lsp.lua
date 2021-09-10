@@ -4,11 +4,11 @@ local buf_set_keymap = function(mode, lhs, rhs)
     vim.api.nvim_buf_set_keymap(0, mode, lhs, rhs, opts)
 end
 
-local custom_lsp = {}
+-- Creating our local functions for general lsp config
+local M = {}
 
-function custom_lsp.attach()
+function M.custom_lsp_attach(client, bufnr)
     -- Mappings.
-
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
     buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
@@ -33,6 +33,31 @@ function custom_lsp.attach()
     buf_set_keymap('n', '<leader>q',
                    '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
     buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+
+    -- testing
+    require('lsp_signature').on_attach(require('plugin-config/lsp-signature'))
+
 end
 
-return custom_lsp
+-- This tells the LSP what our client is capable of. I.e. snippets etc
+function M.make_capabilities()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    capabilities.textDocument.completion.completionItem.preselectSupport = true
+    capabilities.textDocument.completion.completionItem.insertReplaceSupport =
+        true
+    capabilities.textDocument.completion.completionItem.labelDetailsSupport =
+        true
+    capabilities.textDocument.completion.completionItem.deprecatedSupport =
+        true
+    capabilities.textDocument.completion.completionItem.commitCharactersSupport =
+        true
+    capabilities.textDocument.completion.completionItem.tagSupport = {
+        valueSet = {1}
+    }
+    capabilities.textDocument.completion.completionItem.resolveSupport = {
+        properties = {'documentation', 'detail', 'additionalTextEdits'}
+    }
+end
+
+return M

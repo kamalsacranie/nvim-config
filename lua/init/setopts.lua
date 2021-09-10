@@ -12,3 +12,5 @@ vim.opt.expandtab = true
 -- write
 vim.opt.hidden = true
 vim.opt.scrolloff = 12
+vim.opt.ignorecase = true
+vim.opt.smartcase = true

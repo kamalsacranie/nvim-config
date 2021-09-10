@@ -4,4 +4,4 @@ vim.g['pandoc#filetypes#handled'] = {'pandoc', 'markdown'}
 vim.g['pandoc#filetypes#pandoc_markdown'] = 0
 
 -- Disable folding
-vim.g['pandoc#modules#disabled'] = {'folding'}
+vim.g['pandoc#modules#disabled'] = {'formatting', 'folding'}

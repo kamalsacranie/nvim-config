@@ -1,21 +1,17 @@
 local cmp = require('cmp')
 
-cmp.setup {
-    -- Luasnip config
+cmp.setup({
     snippet = {
         expand = function(args)
-            require'luasnip'.lsp_expand(args.body)
+            vim.fn["UltiSnips#Anon"](args.body)
         end
     },
-
     mapping = {
         ['<Tab>'] = cmp.mapping.confirm({
-            behaviour = cmp.ConfirmBehavior.Replace,
+            behavior = cmp.ConfirmBehavior.Replace,
             select = true
-        }),
-        ['<CR>'] = cmp.mapping.scroll_docs(0)
+        })
     },
-
     formatting = {
         format = function(entry, vim_item)
             -- fancy icons and a name of kind
@@ -35,15 +31,13 @@ cmp.setup {
     },
 
     sources = {
-        {name = 'nvim_lsp'}, {name = "path"}, {name = 'luasnip'},
+        {name = 'nvim_lsp'}, {name = "path"}, {name = 'ultisnips'},
         {name = 'nvim_lua'}, {name = 'buffer'}
-    },
+    }
+})
 
-    completion = {completeopt = 'menu,menuone,noinsert'}
-}
-
-require('nvim-autopairs.completion.cmp').setup({
-    map_cr = true,
-    map_complete = true,
-    auto_select = true
+require("nvim-autopairs.completion.cmp").setup({
+    -- map_cr = true, --  map <CR> on insert mode
+    map_complete = true -- it will auto insert `(` after select function or method item
+    -- auto_select = true -- automatically select the first item
 })

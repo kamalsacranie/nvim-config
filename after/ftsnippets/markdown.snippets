@@ -1,0 +1,85 @@
+global !p
+# Custom math context. Dont know how to move to serparate file lol
+def math():
+    synlist = vim.eval(
+        """map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')"""
+    )
+    
+    # Catching emply list
+    if not any(synlist):
+        return False
+
+    if "texMathTex" in synlist[-1]:
+        return False
+    elif any("Math" in string for string in synlist):
+        return True
+    else:
+        return False
+endglobal
+
+snippet c' "InlineCode"
+\`${1:code}\`${2}
+endsnippet
+
+snippet m' "InlineMath"
+\$${1:math}\$${2}
+endsnippet
+
+snippet $$ "MathBlock" b
+\$\$
+${1:math}
+\$\$${2}
+endsnippet
+
+snippet ceck "Checkbox" b
+- [ ] ${1:code}
+endsnippet
+
+snippet h3 "Heading3" b
+### ${1:heading}
+endsnippet
+
+snippet h4 "Heading3" b
+#### ${1:heading}
+endsnippet
+
+snippet h5 "Heading3" b
+##### ${1:heading}
+endsnippet
+
+context "math()"
+snippet \frac "fraction" i
+\dfrac\{${1}\}\{${2}\}${3}
+endsnippet
+
+context "math()"
+snippet \sum "sum" i
+\sum_\{${1}\}^\{${2}\}${3}
+endsnippet
+
+context "math()"
+snippet \text "inmathtext" iA
+\text\{ ${1} \}${3}
+endsnippet
+
+context "math()"
+snippet @g "gamma" iA
+\gamma 
+endsnippet
+
+context "math()"
+snippet @G "Gamma" iA
+\Gamma 
+endsnippet
+
+context "math()"
+snippet @t "theta" iA
+\theta 
+endsnippet
+
+context "math()"
+snippet @T "Theta" iA
+\Theta 
+endsnippet
+
+

@@ -25,7 +25,6 @@ return require('packer').startup(function(use)
         'hoob3rt/lualine.nvim',
         requires = {'kyazdani42/nvim-web-devicons', opt = true}
     }
-    vim.inspect()
 
     -- ==================PYTHON=================
     -- Proper python bracket indent
@@ -34,11 +33,25 @@ return require('packer').startup(function(use)
     -- =========================================
 
     -- =================MARKDOWN================
+    local md = {'md', 'markdown'}
+    local rmd = {'rmd', 'Rmd', 'rmarkdown'}
     use {
         'vim-pandoc/vim-pandoc',
         opt = true,
-        ft = {'md', 'markdown'},
-        requires = 'vim-pandoc/vim-pandoc-syntax'
+        ft = md,
+        requires = {'vim-pandoc/vim-pandoc-syntax'}
+    }
+    use {
+        'vim-pandoc/vim-rmarkdown',
+        opt = true,
+        ft = rmd,
+        requires = {'vim-pandoc/vim-pandoc'},
+        {'vim-pandoc/vim-pandoc-syntax'}
+    }
+    use {
+        'ekickx/clipboard-image.nvim',
+        opt = true,
+        ft = {'md', 'markdown', 'rmd', 'Rmd', 'rmarkdown'}
     }
     -- =========================================
 
@@ -46,7 +59,15 @@ return require('packer').startup(function(use)
     use 'mfussenegger/nvim-lint'
 
     -- Treesitter
-    use 'nvim-treesitter/nvim-treesitter'
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        requires = {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
+    }
+
+    use 'nvim-lua/plenary.nvim'
+
+    -- Telescope fzf
+    use 'nvim-telescope/telescope.nvim'
 
     -- native LSP
     use 'neovim/nvim-lspconfig'
@@ -54,8 +75,26 @@ return require('packer').startup(function(use)
     -- LSP saga
     use 'glepnir/lspsaga.nvim'
 
-    -- Telescope fzf
-    use {'nvim-telescope/telescope.nvim', requires = {'nvim-lua/plenary.nvim'}}
+    -- TS utils
+    use {
+        'jose-elias-alvarez/nvim-lsp-ts-utils',
+        ft = {
+            'javascript', 'javascript.jsx', 'jsx', 'typescript',
+            'typescript.tsx', 'tsx'
+        },
+        opt = true,
+        requires = {'nvim-lua/plenary.nvim'}
+    }
+
+    -- Treesitter auto tag completion
+    use {
+        'windwp/nvim-ts-autotag',
+        ft = {
+            'html', 'markdown', 'rmarkdown', 'javascript', 'javascript.jsx',
+            'jsx', 'typescript', 'typescript.tsx', 'tsx'
+        },
+        opt = true
+    }
 
     -- Autoshow signature
     use 'ray-x/lsp_signature.nvim'
@@ -68,21 +107,18 @@ return require('packer').startup(function(use)
         "hrsh7th/nvim-cmp",
         requires = {
             "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", 'hrsh7th/cmp-path',
-            'hrsh7th/cmp-nvim-lua'
+            'hrsh7th/cmp-nvim-lua', "quangnguyen30192/cmp-nvim-ultisnips"
         }
     }
+
+    -- UltiNips yeah
+    use({"SirVer/ultisnips", requires = "honza/vim-snippets"})
 
     -- Git signs for when we change shit. VeryNAAAIIICE
     use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}}
 
     -- VSCode like icons for completion
     use 'onsails/lspkind-nvim'
-
-    -- Snippet engine
-    use {'L3MON4D3/LuaSnip', requires = {'saadparwaiz1/cmp_luasnip'}}
-
-    -- Snippets
-    use 'rafamadriz/friendly-snippets'
 
     -- Colorschemes
     use 'yashguptaz/calvera-dark.nvim'

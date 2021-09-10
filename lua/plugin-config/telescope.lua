@@ -15,22 +15,38 @@ require('telescope').setup {
             horizontal = {mirror = false},
             vertical = {mirror = false}
         },
-        file_sorter = require'telescope.sorters'.get_fuzzy_file,
-        file_ignore_patterns = {},
-        generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
-        winblend = 0,
-        border = {},
-        borderchars = {'─', '│', '─', '│', '╭', '╮', '╯', '╰'},
-        color_devicons = true,
-        use_less = true,
-        path_display = {},
-        -- set_env = {['COLORTERM'] = 'truecolor'}, -- default = nil,
         file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
         grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
         qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new
+    },
+
+    -- Configuring tele with fzf. we will see how we like it
+    extensions = {
+        fzf = {
+            fuzzy = true, -- fuzzy matching
+            override_generic_sorter = false,
+            override_file_sorter = true -- override the file sorter
+        }
     }
 }
 
+-- Defining custom search zones like my nvrc
+-- Defining M like this so that if I decide to setup more I can modulise this setup
+local M = {}
+M.search_dotfiles = function()
+    -- This allows us to create the custom tele env
+    require('telescope.builtin').find_files({
+        prompt_title = '< NVimRC>',
+        -- Specifies where tele should look
+        cwd = vim.env.XDG_CONFIG_HOME .. '/nvim',
+        hidden = true
+    })
+end
+
+-- Calling fzf native plugin
+require('telescope').load_extension('fzf')
+
+-- Keymappings: f for find
 -- other files in cwd
 vim.api.nvim_set_keymap('n', '<leader>ff',
                         "<cmd>lua require('telescope.builtin').find_files()<CR>",
@@ -47,7 +63,13 @@ vim.api.nvim_set_keymap('n', '<leader>fb',
 vim.api.nvim_set_keymap('n', '<leader>fh',
                         "<cmd>lua require('telescope.builtin').help_tags()<CR>",
                         {noremap = true})
--- Git files????
+-- Git project files. very naaace
 vim.api.nvim_set_keymap('n', '<C-p>',
                         "<cmd>lua require('telescope.builtin').git_files()<CR>",
                         {noremap = true})
+-- Vimrc file searc
+vim.api.nvim_set_keymap('n', '<leader>fv',
+                        "<cmd>lua require('plugin-config/telescope').search_dotfiles()<CR>",
+                        {noremap = true})
+
+return M

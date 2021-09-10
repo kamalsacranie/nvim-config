@@ -69,10 +69,6 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  LuaSnip = {
-    loaded = true,
-    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/LuaSnip"
-  },
   black = {
     loaded = false,
     needs_bufread = false,
@@ -81,6 +77,11 @@ _G.packer_plugins = {
   ["calvera-dark.nvim"] = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/calvera-dark.nvim"
+  },
+  ["clipboard-image.nvim"] = {
+    loaded = false,
+    needs_bufread = false,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/clipboard-image.nvim"
   },
   ["cmp-buffer"] = {
     loaded = true,
@@ -94,17 +95,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/cmp-nvim-lua"
   },
+  ["cmp-nvim-ultisnips"] = {
+    loaded = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/cmp-nvim-ultisnips"
+  },
   ["cmp-path"] = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/cmp-path"
   },
-  cmp_luasnip = {
+  ["gitsigns.nvim"] = {
     loaded = true,
-    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/cmp_luasnip"
-  },
-  ["friendly-snippets"] = {
-    loaded = true,
-    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/friendly-snippets"
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
   },
   ["lsp_signature.nvim"] = {
     loaded = true,
@@ -134,6 +135,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/nvim-lint"
   },
+  ["nvim-lsp-ts-utils"] = {
+    loaded = false,
+    needs_bufread = false,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/nvim-lsp-ts-utils"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
@@ -145,6 +151,11 @@ _G.packer_plugins = {
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
+  },
+  ["nvim-ts-autotag"] = {
+    loaded = false,
+    needs_bufread = false,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/nvim-ts-autotag"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
@@ -162,36 +173,43 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/rainbow"
   },
+  ["telescope-fzf-native.nvim"] = {
+    loaded = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+  },
+  ultisnips = {
+    loaded = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/ultisnips"
   },
   ["vim-commentary"] = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-commentary"
   },
-  ["vim-fugitive"] = {
-    loaded = true,
-    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-fugitive"
-  },
   ["vim-pandoc"] = {
-    after = { "vim-pandoc-syntax" },
     loaded = false,
     needs_bufread = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/vim-pandoc"
   },
   ["vim-pandoc-syntax"] = {
-    load_after = {
-      ["vim-pandoc"] = true
-    },
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/vim-pandoc-syntax"
+    loaded = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-pandoc-syntax"
   },
   ["vim-python-pep8-indent"] = {
     loaded = false,
     needs_bufread = false,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/vim-python-pep8-indent"
+  },
+  ["vim-rmarkdown"] = {
+    loaded = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-rmarkdown"
+  },
+  ["vim-snippets"] = {
+    loaded = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-snippets"
   },
   ["vim-surround"] = {
     loaded = true,
@@ -204,9 +222,19 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType python ++once lua require("packer.load")({'vim-python-pep8-indent', 'black'}, { ft = "python" }, _G.packer_plugins)]]
-vim.cmd [[au FileType md ++once lua require("packer.load")({'vim-pandoc'}, { ft = "md" }, _G.packer_plugins)]]
-vim.cmd [[au FileType markdown ++once lua require("packer.load")({'vim-pandoc'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType typescript.tsx ++once lua require("packer.load")({'nvim-lsp-ts-utils', 'nvim-ts-autotag'}, { ft = "typescript.tsx" }, _G.packer_plugins)]]
+vim.cmd [[au FileType html ++once lua require("packer.load")({'nvim-ts-autotag'}, { ft = "html" }, _G.packer_plugins)]]
+vim.cmd [[au FileType rmarkdown ++once lua require("packer.load")({'nvim-ts-autotag', 'clipboard-image.nvim'}, { ft = "rmarkdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType Rmd ++once lua require("packer.load")({'clipboard-image.nvim'}, { ft = "Rmd" }, _G.packer_plugins)]]
+vim.cmd [[au FileType rmd ++once lua require("packer.load")({'clipboard-image.nvim'}, { ft = "rmd" }, _G.packer_plugins)]]
+vim.cmd [[au FileType md ++once lua require("packer.load")({'vim-pandoc', 'clipboard-image.nvim'}, { ft = "md" }, _G.packer_plugins)]]
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'nvim-ts-autotag', 'vim-pandoc', 'clipboard-image.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType typescript ++once lua require("packer.load")({'nvim-lsp-ts-utils', 'nvim-ts-autotag'}, { ft = "typescript" }, _G.packer_plugins)]]
+vim.cmd [[au FileType javascript ++once lua require("packer.load")({'nvim-lsp-ts-utils', 'nvim-ts-autotag'}, { ft = "javascript" }, _G.packer_plugins)]]
+vim.cmd [[au FileType python ++once lua require("packer.load")({'black', 'vim-python-pep8-indent'}, { ft = "python" }, _G.packer_plugins)]]
+vim.cmd [[au FileType javascript.jsx ++once lua require("packer.load")({'nvim-lsp-ts-utils', 'nvim-ts-autotag'}, { ft = "javascript.jsx" }, _G.packer_plugins)]]
+vim.cmd [[au FileType jsx ++once lua require("packer.load")({'nvim-lsp-ts-utils', 'nvim-ts-autotag'}, { ft = "jsx" }, _G.packer_plugins)]]
+vim.cmd [[au FileType tsx ++once lua require("packer.load")({'nvim-lsp-ts-utils', 'nvim-ts-autotag'}, { ft = "tsx" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 vim.cmd [[augroup filetypedetect]]

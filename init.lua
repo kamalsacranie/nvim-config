@@ -21,5 +21,12 @@ augroup END
 vim.cmd [[
 let didit = 0
 autocmd! InsertEnter * if ! didit | call feedkeys("\<C-\>\<C-o>:nohlsearch|let didit = 1\<CR>", 'n') | endif
-autocmd! InsertLeave * let didit = 0
 ]]
+require('lspconfig').tsserver.setup {
+    cmd = {"typescript-language-server", "--stdio"},
+    filetypes = {
+        "javascript", "javascriptreact", "javascript.jsx", "typescript",
+        "typescriptreact", "typescript.tsx"
+    },
+    init_options = {hostInfo = "neovim"}
+}

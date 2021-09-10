@@ -7,10 +7,9 @@ vim.opt.expandtab = true
 vim.opt.textwidth = 79
 vim.opt.colorcolumn = {80}
 
--- Loading snippets
-require("luasnip/loaders/from_vscode").lazy_load()
 -- Setting up spell
 require('modular-settings.spell')
 
-vim.api.nvim_set_keymap('v', '<leader>wc', '<Esc>:WordCount<CR>gv',
-                        {noremap = true})
+-- Keymaps
+vim.api.nvim_set_keymap('n', 'gf', 'gf<C-w>o', {noremap = true})
+vim.g['pandoc#hypertext#split_open_cmd'] = 'e'
