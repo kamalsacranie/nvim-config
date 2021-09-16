@@ -28,4 +28,5 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 0
 vim.opt.expandtab = true
 
-require("plugins")
+-- USEFUL NOTE: ANYTHING THAT IS IN THE plugin or after/plugin folder gets
+-- sourced automagically
