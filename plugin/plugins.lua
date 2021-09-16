@@ -6,7 +6,11 @@ return require('packer').startup(function()
     -- Surround things with things duh
     use 'tpope/vim-surround'
 
-    -- LSP Related
+    --============ LSP Related
+    -- nvim lsp
     use 'neovim/nvim-lspconfig'
+    -- lspsaga (provides lsp feedback)
+    use 'glepnir/lspsaga.nvim'
+
 
 end)
