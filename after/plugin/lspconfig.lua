@@ -1,39 +1,79 @@
-if not vim.g.lspconfig then
-    return
-end
-local nvim_lsp = require('lspconfig')
+if not vim.g.lspconfig then return end
 
 -- This is the best practice way to setup a language server
 -- you should run this function when the server ATTATCHES!!
 local on_attach = function(client, bufnr)
-    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+    local function buf_set_keymap(...)
+        vim.api.nvim_buf_set_keymap(bufnr, ...)
+    end
 
     -- Mappings
-    local opts = { noremap = true, silent = true }
+    local opts = {noremap = true, silent = true}
 
     -- go to definition
     buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    buf_set_keymap('n', '<leader>fo', '<Cmd>lua vim.lsp.buf.formatting()<CR>', opts)
     buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    buf_set_keymap('i', '<C-i>', '<Cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    buf_set_keymap('n', '<C-i>', '<Cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    buf_set_keymap('n', '<leader>gf', '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    buf_set_keymap('i', '<C-k>', '<Cmd>lua vim.lsp.buf.signature_help()<CR>',
+                   opts)
+
+    buf_set_keymap('n', '<leader>gf', '<Cmd>lua vim.lsp.buf.code_action()<CR>',
+                   opts)
     if client.resolved_capabilities.document_formatting then
         vim.api.nvim_command [[augroup Format]]
         vim.api.nvim_command [[autocmd! * <buffer>]]
-        vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()]]
+        vim.api
+            .nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()]]
         vim.api.nvim_command [[augroup END]]
     end
+    require('lsp_signature').on_attach({
+        bind = true,
+        fix_pos = true,
+        floating_window = false,
+        hint_enable = true,
+        padding = '',
+        handler_opts = {border = 'none'},
+        -- toggle_key = '<M-x>',
+        auto_close_after = false,
+        hint_prefix = '▸ '
+    }, bufnr)
 end
 
-nvim_lsp.tsserver.setup {
-    on_attach = on_attach,
-    filetypes = {'javascript', 'jsx', 'typescript.tsx', 'javascript.tsx', 'typescript', 'tsx', 'typescriptreact', 'javascriptreact'}
-}
-
 -- Disables virtual texs so we just use gh to show the erroe
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = false,
+vim.lsp.handlers['textDocument/publishDiagnostics'] =
+    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
+                 {virtual_text = false})
+
+-- LspInstall setup allows us to install servers locally not globally
+-- When the server is ready we attach our regular function and then any
+-- options we edit the table
+local lsp_installer = require("nvim-lsp-installer")
+lsp_installer.on_server_ready(function(server)
+    local opts = {
+        on_attach = on_attach,
+        -- requireing cmp into our capabilities
+        capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp
+                                                                       .protocol
+                                                                       .make_client_capabilities())
     }
-)
+
+    if server.name == "tsserrver" then
+        opts.filetypes = {
+            'javascript', 'jsx', 'typescript.tsx', 'javascript.tsx',
+            'typescript', 'tsx', 'typescriptreact', 'javascriptreact'
+        }
+    elseif server.name == "sumneko_lua" then
+        -- Document formatting cant figure out how to make the capabilities known so we can use
+        -- regular formatting
+        vim.cmd [[
+            augroup Format
+                autocmd! * <buffer>
+                autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
+            augroup END
+        ]]
+    elseif server.name == "pyright" then
+        opts.filetypes = {'python'}
+    end
+
+    server:setup(opts)
+    vim.cmd [[ do User LspAttachBuffers ]]
+end)
