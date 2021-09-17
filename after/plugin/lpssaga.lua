@@ -21,8 +21,8 @@ bufremap('n', '<C-n>', '<Cmd>Lspsaga diagnostic_jump_next<CR>')
 bufremap('n', 'gh', '<Cmd>lua require("lspsaga.diagnostic").show_line_diagnostics()<CR>')
 bufremap('n', '<leader>fo', '<Cmd>Lspsaga lsp_finder<CR>')
 bufremap('n', '<leader>rn', '<Cmd>lua require("lspsaga.rename").rename()<CR>')
-bufremap('n', 'K', '<Cmd>lua require("lspsaga.hover").render_hover_doc()<CR>')
-bufremap('i', '<C-k>', '<Cmd>lua require("lspsaga.signaturehelp").signature_help()<CR>')
+-- bufremap('n', 'K', '<Cmd>lua require("lspsaga.hover").render_hover_doc()<CR>')
+-- bufremap('i', '<C-k>', '<Cmd>lua require("lspsaga.signaturehelp").signature_help()<CR>')
 
 -- float terminal also you can pass the cli command in open_float_terminal function
 bufremap('n', '<A-d>', '<Cmd>lua require("lspsaga.floaterm").open_float_terminal()<CR>')
