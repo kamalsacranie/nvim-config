@@ -5,7 +5,6 @@ end
 local saga = require('lspsaga')
 
 saga.init_lsp_saga {
-    warn_sign = '/',
     border_style = 'round',
 }
 
