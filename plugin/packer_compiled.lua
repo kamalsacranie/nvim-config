@@ -109,10 +109,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/nvim-cmp"
   },
-  ["nvim-cursorline"] = {
-    loaded = true,
-    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/nvim-cursorline"
-  },
   ["nvim-lsp-installer"] = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer"
@@ -165,9 +161,25 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-commentary"
   },
+  ["vim-matchup"] = {
+    loaded = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-matchup"
+  },
   ["vim-nightfly-guicolors"] = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-nightfly-guicolors"
+  },
+  ["vim-pandoc"] = {
+    loaded = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-pandoc"
+  },
+  ["vim-pandoc-syntax"] = {
+    loaded = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-pandoc-syntax"
+  },
+  ["vim-rmarkdown"] = {
+    loaded = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-rmarkdown"
   },
   ["vim-snippets"] = {
     loaded = true,

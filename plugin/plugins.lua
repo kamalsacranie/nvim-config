@@ -17,7 +17,7 @@ return require('packer').startup(function(use)
     -- Floating signature
     use 'ray-x/lsp_signature.nvim'
     -- Document highlighting
-    use 'yamatsum/nvim-cursorline'
+    use {'andymass/vim-matchup'}
 
     -- Tree shitter
     use {'nvim-treesitter/nvim-treesitter', run = 'TSUpdate'}
@@ -38,6 +38,12 @@ return require('packer').startup(function(use)
         }
     }
 
+    -- =================MARKDOWN================
+    use {'vim-pandoc/vim-pandoc'}
+    use {'vim-pandoc/vim-pandoc-syntax'}
+    use {'vim-pandoc/vim-rmarkdown'}
+    -- =========================================
+
     -- Snippets
     use {'SirVer/ultisnips', requires = {'honza/vim-snippets'}}
 
@@ -55,4 +61,9 @@ return require('packer').startup(function(use)
     use 'rktjmp/highlight-current-n.nvim'
     -- Popup terminal
     use "akinsho/toggleterm.nvim"
+
+    -- Color code highlightingh
+    use 'norcalli/nvim-colorizer.lua'
+    -- Git changes
+    use 'lewis6991/gitsigns.nvim'
 end)

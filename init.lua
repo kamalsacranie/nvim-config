@@ -25,7 +25,8 @@ if fn.empty(fn.glob(config .. '/packer')) then
     vim.cmd 'packadd packer.nvim'
 end
 
-vim.o.shell = '/usr/local/bin/zsh -f' -- '/bin/bash' 
+vim.o.updatetime = 500
+vim.o.shell = '/usr/local/bin/zsh -f' -- '/bin/bash'
 vim.g.mapleader = ' '
 -- Numbers
 vim.opt.number = true
@@ -43,3 +44,6 @@ vim.opt.termguicolors = true
 -- sourced automagically
 require('post')
 vim.o.cursorline = false
+
+-- Mapping WQ to wqa
+vim.cmd [[command! -bar -bang WQ wqa<bang>]]
