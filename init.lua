@@ -25,6 +25,10 @@ if fn.empty(fn.glob(config .. '/packer')) then
     vim.cmd 'packadd packer.nvim'
 end
 
+require('pre')
+
+vim.g.python3_host_prog = '/usr/local/bin/python3.9'
+
 vim.o.updatetime = 500
 vim.o.shell = '/usr/local/bin/zsh -f' -- '/bin/bash'
 vim.g.mapleader = ' '

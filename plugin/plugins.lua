@@ -34,7 +34,7 @@ return require('packer').startup(function(use)
         'hrsh7th/nvim-cmp',
         requires = {
             'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-nvim-lua',
-            'kdheepak/cmp-latex-symbols', 'quangnguyen30192/cmp-nvim-ultisnips'
+            'quangnguyen30192/cmp-nvim-ultisnips'
         }
     }
 

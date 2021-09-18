@@ -89,6 +89,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/cmp-path"
   },
+  ["gitsigns.nvim"] = {
+    loaded = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
+  },
   ["highlight-current-n.nvim"] = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/highlight-current-n.nvim"
@@ -108,6 +112,10 @@ _G.packer_plugins = {
   ["nvim-cmp"] = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/nvim-cmp"
+  },
+  ["nvim-colorizer.lua"] = {
+    loaded = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua"
   },
   ["nvim-lsp-installer"] = {
     loaded = true,
@@ -174,8 +182,9 @@ _G.packer_plugins = {
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-pandoc"
   },
   ["vim-pandoc-syntax"] = {
-    loaded = true,
-    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-pandoc-syntax"
+    loaded = false,
+    needs_bufread = false,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/vim-pandoc-syntax"
   },
   ["vim-rmarkdown"] = {
     loaded = true,
@@ -192,6 +201,13 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Filetype lazy-loads
+time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'vim-pandoc-syntax'}, { ft = "markdown" }, _G.packer_plugins)]]
+time([[Defining lazy-load filetype autocommands]], false)
+vim.cmd("augroup END")
 if should_profile then save_profiles() end
 
 end)

@@ -30,6 +30,6 @@ vim.api.nvim_set_keymap('n', '<C-p>',
                         {noremap = true})
 -- Vimrc file searc
 vim.api.nvim_set_keymap('n', '<leader>fv',
-                        "<cmd>lua require('telezones').search_dotfiles()<CR>",
+                        "<cmd>lua require('utils.telezones').search_dotfiles()<CR>",
                         {noremap = true})
 

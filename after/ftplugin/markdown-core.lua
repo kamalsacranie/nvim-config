@@ -8,10 +8,15 @@ vim.opt.textwidth = 79
 vim.opt.colorcolumn = {80}
 
 -- Setting up spell
-require('spell')
+require('utils.spell')
 
 -- Keymaps
 vim.api.nvim_set_keymap('n', 'gf', 'gf<C-w>o', {noremap = true})
 vim.g['pandoc#hypertext#split_open_cmd'] = 'e'
 
 -- require'clipboard-image'.setup {require('plugin-config/clipboard-image')}
+
+-- Disabling tick autopair surely there has to be a better way to do this
+-- not in the ftplugin idk
+require('nvim-autopairs').remove_rule('```')
+require('nvim-autopairs').remove_rule('`')

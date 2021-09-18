@@ -68,7 +68,8 @@ cmp.setup({
 
     sources = {
         {name = 'nvim_lsp'}, {name = 'path'}, {name = 'nvim_lua'},
-        {name = 'latex_symbols'}, {name = 'ultisnips'}
+        -- {name = 'latex_symbols'}, 
+        {name = 'ultisnips'}
     },
 
     mapping = {
