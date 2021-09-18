@@ -1,6 +1,7 @@
 local cmp = require('cmp')
 -- Information icons with our completions
 -- Custom icons so we dont have to use a different plugin
+
 local icons = {
     Class = " ",
     Color = " ",
@@ -68,7 +69,6 @@ cmp.setup({
 
     sources = {
         {name = 'nvim_lsp'}, {name = 'path'}, {name = 'nvim_lua'},
-        -- {name = 'latex_symbols'}, 
         {name = 'ultisnips'}
     },
 
@@ -77,7 +77,7 @@ cmp.setup({
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.close(),
-        ['<Tab>'] = cmp.mapping.confirm({select = true})
+        ['<TAB>'] = cmp.mapping.confirm({select = true})
     }
 })
 

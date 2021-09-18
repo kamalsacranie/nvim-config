@@ -1,4 +1,4 @@
-require('after.ftplugin.markdown-core')
+require('utils.markdown-core')
 
 vim.cmd [[augroup rmarkdown
 	autocmd!

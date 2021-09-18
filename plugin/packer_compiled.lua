@@ -69,10 +69,6 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["cmp-latex-symbols"] = {
-    loaded = true,
-    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/cmp-latex-symbols"
-  },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp"
@@ -182,9 +178,8 @@ _G.packer_plugins = {
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-pandoc"
   },
   ["vim-pandoc-syntax"] = {
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/vim-pandoc-syntax"
+    loaded = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-pandoc-syntax"
   },
   ["vim-rmarkdown"] = {
     loaded = true,
@@ -201,13 +196,6 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
-vim.cmd [[augroup packer_load_aucmds]]
-vim.cmd [[au!]]
-  -- Filetype lazy-loads
-time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType markdown ++once lua require("packer.load")({'vim-pandoc-syntax'}, { ft = "markdown" }, _G.packer_plugins)]]
-time([[Defining lazy-load filetype autocommands]], false)
-vim.cmd("augroup END")
 if should_profile then save_profiles() end
 
 end)

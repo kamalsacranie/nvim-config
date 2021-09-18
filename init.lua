@@ -10,21 +10,7 @@
     \:\__\        /:/  /                       /:/  /      \::/  /
      \/__/        \/__/                        \/__/        \/__/          --]] --
 -- Boostrapping Packer
-local fn = vim.fn
-local config = fn.getenv('XDG_CONFIG_HOME') .. '/nvim'
-local pack_root = fn.stdpath('data') .. '/site/pack/packer'
-local install_path = pack_root .. '/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({
-        'git', 'clone', '--depth', '1',
-        'https://github.com/wbthomason/packer.nvim', install_path
-    })
-end
-if fn.empty(fn.glob(config .. '/packer')) then
-    fn.system({'ln', '-s', pack_root, config})
-    vim.cmd 'packadd packer.nvim'
-end
-
+require('utils.packer-bootstrap')
 require('pre')
 
 vim.g.python3_host_prog = '/usr/local/bin/python3.9'

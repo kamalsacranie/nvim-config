@@ -1,6 +1,5 @@
--- Has to be set so we can move through tab mappings  
+-- Has to be set so we can move through tab mappings
 vim.g.UltiSnipsRemoveSelectModeMappings = 0
-
 -- NOT SURE WHY WE DONT NEED TO SET OUR SNIPPETS PATH BUT IT WORKS
 -- Adding vim snippets and local snippets
 vim.g.UltiSnipsSnippetDirectories = {
