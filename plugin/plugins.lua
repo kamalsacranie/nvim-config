@@ -16,9 +16,17 @@ return require('packer').startup(function(use)
     use 'williamboman/nvim-lsp-installer'
     -- Floating signature
     use 'ray-x/lsp_signature.nvim'
+    -- Document highlighting
+    use 'yamatsum/nvim-cursorline'
 
     -- Tree shitter
     use {'nvim-treesitter/nvim-treesitter', run = 'TSUpdate'}
+    -- Autotag (setup in treesitter)
+    use 'windwp/nvim-ts-autotag'
+    -- Contextual autocommenting with treesitter (setup in treesitter)
+    use 'JoosepAlviste/nvim-ts-context-commentstring'
+    -- Raibow brackets
+    use 'p00f/nvim-ts-rainbow'
 
     -- Gonna try both cmp and nvim-completion. well see how it goes
     -- ============ Completion
@@ -33,4 +41,18 @@ return require('packer').startup(function(use)
     -- Snippets
     use {'SirVer/ultisnips', requires = {'honza/vim-snippets'}}
 
+    -- Autobrakcets
+    use 'windwp/nvim-autopairs'
+
+    -- Telescope
+    use {'nvim-telescope/telescope.nvim', requires = {'nvim-lua/plenary.nvim'}}
+
+    -- Color scheme/theme
+    use "bluz71/vim-nightfly-guicolors"
+    -- Devicons
+    use 'kyazdani42/nvim-web-devicons'
+    -- Proper search highlightig
+    use 'rktjmp/highlight-current-n.nvim'
+    -- Popup terminal
+    use "akinsho/toggleterm.nvim"
 end)

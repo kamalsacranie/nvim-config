@@ -18,6 +18,13 @@ local on_attach = function(client, bufnr)
 
     buf_set_keymap('n', '<leader>gf', '<Cmd>lua vim.lsp.buf.code_action()<CR>',
                    opts)
+    -- setting our diagnostic popups to have a round border
+    -- buf_set_keymap('n', ']d',
+    --                '<cmd>lua vim.lsp.diagnostic.goto_next({severity_limit = "Warning", popup_opts = {border = "single"}})<CR>',
+    --                opts)
+    -- buf_set_keymap('n', '[d',
+    --                '<cmd>lua vim.lsp.diagnostic.goto_prev({severity_limit = "Warning", popup_opts = {border = "single"}})<CR>',
+    --                opts)
     if client.resolved_capabilities.document_formatting then
         vim.api.nvim_command [[augroup Format]]
         vim.api.nvim_command [[autocmd! * <buffer>]]
@@ -32,16 +39,32 @@ local on_attach = function(client, bufnr)
         hint_enable = true,
         padding = '',
         handler_opts = {border = 'none'},
-        -- toggle_key = '<M-x>',
         auto_close_after = false,
         hint_prefix = '▸ '
     }, bufnr)
+
+    if client.resolved_capabilities.document_highlight then
+        vim.api.nvim_exec([[
+        hi! CursorWord term=bold cterm=bold gui=bold guibg=#353d46
+        set nocursorline
+        augroup Cursor
+        au!
+        au BufEnter * set nocursorline
+        augroup END
+        ]], false)
+    end
 end
 
 -- Disables virtual texs so we just use gh to show the erroe
 vim.lsp.handlers['textDocument/publishDiagnostics'] =
     vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
                  {virtual_text = false})
+
+-- Make the borders of the hover and signature round
+vim.lsp.handlers['textDocument/hover'] =
+    vim.lsp.with(vim.lsp.handlers.hover, {border = 'rounded'})
+vim.lsp.handlers['textDocument/signatureHelp'] =
+    vim.lsp.with(vim.lsp.handlers.signatureHelp, {border = 'rounded'})
 
 -- LspInstall setup allows us to install servers locally not globally
 -- When the server is ready we attach our regular function and then any
@@ -77,3 +100,4 @@ lsp_installer.on_server_ready(function(server)
     server:setup(opts)
     vim.cmd [[ do User LspAttachBuffers ]]
 end)
+

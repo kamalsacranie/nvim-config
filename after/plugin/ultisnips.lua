@@ -8,9 +8,3 @@ vim.g.UltiSnipsSnippetDirectories = {
         .. "/.local/share/nvim/site/pack/packer/start/vim-snippets/UltiSnips",
     "/" .. vim.fn.expand('$HOME') .. "/.config/nvim/after/ftsnippets"
 }
-
--- Ulti jump keys
--- vim.cmd [[
--- let g:UltiSnipsJumpForwardTrigger="<tab>"
--- let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
--- ]]

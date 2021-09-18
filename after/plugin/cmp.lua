@@ -15,7 +15,7 @@ local icons = {
     Function = " ",
     Interface = "ﰮ ",
     Keyword = " ",
-    Method = " ",
+    Method = "⦿ ",
     Module = " ",
     Operator = "",
     Property = " ",
@@ -79,3 +79,11 @@ cmp.setup({
         ['<Tab>'] = cmp.mapping.confirm({select = true})
     }
 })
+
+-- Disabling our autocomplete when using telescope
+vim.cmd [[
+augroup Cmp
+    au!
+    autocmd FileType TelescopePrompt lua require('cmp').setup.buffer { enabled = false }
+augroup END
+]]
