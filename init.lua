@@ -9,8 +9,8 @@
    \:\ \/__/       /:/  / \/__/                |::/  /    \:\/:/  / \/__/
     \:\__\        /:/  /                       /:/  /      \::/  /
      \/__/        \/__/                        \/__/        \/__/          --]] --
--- Boostrapping Packer
 vim.g.mapleader = ' '
+-- Boostrapping Packer
 require('utils.packer-bootstrap')
 
 require('pre')

@@ -41,7 +41,7 @@ return require('packer').startup(function(use)
     }
 
     -- =================PYTHON==================
-    -- use {'Vimjas/vim-python-pep8-indent', ft = {'python'}, opt = true}
+    use {'Vimjas/vim-python-pep8-indent', ft = {'python'}, opt = true}
 
     -- =================MARKDOWN================
     use {
