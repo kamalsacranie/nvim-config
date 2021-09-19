@@ -19,4 +19,4 @@ require("toggleterm").setup {
     shell = vim.o.shell -- we set zsh with -f to have no config
 }
 
-vim.cmd [[tnoremap <Esc> <C-\><C-n>]]
+vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], {noremap = true})

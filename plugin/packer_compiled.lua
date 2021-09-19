@@ -69,6 +69,10 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["clipboard-image.nvim"] = {
+    loaded = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/clipboard-image.nvim"
+  },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp"
@@ -100,6 +104,10 @@ _G.packer_plugins = {
   ["lspsaga.nvim"] = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
+  },
+  ["lualine.nvim"] = {
+    loaded = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/lualine.nvim"
   },
   ["nvim-autopairs"] = {
     loaded = true,
@@ -174,16 +182,23 @@ _G.packer_plugins = {
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-nightfly-guicolors"
   },
   ["vim-pandoc"] = {
-    loaded = true,
-    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-pandoc"
+    loaded = false,
+    needs_bufread = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/vim-pandoc"
   },
   ["vim-pandoc-syntax"] = {
     loaded = true,
     path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-pandoc-syntax"
   },
+  ["vim-python-pep8-indent"] = {
+    loaded = false,
+    needs_bufread = false,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/vim-python-pep8-indent"
+  },
   ["vim-rmarkdown"] = {
-    loaded = true,
-    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/start/vim-rmarkdown"
+    loaded = false,
+    needs_bufread = true,
+    path = "/Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/vim-rmarkdown"
   },
   ["vim-snippets"] = {
     loaded = true,
@@ -196,6 +211,23 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Filetype lazy-loads
+time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType python ++once lua require("packer.load")({'vim-python-pep8-indent'}, { ft = "python" }, _G.packer_plugins)]]
+vim.cmd [[au FileType rmarkdown ++once lua require("packer.load")({'vim-rmarkdown'}, { ft = "rmarkdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'vim-pandoc'}, { ft = "markdown" }, _G.packer_plugins)]]
+time([[Defining lazy-load filetype autocommands]], false)
+vim.cmd("augroup END")
+vim.cmd [[augroup filetypedetect]]
+time([[Sourcing ftdetect script at: /Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/vim-rmarkdown/ftdetect/rmarkdown.vim]], true)
+vim.cmd [[source /Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/vim-rmarkdown/ftdetect/rmarkdown.vim]]
+time([[Sourcing ftdetect script at: /Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/vim-rmarkdown/ftdetect/rmarkdown.vim]], false)
+time([[Sourcing ftdetect script at: /Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/vim-pandoc/ftdetect/pandoc.vim]], true)
+vim.cmd [[source /Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/vim-pandoc/ftdetect/pandoc.vim]]
+time([[Sourcing ftdetect script at: /Users/kamalsacranie/.local/share/nvim/site/pack/packer/opt/vim-pandoc/ftdetect/pandoc.vim]], false)
+vim.cmd("augroup END")
 if should_profile then save_profiles() end
 
 end)
