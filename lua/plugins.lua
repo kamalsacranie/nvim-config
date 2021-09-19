@@ -19,6 +19,9 @@ return require('packer').startup(function(use)
     }
     -- ===============
 
+    -- Linting and formatting made easy
+    use 'jose-elias-alvarez/null-ls.nvim'
+
     -- Document highlighting
     use {'andymass/vim-matchup'}
 
@@ -38,7 +41,7 @@ return require('packer').startup(function(use)
     }
 
     -- =================PYTHON==================
-    use {'Vimjas/vim-python-pep8-indent', ft = {'python'}, opt = true}
+    -- use {'Vimjas/vim-python-pep8-indent', ft = {'python'}, opt = true}
 
     -- =================MARKDOWN================
     use {

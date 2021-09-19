@@ -4,8 +4,7 @@
 
 - Lspsaga refuses to show a signature at all ever
 - It also refuses to show a hover doc
-
-This is exceptionally weird because the regular LSP shows both
+  This is exceptionally weird because the regular LSP shows both
 
 ### Update
 

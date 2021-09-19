@@ -3,9 +3,9 @@ local Rule = require "nvim-autopairs.rule"
 local cond = require "nvim-autopairs.conds"
 if package.loaded["cmp"] then
     require("nvim-autopairs.completion.cmp").setup {
-        map_cr = false, -- indent when you return on two brackets
+        map_cr = true, -- indent when you return on two brackets
         map_complete = true, -- Complete the parenthesis
-        auto_select = true, -- Dont autoselect form the pum
+        auto_select = false, -- Dont autoselect form the pum
         insert = true, -- Insert your completion instead of replacing
         map_char = {all = '(', tex = '{'} -- specific completion char for latex
     }
