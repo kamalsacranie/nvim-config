@@ -14,4 +14,4 @@ bufremap('n', ']d', '<Cmd>Lspsaga diagnostic_jump_next<CR>')
 bufremap('n', 'gh',
          '<Cmd>lua require("lspsaga.diagnostic").show_line_diagnostics()<CR>')
 bufremap('n', '<leader>fo', '<Cmd>Lspsaga lsp_finder<CR>')
-bufremap('n', '<leader>rn', '<Cmd>lua require("lspsaga.rename").rename()<CR>')
+bufremap('n', '<leader>nr', '<Cmd>lua require("lspsaga.rename").rename()<CR>')
