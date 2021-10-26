@@ -11,9 +11,23 @@ vim.api.nvim_set_keymap('n', '<C-K>', '<C-W><C-K>', {noremap = true})
 vim.api.nvim_set_keymap('n', 'Y', 'y$', {noremap = true})
 -- Mapping alt bkspc to ctrl w in insert mode
 vim.api.nvim_set_keymap('i', '<M-BS>', '<C-w>', {noremap = true})
--- Setting new linke while in normal mode
-vim.api.nvim_set_keymap('n', 'nl', 'o<ESC>', {noremap = true})
-vim.api.nvim_set_keymap('n', 'NL', 'O<ESC>', {noremap = true})
+-- Buffer switch also in insert mode
+vim.api.nvim_set_keymap('i', '<C-^>', '<ESC><C-^>', {noremap = true})
 
 -- Alt symbol remap
 vim.api.nvim_set_keymap('i', '<M-3>', '£', {noremap = true})
+
+-- Centering our line in the middle of the screen
+vim.api.nvim_set_keymap('n', 'j', 'jzz', {noremap = true})
+vim.api.nvim_set_keymap('n', 'k', 'kzz', {noremap = true})
+vim.api.nvim_set_keymap('n', '{', '{zz', {noremap = true})
+vim.api.nvim_set_keymap('n', '}', '}zz', {noremap = true})
+vim.api.nvim_set_keymap('n', 'G', 'Gzz', {noremap = true})
+vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>zz', {noremap = true})
+vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', {noremap = true})
+-- Setting new linke while in normal mode
+vim.api.nvim_set_keymap('n', 'nl', 'o<ESC>zz', {noremap = true})
+vim.api.nvim_set_keymap('n', 'NL', 'O<ESC>zz', {noremap = true})
+-- Highilighting to the end and beginning of line in visual mode
+vim.api.nvim_set_keymap('v', 'W', '$h', {noremap = true})
+vim.api.nvim_set_keymap('v', 'B', '0', {noremap = true})

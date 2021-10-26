@@ -1,0 +1,5 @@
+-- vim.cmd [[
+-- augroup rmarkdown
+--     au! BufRead,BufNewFile *.html  set filetype=html.htmldjango
+-- augroup END
+-- ]]

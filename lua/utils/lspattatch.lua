@@ -10,18 +10,24 @@ M.on_attach = function(client, bufnr)
 
     -- go to definition
     buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    buf_set_keymap('n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>', opts)
     buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
     buf_set_keymap('i', '<C-k>', '<Cmd>lua vim.lsp.buf.signature_help()<CR>',
                    opts)
-
-    buf_set_keymap('n', '<leader>gf', '<Cmd>lua vim.lsp.buf.code_action()<CR>',
+    buf_set_keymap('n', 'gh',
+                   '<Cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>',
                    opts)
+    buf_set_keymap('n', '<leader>lca',
+                   '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    buf_set_keymap('n', '<leader>lr', '<Cmd>lua vim.lsp.buf.rename()<CR>', opts)
     -- setting our diagnostic popups to have a round border
-    -- buf_set_keymap('n', ']d',
-    --                '<cmd>lua vim.lsp.diagnostic.goto_next({severity_limit = "Warning", popup_opts = {border = "single"}})<CR>',
-    --                opts)
-    -- buf_set_keymap('n', '[d',
-    --                '<cmd>lua vim.lsp.diagnostic.goto_prev({severity_limit = "Warning", popup_opts = {border = "single"}})<CR>',
+    buf_set_keymap('n', ']d',
+                   '<cmd>lua vim.lsp.diagnostic.goto_next({severity_limit = "Warning", popup_opts = {border = "single"}})<CR>',
+                   opts)
+    buf_set_keymap('n', '[d',
+                   '<cmd>lua vim.lsp.diagnostic.goto_prev({severity_limit = "Warning", popup_opts = {border = "single"}})<CR>',
+                   opts)
+    -- buf_set_keymap('n', '<leader>lrf', '<cmd>lua vim.lsp.buf.references()<CR>',
     --                opts)
     if client.resolved_capabilities.document_formatting then
         vim.api.nvim_command [[augroup Format]]

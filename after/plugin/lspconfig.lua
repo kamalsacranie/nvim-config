@@ -32,8 +32,6 @@ lsp_installer.on_server_ready(function(server)
             'typescript', 'tsx', 'typescriptreact', 'javascriptreact'
         }
     elseif server.name == "sumneko_lua" then
-        -- Document formatting cant figure out how to make the capabilities known so we can use
-        -- regular formatting
         vim.cmd [[
             augroup Format
                 autocmd! * <buffer>
@@ -42,6 +40,13 @@ lsp_installer.on_server_ready(function(server)
         ]]
     elseif server.name == "pyright" then
         opts.filetypes = {'python'}
+
+    elseif server.name == "html" then
+        opts.filetypes = {'htmldjango'}
+
+        -- VERY TEMPORARY
+    elseif server.name == "tailwindcss" then
+        opts.filetypes = {'htmldjango', 'html', 'django'}
     end
 
     server:setup(opts)
@@ -53,5 +58,4 @@ require('lspconfig').jsonls.setup {
     on_attach = on_attach,
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol
                                                                    .make_client_capabilities())
-
 }

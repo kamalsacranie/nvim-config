@@ -9,5 +9,5 @@ vim.g['pandoc#modules#disabled'] = {'formatting', 'folding'}
 -- PANDOC SYNTAX
 vim.g['pandoc#syntax#conceal#urls'] = true
 vim.g['pandoc#syntax#codeblocks#embeds#langs'] = {
-    'python', 'javascript', 'bash'
+    'python', 'javascript', 'bash', 'yaml', 'sql'
 }

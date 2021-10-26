@@ -31,14 +31,14 @@ local icons = {
 }
 
 -- Look if there is text behind us i think
-local check_backspace = function()
-    local col = vim.fn.col "." - 1
-    return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
-end
+-- local check_backspace = function()
+--     local col = vim.fn.col "." - 1
+--     return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+-- end
 -- Replace termcodes when we feed keys
-local function t(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
+-- local function t(str)
+--     return vim.api.nvim_replace_termcodes(str, true, true, true)
+-- end
 
 cmp.setup({
 
@@ -47,13 +47,13 @@ cmp.setup({
             vim_item.kind = icons[vim_item.kind]
             -- setting up our won icons etc
             vim_item.menu = ({
-                nvim_lsp = "「LSP」",
-                emoji = "「Emoji」",
-                path = "「Path」",
-                calc = "「Calc」",
-                cmp_tabnine = "「Tabnine」",
-                ultisnips = "「Snippet」",
-                buffer = "「Buffer」"
+                nvim_lsp = "「LSP",
+                emoji = "「Emoji",
+                path = "「Path",
+                calc = "「Calc",
+                cmp_tabnine = "「Tabnine",
+                ultisnips = "「Snippet",
+                buffer = "「Buffer"
             })[entry.source.name]
             vim_item.dup = ({buffer = 1, path = 1, nvim_lsp = 0})[entry.source
                                .name] or 0
@@ -75,9 +75,10 @@ cmp.setup({
     mapping = {
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
+        -- ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.close(),
-        ['<TAB>'] = cmp.mapping.confirm({select = true})
+        ['<C-Space>'] = cmp.mapping.confirm({select = true})
+        -- ['<TAB>'] = cmp.mapping.confirm({select = true})
     }
 })
 

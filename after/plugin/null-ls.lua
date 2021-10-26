@@ -2,7 +2,8 @@ local null_ls = require('null-ls')
 local builtins = null_ls.builtins
 null_ls.config({
     sources = {
-        builtins.formatting.prettier,
+        builtins.diagnostics.luacheck,
+        builtins.formatting.prettier.with({filetypes = {"js", "ts"}}),
         builtins.diagnostics.write_good
             .with({filetypes = {"markdown", "rmarkdown"}}),
         builtins.diagnostics.markdownlint

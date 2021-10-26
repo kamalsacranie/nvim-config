@@ -12,3 +12,4 @@ vim.opt.expandtab = true
 vim.opt.signcolumn = 'yes'
 vim.opt.termguicolors = true
 vim.cmd [[set viminfo+=n~/.cache/nvim/viminfo]]
+vim.opt.wrap = false

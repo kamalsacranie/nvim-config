@@ -13,14 +13,13 @@ return require('packer').startup(function(use)
     use {
         'neovim/nvim-lspconfig',
         requires = {
-            'williamboman/nvim-lsp-installer', 'ray-x/lsp_signature.nvim',
-            'glepnir/lspsaga.nvim'
+            'ray-x/lsp_signature.nvim', 'williamboman/nvim-lsp-installer'
         }
     }
     -- ===============
 
     -- Linting and formatting made easy
-    use 'jose-elias-alvarez/null-ls.nvim'
+    use {'jose-elias-alvarez/null-ls.nvim', rocks = {'luacheck'}}
 
     -- Document highlighting
     use {'andymass/vim-matchup'}
@@ -42,19 +41,25 @@ return require('packer').startup(function(use)
 
     -- =================PYTHON==================
     use {'Vimjas/vim-python-pep8-indent', ft = {'python'}, opt = true}
+    use 'tweekmonster/django-plus.vim'
+    use 'alvan/vim-closetag'
 
     -- =================MARKDOWN================
     use {
         'vim-pandoc/vim-pandoc',
-        ft = {'markdown'},
+        -- ft = {'markdown'},
         requires = {
             'vim-pandoc/vim-pandoc-syntax', 'ekickx/clipboard-image.nvim'
         }
     }
     use {
         'vim-pandoc/vim-rmarkdown',
-        ft = {'rmarkdown'},
+        -- ft = {'rmarkdown'},
         requires = {'vim-pandoc/vim-pandoc'}
+    }
+    use {
+        'dhruvasagar/vim-table-mode',
+        ft = {'markdonw', 'rmarkdown', 'rmd', 'md'}
     }
     -- =========================================
 

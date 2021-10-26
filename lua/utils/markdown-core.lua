@@ -20,3 +20,11 @@ vim.g['pandoc#hypertext#split_open_cmd'] = 'e'
 -- not in the ftplugin idk
 require('nvim-autopairs').remove_rule('```')
 require('nvim-autopairs').remove_rule('`')
+
+-- Render pdf
+vim.api.nvim_set_keymap("n", "<leader>r",
+                        "<Cmd>w<CR><Cmd>! pandoc % -o %:r.pdf<CR>",
+                        {noremap = true, silent = true})
+
+-- Tablemode settings
+vim.cmd [[let g:table_mode_corner='|']]
