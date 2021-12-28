@@ -1,1 +1,1 @@
-vim.g.python3_host_prog = '/usr/local/bin/python3.9'
+vim.g.python3_host_prog = '/opt/homebrew/opt/python/libexec/bin/python'

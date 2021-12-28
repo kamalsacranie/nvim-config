@@ -1,15 +1,15 @@
 local autopairs = require "nvim-autopairs"
 local Rule = require "nvim-autopairs.rule"
 local cond = require "nvim-autopairs.conds"
-if package.loaded["cmp"] then
-    require("nvim-autopairs.completion.cmp").setup {
-        map_cr = true, -- indent when you return on two brackets
-        map_complete = true, -- Complete the parenthesis
-        auto_select = false, -- Dont autoselect form the pum
-        insert = true, -- Insert your completion instead of replacing
-        map_char = {all = '(', tex = '{'} -- specific completion char for latex
-    }
-end
+-- if package.loaded["cmp"] then
+--     require("nvim-autopairs.completion.cmp").setup {
+--         map_cr = true, -- indent when you return on two brackets
+--         -- map_complete = true, -- Complete the parenthesis
+--         auto_select = false, -- Dont autoselect form the pum
+--         insert = true, -- Insert your completion instead of replacing
+--         map_char = {all = '(', tex = '{'} -- specific completion char for latex
+--     }
+-- end
 -- Setting up treesitter. Should change all to wrok like this
 require("nvim-treesitter.configs").setup {autopairs = {enable = true}}
 -- Calling the plugin

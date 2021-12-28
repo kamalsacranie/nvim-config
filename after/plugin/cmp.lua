@@ -1,4 +1,5 @@
 local cmp = require('cmp')
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 -- Information icons with our completions
 -- Custom icons so we dont have to use a different plugin
 
@@ -73,14 +74,21 @@ cmp.setup({
     },
 
     mapping = {
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        -- ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.close(),
-        ['<C-Space>'] = cmp.mapping.confirm({select = true})
-        -- ['<TAB>'] = cmp.mapping.confirm({select = true})
+        ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+        ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+        ['<C-e>'] = cmp.mapping({
+            i = cmp.mapping.abort(),
+            c = cmp.mapping.close(),
+        }),
+        ['<Tab>'] = cmp.mapping({
+            i = cmp.mapping.confirm({ select = true }),
+            c = cmp.mapping.confirm({ select = true }),
+        })
     }
 })
+
+-- Puts brackets when we complete
+cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
 -- Disabling our autocomplete when using telescope
 vim.cmd [[

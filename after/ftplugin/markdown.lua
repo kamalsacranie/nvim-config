@@ -13,5 +13,5 @@ augroup END]]
 
 -- Render pdf
 vim.api.nvim_buf_set_keymap(0, "n", "<leader>r",
-                            "<Cmd>w<CR><Cmd>! pandoc % -o %:r.pdf<CR>",
+                            "<Cmd>w<CR><Cmd>! mkdir -p pdf_output; pandoc % -o ./pdf_output/%:r.pdf<CR>",
                             {noremap = true, silent = true})

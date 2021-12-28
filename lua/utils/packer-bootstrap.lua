@@ -1,6 +1,6 @@
 -- Bootstrapping packer to auto install on a new machine
 local fn = vim.fn
-local config = fn.getenv('XDG_CONFIG_HOME') .. '/nvim'
+local config = fn.getenv('XDG_CONFIG_HOME') .. '/.config/nvim'
 local pack_root = fn.stdpath('data') .. '/site/pack/packer'
 local install_path = pack_root .. '/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then

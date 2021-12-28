@@ -1,5 +1,5 @@
 vim.o.updatetime = 500
-vim.o.shell = '/usr/local/bin/zsh -f' -- '/bin/bash'
+vim.o.shell = vim.fn.getenv('HOMEBREW_PREFIX') .. '/bin/zsh -f' -- '/bin/bash'
 -- Numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -13,3 +13,5 @@ vim.opt.signcolumn = 'yes'
 vim.opt.termguicolors = true
 vim.cmd [[set viminfo+=n~/.cache/nvim/viminfo]]
 vim.opt.wrap = false
+-- Setting udofile to on
+vim.opt.undofile = true

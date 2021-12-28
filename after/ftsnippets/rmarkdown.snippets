@@ -21,3 +21,11 @@ snippet img "Image" b
 knitr::include_graphics("${2:${VISUAL:path}}")
 \`\`\`
 endsnippet
+
+snippet example "ExampleDiv" b
+::: \{.example #$1 name="$2"\}
+<br />\\hfill\\break
+
+$3
+:::
+endsnippet

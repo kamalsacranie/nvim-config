@@ -1,18 +1,20 @@
-local null_ls = require('null-ls')
+local null_ls = require("null-ls")
 local builtins = null_ls.builtins
-null_ls.config({
-    sources = {
-        builtins.diagnostics.luacheck,
-        builtins.formatting.prettier.with({filetypes = {"js", "ts"}}),
-        builtins.diagnostics.write_good
-            .with({filetypes = {"markdown", "rmarkdown"}}),
-        builtins.diagnostics.markdownlint
-            .with({filetypes = {'markdown', 'rmarkdown'}}),
-        builtins.formatting.black.with({extra_args = {'-l79'}}),
-        builtins.diagnostics.flake8
-    }
-})
+local sources = {
+	builtins.formatting.stylua.with({
+		extra_args = { "--column-width", "80" },
+	}),
+	builtins.formatting.prettier,
+	-- Markdown linting with MD025 disbaled so we can have mutiple levle one
+	-- headings
+	builtins.diagnostics.markdownlint.with({
+		extra_args = { "--disable", "MD025" },
+	}),
+	builtins.formatting.black.with({ extra_args = { "-l79" } }),
+	builtins.diagnostics.flake8,
+}
 
-require('lspconfig')['null-ls'].setup({
-    on_attach = require('utils.lspattatch').on_attach
+null_ls.setup({
+	sources = sources,
+	on_attach = require("utils.lspattach").on_attach,
 })
