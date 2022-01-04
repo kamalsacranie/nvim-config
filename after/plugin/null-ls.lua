@@ -4,9 +4,10 @@ local sources = {
 	builtins.formatting.stylua.with({
 		extra_args = { "--column-width", "80" },
 	}),
-	builtins.formatting.prettier,
+	builtins.formatting.prettier.with({ disabled_filetypes = { "markdown" } }),
 	-- Markdown linting with MD025 disbaled so we can have mutiple levle one
 	-- headings
+    builtins.formatting.markdownlint,
 	builtins.diagnostics.markdownlint.with({
 		extra_args = { "--disable", "MD025" },
 	}),

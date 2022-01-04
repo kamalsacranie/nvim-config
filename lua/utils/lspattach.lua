@@ -7,11 +7,13 @@ M.on_attach = function(client, bufnr)
 
 	-- Mappings
 	local opts = { noremap = true, silent = true }
+	map("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
 
+	-- Mappings for lspsaga
 	map("n", "gh", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts)
-	map("n", "lgr", "<cmd>Lspsaga rename<CR>", opts)
-	map("n", "gx", "<cmd>Lspsaga code_action<CR>", opts)
-	map("x", "gx", ":<C-u>Lspsaga range_code_action<<CR>", opts)
+	map("n", "<leader>lr", "<cmd>Lspsaga rename<CR>", opts)
+	map("n", "<leader>lca", "<cmd>Lspsaga code_action<CR>", opts)
+	map("x", "<leader>lca", ":<C-u>Lspsaga range_code_action<<CR>", opts)
 	map("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts)
 	map("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
 	map("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)

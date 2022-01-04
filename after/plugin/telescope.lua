@@ -39,7 +39,7 @@ vim.api.nvim_set_keymap(
 -- Git project files. very naaace
 vim.api.nvim_set_keymap(
 	"n",
-	"<C-p>",
+	"<C-g>",
 	"<cmd>lua require('telescope.builtin').git_files()<CR>",
 	{ noremap = true }
 )

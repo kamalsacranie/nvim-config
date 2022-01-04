@@ -47,7 +47,7 @@ return require("packer").startup(function(use)
 	use("tweekmonster/django-plus.vim")
 	use("alvan/vim-closetag")
 
-	-- =================MARKDOWN================
+	-- =================WRITING================
 	use({
 		"vim-pandoc/vim-pandoc",
 		-- ft = {'markdown'},
@@ -64,6 +64,21 @@ return require("packer").startup(function(use)
 	use({
 		"dhruvasagar/vim-table-mode",
 		ft = { "markdonw", "rmarkdown", "rmd", "md" },
+	})
+	-- use({ "jbyuki/nabla.nvim" })
+	use({
+		"aspeddro/cmp-pandoc.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("cmp_pandoc").setup({
+				filetypes = {
+					"markdown",
+					"markdown.pandoc",
+					"rmd",
+					"rmarkdown",
+				},
+			})
+		end,
 	})
 	-- =========================================
 
