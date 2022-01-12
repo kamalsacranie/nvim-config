@@ -15,3 +15,6 @@ vim.cmd([[set viminfo+=n~/.cache/nvim/viminfo]])
 vim.opt.wrap = false
 -- Setting udofile to on
 vim.opt.undofile = true
+-- Casing
+vim.opt.ignorecase = true
+vim.opt.smartcase = true

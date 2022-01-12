@@ -12,3 +12,10 @@ vim.api.nvim_buf_set_keymap(
 	"<C-p><CR>zz<C-w>p",
 	{ noremap = true, silent = true }
 )
+vim.api.nvim_buf_set_keymap(
+	0,
+	"n",
+	"<CR>",
+	"<CR>zz<C-w>w:q<CR>",
+	{ noremap = true, silent = true }
+)
