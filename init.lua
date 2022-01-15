@@ -8,17 +8,17 @@
   \:\ \:\__\       \::/  //:/  /               |:/:/  /  \:\  /:/  //:/  /
    \:\ \/__/       /:/  / \/__/                |::/  /    \:\/:/  / \/__/
     \:\__\        /:/  /                       /:/  /      \::/  /
-     \/__/        \/__/                        \/__/        \/__/          --]] --
-vim.g.mapleader = ' '
+     \/__/        \/__/                        \/__/        \/__/          --]]
+
+vim.g.mapleader = " "
 -- Boostrapping Packer
-require('utils.packer-bootstrap')
+require("utils.packer-bootstrap")
 
-require('pre')
+require("pre")
 
-require('sets')
-require('lets')
-require('mappings')
-require('plugins')
+require("sets")
+require("lets")
+require("mappings")
+require("plugins")
 
-require('post')
-
+require("post")
