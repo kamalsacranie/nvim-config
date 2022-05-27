@@ -32,7 +32,6 @@ local icons = {
 	Variable = " ",
 }
 
----@diagnostic disable-next-line: redundant-parameter
 cmp.setup({
 	formatting = {
 		format = function(entry, vim_item)
@@ -64,20 +63,60 @@ cmp.setup({
 		{ name = "path" },
 		{ name = "nvim_lua" },
 		{ name = "ultisnips" },
-		{ name = "cmp_pandoc" },
+		{ name = "pandoc_references" },
 	},
 
 	mapping = {
-		["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-		["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-		["<C-e>"] = cmp.mapping({
-			i = cmp.mapping.abort(),
-			c = cmp.mapping.close(),
-		}),
-		["<Tab>"] = cmp.mapping({
-			i = cmp.mapping.confirm({ select = true }),
-			c = cmp.mapping.confirm({ select = true }),
-		}),
+		["<C-d>"] = function(fallback)
+			if cmp.visible() then
+				cmp.scroll_docs(4)
+			else
+				fallback()
+			end
+		end,
+		["<C-u>"] = function(fallback)
+			if cmp.visible() then
+				cmp.scroll_docs(-4)
+			else
+				fallback()
+			end
+		end,
+		["<C-c>"] = function(fallback)
+			if cmp.visible() then
+				cmp.mapping({
+					i = cmp.mapping.abort(),
+					c = cmp.mapping.close(),
+				})
+			else
+				fallback()
+			end
+		end,
+		-- Mapping control n to next item
+		["<C-n>"] = function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item()
+			else
+				fallback()
+			end
+		end,
+		-- Mapping control p to previous item
+		["<C-p>"] = function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item()
+			else
+				fallback()
+			end
+		end,
+		-- Mapping tab to completion
+		["<Tab>"] = function(fallbalck)
+			if cmp.visible() then
+				cmp.confirm({ select = true })
+			else
+				-- The fall back allows us to use the regular behavoiur if the
+				-- condition is not met
+				fallbalck()
+			end
+		end,
 	},
 })
 

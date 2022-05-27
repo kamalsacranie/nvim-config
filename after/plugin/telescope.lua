@@ -50,3 +50,10 @@ vim.api.nvim_set_keymap(
 	"<cmd>lua require('utils.telezones').search_dotfiles()<CR>",
 	{ noremap = true }
 )
+-- Notes search
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>fn",
+	"<cmd>lua require('utils.telezones').search_notes()<CR>",
+	{ noremap = true }
+)

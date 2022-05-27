@@ -2,7 +2,7 @@ require("utils.markdown-core")
 
 vim.cmd([[augroup snippets
 	autocmd!
-	autocmd VimEnter * exec ":UltiSnipsAddFiletypes markdown-core"
+	autocmd VimEnter * exec ":UltiSnipsAddFiletypes markdown-core.markdown"
 augroup END]])
 
 -- Render pdf

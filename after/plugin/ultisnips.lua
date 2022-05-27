@@ -3,7 +3,9 @@ vim.g.UltiSnipsRemoveSelectModeMappings = 0
 -- NOT SURE WHY WE DONT NEED TO SET OUR SNIPPETS PATH BUT IT WORKS
 -- Adding vim snippets and local snippets
 vim.g.UltiSnipsSnippetDirectories = {
-    "UltiSnips", "" .. vim.fn.expand('$HOME')
-        .. "/.local/share/nvim/site/pack/packer/start/vim-snippets/UltiSnips",
-    "/" .. vim.fn.expand('$HOME') .. "/.config/nvim/after/ftsnippets"
+	"UltiSnips",
+	""
+		.. vim.fn.expand("$HOME")
+		.. "/.local/share/nvim/site/pack/packer/start/vim-snippets/UltiSnips",
+	"/" .. vim.fn.expand("$HOME") .. "/.config/nvim/after/ftsnippets",
 }

@@ -1,3 +1,29 @@
+priority 1
+
+global !p
+
+# Custom math context. Dont know how to move to serparate file lol
+def math():
+    synlist = vim.eval(
+        """map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')"""
+    )
+    
+    # Catching emply list
+    # echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+    if not any(synlist):
+        return False
+
+    if "texMathTex" in synlist[-1]:
+        return False
+    elif any("Math" in string for string in synlist):
+        return True
+    elif "pandocLaTeXRegion" in synlist:
+        return True
+    else:
+        return False
+endglobal
+
+
 snippet cbl "CodeBloc" b
 \`\`\`\{${1:language}\}
 ${2:code}
@@ -9,17 +35,32 @@ snippet ref "Reference" i
 endsnippet
 
 snippet mdiag "MermaidDiag" b
-\`\`\`\{r $1, echo=FALSE, fig.width = 1, fig.cap = '$1', fig.width=1, out.width='100%'\}
+\`\`\`\{r $1, echo=F, fig.width=1, out.width='100%'\}
+#| fig.width = 1,
+#| fig.cap = '$1',
 DiagrammeR::mermaid("
 ${2:${VISUAL:diagram}}
 ")
 \`\`\`
 endsnippet
 
-snippet img "Image" b
-\`\`\`\{r $1, echo=FALSE, fig.cap='$1', out.height="30%", fig.align="center"\}
-knitr::include_graphics("${2:${VISUAL:path}}")
+snippet fig "Image" b
+\`\`\`\{r $1, echo=F, eval=T\}
+#| fig.cap="$1",
+#| out.height="30%",
+#| fig.align="center",
+knitr::include_graphics(
+  "${2:${VISUAL:path}}"
+)
 \`\`\`
+endsnippet
+
+snippet appendix "Appendix" b
+# (APPENDIX) Appendices \{-\}
+endsnippet
+
+snippet part "Appendix" b
+# (PART) $1 {-}
 endsnippet
 
 snippet example "ExampleDiv" b
@@ -31,4 +72,9 @@ $3
 
 ---
 
+endsnippet
+
+context "math()"
+snippet label "Equation label"
+(\\#eq:$1)
 endsnippet

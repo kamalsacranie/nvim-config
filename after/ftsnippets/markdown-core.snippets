@@ -47,15 +47,15 @@ snippet d' "InlineMath"
 \$${1:math}\$${2}
 endsnippet
 
-# snippet $$ "MathBlock" b
-# \$\$
-# ${1:math}
-# \$\$${2}
-# endsnippet
+snippet neqn "NumberLatexBlock" bA
+\\begin\{equation\}
+	$1 (\\#eq:)
+\\end\{equation\}
+endsnippet
 
 snippet eqn "LatexBlock" bA
 \\begin\{align*\}
-${1:LaTeX}
+	$1
 \\end\{align*\}
 endsnippet
 
@@ -88,6 +88,18 @@ endsnippet
 # ========================= MATH
 
 context "math()"
+snippet substack "Substack" iA
+\\substack\{$1\}
+endsnippet
+
+context "math()"
+snippet matrix "Matrix"
+\begin\{pmatrix\}
+	$1
+\end\{pmatrix\}
+endsnippet
+
+context "math()"
 snippet ... "dots" iA
 \\dots
 endsnippet
@@ -105,6 +117,11 @@ endsnippet
 context "math()"
 snippet hat "hat" iA
 \\hat\{${1}\}${2}
+endsnippet
+
+context "math()"
+snippet check "check" iA
+\\check\{${1}\}${2}
 endsnippet
 
 context "math()"
@@ -178,8 +195,32 @@ snippet root "squareroot" iA
 endsnippet
 
 context "math()"
-snippet left "brakcets" iA
-\\left$0\\right$1
+snippet left) "(brakcets" iA
+\\left($1\\right)$2
+endsnippet
+
+context "math()"
+snippet left] "[brakcets" iA
+\\left[$1\\right]$2
+endsnippet
+
+context "math()"
+snippet left} "{brakcets" iA
+\\left\\{$1\\right\\}$2
+endsnippet
+
+snippet big) "big)" iA
+\\big($1\\big)$2
+endsnippet
+
+context "math()"
+snippet big] "big]" iA
+\\big[$1\\big]$2
+endsnippet
+
+context "math()"
+snippet big} "big}" iA
+\\big\\{$1\\big\\}$2
 endsnippet
 
 context "math()"
@@ -196,6 +237,45 @@ context "math()"
 snippet overbrace "oversetbrace" iA
 \\overbrace\{$1\}^\{$2\}
 endsnippet
+
+context "math()"
+snippet bold "boldface" i
+\\mathbf{$1}
+endsnippet
+
+context "math()"
+snippet geq "Greater than or equal to" iA
+ \\geq 
+endsnippet
+
+context "math()"
+snippet leq "Less than or equal to" iA
+ \\leq 
+endsnippet
+
+context "math()"
+snippet > "Greater than" iA
+ > 
+endsnippet
+
+context "math()"
+snippet < "Greater than" iA
+ < 
+endsnippet
+
+context "math()"
+snippet expected "Expected value operator" iA
+\\mathbb E[$1]$2
+endsnippet
+
+context "math()"
+snippet `` "Prime" iA
+ \\prime
+endsnippet
+
+
+
+
 
 # Letters
 
