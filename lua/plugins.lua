@@ -6,6 +6,8 @@ return require("packer").startup(function(use)
 	-- Commentary
 	use("tpope/vim-commentary")
 	use("hoob3rt/lualine.nvim")
+	-- Multicursor select
+	use("terryma/vim-multiple-cursors")
 
 	-- ============ LSP Related
 	-- nvim lsp
@@ -30,6 +32,7 @@ return require("packer").startup(function(use)
 	use("windwp/nvim-ts-autotag")
 	use("JoosepAlviste/nvim-ts-context-commentstring")
 	use("p00f/nvim-ts-rainbow")
+	use({ "nvim-treesitter/playground" })
 
 	-- ============ Completion
 	use({
@@ -39,6 +42,7 @@ return require("packer").startup(function(use)
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-nvim-lua",
 			"quangnguyen30192/cmp-nvim-ultisnips",
+			"jc-doyle/cmp-pandoc-references",
 		},
 	})
 
@@ -50,7 +54,6 @@ return require("packer").startup(function(use)
 	-- =================WRITING================
 	use({
 		"vim-pandoc/vim-pandoc",
-		-- ft = {'markdown'},
 		requires = {
 			"vim-pandoc/vim-pandoc-syntax",
 			"ekickx/clipboard-image.nvim",
@@ -63,24 +66,12 @@ return require("packer").startup(function(use)
 	})
 	use({
 		"dhruvasagar/vim-table-mode",
-		ft = { "markdonw", "rmarkdown", "rmd", "md" },
-	})
-	-- use({ "jbyuki/nabla.nvim" })
-	use({
-		"aspeddro/cmp-pandoc.nvim",
-		requires = { "nvim-lua/plenary.nvim" },
-		config = function()
-			require("cmp_pandoc").setup({
-				filetypes = {
-					"markdown",
-					"markdown.pandoc",
-					"rmd",
-					"rmarkdown",
-				},
-			})
-		end,
+		ft = { "markdown", "rmarkdown", "rmd", "md", "anki.markdown.pandoc" },
 	})
 	-- =========================================
+
+	-- R
+	use({ "jalvesaq/Nvim-R", branch = "stable" })
 
 	-- Snippets
 	use({ "SirVer/ultisnips", requires = { "honza/vim-snippets" } })
@@ -89,7 +80,16 @@ return require("packer").startup(function(use)
 	use("windwp/nvim-autopairs")
 
 	-- Telescope
-	use({ "nvim-telescope/telescope.nvim", requires = "nvim-lua/plenary.nvim" })
+	use({
+		"nvim-telescope/telescope.nvim",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				run = "make",
+			},
+		},
+	})
 
 	-- Color scheme/theme
 	use("bluz71/vim-nightfly-guicolors")
@@ -99,6 +99,13 @@ return require("packer").startup(function(use)
 	use("rktjmp/highlight-current-n.nvim")
 	-- Popup terminal
 	use("akinsho/toggleterm.nvim")
+
+	-- Tabbing out of surrounding things
+	use({
+		"abecodes/tabout.nvim",
+		wants = { "nvim-treesitter" },
+		after = { "nvim-cmp" },
+	})
 
 	-- Color code highlightingh
 	use("norcalli/nvim-colorizer.lua")

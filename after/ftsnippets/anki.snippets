@@ -24,13 +24,13 @@ endglobal
 # ========================== anki specific
 
 snippet multihead "Multi-line heading"
-::: \{data-block=\}
+::: \{data-question=\}
 
-$0
+${1:${VISUAL:temp}}
 
 :::
 endsnippet
 
 snippet cloze "Cloze"
-\{\{c$1::${2:answer}\}\}
+\{\{c$1::${2:${VISUAL:answer}}\}\}
 endsnippet

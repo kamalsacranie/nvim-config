@@ -1,5 +1,6 @@
+-- For code word highlighting
 vim.o.updatetime = 500
-vim.o.shell = vim.fn.getenv("HOMEBREW_PREFIX") .. "/bin/zsh" -- '/bin/bash'
+vim.o.shell = vim.fn.getenv("HOMEBREW_PREFIX") .. "/bin/zsh"
 -- Numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -18,3 +19,7 @@ vim.opt.undofile = true
 -- Casing
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+-- Fold settings
+vim.opt.foldlevelstart = 9 -- All folds start open
+-- Setting a cursorline
+vim.opt.cursorline = true

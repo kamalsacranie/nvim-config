@@ -1,11 +1,11 @@
 -- Setting tabs
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 0
-vim.opt.expandtab = true
+vim.opt_local.tabstop = 2
+vim.opt_local.softtabstop = 2
+vim.opt_local.shiftwidth = 0
+vim.opt_local.expandtab = true
 -- Setting width and colorcolumn
-vim.opt.textwidth = 79
-vim.opt.colorcolumn = { 80 }
+vim.opt_local.textwidth = 79
+vim.opt_local.colorcolumn = { 80 }
 
 -- Setting up spell
 require("utils.spell")
@@ -21,21 +21,45 @@ vim.g["pandoc#hypertext#split_open_cmd"] = "e"
 require("nvim-autopairs").remove_rule("```")
 require("nvim-autopairs").remove_rule("`")
 
--- Render pdf
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>r",
-	"<Cmd>w<CR><Cmd>! pandoc % -o %:r.pdf<CR>",
-	{ noremap = true, silent = true }
-)
 -- Generate toc in quickfix list
 vim.api.nvim_buf_set_keymap(
 	0,
 	"n",
 	"<leader>toc",
-	[[<Cmd>vimgrep '^\#' % | cw<CR>]],
+	-- [[<Cmd>vimgrep '^\#' % | cw<CR>]],
+	[[<Cmd>TOC<CR>]],
 	{ noremap = true, silent = true }
 )
 
 -- Tablemode settings
-vim.cmd([[let g:table_mode_corner='|']])
+vim.cmd([[let g:table_mode_corner_corner='+']])
+vim.cmd([[let b:table_mode_corner='+']])
+vim.cmd([[let g:table_mode_header_fillchar='=']])
+
+vim.api.nvim_buf_set_keymap(
+	0,
+	"v",
+	"<leader>rp",
+	[[y:! qlmanage -p '<C-R>"'<CR><CR>]],
+	{ noremap = false, silent = true }
+)
+-- Latex image render script in user bin
+vim.api.nvim_buf_set_keymap(
+	0,
+	"v",
+	"<leader>lr",
+	[[y:! lateximg '<C-R>"'<CR><CR>]],
+	{ noremap = false, silent = true }
+)
+vim.api.nvim_buf_set_keymap(
+	0,
+	"v",
+	"<leader>lmr",
+	[[y:! lateximg '\begin{align*}<C-R>"\end{align*}'<CR><CR>]],
+	{ noremap = false, silent = true }
+)
+
+vim.cmd([[augroup snippets
+	autocmd!
+	autocmd VimEnter * exec ":UltiSnipsAddFiletypes markdown-core"
+augroup END]])

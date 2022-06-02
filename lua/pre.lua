@@ -6,6 +6,7 @@ vim.g["pandoc#filetypes#handled"] = { "pandoc", "markdown" }
 vim.g["pandoc#filetypes#pandoc_markdown"] = 0
 -- Disable folding and formatting
 vim.g["pandoc#modules#disabled"] = { "formatting", "folding" }
+-- vim.g["pandoc#folding#level"] = 2
 -- PANDOC SYNTAX
 vim.g["pandoc#syntax#conceal#urls"] = true
 vim.g["pandoc#syntax#codeblocks#embeds#langs"] = {
@@ -14,4 +15,5 @@ vim.g["pandoc#syntax#codeblocks#embeds#langs"] = {
 	"bash",
 	"yaml",
 	"sql",
+	"r",
 }

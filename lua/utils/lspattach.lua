@@ -8,6 +8,7 @@ M.on_attach = function(client, bufnr)
 	-- Mappings
 	local opts = { noremap = true, silent = true }
 	map("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
+	map("n", "gr", "<Cmd>lua vim.lsp.buf.references()<CR>", opts)
 
 	-- Mappings for lspsaga
 	map("n", "gh", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts)
@@ -77,7 +78,6 @@ return M
 
 -- ======== OLD MAPPINGS FOR NATIVE LSP ======
 -- map("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
--- map("n", "gr", "<Cmd>lua vim.lsp.buf.references()<CR>", opts)
 -- map("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
 -- map(
 --     "i",

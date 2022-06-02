@@ -1,5 +1,7 @@
 require("utils.markdown-core")
 
+vim.cmd([[let b:table_mode_corner='+']])
+
 vim.cmd([[augroup snippets
 	autocmd!
 	autocmd VimEnter * exec ":UltiSnipsAddFiletypes markdown-core.markdown"
