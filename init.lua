@@ -11,6 +11,8 @@
      \/__/        \/__/                        \/__/        \/__/          --]]
 
 vim.g.mapleader = " "
+-- Loading our useful functions first
+require("qol_globals")
 -- Boostrapping Packer
 require("utils.packer-bootstrap")
 
@@ -18,7 +20,7 @@ require("pre")
 
 require("sets")
 require("lets")
-require("mappings")
+require("user")
 require("plugins")
 
 require("post")

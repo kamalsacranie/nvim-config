@@ -1,18 +1,23 @@
-local npairs = require("nvim-autopairs")
+local is_loaded, npairs = LOAD_PACKAGE("nvim-autopairs")
+if not is_loaded then
+	return
+end
+
 local Rule = require("nvim-autopairs.rule")
 local cond = require("nvim-autopairs.conds")
 
--- Setting up treesitter. Should change all to wrok like this
-require("nvim-treesitter.configs").setup({ autopairs = { enable = true } })
 -- Calling the plugin
-require("nvim-autopairs").setup({})
+require("nvim-autopairs").setup({
+	check_ts = true, -- check treesitter for pairing
+})
+
 -- autopairs.add_rule(Rule("$$", "$$", {"tex", "latex", "markdown", "rmarkdown"}))
 npairs.add_rules({
 	Rule(
-		"$",
-		"$",
-		{ "tex", "latex", "markdown", "rmarkdown", "markdown.pandoc" }
-	) -- don't add a pair if the next character is %
+			"$",
+			"$",
+			{ "tex", "latex", "markdown", "rmarkdown", "markdown.pandoc" }
+		) -- don't add a pair if the next character is %
 		:with_pair(cond.not_after_regex_check("%%")) -- don't add a pair if  the previous character is xxx
 		:with_pair(cond.not_before_regex_check("xxx", 3)) -- don't move right when repeat character
 		:with_pair(cond.not_before_text([[\]]))

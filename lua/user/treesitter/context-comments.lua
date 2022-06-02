@@ -1,4 +1,3 @@
-if not vim.g.loaded_nvim_treesitter then return end
 require("nvim-treesitter.configs").setup {
     context_commentstring = {
         enable = true,

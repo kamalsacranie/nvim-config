@@ -5,7 +5,7 @@ vim.opt_local.shiftwidth = 0
 vim.opt_local.expandtab = true
 -- Setting width and colorcolumn
 vim.opt_local.textwidth = 79
-vim.opt_local.colorcolumn = { 80 }
+vim.wo.colorcolumn = "80"
 
 -- Setting up spell
 require("utils.spell")
