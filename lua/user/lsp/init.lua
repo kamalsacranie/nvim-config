@@ -46,7 +46,7 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 local servers = require("user.lsp.lsp_install")
 
 ---@diagnostic disable-next-line: unused-local
-local is_loaded, lspconfig = LOAD_PACKAGE("lspconfig")
+local is_loaded, lspconfig = load_package("lspconfig")
 if not is_loaded then
     return
 end

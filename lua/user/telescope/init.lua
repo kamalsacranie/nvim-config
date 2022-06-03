@@ -1,4 +1,4 @@
-local is_loaded, telescope = LOAD_PACKAGE("telescope")
+local is_loaded, telescope = load_package("telescope")
 if not is_loaded then
 	return
 end

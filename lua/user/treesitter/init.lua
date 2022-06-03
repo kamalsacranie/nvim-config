@@ -1,4 +1,4 @@
-local is_loaded, _ = LOAD_PACKAGE("nvim-treesitter.configs")
+local is_loaded, _ = load_package("nvim-treesitter.configs")
 if not is_loaded then
 	return
 end

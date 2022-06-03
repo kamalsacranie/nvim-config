@@ -2,7 +2,7 @@ local M = {}
 
 M.lsp_mappings = function(bufnr)
 	local bkmap = function(mode, lhs, rhs, opts)
-		BKMAP(mode, lhs, rhs, opts, bufnr)
+		bkmap(mode, lhs, rhs, opts, bufnr)
 	end
 	-- Mappings
 	bkmap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>")

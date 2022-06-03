@@ -1,4 +1,4 @@
-local is_loaded, npairs = LOAD_PACKAGE("nvim-autopairs")
+local is_loaded, npairs = load_package("nvim-autopairs")
 if not is_loaded then
 	return
 end

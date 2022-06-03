@@ -1,4 +1,4 @@
-local is_loaded, lsp_installer = LOAD_PACKAGE("nvim-lsp-installer")
+local is_loaded, lsp_installer = load_package("nvim-lsp-installer")
 if not is_loaded then
     return
 end

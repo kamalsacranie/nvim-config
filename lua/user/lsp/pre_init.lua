@@ -7,14 +7,14 @@ M.on_attach = function(client, bufnr)
     -- setting up our mappings
     require("user.mappings.lsp_map").lsp_mappings(bufnr)
 
-    local is_loaded, signature = LOAD_PACKAGE("lsp_signature")
+    local is_loaded, signature = load_package("lsp_signature")
     if is_loaded then
         signature.on_attach(require("user.lsp.lsp_signature").cfg, bufnr)
     end
 
     -- Updating cmp with our capabilities
     ---@diagnostic disable-next-line: unused-local, redefined-local
-    local is_loaded, cmp = LOAD_PACKAGE("cmp_nvim_lsp")
+    local is_loaded, cmp = load_package("cmp_nvim_lsp")
     if is_loaded then
         M.capabilities.textDocument.completion.completionItem.snippetSupport = true
         M.capabilities = cmp.update_capabilities(M.capabilities)
