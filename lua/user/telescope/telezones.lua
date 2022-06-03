@@ -45,4 +45,8 @@ M.buffer = function()
 	builtin.buffers({ ignore_current_buffer = true })
 end
 
+M.doc_symbols = function()
+	builtin.lsp_document_symbols({ show_line = true })
+end
+
 return M

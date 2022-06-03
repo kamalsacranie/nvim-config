@@ -31,4 +31,7 @@ KMAP("n", "<leader>fv", "<CMD>lua require('user.telescope').nvim_config()<CR>")
 KMAP("n", "<leader>fn", "<CMD>lua require('user.telescope').notes()<CR>")
 
 -- Show all keymaps
-BKMAP("n", "<leader>fk", "<CMD>lua require('telescope.builtin').keymaps()<CR>")
+KMAP("n", "<leader>fk", "<CMD>lua require('telescope.builtin').keymaps()<CR>")
+
+-- Show document symbols
+KMAP("n", "<leader>fds", "<CMD>lua require('user.telescope').doc_symbols()<CR>")

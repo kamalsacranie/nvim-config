@@ -1,5 +1,5 @@
 local lspc = require("lspconfig")
-local helper_funcs = require("utils.helper_funcs")
+local helper_funcs = require("utils.helping_hand")
 
 lspc.r_language_server.setup({
 	on_attach = require("utils.lspattach").on_attach,
