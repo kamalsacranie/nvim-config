@@ -1,9 +1,9 @@
 local null_ls = require("null-ls")
 local builtins = null_ls.builtins
 local sources = {
-	builtins.formatting.stylua.with({
-		extra_args = { "--column-width", "80" },
-	}),
+	-- builtins.formatting.stylua.with({
+	-- 	extra_args = { "--column-width", "80" },
+	-- }),
 	builtins.formatting.prettier.with({
 		disabled_filetypes = { "markdown", "json" },
 	}),
@@ -24,5 +24,5 @@ local sources = {
 
 null_ls.setup({
 	sources = sources,
-	on_attach = require("utils.lspattach").on_attach,
+	on_attach = require("user.lsp.pre_init").on_attach,
 })
