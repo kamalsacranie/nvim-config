@@ -1,4 +1,4 @@
-local null_ls = require("null-ls")
+--[[ local null_ls = require("null-ls")
 local builtins = null_ls.builtins
 local sources = {
 	-- builtins.formatting.stylua.with({
@@ -25,4 +25,4 @@ local sources = {
 null_ls.setup({
 	sources = sources,
 	on_attach = require("user.lsp.pre_init").on_attach,
-})
+}) --]]

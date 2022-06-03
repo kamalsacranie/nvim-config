@@ -41,7 +41,7 @@ M.live_grep = function()
 end
 
 -- Search all buffers
-M.buffer = function()
+M.buffers = function()
 	builtin.buffers({ ignore_current_buffer = true })
 end
 

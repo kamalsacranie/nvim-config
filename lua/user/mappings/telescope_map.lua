@@ -1,15 +1,15 @@
 -- These are our telescope mappings
-local is_loaded, telescope = load_package("telescope")
-if not is_loaded then
-	return
+local telescope_did_load, _ = load_package("telescope")
+if not telescope_did_load then
+    return
 end
 
 -- Keymappings: f for find
 -- other files in cwd
 kmap(
-	"n",
-	"<leader>ff",
-	"<CMD>lua require('user.telescope').current_directory()<CR>"
+    "n",
+    "<leader>ff",
+    "<CMD>lua require('user.telescope').current_directory()<CR>"
 )
 
 -- grep text in files

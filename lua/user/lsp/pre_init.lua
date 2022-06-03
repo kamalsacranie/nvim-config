@@ -9,7 +9,7 @@ M.on_attach = function(client, bufnr)
 
     local is_loaded, signature = load_package("lsp_signature")
     if is_loaded then
-        signature.on_attach(require("user.lsp.lsp_signature").cfg, bufnr)
+        signature.on_attach(require("user.lsp.lsp_signature"), bufnr)
     end
 
     -- Updating cmp with our capabilities
@@ -20,16 +20,19 @@ M.on_attach = function(client, bufnr)
         M.capabilities = cmp.update_capabilities(M.capabilities)
     end
 
+    -- if we have lsp-status installed, we can have the update in our status
+    -- bar (configured in lualine)
+    local lsp_stauts_did_load, lsp_status = load_package("lsp-status")
+    if lsp_stauts_did_load then
+        lsp_status.register_progress()
+        vim.tbl_extend("keep", M.capabilities or {}, lsp_status.capabilities)
+    end
+
     -- When your LSP has formatting capabilities, it has a specified command
     -- for formatting which is called with `lua vim.lsp.buf.formatting()`. This
     -- sets up format on save with an autocommand
     if client.resolved_capabilities.document_formatting then
-        vim.cmd([[
-            augroup Format
-            autocmd! * <buffer>
-            autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()
-            augroup END
-        ]])
+        require('user.lsp.format_on_save').enable_format_on_save()
     end
 
     -- If the LSP has document_highlighting capabilities, then we setup an
