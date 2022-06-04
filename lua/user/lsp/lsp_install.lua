@@ -29,20 +29,15 @@ end
 local servers = get_server_names()
 
 local cfg = {
+    -- see defaults at :h nvim-lsp-installer-default-settings
     ensure_installed = servers,
     ui = {
-        keymaps = {
-            toggle_server_expand = "<CR>",
-            install_server = "i",
-            update_server = "u",
-            check_server_version = "c",
-            update_all_servers = "U",
-            check_outdated_servers = "C",
-            uninstall_server = "X",
-        },
-    },
-
-    log_level = vim.log.levels.INFO,
+        icons = {
+            server_installed = "✓",
+            server_pending = "➜",
+            server_uninstalled = "✗"
+        }
+    }
 }
 
 lsp_installer.setup(cfg)

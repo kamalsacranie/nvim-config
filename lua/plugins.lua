@@ -4,7 +4,6 @@ return require("packer").startup(function(use)
     -- Surround things with things duh
     use("tpope/vim-surround")
     -- Commentary
-    -- use("tpope/vim-commentary")
     use({ "numToStr/Comment.nvim" })
     -- Status line
     use("hoob3rt/lualine.nvim")

@@ -1,5 +1,4 @@
 local cmp = require("cmp")
-local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 -- Information icons with our completions
 -- Custom icons so we dont have to use a different plugin
