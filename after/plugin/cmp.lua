@@ -1,35 +1,12 @@
-local cmp = require("cmp")
+local cmp_did_load, cmp = load_package("cmp")
+if not cmp_did_load then
+	return
+end
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 -- Information icons with our completions
 -- Custom icons so we dont have to use a different plugin
 
-local icons = {
-	Class = " ",
-	Color = " ",
-	Constant = "ﲀ ",
-	Constructor = " ",
-	Enum = "練",
-	EnumMember = " ",
-	Event = " ",
-	Field = " ",
-	File = "",
-	Folder = " ",
-	Function = " ",
-	Interface = "ﰮ ",
-	Keyword = " ",
-	Method = "⦿ ",
-	Module = " ",
-	Operator = "",
-	Property = " ",
-	Reference = " ",
-	Snippet = " ",
-	Struct = " ",
-	Text = " ",
-	TypeParameter = " ",
-	Unit = "塞",
-	Value = " ",
-	Variable = " ",
-}
+local icons = require("utils.icons").kind
 
 cmp.setup({
 	formatting = {
@@ -37,13 +14,13 @@ cmp.setup({
 			vim_item.kind = icons[vim_item.kind]
 			-- setting up our won icons etc
 			vim_item.menu = ({
-				nvim_lsp = "「LSP",
-				emoji = "「Emoji",
-				path = "「Path",
-				calc = "「Calc",
-				cmp_tabnine = "「Tabnine",
-				ultisnips = "「Snippet",
-				buffer = "「Buffer",
+				nvim_lsp = "「LSP」",
+				emoji = "「Emoji」",
+				path = "「Path」",
+				calc = "「Calc」",
+				cmp_tabnine = "「Tabnine」",
+				ultisnips = "「Snippet」",
+				buffer = "「Buffer」",
 			})[entry.source.name]
 			vim_item.dup = ({ buffer = 1, path = 1, nvim_lsp = 0 })[entry.source.name]
 				or 0
