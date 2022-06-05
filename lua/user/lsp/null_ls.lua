@@ -11,10 +11,10 @@ local sources = {
 	-- }),
 	-- Markdown linting with MD025 disbaled so we can have mutiple levle one
 	-- headings
-	-- formatting.markdownlint,
-	-- diagnostics.markdownlint.with({
-	-- 	extra_args = { "--disable", "MD025" },
-	-- }),
+	formatting.markdownlint,
+	diagnostics.markdownlint.with({
+		extra_args = { "--disable", "MD025" },
+	}),
 	-- Python formatting
 	formatting.black.with({ extra_args = { "-l79" } }),
 	diagnostics.flake8,

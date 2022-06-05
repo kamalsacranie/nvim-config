@@ -3,11 +3,12 @@ if not cmp_did_load then
 	return
 end
 
+-- Getting our lspkind icon set from our icons file
 local icons = require("utils.icons").kind
 
 cmp.setup({
 	formatting = {
-		format = function(entry, vim_item)
+		format = function(entry, vim_item) -- Setting up how our PUM looks and what the sources are
 			vim_item.kind = icons[vim_item.kind]
 			-- setting up our won icons etc
 			vim_item.menu = ({
@@ -25,13 +26,13 @@ cmp.setup({
 		end,
 	},
 
-	snippet = {
+	snippet = { -- Configuring for use with ultisnips
 		expand = function(args)
 			vim.fn["UltiSnips#Anon"](args.body)
 		end,
 	},
 
-	sources = {
+	sources = { -- registering our sources
 		{ name = "nvim_lsp" },
 		{ name = "path" },
 		{ name = "nvim_lua" },

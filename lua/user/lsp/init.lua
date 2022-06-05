@@ -16,6 +16,8 @@ local servers = require("user.lsp.lsp_install") -- sets up lspinstall and return
 local pre_init = require("user.lsp.pre_init")
 local server_settings = require("user.lsp.server_settings")
 
+-- Loops through our list of servers and then sets up the options by
+-- dynamically calling our setting option files
 for _, server in pairs(servers) do
 	local opts = {
 		on_attach = pre_init.on_attach,
