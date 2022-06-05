@@ -1,15 +1,15 @@
 -- These are our telescope mappings
 local telescope_did_load, _ = load_package("telescope")
 if not telescope_did_load then
-    return
+	return
 end
 
 -- Keymappings: f for find
 -- other files in cwd
 kmap(
-    "n",
-    "<leader>ff",
-    "<CMD>lua require('user.telescope').current_directory()<CR>"
+	"n",
+	"<leader>ff",
+	"<CMD>lua require('user.telescope').current_directory()<CR>"
 )
 
 -- grep text in files
@@ -20,9 +20,6 @@ kmap("n", "<leader>fb", "<CMD>lua require('user.telescope').buffers()<CR>")
 
 -- fuzzy search helptags
 kmap("n", "<leader>fh", "<CMD>lua require('telescope.builtin').help_tags()<CR>")
-
--- Git project files. very naaace
-kmap("n", "<C-g>", "<CMD>lua require('telescope.builtin').git_files()<CR>")
 
 -- Vimrc file searc
 kmap("n", "<leader>fv", "<CMD>lua require('user.telescope').nvim_config()<CR>")
@@ -35,3 +32,8 @@ kmap("n", "<leader>fk", "<CMD>lua require('telescope.builtin').keymaps()<CR>")
 
 -- Show document symbols
 kmap("n", "<leader>fds", "<CMD>lua require('user.telescope').doc_symbols()<CR>")
+
+if is_git_dir() then
+	-- Git project files. very naaace
+	kmap("n", "<C-g>", "<CMD>lua require('telescope.builtin').git_files()<CR>")
+end

@@ -12,7 +12,7 @@ augroup END
 vim.cmd([[
 augroup remember_folds
   autocmd!
-  autocmd BufWinLeave *[^Prompt].* mkview
-  autocmd BufWinEnter *[^Prompt].* silent! loadview
+  autocmd BufWinLeave *.* mkview
+  autocmd BufWinEnter *.* silent! loadview
 augroup END
 ]])

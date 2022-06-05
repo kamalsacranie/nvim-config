@@ -107,6 +107,13 @@ return require("packer").startup(function(use)
 		wants = { "nvim-treesitter" },
 		after = { "nvim-cmp" },
 	})
+	-- Making folds nicer: we could use require("pretty-fold").setup() but i
+	-- need to look at the documentation for that becuase it looks like it will
+	-- mess with treesitter out the box
+	use({
+		"anuvyklack/pretty-fold.nvim",
+		requires = "anuvyklack/nvim-keymap-amend", -- only for preview
+	})
 
 	-- Color code highlightingh
 	use("norcalli/nvim-colorizer.lua")

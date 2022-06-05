@@ -1,5 +1,17 @@
 local M = {}
 
+-- This function checks to see if we are on a fold and if we are we how the
+-- fold hover otherwise we show the regular lsp hover
+M.hover_callback = function()
+	if vim.fn.foldclosed(".") ~= -1 then
+		local pfp_did_load, pfp = load_package("pretty-fold.preview")
+		if pfp_did_load then
+			return pfp.mapping.show_close_preview_open_fold()
+		end
+	end
+	return vim.lsp.buf.hover()
+end
+
 M.lsp_mappings = function(bufnr)
 	local bkmap = function(mode, lhs, rhs, opts)
 		bkmap(mode, lhs, rhs, opts, bufnr)
@@ -8,16 +20,18 @@ M.lsp_mappings = function(bufnr)
 	bkmap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>")
 	bkmap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
 	bkmap("n", "gr", "<Cmd>lua vim.lsp.buf.references()<CR>")
-	bkmap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>")
 	bkmap("n", "<leader>lr", "<Cmd>lua vim.lsp.buf.rename()<CR>")
-	-- Can't use the standard <C-k> until I develope some type of callback to
-	-- test if we have a hover
 	bkmap("i", "<C-k>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>")
+	bkmap(
+		"n",
+		"K",
+		"<Cmd>lua require('user.mappings.lsp_map').hover_callback()<CR>"
+	)
 	bkmap("n", "gI", "<Cmd>lua vim.lsp.buf.implementation()<CR>")
 	bkmap(
 		"n",
 		"<leader>lca",
-		"<Cmd>lua vim.lsp.buf.code_action(({ only = { 'quickfix' } }))<CR>"
+		"<Cmd>lua vim.lsp.buf.code_action(({ only = { 'QuickFix' } }))<CR>"
 	)
 	bkmap("x", "<leader>lca", "<Cmd>lua vim.lsp.buf.range_code_action()<CR>")
 	bkmap("n", "[d", "<Cmd>lua vim.diagnostic.goto_prev()<CR>")
