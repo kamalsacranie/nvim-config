@@ -43,3 +43,5 @@ kmap("n", "{", "<Cmd>keepjumps normal! {<CR>")
 -- remapping so that when we use surround in insert, we autohighlight under
 -- cursor
 kmap("n", "S", "vS", { noremap = false })
+-- Making it easier to source files. SHOUT OUT % BABAYYYYY1
+kmap("n", "<leader><leader>x", "<Cmd>w | so %<CR>")

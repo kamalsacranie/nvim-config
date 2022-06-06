@@ -9,7 +9,7 @@ return require("packer").startup({
 		-- Status line
 		use("hoob3rt/lualine.nvim")
 		-- Multicursor select
-		use("terryma/vim-multiple-cursors")
+		-- use("terryma/vim-multiple-cursors")
 
 		-- ============ LSP Related
 		-- nvim lsp

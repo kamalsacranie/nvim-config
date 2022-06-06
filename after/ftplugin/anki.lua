@@ -1,4 +1,4 @@
-require("utils.markdown-core")
+require("utils.markdown_core")
 
 -- Using treesitter for our parser
 local is_loaded, ts_parser = load_package("nvim-treesitter.parsers")

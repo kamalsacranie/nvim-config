@@ -1,4 +1,4 @@
-require("utils.markdown-core")
+require("utils.markdown_core")
 
 vim.cmd([[let b:table_mode_corner='+']])
 
