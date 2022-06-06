@@ -14,7 +14,7 @@ require("toggleterm").setup({
 	start_in_insert = true,
 	insert_mappings = true, -- whether or not the open mapping applies in insert mode
 	persist_size = true,
-	direction = "tab",
+	direction = "horizontal",
 	close_on_exit = true, -- close the terminal window when the process exits
 	shell = vim.o.shell, -- we set zsh with -f to have no config
 })

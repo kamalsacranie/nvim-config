@@ -4,7 +4,7 @@ if not is_loaded then
 end
 
 require("nvim-treesitter.configs").setup({
-	highlight = { enable = true },
+	highlight = { enable = true},
 	indent = { enable = true, disable = { "python" } },
 	ensure_installed = {
 		"tsx",

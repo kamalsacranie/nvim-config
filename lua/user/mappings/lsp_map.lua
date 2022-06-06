@@ -12,10 +12,11 @@ M.hover_callback = function()
 	return vim.lsp.buf.hover()
 end
 
-M.lsp_mappings = function(bufnr)
+M.lsp_mappings = function(bufnr, client)
 	local bkmap = function(mode, lhs, rhs, opts)
 		bkmap(mode, lhs, rhs, opts, bufnr)
 	end
+
 	-- Mappings
 	bkmap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>")
 	bkmap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>")

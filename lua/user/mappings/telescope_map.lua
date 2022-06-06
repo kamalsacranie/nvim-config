@@ -16,7 +16,7 @@ kmap(
 kmap("n", "<leader>fg", "<CMD>lua require('user.telescope').live_grep()<CR>")
 
 -- list buffers
-kmap("n", "<leader>fb", "<CMD>lua require('user.telescope').buffers()<CR>")
+kmap("n", "<leader>fb", "<CMD>lua require('telescope.builtin').buffers()<CR>")
 
 -- fuzzy search helptags
 kmap("n", "<leader>fh", "<CMD>lua require('telescope.builtin').help_tags()<CR>")

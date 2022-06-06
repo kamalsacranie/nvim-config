@@ -50,11 +50,3 @@ local autopairs_did_load, cmp_autopairs = load_package(
 if autopairs_did_load then
 	cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 end
-
--- Disabling our autocomplete when using telescope
-vim.cmd([[
-augroup Cmp
-    au!
-    autocmd FileType TelescopePrompt lua require('cmp').setup.buffer { enabled = false }
-augroup END
-]])

@@ -4,7 +4,7 @@ if not is_loaded then
 end
 
 -- loading ansilliary things
-local null_ls_did_load, _ = require("null-ls")
+local null_ls_did_load, _ = load_package("null-ls")
 if null_ls_did_load then
 	require("user.lsp.null_ls")
 end

@@ -1,4 +1,9 @@
-require("lualine").setup({
+local ll_did_load, lualine = load_package("lualine")
+if not ll_did_load then
+	return
+end
+
+lualine.setup({
 	options = {
 		icons_enabled = true,
 		theme = "nightfly",
@@ -13,13 +18,13 @@ require("lualine").setup({
 		lualine_x = { "encoding", "fileformat", "filetype" },
 		-- Adding our lsp status. very rough but will do for now
 		lualine_y = {
-			function()
-				local success, func = pcall(require("lsp-status").status)
-				if success then
-					return func
-				end
-				return ""
-			end,
+			-- function()
+			-- 	local success, lsp_status = pcall(require, "lsp-status")
+			-- 	if success then
+			-- 		return lsp_status.status()
+			-- 	end
+			-- 	return ""
+			-- end,
 			"progress",
 		},
 		lualine_z = { "location" },

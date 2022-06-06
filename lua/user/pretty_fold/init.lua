@@ -6,13 +6,13 @@ end
 pretty_fold.setup({
 	sections = {
 		left = {
-			"► ",
 			"content",
 			"╟",
 		}, -- auto expands to the content line of the fold
 		right = {
 			" ",
 			"number_of_folded_lines", -- displays number of folded lines
+			" ",
 			function(config)
 				return config.fill_char:rep(3)
 			end,

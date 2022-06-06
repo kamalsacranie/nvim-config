@@ -40,11 +40,6 @@ M.live_grep = function()
 	builtin.live_grep({ cwd = require("telescope.utils").buffer_dir() })
 end
 
--- Search all buffers
-M.buffers = function()
-	builtin.buffers({ ignore_current_buffer = true })
-end
-
 M.doc_symbols = function()
 	builtin.lsp_document_symbols({ show_line = true })
 end

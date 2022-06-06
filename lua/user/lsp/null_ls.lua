@@ -7,7 +7,7 @@ local sources = {
 		extra_args = { "--column-width", "80" },
 	}),
 	-- formatting.prettier.with({
-	--     disabled_filetypes = { "markdown", "json" },
+	--     disabled_filetypes = { "markdown", "rmd", "md", "markdown.pandoc", "rmarkdown" },
 	-- }),
 	-- Markdown linting with MD025 disbaled so we can have mutiple levle one
 	-- headings
@@ -19,7 +19,9 @@ local sources = {
 	formatting.black.with({ extra_args = { "-l79" } }),
 	diagnostics.flake8,
 	-- Latex formatting
-	diagnostics.chktex,
+	diagnostics.chktex.with({
+		filetypes = { "latex", "plaintex", "bib", "tex" },
+	}),
 	-- Shell formatting
 	formatting.shfmt,
 }

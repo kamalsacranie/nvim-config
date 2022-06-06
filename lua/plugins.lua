@@ -19,11 +19,21 @@ return require("packer").startup(function(use)
 			"williamboman/nvim-lsp-installer",
 		},
 	})
-	use({ "nvim-lua/lsp-status.nvim" })
+	-- Really good plugin for seeing your lsp load
+	use({
+		"j-hui/fidget.nvim",
+		config = function()
+			require("user.fidget")
+		end,
+	})
+	use({ "arkav/lualine-lsp-progress" })
 	-- ===============
 
 	-- Linting and formatting made easy
-	use({ "jose-elias-alvarez/null-ls.nvim", rocks = { "luacheck" } })
+	use({
+		"jose-elias-alvarez/null-ls.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+	})
 
 	-- Document highlighting
 	use({ "andymass/vim-matchup" })
@@ -117,6 +127,19 @@ return require("packer").startup(function(use)
 
 	-- Color code highlightingh
 	use("norcalli/nvim-colorizer.lua")
+	-- Intent highlighting
+	use({ "lukas-reineke/indent-blankline.nvim" })
+	-- File explorer
+	use({
+		"kyazdani42/nvim-tree.lua",
+		requires = {
+			"kyazdani42/nvim-web-devicons",
+		},
+		tag = "nightly",
+		config = function()
+			require("user.filetree")
+		end,
+	})
 	-- Git changes
 	use({
 		"lewis6991/gitsigns.nvim",
