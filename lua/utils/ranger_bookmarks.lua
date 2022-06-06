@@ -6,7 +6,10 @@ local _get_bookmarks_table = function(bookmarks_string)
 	local bookmarks_table = vim.fn.split(bookmarks_string, [[\n]])
 	local bookmarks_clean_table = {}
 	for index, bookmark in ipairs(bookmarks_table) do
-		bookmarks_clean_table[index] = vim.fn.split(bookmark, ":")
+		local _, reps = bookmark:gsub(":", "") -- checking for only one split char in the string
+		if reps == 1 then
+			bookmarks_clean_table[index] = vim.fn.split(bookmark, ":")
+		end
 	end
 	return bookmarks_clean_table
 end
