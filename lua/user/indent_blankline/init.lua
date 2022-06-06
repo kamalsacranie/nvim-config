@@ -10,11 +10,10 @@ vim.cmd([[highlight IndentBlanklineContextChar guifg=#751e26 gui=nocombine]])
 
 indent_blankline.setup({
 	char = "┃",
-	char_blankline = "┆",
+	-- char_blankline = "",
 	char_highlight_list = { "IndentBlanklineIndent" },
 	show_current_context = true,
 	use_treesitter = true,
 	show_trailing_blankline_indent = false,
 	bufname_excludes = { [[.*\.md]], [[.*\.rmd]], [[.*\.Rmd]], [[.*\.anki]] },
-	-- use_treesitter_scope = true,
 })

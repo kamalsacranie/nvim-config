@@ -6,19 +6,34 @@ end
 -- Getting our lspkind icon set from our icons file
 local icons = require("utils.icons").kind
 
+local lsp_source_brackets = {
+	none = { "", "" },
+	semi_square = { "「", "」" },
+	semi_curve = { "⎧", "⎭" },
+	thic_curve = { "【", "】" },
+}
+
+local wrap_source = function(source, style)
+	local surrounds = lsp_source_brackets[style]
+	return surrounds[1] .. source .. surrounds[2]
+end
+
 cmp.setup({
 	formatting = {
 		format = function(entry, vim_item) -- Setting up how our PUM looks and what the sources are
 			vim_item.kind = icons[vim_item.kind]
 			-- setting up our won icons etc
+			local surround_kind = "none"
 			vim_item.menu = ({
-				nvim_lsp = "「LSP」",
-				emoji = "「Emoji」",
-				path = "「Path」",
-				calc = "「Calc」",
-				cmp_tabnine = "「Tabnine」",
-				ultisnips = "「Snippet」",
-				buffer = "「Buffer」",
+				nvim_lsp = wrap_source("🔠", surround_kind),
+				emoji = wrap_source("😶", surround_kind),
+				-- bath for path
+				path = wrap_source("🛁", surround_kind),
+				calc = wrap_source("🧮", surround_kind),
+				-- Only babies need ai completion
+				cmp_tabnine = wrap_source("🚼", surround_kind),
+				ultisnips = wrap_source("✂️ ", surround_kind),
+				buffer = wrap_source("💬", surround_kind),
 			})[entry.source.name]
 			vim_item.dup = ({ buffer = 1, path = 1, nvim_lsp = 0 })[entry.source.name]
 				or 0

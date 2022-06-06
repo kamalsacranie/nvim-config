@@ -1,4 +1,9 @@
-require("tabout").setup({
+local tabout_did_load, tabout = load_package("tabout")
+if not tabout_did_load then
+	return
+end
+
+tabout.setup({
 	tabkey = "<C-f>", -- key to trigger tabout, set to an empty string to disable
 	backwards_tabkey = "<C-b>", -- key to trigger backwards tabout, set to an empty string to disable
 	act_as_tab = false, -- shift content if tab out is not possible

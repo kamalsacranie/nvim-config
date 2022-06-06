@@ -8,10 +8,10 @@ kmap("n", "<C-l>", "<C-W><C-l>")
 kmap("n", "<C-j>", "<C-W><C-j>")
 kmap("n", "<C-k>", "<C-W><C-k>")
 -- Window resizing
-bkmap("n", "<A-Up>", ":resize -2<CR>")
-bkmap("n", "<A-Down>", ":resize +2<CR>")
-bkmap("n", "<A-Left>", ":vertical resize -2<CR>")
-bkmap("n", "<A-Right>", ":vertical resize +2<CR>")
+kmap("n", "<A-Up>", ":resize -2<CR>")
+kmap("n", "<A-Down>", ":resize +2<CR>")
+kmap("n", "<A-Left>", ":vertical resize -2<CR>")
+kmap("n", "<A-Right>", ":vertical resize +2<CR>")
 -- Yank remap to yank to end of line not whole line
 kmap("n", "Y", "y$")
 -- Buffer switch also in insert mode

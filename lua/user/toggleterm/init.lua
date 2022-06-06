@@ -1,4 +1,9 @@
-require("toggleterm").setup({
+local tt_did_load, toggleterm = load_package("toggleterm")
+if not tt_did_load then
+	return
+end
+
+toggleterm.setup({
 	size = function(term)
 		if term.direction == "horizontal" then
 			return 15
@@ -6,7 +11,7 @@ require("toggleterm").setup({
 			return vim.o.columns * 0.4
 		end
 	end,
-	open_mapping = [[<c-\>]],
+	open_mapping = [[<C-\>]],
 	hide_numbers = true, -- hide the number column in toggleterm buffers
 	shade_filetypes = { "none" },
 	shade_terminals = true,

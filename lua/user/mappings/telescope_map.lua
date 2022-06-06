@@ -33,7 +33,20 @@ kmap("n", "<leader>fk", "<CMD>lua require('telescope.builtin').keymaps()<CR>")
 -- Show document symbols
 kmap("n", "<leader>fds", "<CMD>lua require('user.telescope').doc_symbols()<CR>")
 
-if is_git_dir() then
-	-- Git project files. very naaace
-	kmap("n", "<C-g>", "<CMD>lua require('telescope.builtin').git_files()<CR>")
+kmap("n", "<C-g>", "<CMD>lua pcall(require('telescope.builtin').git_files)<CR>")
+
+-- Maybe put a pcall here?
+local ranger_bookmarks_table =
+	require("utils.ranger_bookmarks").ranger_bookmarks_table()
+if ranger_bookmarks_table then
+	for _, bookmark in ipairs(ranger_bookmarks_table) do
+		local mark, path = unpack(bookmark)
+		kmap(
+			"n",
+			"<leader>fr" .. mark,
+			"<Cmd>lua require('telescope.builtin').find_files({ cwd = '"
+				.. path
+				.. "'})<CR>"
+		)
+	end
 end
