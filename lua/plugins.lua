@@ -119,7 +119,13 @@ return require("packer").startup({
 		-- Devicons
 		use("kyazdani42/nvim-web-devicons")
 		-- Proper search highlightig
-		use("rktjmp/highlight-current-n.nvim")
+		use({
+			"rktjmp/highlight-current-n.nvim",
+			keys = "/",
+			config = function()
+				require("user.search_highlight")
+			end,
+		})
 		-- Popup terminal
 		use({
 			keys = [[<C-\>]],

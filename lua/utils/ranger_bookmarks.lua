@@ -27,7 +27,7 @@ end
 M.ranger_bookmarks_table = function(bookmarks_file_path)
 	bookmarks_file_path = bookmarks_file_path
 		-- default path
-		or vim.fn.expand("$XDG_DATA_HOME") .. "ranger/" .. "bookmarks"
+		or vim.fn.expand("$XDG_DATA_HOME") .. "/ranger/" .. "bookmarks"
 	local bookmarks_string = get_raw_bookmarks(bookmarks_file_path)
 	if not bookmarks_string then
 		return

@@ -30,9 +30,9 @@ kmap("n", "<C-o>", "<C-o>zz")
 kmap("n", "<C-i>", "<C-i>zz")
 kmap("n", "<C-d>", "<C-d>zz")
 kmap("n", "<C-u>", "<C-u>zz")
--- Setting new linke while in normal mode
-kmap("n", "nl", "o<ESC>zz")
-kmap("n", "NL", "O<ESC>zz")
+-- Setting new line while in normal mode
+kmap("n", "ml", "o<ESC>zz")
+kmap("n", "ML", "O<ESC>zz")
 -- Changing how our highlihgting works
 kmap("v", "$", "$h")
 kmap("n", "vv", "V")
