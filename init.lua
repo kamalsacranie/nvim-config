@@ -16,7 +16,7 @@ require("qol_globals")
 -- Boostrapping Packer
 require("utils.packer-bootstrap")
 
-require("pre")
+-- require("pre")
 require("sets")
 require("lets")
 require("user")

@@ -57,37 +57,36 @@ return require("packer").startup({
 			},
 		})
 
-		-- =================PYTHON==================
-		-- use({ "Vimjas/vim-python-pep8-indent", ft = { "python" }, opt = true })
-
 		-- =================WRITING================
 		use({
+			"ekickx/clipboard-image.nvim",
+			keys = [[<leader>p]],
+			config = function()
+				require("user.clipboard_image")
+			end,
+		})
+		use({
 			"vim-pandoc/vim-pandoc",
-			requires = {
-				"vim-pandoc/vim-pandoc-syntax",
-				{
-					"ekickx/clipboard-image.nvim",
-					keys = [[<leader>p]],
-					config = function()
-						require("user.clipboard_image")
-					end,
-				},
-			},
+			setup = function()
+				require("user.pandoc")
+			end,
+			cond = function()
+				return is_filetype({ "md", "markdown", "anki" })
+			end,
+			requires = "vim-pandoc/vim-pandoc-syntax",
 		})
 		use({
 			"vim-pandoc/vim-rmarkdown",
-			-- ft = {'rmarkdown'},
-			requires = { "vim-pandoc/vim-pandoc" },
+			cond = function()
+				return is_filetype({ "rmd" })
+			end,
+			requires = {
+				"vim-pandoc/vim-pandoc",
+			},
 		})
 		use({
 			"dhruvasagar/vim-table-mode",
-			ft = {
-				"markdown",
-				"rmarkdown",
-				"rmd",
-				"md",
-				"anki.markdown.pandoc",
-			},
+			keys = "<leader>tm",
 		})
 		-- =========================================
 
@@ -95,6 +94,9 @@ return require("packer").startup({
 		use({
 			"jalvesaq/Nvim-R",
 			branch = "stable",
+			cond = function()
+				return is_filetype({ "rmd" })
+			end,
 		})
 
 		-- Snippets

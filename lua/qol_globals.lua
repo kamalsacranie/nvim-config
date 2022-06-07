@@ -28,6 +28,20 @@ _G.bkmap = function(mode, lhs, rhs, opts, bufnr)
 	vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
 end
 
+_G.get_filetype = function()
+	return vim.fn.expand("%:e"):lower()
+end
+
+_G.is_filetype = function(filetypes)
+	local ext = get_filetype()
+	for _, target_ext in ipairs(filetypes) do
+		if ext == target_ext:lower() then
+			return true
+		end
+	end
+	return false
+end
+
 _G.is_git_dir = function()
 	-- Getting the output from term
 	local file = io.popen("git rev-parse --show-toplevel 2>&1")

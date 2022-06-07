@@ -11,10 +11,7 @@ vim.wo.colorcolumn = "81"
 require("utils.spell")
 
 local is_markdown_file = function(lang, bufnr)
-	local is_ft = function(ft)
-		return string.find(vim.api.nvim_buf_get_option(bufnr, "ft"), ft)
-	end
-	if is_ft("markdown") or is_ft("rmd") then
+	if is_filetype({ "md" }) or is_filetype({ "rmd" }) then
 		return true
 	end
 end
