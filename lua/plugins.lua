@@ -58,9 +58,7 @@ return require("packer").startup({
 		})
 
 		-- =================PYTHON==================
-		use({ "Vimjas/vim-python-pep8-indent", ft = { "python" }, opt = true })
-		use("tweekmonster/django-plus.vim")
-		use("alvan/vim-closetag")
+		-- use({ "Vimjas/vim-python-pep8-indent", ft = { "python" }, opt = true })
 
 		-- =================WRITING================
 		use({
@@ -94,13 +92,21 @@ return require("packer").startup({
 		-- =========================================
 
 		-- R
-		use({ "jalvesaq/Nvim-R", branch = "stable" })
+		use({
+			"jalvesaq/Nvim-R",
+			branch = "stable",
+		})
 
 		-- Snippets
 		use({ "SirVer/ultisnips", requires = { "honza/vim-snippets" } })
 
 		-- Autobrakcets
-		use("windwp/nvim-autopairs")
+		use({
+			"windwp/nvim-autopairs",
+			config = function()
+				require("user.autoparis")
+			end,
+		})
 
 		-- Telescope
 		use({
@@ -115,7 +121,12 @@ return require("packer").startup({
 		})
 
 		-- Color scheme/theme
-		use("bluz71/vim-nightfly-guicolors")
+		use({
+			"bluz71/vim-nightfly-guicolors",
+			config = function()
+				require("user.theme")
+			end,
+		})
 		-- Devicons
 		use("kyazdani42/nvim-web-devicons")
 		-- Proper search highlightig
@@ -128,7 +139,7 @@ return require("packer").startup({
 		})
 		-- Popup terminal
 		use({
-			keys = [[<C-\>]],
+			event = "BufWinEnter",
 			"akinsho/toggleterm.nvim",
 			config = function()
 				require("user.toggleterm")

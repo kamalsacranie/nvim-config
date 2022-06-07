@@ -12,5 +12,3 @@ vim.cmd([[augroup snippets
 	autocmd!
 	autocmd BufEnter * exec ":UltiSnipsAddFiletypes anki.markdown-core.markdown"
 augroup END]])
-kmap("n", "C", "<Cmd>echo This<CR>")
-

@@ -65,7 +65,7 @@ endif
 endfunction
 augroup md_fold
     au!
-    au BufEnter * setlocal foldexpr=MarkdownLevel() 
+    au BufEnter *.anki,*.md,*Rmd setlocal foldexpr=MarkdownLevel()
 augroup END
 ]])
 

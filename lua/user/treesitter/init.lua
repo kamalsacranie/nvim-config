@@ -4,8 +4,8 @@ if not is_loaded then
 end
 
 require("nvim-treesitter.configs").setup({
-	highlight = { enable = true},
-	indent = { enable = true, disable = { "python" } },
+	highlight = { enable = true },
+	indent = { enable = true },
 	ensure_installed = {
 		"tsx",
 		"toml",
@@ -24,5 +24,6 @@ require("nvim-treesitter.configs").setup({
 require("user.treesitter.settings")
 
 -- Allowing our treesitter fold
+
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"

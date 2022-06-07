@@ -6,6 +6,7 @@ end
 -- Getting our lspkind icon set from our icons file
 local icons = require("utils.icons").kind
 
+-- Nice brackets for completion
 local lsp_source_brackets = {
 	none = { "", "" },
 	semi_square = { "「", "」" },
@@ -13,13 +14,24 @@ local lsp_source_brackets = {
 	thic_curve = { "【", "】" },
 }
 
+-- Setting the highlihgting for our compeltion menu
+local winhighlight = {
+	winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
+}
+require("cmp").setup({})
+
 local wrap_source = function(source, style)
 	local surrounds = lsp_source_brackets[style]
 	return surrounds[1] .. source .. surrounds[2]
 end
 
 cmp.setup({
+	window = {
+		completion = cmp.config.window.bordered(winhighlight),
+		documentation = cmp.config.window.bordered(winhighlight),
+	},
 	formatting = {
+
 		format = function(entry, vim_item) -- Setting up how our PUM looks and what the sources are
 			vim_item.kind = icons[vim_item.kind]
 			-- setting up our won icons etc
