@@ -25,3 +25,6 @@ pretty_fold.setup({
 require("pretty-fold.preview").setup({
 	border = "shadow",
 })
+
+-- Source our mappings
+require("user.mappings.pretty_fold_map")

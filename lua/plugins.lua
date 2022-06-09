@@ -45,9 +45,12 @@ return require("packer").startup({
 		use("p00f/nvim-ts-rainbow")
 		use({ "nvim-treesitter/playground" })
 
-		-- ============ Completion
+		-- ============ Cuckpletion
 		use({
 			"hrsh7th/nvim-cmp",
+			config = function()
+				require("user.cmp")
+			end,
 			requires = {
 				"hrsh7th/cmp-nvim-lsp",
 				"hrsh7th/cmp-path",
@@ -76,6 +79,29 @@ return require("packer").startup({
 			requires = "vim-pandoc/vim-pandoc-syntax",
 		})
 		use({
+			"dhruvasagar/vim-table-mode",
+			keys = "<leader>tm",
+		})
+		-- =========================================
+
+		-- Python
+		use({
+			"Vimjas/vim-python-pep8-indent",
+			ft = "python",
+		})
+
+		-- R
+		use({
+			"jalvesaq/Nvim-R",
+			branch = "stable",
+			config = function()
+				require("user.nvim_r")
+			end,
+			cond = function()
+				return is_filetype({ "rmd" })
+			end,
+		})
+		use({
 			"vim-pandoc/vim-rmarkdown",
 			cond = function()
 				return is_filetype({ "rmd" })
@@ -84,23 +110,15 @@ return require("packer").startup({
 				"vim-pandoc/vim-pandoc",
 			},
 		})
-		use({
-			"dhruvasagar/vim-table-mode",
-			keys = "<leader>tm",
-		})
-		-- =========================================
-
-		-- R
-		use({
-			"jalvesaq/Nvim-R",
-			branch = "stable",
-			cond = function()
-				return is_filetype({ "rmd" })
-			end,
-		})
 
 		-- Snippets
-		use({ "SirVer/ultisnips", requires = { "honza/vim-snippets" } })
+		use({
+			"SirVer/ultisnips",
+			config = function()
+				require("user.ultisnips")
+			end,
+			requires = { "honza/vim-snippets" },
+		})
 
 		-- Autobrakcets
 		use({
@@ -113,6 +131,9 @@ return require("packer").startup({
 		-- Telescope
 		use({
 			"nvim-telescope/telescope.nvim",
+			config = function()
+				require("user.telescope")
+			end,
 			requires = {
 				"nvim-lua/plenary.nvim",
 				{
@@ -157,11 +178,12 @@ return require("packer").startup({
 			requires = { "nvim-treesitter" },
 			after = { "nvim-cmp" },
 		})
-		-- Making folds nicer: we could use require("pretty-fold").setup() but i
-		-- need to look at the documentation for that becuase it looks like it will
-		-- mess with treesitter out the box
+		-- Making folds nicer
 		use({
 			"anuvyklack/pretty-fold.nvim",
+			config = function()
+				require("user.pretty_fold")
+			end,
 			requires = "anuvyklack/nvim-keymap-amend", -- only for preview
 		})
 

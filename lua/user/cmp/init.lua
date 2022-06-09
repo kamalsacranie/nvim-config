@@ -18,7 +18,7 @@ local lsp_source_brackets = {
 local winhighlight = {
 	winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
 }
-require("cmp").setup({})
+-- cmp.setup({})
 
 local wrap_source = function(source, style)
 	local surrounds = lsp_source_brackets[style]
@@ -67,7 +67,7 @@ cmp.setup({
 		{ name = "pandoc_references" },
 	},
 
-	mapping = require("user.mappings").cmp,
+	mapping = require("user.mappings.cmp_map"),
 })
 
 -- Puts brackets when we complete

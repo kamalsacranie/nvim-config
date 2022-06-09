@@ -6,11 +6,7 @@ end
 
 -- Keymappings: f for find
 -- other files in cwd
-kmap(
-	"n",
-	"<leader>ff",
-	"<CMD>lua require('user.telescope').current_directory()<CR>"
-)
+kmap("n", "<leader>ff", "<CMD>lua require('user.telescope').find_files()<CR>")
 
 -- grep text in files
 kmap("n", "<leader>fg", "<CMD>lua require('user.telescope').live_grep()<CR>")
@@ -44,7 +40,7 @@ if ranger_bookmarks_table then
 		kmap(
 			"n",
 			"<leader>fr" .. mark,
-			"<Cmd>lua require('telescope.builtin').find_files({ cwd = '"
+			"<Cmd>lua require('user.telescope').find_files({ cwd = '"
 				.. path
 				.. "'})<CR>"
 		)

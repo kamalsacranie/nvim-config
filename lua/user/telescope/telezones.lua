@@ -2,14 +2,16 @@ local builtin = require("telescope.builtin")
 
 local M = {}
 
--- Search current directory
-M.current_directory = function()
-	builtin.find_files({
+-- Search current directory or cwd passed in
+M.find_files = function(opts)
+	local defaults = {
 		cwd = require("telescope.utils").buffer_dir(),
 		follow = true,
 		hidden = true,
 		no_ignore = true,
-	})
+	}
+	opts = opts or {}
+	builtin.find_files(vim.tbl_deep_extend("force", defaults, opts))
 end
 
 -- Search vim config

@@ -44,7 +44,10 @@ end
 
 _G.is_git_dir = function()
 	-- Getting the output from term
-	local file = io.popen("git rev-parse --show-toplevel 2>&1")
+	local file = io.popen("git rev-parse --show-toplevel 2>&1") or nil
+	if not file then
+		return false
+	end
 	local response = file:read("a")
 	file:close()
 
@@ -61,4 +64,12 @@ _G.has_key = function(table, val)
 		end
 	end
 	return false
+end
+
+-- Simplifying setting options
+_G.options_set = function(options, kind)
+	kind = kind or "opt"
+	for opt_key, opt_value in pairs(options) do
+		vim[kind][opt_key] = opt_value
+	end
 end
