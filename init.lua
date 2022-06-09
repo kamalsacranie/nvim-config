@@ -19,7 +19,14 @@ require("utils.packer-bootstrap")
 -- require("pre")
 require("sets")
 require("lets")
-require("user")
-require("plugins")
+require("vanilla_mappings")
+require("autocmds")
 
-require("post")
+-- To be changed
+require("user.treesitter")
+require("user.lsp")
+require("user.lualine")
+require("user.comment")
+require("user.indent_blankline")
+
+require("plugins")

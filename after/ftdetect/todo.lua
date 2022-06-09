@@ -1,5 +1,5 @@
 vim.cmd([[
 augroup pandoc_syntax
-  autocmd! BufNewFile,BufFilePre,BufRead *.todo set filetype=todo
+  autocmd! BufNewFile,BufFilePre,BufRead TODO set filetype=todo
 augroup END
 ]])

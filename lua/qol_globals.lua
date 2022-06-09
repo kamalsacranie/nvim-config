@@ -68,6 +68,10 @@ end
 
 -- Simplifying setting options
 _G.options_set = function(options, kind)
+	if type(options) ~= "table" then
+		error('options should be a type of "table"')
+		return
+	end
 	kind = kind or "opt"
 	for opt_key, opt_value in pairs(options) do
 		vim[kind][opt_key] = opt_value

@@ -3,6 +3,7 @@ if not is_loaded then
 	return
 end
 
+require("user.treesitter.settings")
 require("nvim-treesitter.configs").setup({
 	highlight = { enable = true },
 	indent = { enable = true, disable = { "python" } },
@@ -20,8 +21,6 @@ require("nvim-treesitter.configs").setup({
 		"latex",
 	},
 })
-
-require("user.treesitter.settings")
 
 -- Allowing our treesitter fold
 

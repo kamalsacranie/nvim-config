@@ -12,6 +12,6 @@ vim.api.nvim_buf_set_keymap(
 	0,
 	"n",
 	"<leader>r",
-	"<Cmd>w<CR><Cmd>! mkdir -p output; pandoc % -o ./output/%:r.pdf<CR>",
+	"<Cmd>w<CR><Cmd>! mkdir -p output; pandoc -dlatex_basic % -o ./output/%:r.pdf<CR>",
 	{ noremap = true, silent = true }
 )

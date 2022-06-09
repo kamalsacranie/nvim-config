@@ -10,18 +10,18 @@ vim.wo.colorcolumn = "81"
 -- Setting up spell
 require("utils.spell")
 
-local is_markdown_file = function(lang, bufnr)
-	if is_filetype({ "md" }) or is_filetype({ "rmd" }) then
-		return true
-	end
-end
+-- local is_markdown_file = function(lang, bufnr)
+-- 	if is_filetype({ "md" }) or is_filetype({ "rmd" }) then
+-- 		return true
+-- 	end
+-- end
 
 local treesitter_did_load, ts_config = load_package("nvim-treesitter.configs")
 if treesitter_did_load then
 	ts_config.setup({
 		highlight = {
-			disable = is_markdown_file,
-			additional_vim_regex_highlighting = is_markdown_file,
+			disable = true,
+			additional_vim_regex_highlighting = true,
 		},
 	})
 end

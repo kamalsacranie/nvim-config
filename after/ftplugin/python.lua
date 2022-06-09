@@ -1,6 +1,6 @@
 -- vim.opt.colorcolumn = "80"
 vim.wo.colorcolumn = "80"
-vim.cmd([[filetype plugin indent off]])
+-- vim.cmd([[filetype plugin indent off]])
 vim.api.nvim_set_keymap(
 	"n",
 	"<leader>r",
