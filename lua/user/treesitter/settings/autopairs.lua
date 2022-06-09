@@ -1,0 +1,1 @@
+return { autopairs = { enable = true } }

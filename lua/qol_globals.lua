@@ -77,3 +77,21 @@ _G.options_set = function(options, kind)
 		vim[kind][opt_key] = opt_value
 	end
 end
+
+_G.scandir = function(directory, exts)
+	local i, t, popen = 0, {}, io.popen
+	local pfile = nil
+	if exts then
+		pfile = popen('ls -A "' .. directory .. '"')
+	else
+		pfile = popen([[ls -A "]] .. directory .. [[" | sed 's/\.[^.]*$//']])
+	end
+	---@diagnostic disable-next-line: need-check-nil
+	for filename in pfile:lines() do
+		i = i + 1
+		t[i] = filename
+	end
+	---@diagnostic disable-next-line: need-check-nil
+	pfile:close()
+	return t
+end

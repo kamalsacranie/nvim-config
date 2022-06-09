@@ -1,3 +1,1 @@
-require("nvim-treesitter.configs").setup({
-	requirematchup = { enable = true },
-})
+return { matchup = { enable = true } }

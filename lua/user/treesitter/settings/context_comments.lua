@@ -1,4 +1,4 @@
-require("nvim-treesitter.configs").setup({
+return {
 	context_commentstring = {
 		enable = true,
 		-- Pulled straigh from the github. Other languages are auto configed
@@ -26,4 +26,4 @@ require("nvim-treesitter.configs").setup({
 			},
 		},
 	},
-})
+}

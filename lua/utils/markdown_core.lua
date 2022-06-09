@@ -16,26 +16,23 @@ require("utils.spell")
 -- 	end
 -- end
 
-local treesitter_did_load, ts_config = load_package("nvim-treesitter.configs")
-if treesitter_did_load then
-	ts_config.setup({
-		highlight = {
-			disable = true,
-			additional_vim_regex_highlighting = true,
-		},
-	})
-end
+local M = {}
+
+M.ts_config = {
+	highlight = {
+		enable = false,
+		additional_vim_regex_highlighting = true,
+	},
+}
 
 -- Keymaps
 vim.api.nvim_set_keymap("n", "gf", "gf<C-w>o", { noremap = true })
 vim.g["pandoc#hypertext#split_open_cmd"] = "e"
 
--- require'clipboard-image'.setup {require('plugin-config/clipboard-image')}
-
 -- Disabling tick autopair surely there has to be a better way to do this
 -- not in the ftplugin idk
-require("nvim-autopairs").remove_rule("```")
-require("nvim-autopairs").remove_rule("`")
+-- require("nvim-autopairs").remove_rule("```")
+-- require("nvim-autopairs").remove_rule("`")
 
 -- Generate toc in quickfix list
 vim.api.nvim_buf_set_keymap(
@@ -93,3 +90,5 @@ vim.cmd([[augroup snippets
 	autocmd!
 	autocmd VimEnter * exec ":UltiSnipsAddFiletypes markdown-core"
 augroup END]])
+
+return M

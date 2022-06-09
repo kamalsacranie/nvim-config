@@ -1,4 +1,4 @@
-require("nvim-treesitter.configs").setup({
+return {
 	autotag = {
 		enable = true,
 		filetypes = {
@@ -11,4 +11,4 @@ require("nvim-treesitter.configs").setup({
 			"django",
 		},
 	},
-})
+}
