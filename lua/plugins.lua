@@ -5,9 +5,19 @@ return require("packer").startup({
 		-- Surround things with things duh
 		use("tpope/vim-surround")
 		-- Commentary
-		use({ "numToStr/Comment.nvim" })
+		use({
+			"numToStr/Comment.nvim",
+			config = function()
+				require("user.comment")
+			end,
+		})
 		-- Status line
-		use("hoob3rt/lualine.nvim")
+		use({
+			"hoob3rt/lualine.nvim",
+			config = function()
+				require("user.lualine")
+			end,
+		})
 		-- Multicursor select
 		-- use("terryma/vim-multiple-cursors")
 
@@ -15,6 +25,9 @@ return require("packer").startup({
 		-- nvim lsp
 		use({
 			"neovim/nvim-lspconfig",
+			config = function()
+				require("user.lsp")
+			end,
 			requires = {
 				"ray-x/lsp_signature.nvim",
 				"williamboman/nvim-lsp-installer",
@@ -39,11 +52,17 @@ return require("packer").startup({
 		use({ "andymass/vim-matchup" })
 
 		-- Tree shitter
-		use({ "nvim-treesitter/nvim-treesitter", run = "TSUpdate" })
+		use({
+			"nvim-treesitter/nvim-treesitter",
+			run = "TSUpdate",
+			config = function()
+				require("user.treesitter")
+			end,
+		})
 		use("windwp/nvim-ts-autotag")
 		use("JoosepAlviste/nvim-ts-context-commentstring")
 		use("p00f/nvim-ts-rainbow")
-		use({ "nvim-treesitter/playground" })
+		use("nvim-treesitter/playground")
 
 		-- ============ Cuckpletion
 		use({
@@ -190,7 +209,12 @@ return require("packer").startup({
 		-- Color code highlightingh
 		use("norcalli/nvim-colorizer.lua")
 		-- Intent highlighting
-		use({ "lukas-reineke/indent-blankline.nvim" })
+		use({
+			"lukas-reineke/indent-blankline.nvim",
+			config = function()
+				require("user.indent_blankline")
+			end,
+		})
 		-- File explorer
 		use({
 			"kyazdani42/nvim-tree.lua",

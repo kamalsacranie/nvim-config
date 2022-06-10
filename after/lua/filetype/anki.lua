@@ -1,6 +1,5 @@
-require("utils.markdown_core")
-
-local M = {}
+-- Our core file returns a table with shared markdown options
+local M = require("utils.markdown_core")
 
 -- Using treesitter for our parser
 local is_loaded, ts_parser = load_package("nvim-treesitter.parsers")
@@ -9,14 +8,7 @@ if is_loaded then
 	ft_to_parser.anki = "markdown"
 end
 
-vim.cmd([[augroup snippets
-	autocmd!
-	autocmd BufEnter * exec ":UltiSnipsAddFiletypes anki.markdown-core.markdown"
-augroup END]])
-
 M.clipboard_image = {
-	-- Create folder called assets and then a subfolder using the current
-	-- file name without the file extension
 	img_dir = function()
 		return "."
 	end,
@@ -24,5 +16,10 @@ M.clipboard_image = {
 		return "."
 	end,
 }
+
+vim.cmd([[augroup snippets
+	autocmd!
+	autocmd BufEnter *.anki exec ":UltiSnipsAddFiletypes anki.markdown-core.markdown"
+augroup END]])
 
 return M

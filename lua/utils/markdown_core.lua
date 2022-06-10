@@ -1,26 +1,26 @@
--- Setting tabs
-vim.opt_local.tabstop = 2
-vim.opt_local.softtabstop = 2
-vim.opt_local.shiftwidth = 0
-vim.opt_local.expandtab = true
--- Setting width and colorcolumn
-vim.opt.textwidth = 80
-vim.wo.colorcolumn = "81"
+local buffer_options = {
+	-- Setting tabs,
+	tabstop = 2,
+	softtabstop = 2,
+	shiftwidth = 0,
+	expandtab = true,
+	-- Setting width and colorcolumn,
+	textwidth = 80,
+}
+
+options_set(buffer_options, "bo")
+-- for some reason telescope likes to bring along this window option so i have
+-- to set it manually
+vim.cmd([[setlocal colorcolumn=81]])
 
 -- Setting up spell
 require("utils.spell")
-
--- local is_markdown_file = function(lang, bufnr)
--- 	if is_filetype({ "md" }) or is_filetype({ "rmd" }) then
--- 		return true
--- 	end
--- end
 
 local M = {}
 
 M.ts_config = {
 	highlight = {
-		enable = false,
+		enable = true,
 		additional_vim_regex_highlighting = true,
 	},
 }
@@ -49,7 +49,7 @@ vim.cmd([[let b:table_mode_corner='+']])
 vim.cmd([[let g:table_mode_header_fillchar='=']])
 -- folding
 vim.cmd([[
-function MarkdownLevel()
+function! MarkdownLevel()
     let h = matchstr(getline(v:lnum), '^#\+ ')
     if empty(h)
         return "="
@@ -90,5 +90,13 @@ vim.cmd([[augroup snippets
 	autocmd!
 	autocmd VimEnter * exec ":UltiSnipsAddFiletypes markdown-core"
 augroup END]])
+
+-- This seems to be the best way for now
+vim.cmd([[
+augroup temp
+    autocmd!
+    autocmd  BufWinEnter *.md,*.anki TSBufDisable highlight
+
+]])
 
 return M

@@ -3,7 +3,10 @@ if not is_loaded then
 	return
 end
 
-local module_settings_list = scandir("./settings", false)
+-- surely there is a beeter WAYYYY than to have the whole path there ffs
+local module_settings_list = scandir(
+	vim.fn.expand("$XDG_CONFIG_HOME/nvim/lua/user/treesitter/settings", false)
+)
 local defaults = {
 	highlight = { enable = true, additional_vim_regex_highlighting = false },
 	indent = { enable = true },

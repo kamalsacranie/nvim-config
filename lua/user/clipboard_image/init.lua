@@ -48,5 +48,5 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 	group = "clipboard_image",
 	callback = clipboard_image_setup,
 	pattern = "*.*",
-	desc = "Setup clipboard-image",
+	desc = "Clipboard-image setup",
 })

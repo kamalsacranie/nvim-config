@@ -79,19 +79,9 @@ _G.options_set = function(options, kind)
 end
 
 _G.scandir = function(directory, exts)
-	local i, t, popen = 0, {}, io.popen
-	local pfile = nil
+	local file_list = vim.fn.split(vim.fn.system({ "ls", "-A", directory }))
 	if exts then
-		pfile = popen('ls -A "' .. directory .. '"')
-	else
-		pfile = popen([[ls -A "]] .. directory .. [[" | sed 's/\.[^.]*$//']])
+		return file_list
 	end
-	---@diagnostic disable-next-line: need-check-nil
-	for filename in pfile:lines() do
-		i = i + 1
-		t[i] = filename
-	end
-	---@diagnostic disable-next-line: need-check-nil
-	pfile:close()
-	return t
+	return vim.fn.split(vim.fn.system({ "sed", [[s/\.[^.]*$//]] }, file_list))
 end

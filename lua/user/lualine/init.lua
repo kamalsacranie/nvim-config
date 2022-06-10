@@ -16,16 +16,8 @@ lualine.setup({
 		lualine_b = { "branch" },
 		lualine_c = { "filename" },
 		lualine_x = { "encoding", "fileformat", "filetype" },
-		-- Adding our lsp status. very rough but will do for now
 		lualine_y = {
-			-- function()
-			-- 	local success, lsp_status = pcall(require, "lsp-status")
-			-- 	if success then
-			-- 		return lsp_status.status()
-			-- 	end
-			-- 	return ""
-			-- end,
-			"progress",
+			-- "progress",
 		},
 		lualine_z = { "location" },
 	},

@@ -11,22 +11,14 @@
      \/__/        \/__/                        \/__/        \/__/          --]]
 
 vim.g.mapleader = " "
--- Loading our useful functions first
+-- Loading our global functions for later use in setup
 require("qol_globals")
--- Boostrapping Packer
-require("utils.packer-bootstrap")
-
--- require("pre")
-require("sets")
-require("lets")
-require("vanilla_mappings")
-require("autocmds")
-
--- To be changed
-require("user.treesitter")
-require("user.lsp")
-require("user.lualine")
-require("user.comment")
-require("user.indent_blankline")
-
+-- Installing packer if vim doesn't have it
+require("utils.packer_bootstrap")
+-- Setting our vanilla vim options
+require("vanilla.sets")
+require("vanilla.lets")
+require("vanilla.mappings")
+require("vanilla.autocmds")
+-- Setting up our pligins
 require("plugins")
