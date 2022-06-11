@@ -8,4 +8,4 @@
 --optimal i don't think??]]
 -- The rerequire seems to have a performance overhead... Perhaps it is better
 -- to send back functions
-local M = rerequire("filetype.anki")
+rerequire("filetype.anki")
