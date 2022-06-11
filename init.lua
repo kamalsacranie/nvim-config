@@ -10,7 +10,6 @@
     \:\__\        /:/  /                       /:/  /      \::/  /
      \/__/        \/__/                        \/__/        \/__/          --]]
 
-vim.g.mapleader = " "
 -- Loading our global functions for later use in setup
 require("qol_globals")
 -- Installing packer if vim doesn't have it

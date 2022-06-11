@@ -16,4 +16,5 @@ vim.g["pandoc#syntax#codeblocks#embeds#langs"] = {
 	"yaml",
 	"sql",
 	"r",
+	"lua",
 }

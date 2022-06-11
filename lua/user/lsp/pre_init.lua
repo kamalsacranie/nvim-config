@@ -4,7 +4,7 @@ local M = {}
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
 -- Base attatch function mostly for nullls because some of the formatters class with lsp-status
-M.on_attach_base = function(client, bufnr)
+M.on_attach = function(client, bufnr)
 	-- setting up our mappings
 	require("user.mappings.lsp_map").lsp_mappings(bufnr, client)
 
@@ -49,22 +49,6 @@ M.on_attach_base = function(client, bufnr)
 			buffer = bufnr,
 			callback = vim.lsp.buf.clear_references,
 		})
-	end
-end
-
-M.on_attach = function(client, bufnr)
-	M.on_attach_base(client, bufnr)
-
-	-- if we have lsp-status installed, we can have the update in our status
-	-- bar (configured in lualine)
-	local lsp_stauts_did_load, lsp_status = load_package("lsp-status")
-	if lsp_stauts_did_load then
-		lsp_status.register_progress()
-		M.capabilities = vim.tbl_extend(
-			"keep",
-			M.capabilities or {},
-			lsp_status.capabilities
-		)
 	end
 end
 

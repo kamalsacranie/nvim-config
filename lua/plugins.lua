@@ -20,7 +20,7 @@ return require("packer").startup({
 		})
 		-- Multicursor select
 		-- use("terryma/vim-multiple-cursors")
-
+		
 		-- ============ LSP Related
 		-- nvim lsp
 		use({
@@ -41,16 +41,16 @@ return require("packer").startup({
 			end,
 		})
 		-- ===============
-
+		
 		-- Linting and formatting made easy
 		use({
 			"jose-elias-alvarez/null-ls.nvim",
 			requires = { "nvim-lua/plenary.nvim" },
 		})
-
+		
 		-- Document highlighting
 		use({ "andymass/vim-matchup" })
-
+		
 		-- Tree shitter
 		use({
 			"nvim-treesitter/nvim-treesitter",
@@ -63,7 +63,7 @@ return require("packer").startup({
 		use("JoosepAlviste/nvim-ts-context-commentstring")
 		use("p00f/nvim-ts-rainbow")
 		use("nvim-treesitter/playground")
-
+		
 		-- ============ Cuckpletion
 		use({
 			"hrsh7th/nvim-cmp",
@@ -78,7 +78,7 @@ return require("packer").startup({
 				"jc-doyle/cmp-pandoc-references",
 			},
 		})
-
+		
 		-- =================WRITING================
 		use({
 			"ekickx/clipboard-image.nvim",
@@ -97,18 +97,23 @@ return require("packer").startup({
 			end,
 			requires = "vim-pandoc/vim-pandoc-syntax",
 		})
+        -- Cannot be lazy lodaded due to markdown issues
 		use({
 			"dhruvasagar/vim-table-mode",
-			keys = "<leader>tm",
+			config = function()
+				vim.cmd([[let g:table_mode_header_fillchar="="]])
+				vim.cmd([[let g:table_mode_corner="+"]])
+				vim.cmd([[let g:table_mode_corner_corner="+"]])
+			end,
 		})
 		-- =========================================
-
+		
 		-- Python
 		use({
 			"Vimjas/vim-python-pep8-indent",
 			ft = "python",
 		})
-
+		
 		-- R
 		use({
 			"jalvesaq/Nvim-R",
@@ -129,7 +134,7 @@ return require("packer").startup({
 				"vim-pandoc/vim-pandoc",
 			},
 		})
-
+		
 		-- Snippets
 		use({
 			"SirVer/ultisnips",
@@ -138,7 +143,7 @@ return require("packer").startup({
 			end,
 			requires = { "honza/vim-snippets" },
 		})
-
+		
 		-- Autobrakcets
 		use({
 			"windwp/nvim-autopairs",
@@ -146,7 +151,7 @@ return require("packer").startup({
 				require("user.autoparis")
 			end,
 		})
-
+		
 		-- Telescope
 		use({
 			"nvim-telescope/telescope.nvim",
@@ -161,7 +166,7 @@ return require("packer").startup({
 				},
 			},
 		})
-
+		
 		-- Color scheme/theme
 		use({
 			"bluz71/vim-nightfly-guicolors",
@@ -187,7 +192,7 @@ return require("packer").startup({
 				require("user.toggleterm")
 			end,
 		})
-
+		
 		-- Tabbing out of surrounding things
 		use({
 			"abecodes/tabout.nvim",
@@ -205,7 +210,7 @@ return require("packer").startup({
 			end,
 			requires = "anuvyklack/nvim-keymap-amend", -- only for preview
 		})
-
+		
 		-- Color code highlightingh
 		use("norcalli/nvim-colorizer.lua")
 		-- Intent highlighting

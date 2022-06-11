@@ -1,9 +1,13 @@
+-- remapping leader to space
+kmap("", "<Space>", "<Nop>")
+vim.g.mapleader = " " -- I know these are technically options, but I'd argue they are mappings
+vim.g.maplocalleader = " "
 -- Mapping WQ to wqa
 vim.cmd([[command! -bar -bang WQ wqa<bang>]])
 -- Yank to my system clipboard
 kmap("v", "<leader>yc", '"*y')
 -- Remapping split nav
-kmap("n", "<C-H>", "<C-W><C-h>")
+kmap("n", "<C-h>", "<C-W><C-h>")
 kmap("n", "<C-l>", "<C-W><C-l>")
 kmap("n", "<C-j>", "<C-W><C-j>")
 kmap("n", "<C-k>", "<C-W><C-k>")

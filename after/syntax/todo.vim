@@ -1,8 +1,3 @@
-" Vim syntax file
-" Language: Todo
-" Maintainer: Huy Tran
-" Latest Revision: 14 June 2020
-
 if exists("b:current_syntax")
   finish
 endif

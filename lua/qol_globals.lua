@@ -85,3 +85,9 @@ _G.scandir = function(directory, exts)
 	end
 	return vim.fn.split(vim.fn.system({ "sed", [[s/\.[^.]*$//]] }, file_list))
 end
+
+_G.rerequire = function(module)
+	assert(type(module) == "string", "`module` must be a string")
+	package.loaded[module] = nil
+	return require(module)
+end

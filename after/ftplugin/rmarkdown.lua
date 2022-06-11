@@ -1,8 +1,8 @@
-require("utils.markdown_core")
+rerequire("utils.markdown_core")
 
 vim.cmd([[augroup rmarkdown
 	autocmd!
-	autocmd BufEnter * exec ":UltiSnipsAddFiletypes markdown-core.rmarkdown.markdown"
+	autocmd BufEnter * exec ":UltiSnipsAddFiletypes markdown_core.rmarkdown"
 augroup END]])
 
 if is_git_dir() then

@@ -16,6 +16,7 @@ local defaults = {
 }
 -- Adding our addon configs by getting the filenames of the subdirectories. Now
 -- we can deep merge the tables when we setup our config
+-- This must be done before altering any of the config from a filetype config
 for _, module_settings in ipairs(module_settings_list) do
 	defaults = vim.tbl_extend(
 		"force",
@@ -41,6 +42,7 @@ local ts_config_setup = function()
 end
 
 -- Allowing our treesitter fold
+-- If you have problems when you change buffer, you neet to press zx
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 

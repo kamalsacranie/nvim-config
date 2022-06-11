@@ -16,7 +16,11 @@ local sources = {
 		extra_args = { "--disable", "MD025" },
 	}),
 	-- Python formatting
-	formatting.black.with({ extra_args = { "-l79" } }),
+	--[[ Black seems to not want a "command" option which means i must install
+	black in every project instead of using the system black --]]
+	formatting.black.with({
+		extra_args = { "-l79" },
+	}),
 	diagnostics.flake8,
 	-- Latex formatting
 	diagnostics.chktex.with({
@@ -28,5 +32,5 @@ local sources = {
 
 null_ls.setup({
 	sources = sources,
-	on_attach = require("user.lsp.pre_init").on_attach_base,
+	on_attach = require("user.lsp.pre_init").on_attach,
 })
