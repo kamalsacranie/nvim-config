@@ -19,17 +19,16 @@ create_autocmd("BufWinEnter", {
 	callback = function()
 		vim.cmd([[TSBufDisable highlight]])
 	end,
-	pattern = { "*.md", "*.anki" },
+	pattern = { "*.md", "*.anki", "*.rmd" },
 	desc = "Treeshitter shim to stop highlighting",
 })
 
-local md_core_cleanup = create_augroup("md_core_cleanup", { clear = true })
-create_autocmd("BufWinEnter", {
-	group = md_core_cleanup,
-	callback = function()
-		vim.cmd([[UltiSnipsAddFiletypes markdown_core]]) -- add snippets (don't know if strictly necessary)
-		vim.cmd([[setlocal foldexpr=MarkdownLevel()]]) -- setting our fold function when we enter
-	end,
-	pattern = { "*.md", "*.anki", "*.rmd" },
-	desc = "Markdown cleanup pre BufWinEnter",
-})
+-- local md_core_cleanup = create_augroup("md_core_cleanup", { clear = true })
+-- create_autocmd("BufWinEnter", {
+-- 	group = md_core_cleanup,
+-- 	callback = function()
+-- 		vim.cmd([[setlocal foldexpr=MarkdownLevel()]]) -- setting our fold function when we enter
+-- 	end,
+-- 	pattern = { "*.md", "*.anki", "*.rmd" },
+-- 	desc = "Markdown cleanup pre BufWinEnter",
+-- })

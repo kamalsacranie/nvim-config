@@ -1,5 +1,5 @@
 -- Our core file returns a table with shared markdown options
-local M = rerequire("utils.markdown_core")
+local M = rerequire("filetype.markdown_core")
 
 -- Using treesitter for our parser
 local is_loaded, ts_parser = load_package("nvim-treesitter.parsers")
@@ -20,7 +20,7 @@ M.clipboard_image = {
 
 vim.cmd([[augroup snippets
 	autocmd!
-	autocmd BufEnter *.anki exec ":UltiSnipsAddFiletypes anki.markdown_core.markdown"
+	autocmd BufEnter *.anki exec ":UltiSnipsAddFiletypes anki.markdown"
 augroup END]])
 
 return M

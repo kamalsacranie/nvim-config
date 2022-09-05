@@ -5,3 +5,4 @@ end
 
 -- X for explore
 kmap("n", "X", "<CMD>NvimTreeToggle<CR>")
+kmap("i", "<C-x>", "<CMD>NvimTreeToggle<CR>")

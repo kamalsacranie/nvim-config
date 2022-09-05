@@ -14,6 +14,7 @@ local sources = {
 	formatting.markdownlint,
 	diagnostics.markdownlint.with({
 		extra_args = { "--disable", "MD025" },
+		filetypes = { "markdown", "anki" },
 	}),
 	-- Python formatting
 	--[[ Black seems to not want a "command" option which means i must install

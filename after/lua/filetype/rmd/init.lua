@@ -1,8 +1,12 @@
-rerequire("utils.markdown_core")
+local M = rerequire("filetype.markdown_core")
 
+-- Having trouble with UltiSnips pointing twice to the same file. Been a while
+-- since I've had a look at my nvim cfg so looks like I'm going to have to
+-- search throught the weeds
 vim.cmd([[augroup rmarkdown
 	autocmd!
-	autocmd BufEnter * exec ":UltiSnipsAddFiletypes markdown_core.rmarkdown"
+	" autocmd BufEnter * exec ":UltiSnipsAddFiletypes markdown_core"
+	autocmd BufEnter * exec ":UltiSnipsAddFiletypes rmarkdown"
 augroup END]])
 
 if is_git_dir() then
@@ -56,3 +60,4 @@ vim.api.nvim_buf_set_keymap(
 	[[<localleader>cc]],
 	{ noremap = false, silent = true }
 )
+return M

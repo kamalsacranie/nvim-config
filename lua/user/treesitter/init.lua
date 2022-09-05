@@ -34,7 +34,7 @@ local filetype_opts = function()
 end
 
 local generate_options = function()
-	return vim.tbl_extend("force", defaults, filetype_opts())
+	return vim.tbl_extend("force", defaults, filetype_opts() or {})
 end
 
 local ts_config_setup = function()

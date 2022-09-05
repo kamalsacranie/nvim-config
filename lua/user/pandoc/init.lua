@@ -3,7 +3,7 @@
 -- This combo of settings allows us to use the markdown filetype while still
 -- usign pandoc syntax highlighting
 vim.g["pandoc#filetypes#handled"] = { "pandoc", "markdown" }
-vim.g["pandoc#filetypes#pandoc_markdown"] = 0
+vim.g["pandoc#filetypes#pandoc_markdown"] = 0 -- we set our syntax manually in a syntax.vim file
 -- Disable folding and formatting
 vim.g["pandoc#modules#disabled"] = { "formatting", "folding" }
 -- vim.g["pandoc#folding#level"] = 2
