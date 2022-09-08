@@ -22,7 +22,7 @@ return {
 	on_attach = function(client, bufnr)
 		local pre_init = require("user.lsp.pre_init")
 		-- The client has resolved capabilities and we set this to false
-		client.resolved_capabilities.document_formatting = false
+        client.server_capabilities.document_formatting = false
 		pre_init.on_attach(client, bufnr)
 	end,
 }

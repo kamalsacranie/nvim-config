@@ -21,7 +21,8 @@ M.on_attach = function(client, bufnr)
 	-- When your LSP has formatting capabilities, it has a specified command
 	-- for formatting which is called with `lua vim.lsp.buf.formatting()`. This
 	-- sets up format on save with an autocommand
-	if client.resolved_capabilities.document_formatting then
+	--[[ if client.resolved_capabilities.document_formatting then ]]
+	if client.server_capabilities.document_formatting then
 		require("user.lsp.format_on_save").enable_format_on_save()
 	end
 
@@ -30,7 +31,8 @@ M.on_attach = function(client, bufnr)
 	-- If the LSP has document_highlighting capabilities, then we setup an
 	-- autocmd so that when we hover our cursor over a variable etc. we get the
 	-- document highlighting
-	if client.resolved_capabilities.document_highlight then
+	--[[ if client.resolved_capabilities.document_highlight then ]]
+	if client.server_capabilities.document_highlight then
 		-- This is detailed in the docs under helpf for document_highlight()
 		vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
 		vim.cmd(
