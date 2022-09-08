@@ -4,9 +4,9 @@ local M = {}
 -- fold hover otherwise we show the regular lsp hover
 M.hover_callback = function()
 	if vim.fn.foldclosed(".") ~= -1 then
-		local pfp_did_load, pfp = load_package("pretty-fold.preview")
-		if pfp_did_load then
-			return pfp.mapping.show_close_preview_open_fold()
+		local fp_did_load, fp = load_package("fold-preview")
+		if fp_did_load then
+			return fp.mapping.show_close_preview_open_fold()
 		end
 	end
 	return vim.lsp.buf.hover()
