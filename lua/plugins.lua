@@ -207,14 +207,20 @@ return require("packer").startup({
 			requires = { "nvim-treesitter" },
 			after = { "nvim-cmp" },
 		})
-		-- Making folds nicer
+		-- Customise fold asthetics
 		use({
 			"anuvyklack/pretty-fold.nvim",
 			config = function()
-				require("user.pretty_fold")
+				require("user.folding").pretty_fold()
 			end,
-			requires = "anuvyklack/nvim-keymap-amend", -- only for preview
 		})
+        -- Allows us to preview closed folds
+        use { 'anuvyklack/fold-preview.nvim',
+           requires = 'anuvyklack/keymap-amend.nvim',
+           config = function()
+              require('user.folding').fold_preview()
+           end
+        }
 
 		-- Color code highlightingh
 		use("norcalli/nvim-colorizer.lua")
