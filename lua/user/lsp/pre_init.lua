@@ -21,10 +21,7 @@ M.on_attach = function(client, bufnr)
 	-- When your LSP has formatting capabilities, it has a specified command
 	-- for formatting which is called with `lua vim.lsp.buf.formatting()`. This
 	-- sets up format on save with an autocommand
-	--[[ if client.resolved_capabilities.document_formatting then ]]
-	if client.server_capabilities.document_formatting then
-		require("user.lsp.format_on_save").enable_format_on_save()
-	end
+	require("user.lsp.format_on_save").enable_format_on_save()
 
 	require("lsp_signature").on_attach(require("user.lsp.lsp_signature"))
 
