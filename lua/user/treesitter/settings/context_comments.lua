@@ -24,6 +24,9 @@ return {
 				__default = "<!-- %s -->",
 				__multiline = "<!-- %s -->",
 			},
+			lua = {
+				__multiline = "-- %s ",
+			},
 		},
 	},
 }
