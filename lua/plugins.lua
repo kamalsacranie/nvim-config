@@ -121,7 +121,6 @@ return require("packer").startup({
 			config = function()
 				require("user.nvim_r")
 			end,
-			-- ft = "rmd",
 			cond = function()
 				return vim.schedule(
 					function() -- Can't remember why we must schedule but we must
@@ -132,6 +131,7 @@ return require("packer").startup({
 		})
 		use({
 			"vim-pandoc/vim-rmarkdown",
+			-- Thinks I can bring this back now???
 			-- cond = function()
 			-- 	return is_filetype({ "rmd" })
 			-- end,
@@ -214,13 +214,14 @@ return require("packer").startup({
 				require("user.folding").pretty_fold()
 			end,
 		})
-        -- Allows us to preview closed folds
-        use { 'anuvyklack/fold-preview.nvim',
-           requires = 'anuvyklack/keymap-amend.nvim',
-           config = function()
-              require('user.folding').fold_preview()
-           end
-        }
+		-- Allows us to preview closed folds
+		use({
+			"anuvyklack/fold-preview.nvim",
+			requires = "anuvyklack/keymap-amend.nvim",
+			config = function()
+				require("user.folding").fold_preview()
+			end,
+		})
 
 		-- Color code highlightingh
 		use("norcalli/nvim-colorizer.lua")
