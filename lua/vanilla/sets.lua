@@ -25,4 +25,5 @@ options_set({
 	foldlevelstart = 9, -- All folds start open
 	-- Setting a cursorline
 	cursorline = true,
+	mouse = "",
 })
