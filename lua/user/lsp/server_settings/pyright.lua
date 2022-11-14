@@ -17,4 +17,10 @@ return {
 			},
 		},
 	},
+	on_attach = function(client, bufnr)
+		local pre_init = require("user.lsp.pre_init")
+		client.server_capabilities.document_highlight = true
+		vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
+		pre_init.on_attach(client, bufnr)
+	end,
 }
