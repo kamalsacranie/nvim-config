@@ -31,7 +31,7 @@ kmap("n", "<leader>fds", "<CMD>lua require('user.telescope').doc_symbols()<CR>")
 
 kmap("n", "<C-g>", "<CMD>lua pcall(require('telescope.builtin').git_files)<CR>")
 
--- Maybe put a pcall here?
+-- This is probably my best achievement ever
 local ranger_bookmarks_table =
 	require("utils.ranger_bookmarks").ranger_bookmarks_table()
 if ranger_bookmarks_table then
