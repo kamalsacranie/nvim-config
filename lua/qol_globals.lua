@@ -42,16 +42,23 @@ _G.is_filetype = function(filetypes)
 	return false
 end
 
-_G.is_git_dir = function()
-	-- Getting the output from term
-	local file = io.popen("git rev-parse --show-toplevel 2>&1") or nil
+_G.shell_command = function(command)
+	local file = io.popen(command) or nil
 	if not file then
 		return false
 	end
 	local response = file:read("a")
 	file:close()
+	return response
+end
 
-	if string.find(response, "fatal:") then
+_G.is_git_dir = function()
+	-- Getting the output from term
+	local result = shell_command("git rev-parse --show-toplevel 2>&1")
+	if not result then
+		return false
+	end
+	if string.find(result, "fatal:") then
 		return false
 	end
 	return true
