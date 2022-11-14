@@ -42,11 +42,19 @@ local sources = {
 	formatting.shfmt,
 	code_actions.gitsigns, -- soooo useful
 	hover.dictionary.with({
-        filetypes = {"markdown", "anki", "rmarkdown", "text", "gitcommit"}
-    }),
+		filetypes = { "markdown", "anki", "rmarkdown", "text", "gitcommit" },
+	}),
 }
 
 null_ls.setup({
 	sources = sources,
-	on_attach = require("user.lsp.pre_init").on_attach,
+	-- on_attach = require("user.lsp.pre_init").on_attach,
+	on_attach = function(client, bufnr)
+		local pre_init = require("user.lsp.pre_init")
+		-- Quick patch so that i can still use gqq in markdown. Should be done the same way as in regular lsp
+		if get_filetype() == "anki" or get_filetype() == "md" then
+			vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
+		end
+		pre_init.on_attach(client, bufnr)
+	end,
 })
