@@ -42,8 +42,15 @@ local sources = {
 	formatting.shfmt,
 	code_actions.gitsigns, -- soooo useful
 	hover.dictionary.with({
-		filetypes = { "markdown", "anki", "rmarkdown", "text", "gitcommit" },
-	}),
+		filetypes = {
+			"markdown",
+			"anki",
+			"rmarkdown",
+			"rmd",
+			"text",
+			"gitcommit",
+		},
+	}), -- shows definition for word,
 }
 
 null_ls.setup({
