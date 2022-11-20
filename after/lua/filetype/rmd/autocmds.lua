@@ -5,7 +5,7 @@ local rmd_cleanup = create_augroup("rmd_cleanup", { clear = true })
 create_autocmd("BufEnter", {
 	group = rmd_cleanup,
 	callback = function()
-		vim.cmd([[UltiSnipsAddFiletypes rmd.markdown_core]])
+		vim.cmd([[UltiSnipsAddFiletypes rmd]])
 	end,
 	pattern = "*.rmd, *.rmarkdown",
 	desc = "Rmarkdown cleanup when we go into buffer",

@@ -5,3 +5,5 @@ end
 
 bkmap("n", "<leader>ghs", "<Cmd>lua require'gitsigns'.stage_hunk()<CR>")
 bkmap("v", "<leader>ghs", "<Cmd>lua require'gitsigns'.stage_hunk()<CR>")
+bkmap("n", "<leader>gbs", "<Cmd>lua require'gitsigns'.stage_buffer()<CR>")
+bkmap("n", "<leader>gbs", "<Cmd>lua require'gitsigns'.stage_buffer()<CR>")

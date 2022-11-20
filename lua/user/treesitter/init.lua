@@ -26,6 +26,7 @@ for _, module_settings in ipairs(module_settings_list) do
 end
 
 local filetype_opts = function()
+	-- Load "filetype.<ft>" which returns M which may have a ts_config table
 	local success, ft = pcall(require, "filetype" .. "." .. get_filetype())
 	if success then
 		return ft.ts_config
@@ -33,6 +34,7 @@ local filetype_opts = function()
 	return {}
 end
 
+-- Dynamically generating opts based on what is in our ftplugin file to reduce coupling with ts
 local generate_options = function()
 	return vim.tbl_extend("force", defaults, filetype_opts() or {})
 end

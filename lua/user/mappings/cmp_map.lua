@@ -46,11 +46,23 @@ return {
 	end,
 	-- Mapping tab to completion
 	["<Tab>"] = function(fallbalck)
+		local neogen_did_load, neogen = load_package("neogen")
 		if cmp.visible() then
 			cmp.confirm({ select = true })
-		else
+		elseif neogen_did_load and neogen.jumpable() then
+			-- I should really map this to the snipppet jump command <c-f> but I just cba to set it all up now
+			neogen.jump_next()
 			-- The fall back allows us to use the regular behavoiur if the
 			-- condition is not met
+		else
+			fallbalck()
+		end
+	end,
+	["<S-Tab>"] = function(fallbalck)
+		local neogen_did_load, neogen = load_package("neogen")
+		if neogen_did_load and neogen.jumpable(true) then
+			neogen.jump_prev()
+		else
 			fallbalck()
 		end
 	end,

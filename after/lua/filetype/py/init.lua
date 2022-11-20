@@ -10,5 +10,14 @@ bkmap(
 M.ts_config = {
 	indent = { enable = false },
 }
+M.neogen = {
+	languages = {
+		python = {
+			template = {
+				annotation_convention = "numpydoc",
+			},
+		},
+	},
+}
 
 return M
