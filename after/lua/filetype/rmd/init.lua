@@ -1,13 +1,5 @@
 local M = rerequire("filetype.markdown_core")
 
--- Having trouble with UltiSnips pointing twice to the same file. Been a while
--- since I've had a look at my nvim cfg so looks like I'm going to have to
--- search throught the weeds
--- vim.cmd([[augroup rmarkdown
---   autocmd!
---   " filetypes must be this way round for some reason
---   autocmd BufEnter * exec ":UltiSnipsAddFiletypes rmarkdown"
--- augroup END]])
 require("filetype.rmd.autocmds")
 
 -- Should be broken out into a mappings thing
