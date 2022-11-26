@@ -14,7 +14,7 @@ M.on_attach = function(client, bufnr)
 	if is_loaded then
 		M.capabilities.textDocument.completion.completionItem.snippetSupport =
 			true
-		M.capabilities = cmp.update_capabilities(M.capabilities)
+		M.capabilities = cmp.default_capabilities(M.capabilities)
 	end
 
 	-- Temporary fix to make sumneko_lua not format

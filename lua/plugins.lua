@@ -2,7 +2,7 @@
 vim.api.nvim_create_user_command("PackerSafeUpdate", function()
 	local packer = require("packer")
 	packer.snapshot(os.date("%Y-%m-%d:%H-%M-%S"))
-	packer.packer_sync()
+	packer.sync()
 end, {})
 
 return require("packer").startup({

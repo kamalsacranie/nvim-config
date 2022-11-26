@@ -26,4 +26,5 @@ options_set({
 	-- Setting a cursorline
 	cursorline = true,
 	mouse = "",
+	cmdheight = 0,
 })

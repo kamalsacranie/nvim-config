@@ -7,8 +7,8 @@ return {
 			workspace = {
 				-- Adding all plugins to our library
 				library = vim.api.nvim_get_runtime_file("", true),
-				-- [vim.fn.stdpath("config") .. "/lua"] = true,
-				-- [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+				-- Disables luassert message
+				checkThirdParty = false,
 			},
 			format = {
 				enable = false,
