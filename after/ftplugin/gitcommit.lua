@@ -8,7 +8,7 @@ local gitcommit_cleanup = create_augroup("gitcommit_cleanup", { clear = true })
 create_autocmd("BufEnter", {
 	group = gitcommit_cleanup,
 	callback = function()
-		vim.cmd([[UltiSnipsAddFiletypes markdown_core]])
+		return
 	end,
 	pattern = "*COMMIT_EDITMSG*",
 	desc = "Gitcommit cleanup when we go into buffer",

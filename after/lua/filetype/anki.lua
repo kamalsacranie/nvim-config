@@ -18,9 +18,4 @@ M.clipboard_image = {
 	end,
 }
 
-vim.cmd([[augroup snippets
-	autocmd!
-	autocmd BufEnter *.anki exec ":UltiSnipsAddFiletypes anki.markdown"
-augroup END]])
-
 return M

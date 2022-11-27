@@ -52,11 +52,18 @@ cmp.setup({
 		end,
 	},
 
+	snippet = {
+		expand = function(args)
+			require("luasnip").lsp_expand(args.body)
+		end,
+	},
+
 	sources = { -- registering our sources
 		{ name = "nvim_lsp" },
 		{ name = "path" },
 		{ name = "nvim_lua" },
 		{ name = "pandoc_references" },
+		{ name = "luasnip" },
 	},
 
 	mapping = require("user.mappings.cmp_map"),

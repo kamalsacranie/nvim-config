@@ -82,6 +82,9 @@ return require("packer").startup({
 		use("nvim-treesitter/playground")
 
 		-- ============ Cuckpletion
+		-- Snippets
+		use({ "L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*" })
+		-- cmp
 		use({
 			"hrsh7th/nvim-cmp",
 			config = function()
@@ -92,6 +95,7 @@ return require("packer").startup({
 				"hrsh7th/cmp-path",
 				"hrsh7th/cmp-nvim-lua",
 				"jc-doyle/cmp-pandoc-references",
+				"saadparwaiz1/cmp_luasnip",
 			},
 		})
 
