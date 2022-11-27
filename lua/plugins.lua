@@ -7,6 +7,8 @@ end, {})
 
 return require("packer").startup({
 	function(use)
+		-- Meta updation
+		use({ "wbthomason/packer.nvim", run = "PackerUpdate" })
 		-- Docstrings
 		use({
 			"danymat/neogen",
@@ -17,8 +19,6 @@ return require("packer").startup({
 			-- Uncomment next line if you want to follow only stable versions
 			-- tag = "*"
 		})
-		-- Meta updation
-		use({ "wbthomason/packer.nvim", run = "PackerUpdate" })
 		-- Surround things with things duh
 		use("tpope/vim-surround")
 		-- Commentary
