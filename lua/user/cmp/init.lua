@@ -44,7 +44,6 @@ cmp.setup({
 				calc = wrap_source("🧮", surround_kind),
 				-- Only babies need ai completion
 				cmp_tabnine = wrap_source("🚼", surround_kind),
-				ultisnips = wrap_source("✂️ ", surround_kind),
 				buffer = wrap_source("💬", surround_kind),
 			})[entry.source.name]
 			vim_item.dup = ({ buffer = 1, path = 1, nvim_lsp = 0 })[entry.source.name]
@@ -53,17 +52,10 @@ cmp.setup({
 		end,
 	},
 
-	snippet = { -- Configuring for use with ultisnips
-		expand = function(args)
-			vim.fn["UltiSnips#Anon"](args.body)
-		end,
-	},
-
 	sources = { -- registering our sources
 		{ name = "nvim_lsp" },
 		{ name = "path" },
 		{ name = "nvim_lua" },
-		{ name = "ultisnips" },
 		{ name = "pandoc_references" },
 	},
 
@@ -71,9 +63,8 @@ cmp.setup({
 })
 
 -- Puts brackets when we complete
-local autopairs_did_load, cmp_autopairs = load_package(
-	"nvim-autopairs.completion.cmp"
-)
+local autopairs_did_load, cmp_autopairs =
+	load_package("nvim-autopairs.completion.cmp")
 if autopairs_did_load then
 	cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 end

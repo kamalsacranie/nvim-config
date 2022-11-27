@@ -91,7 +91,6 @@ return require("packer").startup({
 				"hrsh7th/cmp-nvim-lsp",
 				"hrsh7th/cmp-path",
 				"hrsh7th/cmp-nvim-lua",
-				"quangnguyen30192/cmp-nvim-ultisnips",
 				"jc-doyle/cmp-pandoc-references",
 			},
 		})
@@ -156,16 +155,6 @@ return require("packer").startup({
 				"vim-pandoc/vim-pandoc",
 			},
 		})
-
-		-- Snippets
-		use({
-			"SirVer/ultisnips",
-			config = function()
-				require("user.ultisnips")
-			end,
-			requires = { "honza/vim-snippets" },
-		})
-
 		-- Autobrakcets
 		use({
 			"windwp/nvim-autopairs",
