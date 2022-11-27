@@ -83,7 +83,13 @@ return require("packer").startup({
 
 		-- ============ Cuckpletion
 		-- Snippets
-		use({ "L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*" })
+		use({
+			"L3MON4D3/LuaSnip",
+			tag = "v<CurrentMajor>.*",
+			config = function()
+				require("user.luasnip")
+			end,
+		})
 		-- cmp
 		use({
 			"hrsh7th/nvim-cmp",
