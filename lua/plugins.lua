@@ -89,6 +89,7 @@ return require("packer").startup({
 			config = function()
 				require("user.luasnip")
 			end,
+			after = "tabout.nvim",
 		})
 		-- cmp
 		use({

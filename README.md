@@ -7,14 +7,19 @@ possible
 
 # File specific config extras
 
-In `after/lua/filetyp` we have a list of lua files to configure our filetypes.
+In `after/lua/filetype` we have a list of lua files to configure our filetypes.
 We name them with the **actual file actual file extensions** of our files as
 opposed to vim's inside ft. We can set up the following filetype specific
 settings from within `<ft>.lua`:
 
-- `M.ts_config`: the treesitter config
+- `M.ts_config_extend`: extends the `treesitter` config with the documented
+  options
 - `M.clipboard_image`: alters how we create image paths for when we paste images
   from our clipboard
+- `M.luasnip_config_extend`: extends `luasnip` config with the documented config
+  options
+- `M.neogen_config_extend`: extends `neogen` config with the documented config
+  options
 
 # Rationale for having a central `mappings` folder in our main `lua` folder
 

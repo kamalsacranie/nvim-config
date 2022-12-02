@@ -3,7 +3,6 @@ if not cmp_did_load then
 	return
 end
 
-local ls = require("luasnip")
 
 return {
 	["<C-d>"] = function(fallback)
