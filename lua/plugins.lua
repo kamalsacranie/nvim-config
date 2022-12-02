@@ -59,6 +59,10 @@ return require("packer").startup({
 		})
 		-- ===============
 
+        -- ============ debugging ===========
+        
+        -- ==================================
+
 		-- Linting and formatting made easy
 		use({
 			"jose-elias-alvarez/null-ls.nvim",
