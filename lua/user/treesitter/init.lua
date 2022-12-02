@@ -4,14 +4,15 @@ if not is_loaded then
 end
 
 -- surely there is a beeter WAYYYY than to have the whole path there ffs
+-- lists all the file names in the settings folder
 local module_settings_list = scandir(
 	vim.fn.expand("$XDG_CONFIG_HOME/nvim/lua/user/treesitter/settings", false)
 )
 local defaults = {
 	highlight = { enable = true, additional_vim_regex_highlighting = false },
 	indent = { enable = true },
-	-- PHPdoc giving me issues
-	ensure_installed = "all",
+	-- pretty sure the star means to ensure only maintained languages are installed
+	ensure_installed = "*",
 	ignore_install = { "phpdoc" },
 }
 -- Adding our addon configs by getting the filenames of the subdirectories. Now
@@ -25,34 +26,18 @@ for _, module_settings in ipairs(module_settings_list) do
 	)
 end
 
-local filetype_opts = function()
-	-- Load "filetype.<ft>" which returns M which may have a ts_config table
-	local success, ft = pcall(require, "filetype" .. "." .. get_filetype())
-	if success then
-		return ft.ts_config
-	end
-	return {}
-end
-
--- Dynamically generating opts based on what is in our ftplugin file to reduce coupling with ts
-local generate_options = function()
-	return vim.tbl_extend("force", defaults, filetype_opts() or {})
-end
-
-local ts_config_setup = function()
-	ts_config.setup(generate_options())
-end
-
 -- Allowing our treesitter fold
 -- If you have problems when you change buffer, you neet to press zx
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
--- Autocmd to load ts
+-- Autocmd to load ts every time we enter buffer
 vim.api.nvim_create_augroup("treesitter", { clear = true })
 vim.api.nvim_create_autocmd("BufWinEnter", {
 	group = "treesitter",
-	callback = ts_config_setup,
+	callback = function()
+		ts_config.setup(EXTEND_CONFIG(defaults, "ts_config_extend"))
+	end,
 	pattern = "*.*",
 	desc = "Treesitter setup",
 })

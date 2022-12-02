@@ -1,64 +1,15 @@
 local M = rerequire("filetype.markdown_core")
 
 require("filetype.rmd.autocmds")
+require("filetype.rmd.mappings")
 
-M.luasnip_config_overwrite = {
+-- extending snippet filetypes from markdown_core. This happens in place
+table.insert(M.snippet_types, "rmd")
+
+M.luasnip_config_extend = {
 	ft_func = function()
-		return { "markdown_core", "rmd" } -- this is how you force load. gonna do the regular thing where we pull from lua/ft
+		return M.snippet_types
 	end,
 }
-
--- Should be broken out into a mappings thing
-if is_git_dir() then
-	-- deprecated papis command, replaced by cmp
-	-- vim.api.nvim_buf_set_keymap(
-	-- 	0,
-	-- 	"n",
-	-- 	"<leader>rb",
-	-- 	[[<Cmd>w<CR><Cmd>silent! TermExec direction='float' cmd='cd $(git rev-parse --show-toplevel); papis list --format "@{doc[ref]}" | pbcopy; exit'<CR>]],
-	-- 	{ noremap = true, silent = true }
-	-- )
-	-- Sets the cwd as and starts the correct venv (hopefully it just silently
-	-- fails when there is no git)
-	vim.api.nvim_buf_set_keymap(
-		0,
-		"n",
-		"<leader>rc",
-		[[<localleader>rf<C-w>wa t<-getwd()<CR> setwd(system("git rev-parse --show-toplevel", intern=T))<CR> renv::activate()<CR> setwd(t)<CR>]],
-		{ noremap = false, silent = true }
-	)
-	vim.api.nvim_buf_set_keymap(
-		0,
-		"n",
-		"<leader>rr",
-		"<leader>rc rmarkdown::render_site()<CR>",
-		{ noremap = false, silent = true }
-	)
-else
-	-- start r consol
-	vim.api.nvim_buf_set_keymap(
-		0,
-		"n",
-		"<leader>rc",
-		[[<localleader>rf]],
-		{ noremap = false, silent = true }
-	)
-	-- render using bookdown
-	vim.api.nvim_buf_set_keymap(
-		0,
-		"n",
-		"<leader>rr",
-		[[<Cmd>w<CR><Cmd>TermExec direction='horizontal' cmd='bookdown-render.sh "%"' go_back=0<CR>]],
-		{ noremap = true, silent = true }
-	)
-end
--- shift enter to run codeblock
-vim.api.nvim_buf_set_keymap(
-	0,
-	"n",
-	"<S-CR>",
-	[[<localleader>cc]],
-	{ noremap = false, silent = true }
-)
 
 return M

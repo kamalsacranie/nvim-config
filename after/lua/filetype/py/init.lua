@@ -7,10 +7,10 @@ bkmap(
 	"<leader>r",
 	"<Cmd>w<CR><Cmd>TermExec direction='horizontal' cmd='source $VIRTUAL_ENV/bin/activate; python3 %' go_back=0<CR>"
 )
-M.ts_config = {
+M.ts_config_extend = {
 	indent = { enable = false },
 }
-M.neogen = {
+M.neogen_config_extend = {
 	languages = {
 		python = {
 			template = {

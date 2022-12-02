@@ -98,3 +98,26 @@ _G.rerequire = function(module)
 	package.loaded[module] = nil
 	return require(module)
 end
+
+-- Dynamically generating opts based on what is in our ftplugin file to reduce coupling with ts
+---@param config_table_name string
+---@param config_defaults table
+---@return table
+_G.EXTEND_CONFIG = function(config_defaults, config_table_name)
+	---@return table
+	local get_filetype_opts = function(config_table_name)
+		-- Load "filetype.<ft>" which returns M which may have a ts_config table
+		-- This is specific to my filetype directory setup
+		local success, ft = pcall(require, "filetype" .. "." .. get_filetype())
+		if success then
+			return ft[config_table_name]
+		end
+		return {}
+	end
+	local generate_options = function(config_defaults, filetype_opts)
+		return vim.tbl_extend("force", config_defaults, filetype_opts or {})
+	end
+
+	local filetype_opts = get_filetype_opts(config_table_name)
+	return generate_options(config_defaults, filetype_opts)
+end

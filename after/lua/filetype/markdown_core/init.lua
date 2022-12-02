@@ -16,12 +16,14 @@ end)
 -- to set it manually
 vim.cmd([[setlocal colorcolumn=81]])
 
-M.ts_config = { -- Treesitter settings
+M.ts_config_extend = { -- Treesitter settings
 	highlight = {
 		enable = false,
 		additional_vim_regex_highlighting = false,
 	},
 }
+
+M.snippet_types = { "markdown_core" }
 
 local autopairs = require("nvim-autopairs")
 autopairs.remove_rule("```")
