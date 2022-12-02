@@ -2,6 +2,12 @@ local M = rerequire("filetype.markdown_core")
 
 require("filetype.rmd.autocmds")
 
+M.luasnip_config_overwrite = {
+	ft_func = function()
+		return { "markdown_core", "rmd" } -- this is how you force load. gonna do the regular thing where we pull from lua/ft
+	end,
+}
+
 -- Should be broken out into a mappings thing
 if is_git_dir() then
 	-- deprecated papis command, replaced by cmp
@@ -54,4 +60,5 @@ vim.api.nvim_buf_set_keymap(
 	[[<localleader>cc]],
 	{ noremap = false, silent = true }
 )
+
 return M
