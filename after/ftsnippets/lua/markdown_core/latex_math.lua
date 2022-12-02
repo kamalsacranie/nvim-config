@@ -46,6 +46,11 @@ return {
 	ms({ trig = "=" }, t(" = ")),
 	ms({ trig = "**" }, t([[\times ]])),
 	ms({ trig = "..." }, t([[\dots ]])),
+	ms(
+		{ trig = "frac" },
+		{ t([[\frac]]), t("{"), i(1), t("}"), t("{"), i(2), t("}") },
+		i(0)
+	),
 }
 
 --

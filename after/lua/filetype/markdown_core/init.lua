@@ -23,7 +23,7 @@ M.ts_config_extend = { -- Treesitter settings
 	},
 }
 
-M.snippet_types = { "markdown_core" }
+M.snippet_types = {"markdown_core"}
 
 local autopairs = require("nvim-autopairs")
 autopairs.remove_rule("```")
