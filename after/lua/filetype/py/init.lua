@@ -1,22 +1,58 @@
 local M = {}
--- vim.opt.colorcolumn = "80"
 vim.cmd([[setlocal colorcolumn=80]])
--- vim.cmd([[filetype plugin indent off]])
 bkmap(
 	"n",
 	"<leader>r",
 	"<Cmd>w<CR><Cmd>TermExec direction='horizontal' cmd='source $VIRTUAL_ENV/bin/activate; python3 %' go_back=0<CR>"
 )
+
+-- Treesitter filetype specific configuration
 M.ts_config_extend = {
-	indent = { enable = false },
+	indent = { enable = false }, -- we use a python specific plugin to handle indentation
 }
-M.neogen_config_extend = {
+
+-- Neogen filteyp specific configuration
+M.neogen = {
 	languages = {
 		python = {
 			template = {
 				annotation_convention = "numpydoc",
 			},
 		},
+	},
+}
+
+-- Dap filetype specific configuration
+M.dap = {
+	adapter = {
+		type = "executable",
+		command = "/Users/kamalsacranie/.local/share/nvim/dap_server/debugby/bin/python",
+		args = { "-m", "debugpy.adapter" },
+	},
+	configuration = {
+		-- The first three options are required by nvim-dap
+		type = "python", -- the type here established the link to the adapter definition: `dap.adapters.python`
+		request = "launch",
+		name = "Launch file",
+
+		-- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
+
+		program = "${file}", -- This configuration will launch the current file if used.
+		pythonPath = function()
+			-- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
+			-- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
+			-- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
+			local cwd = vim.fn.getcwd()
+			if os.getenv("VIRTUAL_ENV") then
+				return os.getenv("VIRTUAL_ENV") .. "/bin/python"
+			elseif vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
+				return cwd .. "/venv/bin/python"
+			elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
+				return cwd .. "/.venv/bin/python"
+			else
+				return vim.g.python3_host_prog
+			end
+		end,
 	},
 }
 

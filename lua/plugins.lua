@@ -59,9 +59,28 @@ return require("packer").startup({
 		})
 		-- ===============
 
-        -- ============ debugging ===========
-        
-        -- ==================================
+		-- ============ debugging ===========
+		use({
+			"mfussenegger/nvim-dap",
+			config = function()
+				require("user.dap")
+			end,
+			requires = {
+				{
+					"rcarriga/nvim-dap-ui",
+					config = function()
+						require("dapui").setup()
+					end,
+					-- Requires nvim-dap to be active
+					after = "nvim-dap",
+				},
+				"theHamsta/nvim-dap-virtual-text",
+				"nvim-telescope/telescope-dap.nvim",
+			},
+			-- only sets up on bufwinenter so we have the ft. Alternatively could perform a check for the setting in our custom ft and not load at all. idk
+			event = "BufWinEnter",
+		})
+		-- ==================================
 
 		-- Linting and formatting made easy
 		use({
@@ -170,6 +189,7 @@ return require("packer").startup({
 				"vim-pandoc/vim-pandoc",
 			},
 		})
+
 		-- Autobrakcets
 		use({
 			"windwp/nvim-autopairs",
@@ -210,6 +230,12 @@ return require("packer").startup({
 				require("user.search_highlight")
 			end,
 		})
+		use({
+			"norcalli/nvim-colorizer.lua",
+			config = function()
+				require("colorizer").setup()
+			end,
+		})
 		-- Popup terminal
 		use({
 			event = "BufWinEnter",
@@ -244,8 +270,6 @@ return require("packer").startup({
 			end,
 		})
 
-		-- Color code highlightingh
-		use("norcalli/nvim-colorizer.lua")
 		-- Intent highlighting
 		use({
 			"lukas-reineke/indent-blankline.nvim",

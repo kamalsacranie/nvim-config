@@ -21,6 +21,13 @@ _G.kmap = function(mode, lhs, rhs, opts)
 	opts = opts or default_opts
 	vim.api.nvim_set_keymap(mode, lhs, rhs, opts)
 end
+
+---Less verbose key mapping
+---@param mode string String for which mode you want the map in
+---@param lhs string The keys you want to remap
+---@param rhs string The action you want to remap to
+---@param opts table|nil
+---@param bufnr integer|nil
 _G.bkmap = function(mode, lhs, rhs, opts, bufnr)
 	opts = opts or default_opts
 	-- setting default buffernumber
@@ -101,7 +108,7 @@ end
 
 -- Dynamically generating opts based on what is in our ftplugin file to reduce coupling with ts
 ---@param config_table_name string
----@param config_defaults table
+---@param config_defaults table|nil
 ---@return table
 _G.EXTEND_CONFIG = function(config_defaults, config_table_name)
 	---@return table
@@ -119,5 +126,5 @@ _G.EXTEND_CONFIG = function(config_defaults, config_table_name)
 	end
 
 	local filetype_opts = get_filetype_opts(config_table_name)
-	return generate_options(config_defaults, filetype_opts)
+	return generate_options(config_defaults or {}, filetype_opts)
 end
