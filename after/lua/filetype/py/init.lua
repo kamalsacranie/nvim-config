@@ -12,7 +12,7 @@ M.ts_config_extend = {
 }
 
 -- Neogen filteyp specific configuration
-M.neogen = {
+M.neogen_config_extend = {
 	languages = {
 		python = {
 			template = {
