@@ -1,11 +1,15 @@
+local packer_did_load, packer = load_package("packer")
+if not packer_did_load then
+	return
+end
+
 -- Updates packer but makes a snapshot before
 vim.api.nvim_create_user_command("PackerSafeUpdate", function()
-	local packer = require("packer")
 	packer.snapshot(os.date("%Y-%m-%d:%H-%M-%S"))
 	packer.sync()
 end, {})
 
-return require("packer").startup({
+return packer.startup({
 	function(use)
 		-- Meta updation
 		use({ "wbthomason/packer.nvim", run = "PackerUpdate" })
