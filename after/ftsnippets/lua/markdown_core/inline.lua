@@ -19,6 +19,10 @@ return {
 	}),
 	s({ trig = "b'", name = "bold" }, { t("**"), wrap(), i(1), t("**"), i(2) }),
 	s(
+		{ trig = "fn", name = "footnote" },
+		{ t("^["), wrap(), i(1), t("]"), i(2) }
+	),
+	s(
 		{ trig = "i'", name = "italics" },
 		{ t("*"), wrap(), i(1), t("*"), i(2) }
 	),
