@@ -67,15 +67,15 @@ return packer.startup({
 		use({
 			"mfussenegger/nvim-dap",
 			config = function()
-				require("user.dap")
+				require("user.dap.dap")
 			end,
 			requires = {
 				{
 					"rcarriga/nvim-dap-ui",
 					config = function()
-						require("dapui").setup()
+						require("user.dap.dapui")
 					end,
-					-- Requires nvim-dap to be active
+					-- Requires nvim-dap to be active because we only activate dap on bufenter
 					after = "nvim-dap",
 				},
 				"theHamsta/nvim-dap-virtual-text",

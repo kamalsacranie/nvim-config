@@ -1,3 +1,4 @@
+local types = require("luasnip.util.types")
 local luasnip_did_load, ls = load_package("luasnip")
 if not luasnip_did_load then
 	return

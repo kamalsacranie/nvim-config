@@ -1,7 +1,7 @@
 local M = rerequire("filetype.markdown_core")
 
 require("filetype.rmd.autocmds")
-require("filetype.rmd.mappings")
+rerequire("filetype.rmd.mappings")
 
 -- Adding rmd ft snippets
 table.insert(M.snippet_types, "rmd")

@@ -18,25 +18,9 @@ local defaults = {
 	affix = "%s",
 }
 
-local filetype_opts = function()
-	local success, ft = pcall(require, "filetype" .. "." .. get_filetype())
-	if success then
-		P(ft.clipboard_image)
-		print("yesss")
-		return ft.clipboard_image
-	end
-	return {}
-end
-
--- Remember to use the `or` otherwise vim will throw an error becuase the
--- extend table cant be nil
-local generate_options = function()
-	return vim.tbl_deep_extend("force", defaults, filetype_opts() or {})
-end
-
 local clipboard_image_setup = function()
 	clipboard_image.setup({
-		default = generate_options(),
+		default = EXTEND_CONFIG(defaults, "clipboard_image_config_extend"),
 	})
 end
 
@@ -52,5 +36,5 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 	group = "clipboard_image",
 	callback = clipboard_image_setup,
 	pattern = "*.*",
-	desc = "Clipboard-image setup",
+	desc = "clipboard_image setup",
 })

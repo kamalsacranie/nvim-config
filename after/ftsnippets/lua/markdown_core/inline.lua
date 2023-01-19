@@ -15,20 +15,16 @@ return {
 		wrap(),
 		i(1),
 		t("`"),
-		i(2),
 	}),
-	s({ trig = "b'", name = "bold" }, { t("**"), wrap(), i(1), t("**"), i(2) }),
+	s({ trig = "b'", name = "bold" }, { t("**"), wrap(), i(1), t("**") }),
 	s(
-		{ trig = "fn", name = "footnote" },
-		{ t("^["), wrap(), i(1), t("]"), i(2) }
+		{ trig = "fn", name = "footnote", wordTrig = true },
+		{ t("^["), wrap(), i(1), t("]") }
 	),
-	s(
-		{ trig = "i'", name = "italics" },
-		{ t("*"), wrap(), i(1), t("*"), i(2) }
-	),
+	s({ trig = "i'", name = "italics" }, { t("*"), wrap(), i(1), t("*") }),
 	s(
 		{ trig = "bi'", name = "bitalics" },
-		{ t("***"), wrap(), i(1), t("***"), i(2) }
+		{ t("***"), wrap(), i(1), t("***") }
 	),
 	s({ trig = "d'", name = "math" }, { t("$"), wrap(), i(1), t("$"), i(2) }),
 	s("link", { t("["), i(1), t("]("), wrap(), i(2), t(")"), i(0) }),

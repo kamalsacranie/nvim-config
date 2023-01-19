@@ -7,6 +7,10 @@ P = function(table)
 end
 
 -- Checking if a package is loaded
+---comment
+---@param package_name string
+---@return boolean
+---@return any
 _G.load_package = function(package_name)
 	-- Status okay is a boolean
 	local status_ok, package = pcall(require, package_name)

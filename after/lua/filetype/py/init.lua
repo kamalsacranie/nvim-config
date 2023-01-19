@@ -23,7 +23,7 @@ M.neogen_config_extend = {
 }
 
 -- Dap filetype specific configuration
-M.dap = {
+M.dap_config_extend = {
 	adapter = {
 		type = "executable",
 		command = "/Users/kamalsacranie/.local/share/nvim/dap_server/debugby/bin/python",

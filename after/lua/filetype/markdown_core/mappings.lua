@@ -15,3 +15,6 @@ bkmap(
 	"<leader>tm",
 	[[<Cmd>let b:table_mode_corner="+" | TableModeToggle<CR>]]
 )
+vim.g.maplocalleader = [[\]]
+-- Reflowing a whole paragraph
+bkmap("n", "gqip", [[magqip`a]])

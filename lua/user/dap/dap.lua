@@ -1,3 +1,8 @@
+local dap_did_load, dap = load_package("dap")
+if not dap_did_load then
+	return
+end
+
 -- Custom dap symbols
 -- Must figure out how to give color
 local dap_symbols = {
@@ -14,24 +19,19 @@ for sign, symbol in pairs(dap_symbols) do
 	)
 end
 
-local dap = require("dap")
-
 -- Get our dap tables form our filetype and return if they don't exist
-local dap_tables = EXTEND_CONFIG(nil, "dap")
-if next(dap_tables) == nil then
+local dap_options_to_extend = EXTEND_CONFIG(nil, "dap_config_extend")
+if next(dap_options_to_extend) == nil then
 	return
 end
 
 -- Setup our dap config from our filetype dynamically (this plugin is only activateed after the buffer filetype has been defined)
-dap.adapters[vim.bo.filetype] = dap_tables.adapter or {}
+dap.adapters[vim.bo.filetype] = dap_options_to_extend.adapter or {}
 dap.configurations[vim.bo.filetype] = {
-	dap_tables.configuration or {},
+	dap_options_to_extend.configuration or {},
 }
 
 -- mapppings
-vim.keymap.set("n", "<leader>dt", function()
-	return require("dapui").toggle({})
-end, { buffer = true })
 vim.keymap.set("n", "<leader>dd", function()
 	return require("dap").continue()
 end, { buffer = true })

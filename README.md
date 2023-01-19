@@ -14,8 +14,8 @@ settings from within `<ft>.lua`:
 
 - `M.ts_config_extend`: extends the `treesitter` config with the documented
   options
-- `M.clipboard_image`: alters how we create image paths for when we paste images
-  from our clipboard
+- `M.clipboard_image_config_extend`: alters how we create image paths for when
+  we paste images from our clipboard
 - `M.luasnip_config_extend`: extends `luasnip` config with the documented config
   options
 - `M.neogen_config_extend`: extends `neogen` config with the documented config
