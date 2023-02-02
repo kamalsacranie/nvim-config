@@ -26,6 +26,17 @@ local is_math = function()
 	end
 end
 
+local wrap = function()
+	return f(function(_, snip)
+		-- allows us to return multiple lines
+		local response, env = {}, snip.env
+		for _, v in ipairs(env.LS_SELECT_RAW) do
+			table.insert(response, v)
+		end
+		return response or {}
+	end)
+end
+
 local ms = function(params, nodes, opts)
 	return s(
 		vim.tbl_extend(
@@ -51,6 +62,7 @@ return {
 		{ t([[\frac]]), t("{"), i(1), t("}"), t("{"), i(2), t("}") },
 		i(0)
 	),
+	ms({ trig = "text" }, { t([[\text]]), t("{"), wrap(), i(1), t("}") }, i(0)),
 }
 
 --
