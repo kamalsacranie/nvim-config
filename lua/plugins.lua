@@ -51,8 +51,20 @@ return packer.startup({
 			end,
 			requires = {
 				"ray-x/lsp_signature.nvim",
-				"williamboman/nvim-lsp-installer",
 			},
+		})
+		use({
+			"williamboman/mason.nvim",
+			config = function()
+				require("mason").setup()
+			end,
+		})
+		use({
+			"williamboman/mason-lspconfig.nvim",
+			config = function()
+				require("mason-lspconfig").setup()
+			end,
+			after = "mason.nvim",
 		})
 		-- Really good plugin for seeing your lsp load
 		use({
@@ -280,6 +292,7 @@ return packer.startup({
 			config = function()
 				require("user.indent_blankline")
 			end,
+			after = "mason.nvim",
 		})
 		-- File explorer
 		use({

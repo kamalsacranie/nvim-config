@@ -21,9 +21,11 @@ M.on_attach = function(client, bufnr)
 	-- When your LSP has formatting capabilities, it has a specified command
 	-- for formatting which is called with `lua vim.lsp.buf.formatting()`. This
 	-- sets up format on save with an autocommand
-	require("user.lsp.format_on_save").enable_format_on_save()
+	require("user.lsp.on_attach.format_on_save").enable_format_on_save()
 
-	require("lsp_signature").on_attach(require("user.lsp.lsp_signature"))
+	require("lsp_signature").on_attach(
+		require("user.lsp.on_attach.lsp_signature")
+	)
 
 	-- If the LSP has document_highlighting capabilities, then we setup an
 	-- autocmd so that when we hover our cursor over a variable etc. we get the
