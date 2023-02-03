@@ -64,7 +64,6 @@ return packer.startup({
 			config = function()
 				require("mason-lspconfig").setup()
 			end,
-			after = "mason.nvim",
 		})
 		-- Really good plugin for seeing your lsp load
 		use({
