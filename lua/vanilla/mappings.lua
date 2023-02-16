@@ -23,6 +23,7 @@ kmap("i", "<C-^>", "<ESC><C-^>")
 -- Keeing changed indented section highlighted
 kmap("v", ">", ">gv")
 kmap("v", "<", "<gv")
+kmap("v", "~", "~gv")
 
 -- Centering our line in the middle of the screen
 kmap("n", "j", "jzz")

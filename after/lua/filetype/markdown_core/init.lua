@@ -23,11 +23,12 @@ M.ts_config_extend = { -- Treesitter settings
 	},
 }
 
-M.snippet_types = {"markdown_core"}
+M.snippet_types = { "markdown_core" }
 
-local autopairs = require("nvim-autopairs")
-autopairs.remove_rule("```")
-autopairs.remove_rule("`")
+-- Causing issues with luasnip
+-- local autopairs = require("nvim-autopairs")
+-- autopairs.remove_rule("```")
+-- autopairs.remove_rule("`")
 
 rerequire("utils.spell") -- Setting up spell
 require("filetype.markdown_core.autocmds") -- no need to rerequire autcmds as nvim stores them

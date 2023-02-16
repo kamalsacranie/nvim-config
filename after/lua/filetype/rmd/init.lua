@@ -12,4 +12,7 @@ M.luasnip_config_extend = {
 	end,
 }
 
+vim.cmd("let R_set_omnifunc = []")
+vim.cmd("let R_auto_omni = []")
+
 return M
