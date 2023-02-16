@@ -41,3 +41,17 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 	pattern = "*.*",
 	desc = "Treesitter setup",
 })
+
+------------------------------------------------------
+
+-- adding in my local parsers so I can debug them intreesitter playground
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+parser_config.cameldown = {
+	install_info = {
+		url = "~/Desktop/tree-sitter-cameldown", -- local path or git repo
+		files = { "src/parser.c" },
+	},
+	filetype = "cameldown", -- if filetype does not match the parser name
+}
+local ft_to_parser = require("nvim-treesitter.parsers").filetype_to_parsername
+ft_to_parser.cameldown = "cameldown"

@@ -51,6 +51,7 @@ return packer.startup({
 			end,
 			requires = {
 				"ray-x/lsp_signature.nvim",
+				"b0o/schemastore.nvim",
 			},
 		})
 		use({
@@ -153,13 +154,32 @@ return packer.startup({
 			end,
 		})
 		use({
+			"quarto-dev/quarto-nvim",
+			requires = {
+				"jmbuhr/otter.nvim",
+				"neovim/nvim-lspconfig",
+			},
+			config = function()
+				require("quarto").setup({
+					lspFeatures = {
+						enabled = true,
+						languages = { "r", "python", "julia" },
+						diagnostics = {
+							enabled = true,
+							triggers = { "BufWrite" },
+						},
+						completion = {
+							enabled = true,
+						},
+					},
+				})
+			end,
+		})
+		use({
 			"vim-pandoc/vim-pandoc",
 			setup = function()
 				require("user.pandoc")
 			end,
-			-- cond = function()
-			-- 	return is_filetype({ "md", "markdown", "anki" })
-			-- end,
 			requires = "vim-pandoc/vim-pandoc-syntax",
 		})
 		-- Cannot be lazy lodaded due to markdown issues

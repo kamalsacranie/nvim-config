@@ -29,19 +29,19 @@ vim.keymap.set({ "i", "s" }, "<C-b>", function()
 	end
 end)
 
-vim.keymap.set({ "i", "s" }, "<C-n>", function()
+vim.keymap.set({ "i", "s" }, "<C-d>", function()
 	local choice_available, _ = pcall(ls.change_choice, 1)
 	if choice_available then
 		return
 	else
-		return "<C-n>"
+		return "<C-d>"
 	end
 end)
-vim.keymap.set({ "i", "s" }, "<C-p>", function()
+vim.keymap.set({ "i", "s" }, "<C-u>", function()
 	local choice_available, _ = pcall(ls.change_choice, -1)
 	if choice_available then
 		return
 	else
-		return "<C-p>"
+		return "<C-u>"
 	end
 end)

@@ -64,6 +64,7 @@ cmp.setup({
 		{ name = "nvim_lua" },
 		{ name = "pandoc_references" },
 		{ name = "luasnip" },
+		{ name = "otter" },
 	},
 
 	mapping = require("user.mappings.cmp_map"),

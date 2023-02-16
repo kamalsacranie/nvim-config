@@ -3,11 +3,24 @@ if not is_loaded then
 	return
 end
 
+-- Need to look into how this should be done. Maybe should be done the same way we do seetings/???
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+	properties = {
+		"documentation",
+		"detail",
+		"additionalTextEdits",
+	},
+}
+
 local pre_init = require("user.lsp.on_attach")
 local base_opts = {
 	on_attach = pre_init.on_attach,
-	capabilities = pre_init.capabilities,
+	capabilities = capabilities,
 }
+
 require("user.lsp.visual") -- sets theme for diagnostics
 
 -- loading ansilliary things
