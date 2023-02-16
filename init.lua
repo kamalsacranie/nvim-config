@@ -13,11 +13,11 @@
 -- Loading our global functions for later use in setup
 require("qol_globals")
 -- Installing packer if vim doesn't have it
-require("utils.packer_bootstrap")
+require("utils.lazy_bootstrap")
 -- Setting our vanilla vim options
 require("vanilla.sets")
 require("vanilla.lets")
 require("vanilla.mappings")
 require("vanilla.autocmds")
 -- Setting up our pligins
-require("plugins")
+require("lazy").setup("plugins")
