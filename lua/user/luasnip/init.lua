@@ -4,7 +4,17 @@ if not luasnip_did_load then
 	return
 end
 -- Set path to load snippets from
-require("luasnip.loaders.from_lua").load({ paths = "./after/ftsnippets/lua" })
+require("luasnip.loaders.from_lua").load({
+	paths = {
+		"./after/ftsnippets/lua",
+	},
+})
+-- temp to load friendly snippets
+require("luasnip/loaders/from_vscode").load({
+	paths = {
+		"~/.local/share/nvim/lazy/friendly-snippets",
+	},
+})
 
 -- temp forcing visual mode to allow tab visual snippet
 bkmap(

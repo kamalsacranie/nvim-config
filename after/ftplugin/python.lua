@@ -1,1 +1,2 @@
-rerequire("filetype.py")
+-- rerequire("filetype.py")
+require("filetype.py")

@@ -1,4 +1,3 @@
--- rerequire("filetype.js")
 local M = {}
 M.buffer_options = {
 	-- Setting tabs,

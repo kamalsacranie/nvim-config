@@ -1,11 +1,17 @@
-local M = rerequire("filetype.md")
+local M = rerequire("filetype.markdown_core")
 
-local otter = require("otter")
+M.luasnip_config_extend = {
+	ft_func = function()
+		return { "markdown_core", "md" }
+	end,
+}
+
+rerequire("filetype.md.mappings")
 
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
 	pattern = { "*.md" },
 	callback = function()
-		otter.activate({ "r", "python", "lua" }, true)
+		require("otter").activate({ "javascript", "r", "python", "lua" }, true)
 		vim.api.nvim_buf_set_keymap(
 			0,
 			"n",
