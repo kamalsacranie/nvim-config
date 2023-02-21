@@ -1,75 +1,42 @@
 return {
-    -- Surround things with things duh
-    "tpope/vim-surround",
-    -- Devicons
-    "kyazdani42/nvim-web-devicons",
-    -- Highlight colour strings in nvim editr
-    {
-        "norcalli/nvim-colorizer.lua",
-        config = function()
-            require("colorizer").setup()
-        end,
-    },
-    -- LSP install things with mason
-    {
-        "williamboman/mason.nvim",
-        config = function()
-            require("mason").setup()
-        end,
-    },
-    {
-        "williamboman/mason-lspconfig.nvim",
-        config = function()
-            require("mason-lspconfig").setup()
-        end,
-    },
-    -- Document highlighting
-    "andymass/vim-matchup",
-    -- Good python indenting (might be obselete now)
-    "Vimjas/vim-python-pep8-indent",
-    {
-        "jose-elias-alvarez/null-ls.nvim",
-        -- we don't have a config setup here because this is called in our lsp init
-        dependencies = "nvim-lua/plenary.nvim",
-    },
+	-- Surround things with things duh
+	"tpope/vim-surround",
+	-- Devicons
+	"kyazdani42/nvim-web-devicons",
+	-- Highlight colour strings in nvim editr
+	{
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup()
+		end,
+	},
+	-- LSP install things with mason
+	{
+		"williamboman/mason.nvim",
+		config = function()
+			require("mason").setup()
+		end,
+	},
+	{
+		"williamboman/mason-lspconfig.nvim",
+		config = function()
+			require("mason-lspconfig").setup()
+		end,
+	},
+	-- Document highlighting
+	"andymass/vim-matchup",
+	-- Good python indenting (might be obselete now)
+	"Vimjas/vim-python-pep8-indent",
+	{
+		"jose-elias-alvarez/null-ls.nvim",
+		-- we don't have a config setup here because this is called in our lsp init
+		dependencies = "nvim-lua/plenary.nvim",
+	},
 }
 
--- 		-- Docstrings
--- 		use({
--- 			"danymat/neogen",
--- 			config = function()
--- 				require("user.neogen")
--- 			end,
--- 			requires = "nvim-treesitter/nvim-treesitter",
--- 		})
--- 		-- Commentary
--- 		use({
--- 			"numToStr/Comment.nvim",
--- 			config = function()
--- 				require("user.comment")
--- 			end,
--- 		})
--- 		-- Status line
--- 		use({
--- 			"hoob3rt/lualine.nvim",
--- 			config = function()
--- 				require("user.lualine")
--- 			end,
--- 		})
 -- 		-- Multicursor select
 -- 		-- use("terryma/vim-multiple-cursors")
 --
--- 		-- ============ LSP Related
--- 		-- nvim lsp
--- 		use()
--- 		-- Really good plugin for seeing your lsp load
--- 		use({
--- 			"j-hui/fidget.nvim",
--- 			config = function()
--- 				require("user.fidget")
--- 			end,
--- 		})
--- 		-- ===============
 --
 -- 		-- ============ debugging ===========
 -- 		use({
@@ -93,56 +60,7 @@ return {
 -- 			event = "BufWinEnter",
 -- 		})
 -- 		-- ==================================
---
--- 		-- Linting and formatting made easy
--- 		use()
---
--- 		-- Tree shitter
--- 		use({
--- 			"nvim-treesitter/nvim-treesitter",
--- 			run = "TSUpdate",
--- 			config = function()
--- 				require("user.treesitter")
--- 			end,
--- 		})
--- 		use("windwp/nvim-ts-autotag")
--- 		use("JoosepAlviste/nvim-ts-context-commentstring")
--- 		use("p00f/nvim-ts-rainbow")
--- 		use("nvim-treesitter/playground")
---
--- 		-- ============ Cuckpletion
--- 		-- Snippets
--- 		use({
--- 			"L3MON4D3/LuaSnip",
--- 			tag = "v<CurrentMajor>.*",
--- 			config = function()
--- 				require("user.luasnip")
--- 			end,
--- 			after = "tabout.nvim",
--- 		})
--- 		-- cmp
--- 		use({
--- 			"hrsh7th/nvim-cmp",
--- 			config = function()
--- 				require("user.cmp")
--- 			end,
--- 			requires = {
--- 				"hrsh7th/cmp-nvim-lsp",
--- 				"hrsh7th/cmp-path",
--- 				"hrsh7th/cmp-nvim-lua",
--- 				"jc-doyle/cmp-pandoc-references",
--- 				"saadparwaiz1/cmp_luasnip",
--- 			},
--- 		})
---
 -- 		-- =================WRITING================
--- 		use({
--- 			"ekickx/clipboard-image.nvim",
--- 			keys = [[<leader>p]],
--- 			config = function()
--- 				require("user.clipboard_image")
--- 			end,
--- 		})
 -- 		use({
 -- 			"vim-pandoc/vim-pandoc",
 -- 			setup = function()
@@ -151,14 +69,7 @@ return {
 -- 			requires = "vim-pandoc/vim-pandoc-syntax",
 -- 		})
 --         -- Allows us to make ascii tables easily in markdown
--- 		use({
--- 			"dhruvasagar/vim-table-mode",
--- 			config = function()
--- 				vim.cmd([[let g:table_mode_header_fillchar="="]])
--- 				vim.cmd([[let g:table_mode_corner="+"]])
--- 				vim.cmd([[let g:table_mode_corner_corner="+"]])
--- 			end,
--- 		})
+-- 		use()
 -- 		-- =========================================
 --
 --
@@ -188,41 +99,6 @@ return {
 -- 			},
 -- 		})
 --
--- 		-- Autobrakcets
--- 		use({
--- 			"windwp/nvim-autopairs",
--- 			config = function()
--- 				require("user.autoparis")
--- 			end,
--- 		})
---
---
--- 		-- Proper search highlightig
--- 		use({
--- 			"rktjmp/highlight-current-n.nvim",
--- 			keys = "/",
--- 			config = function()
--- 				require("user.search_highlight")
--- 			end,
--- 		})
--- 		-- Popup terminal
--- 		use({
--- 			event = "BufWinEnter",
--- 			"akinsho/toggleterm.nvim",
--- 			config = function()
--- 				require("user.toggleterm")
--- 			end,
--- 		})
---
--- 		-- Tabbing out of surrounding things
--- 		use({
--- 			"abecodes/tabout.nvim",
--- 			config = function()
--- 				require("user.tabout")
--- 			end,
--- 			requires = { "nvim-treesitter" },
--- 			after = { "nvim-cmp" },
--- 		})
 -- 		-- Customise fold asthetics
 -- 		use({
 -- 			"anuvyklack/pretty-fold.nvim",
@@ -240,13 +116,7 @@ return {
 -- 		})
 --
 -- 		-- Indent highlighting
--- 		use({
--- 			"lukas-reineke/indent-blankline.nvim",
--- 			config = function()
--- 				require("user.indent_blankline")
--- 			end,
--- 			after = "mason.nvim",
--- 		})
+-- 		use()
 -- 		--it changes
 -- 		use({
 -- 			"lewis6991/gitsigns.nvim",

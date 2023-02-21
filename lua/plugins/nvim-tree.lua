@@ -1,7 +1,7 @@
 -- File explorer
 return {
     "kyazdani42/nvim-tree.lua",
-    depends = {
+    dependencies = {
         "kyazdani42/nvim-web-devicons",
     },
     keys = "X",
