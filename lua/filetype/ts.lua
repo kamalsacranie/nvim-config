@@ -1,4 +1,5 @@
 local M = {}
+
 M.buffer_options = {
 	-- Setting tabs,
 	tabstop = 2,
@@ -12,9 +13,10 @@ vim.schedule(function()
 	options_set(M.buffer_options, "bo")
 end)
 
-vim.keymap.set(
-	"n",
-	"<leader>r",
-	"<Cmd>w<CR><Cmd>TermExec direction='horizontal' cmd='node %' go_back=0<CR>"
-)
+M.luasnip_config_extend = {
+	ft_func = function()
+		return { "javascript" }
+	end,
+}
+
 return M

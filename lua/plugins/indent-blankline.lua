@@ -3,5 +3,6 @@ return {
 	config = function()
 		require("user.indent_blankline")
 	end,
-	after = "mason.nvim",
+	dependencies = { "mason.nvim" },
+	enabled = false,
 }

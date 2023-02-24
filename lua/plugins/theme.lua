@@ -1,8 +1,15 @@
 -- Colorscheme
 
+-- return {
+-- 	"bluz71/vim-nightfly-guicolors",
+-- 	config = function()
+-- 		require("user.theme")
+-- 	end,
+-- }
+
 return {
-	"bluz71/vim-nightfly-guicolors",
+	"rebelot/kanagawa.nvim",
 	config = function()
-		require("user.theme")
+		vim.cmd([[colorscheme kanagawa]])
 	end,
 }

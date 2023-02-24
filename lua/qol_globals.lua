@@ -6,6 +6,17 @@ P = function(table)
 	return print(vim.inspect(table))
 end
 
+--- Maps a function to a list-like table
+---@param tbl table
+---@param f function
+---@return table
+_G.map = function(tbl, f)
+	local t = {}
+	for k, v in pairs(tbl) do
+		t[k] = f(v)
+	end
+	return t
+end
 -- Checking if a package is loaded
 ---comment
 ---@param package_name string
@@ -96,6 +107,10 @@ _G.options_set = function(options, kind)
 	end
 end
 
+--- Scan a directory for the files within
+---@param directory string directory to scan
+---@param exts string extension to look for
+---@return Array of file names
 _G.scandir = function(directory, exts)
 	local file_list = vim.fn.split(vim.fn.system({ "ls", "-A", directory }))
 	if exts then

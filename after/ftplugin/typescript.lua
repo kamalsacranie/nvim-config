@@ -1,0 +1,1 @@
+rerequire("filetype.ts")
