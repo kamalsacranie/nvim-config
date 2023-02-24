@@ -21,6 +21,3 @@ require("vanilla.mappings")
 require("vanilla.autocmds")
 -- Setting up our pligins
 require("lazy").setup("plugins")
-require("utils.jest_virt_text")
-
--- require("vim.lsp.util").root_pattern("package.json")

@@ -1,5 +1,4 @@
-local M = require("filetype.js_core")
-
+local M = {}
 M.buffer_options = {
 	-- Setting tabs,
 	tabstop = 2,
@@ -13,10 +12,11 @@ vim.schedule(function()
 	options_set(M.buffer_options, "bo")
 end)
 
-M.luasnip_config_extend = {
-	ft_func = function()
-		return { "javascript" }
-	end,
-}
+vim.keymap.set(
+	"n",
+	"<leader><leader>t",
+	require("filetype.js_core.jest_virt_text").test,
+	{ buffer = true }
+)
 
 return M

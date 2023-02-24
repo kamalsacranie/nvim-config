@@ -1,4 +1,8 @@
 -- TODO: we should rather edit our query in the commented out part of our query
+local M = {}
+local q = require("vim.treesitter.query")
+local filetype = nil
+
 local test_function_query_string = function(ancestor_name)
 	return [[ 
 (call_expression
@@ -33,30 +37,15 @@ local find_test_line = function(input)
 	local closest_ancestor_name = input.ancestorTitles[#input.ancestorTitles]
 	local raw_query = test_function_query_string(closest_ancestor_name)
 	local formatted = string.format(raw_query)
-	local query = vim.treesitter.parse_query("javascript", formatted)
-	local parser = vim.treesitter.get_parser(0, "javascript", {})
+	local query = vim.treesitter.parse_query(filetype, formatted)
+	local parser = vim.treesitter.get_parser(0, filetype, {})
 	local tree = parser:parse()[1]
 	local root = tree:root()
 
 	for _, nodes in query:iter_matches(root, 0, 0, -1) do
-		-- We do not currently use node two but I'm gonna leave it here in case
-		-- local closest_describe_arg = nodes[2]
 		local test_arg = nodes[4]
-		local get_node_string = function(node)
-			local range = { node:range() }
-			local line_number = range[1]
-			local from, to = range[2] + 1, range[4]
-			local range_string = vim.api.nvim_buf_get_lines(
-				0,
-				line_number,
-				line_number + 1,
-				false
-			)[1]
-			return string.sub(range_string, from, to), range
-		end
-		-- local closest_describe_string, _ = get_node_string(closest_describe_arg) -- again to do with node2
-		local test_string, test_range = get_node_string(test_arg)
-		local test_line_number = test_range[1]
+		local test_string = q.get_node_text(test_arg, 0)
+		local test_line_number = test_arg:range()
 		if
 			-- closest_describe_string == closest_ancestor_name and -- and again, node 2
 			test_string == input.title
@@ -94,19 +83,24 @@ local process_tests = function(_, data)
 	end
 end
 
-local test = function()
+M.test = function()
 	-- Get absolute filepath
-	local current_file = vim.fn.expand("%:p")
+	local file_path = vim.fn.expand("%:p")
 	-- regex to see if test file .*\.test\.[tj]s$
 	local test_file_regex = vim.regex([[.*\.test\.[tj]s$]])
+	if vim.fn.expand("%:e") == "js" then
+		filetype = "javascript"
+	else
+		filetype = "typescript"
+	end
 	-- TODO: check we are in an npm repo with jest installed
-	if not test_file_regex:match_str(current_file) then
+	if not test_file_regex:match_str(file_path) then
 		return
 	end
 	vim.fn.jobstart({
 		"npx",
 		"jest",
-		current_file,
+		file_path,
 		"--json",
 		"--silent",
 	}, {
@@ -119,4 +113,5 @@ end
 -- we could either do this by getting the parent of the describe node until it is no longer a describe node or
 -- we could build a table of the strucutre of the test file by making a query for all describe nodes. Kind
 -- the same thing?
-vim.keymap.set("n", "<leader><leader>t", test)
+
+return M
