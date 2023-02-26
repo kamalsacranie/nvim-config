@@ -29,7 +29,7 @@
   "nvim-ts-context-commentstring": { "branch": "main", "commit": "a0f89563ba36b3bacd62cf967b46beb4c2c29e52" },
   "nvim-ts-rainbow2": { "branch": "master", "commit": "99768947820b969bcd99c4252c6166a984f99be4" },
   "nvim-web-devicons": { "branch": "master", "commit": "bb6d4fd1e010300510172b173ab5205d37af084f" },
-  "otter.nvim": { "branch": "main", "commit": "a655ee9d58febc45c5ca7ec402c9eebbaf80326e" },
+  "otter.nvim": { "branch": "main", "commit": "8b46caf113918c26a9247031d6482709078ec907" },
   "playground": { "branch": "master", "commit": "c481c660fa903a0e295902b1765ecfbd6e76a556" },
   "plenary.nvim": { "branch": "master", "commit": "9a0d3bf7b832818c042aaf30f692b081ddd58bd9" },
   "schemastore.nvim": { "branch": "main", "commit": "a4798a9fb5fd3ac8e132065597b397cab347d3ca" },
@@ -38,6 +38,9 @@
   "telescope.nvim": { "branch": "master", "commit": "203bf5609137600d73e8ed82703d6b0e320a5f36" },
   "toggleterm.nvim": { "branch": "main", "commit": "7f3ab9d214c8cf2855256f1002385fe44b01a50b" },
   "vim-matchup": { "branch": "master", "commit": "945e01e39fc137bd74bb3aa8c4f40e6ffb5be2dd" },
+  "vim-pandoc": { "branch": "master", "commit": "d4fc6f8234c37eef16b6de8055c5fe53b7d7316a" },
+  "vim-pandoc-syntax": { "branch": "master", "commit": "4268535e1d33117a680a91160d845cd3833dfe28" },
   "vim-python-pep8-indent": { "branch": "master", "commit": "60ba5e11a61618c0344e2db190210145083c91f8" },
-  "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" }
+  "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
+  "vim-table-mode": { "branch": "master", "commit": "9555a3e6e5bcf285ec181b7fc983eea90500feb4" }
 }

@@ -11,7 +11,7 @@ rerequire("filetype.md.mappings")
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
 	pattern = { "*.md" },
 	callback = function()
-		require("otter").activate({ "javascript", "r", "python", "lua" }, true)
+		require("otter").activate({ "r", "python", "lua" }, true)
 		vim.api.nvim_buf_set_keymap(
 			0,
 			"n",
