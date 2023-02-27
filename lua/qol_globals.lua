@@ -8,12 +8,34 @@ end
 
 --- Maps a function to a list-like table
 ---@param tbl table
----@param f function
+---@param f function which takes one parameter which is the element
 ---@return table
-_G.map = function(tbl, f)
+_G.map = function(tbl, f, list_like)
+	list_like = list_like or true
 	local t = {}
 	for k, v in pairs(tbl) do
-		t[k] = f(v)
+		if list_like then
+			table.insert(t, f(v))
+		else
+			t[k] = f(v)
+		end
+	end
+	return t
+end
+---@param tbl table
+---@param f function which takes one parameter which is the element
+---@return table
+_G.filter = function(tbl, f, list_like)
+	list_like = list_like or true
+	local t = {}
+	for k, v in pairs(tbl) do
+		if f(v) then
+			if list_like then
+				table.insert(t, v)
+			else
+				t[k] = v
+			end
+		end
 	end
 	return t
 end

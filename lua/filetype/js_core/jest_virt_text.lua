@@ -1,4 +1,3 @@
--- TODO: we should rather edit our query in the commented out part of our query
 local M = {}
 local q = require("vim.treesitter.query")
 local filetype = nil
@@ -12,7 +11,7 @@ local test_function_query_string = function(ancestor_name)
       (string_fragment) @test-name
       (#eq? @test-name "]] .. ancestor_name .. [[")
     ) 
-    (arrow_function
+    (arrow_function ; should probably change this to something general
       (statement_block
         (expression_statement
           (call_expression
@@ -33,6 +32,20 @@ local test_function_query_string = function(ancestor_name)
 ]]
 end
 
+local function get_all_parent_nodes(node)
+	local result = {}
+	local immediate_parent = node:parent() or nil
+	if not immediate_parent then
+		return result
+	end
+	table.insert(result, immediate_parent)
+	local ancestors = get_all_parent_nodes(immediate_parent)
+	for _, parent in ipairs(ancestors) do
+		table.insert(result, parent)
+	end
+	return result
+end
+
 local find_test_line = function(input)
 	local closest_ancestor_name = input.ancestorTitles[#input.ancestorTitles]
 	local raw_query = test_function_query_string(closest_ancestor_name)
@@ -43,37 +56,32 @@ local find_test_line = function(input)
 	local root = tree:root()
 
 	for _, nodes in query:iter_matches(root, 0, 0, -1) do
-		local closest_ancestor_node = nodes[2]
-		local describes = {}
-		local function find_describes(node)
-			local parent = node:parent() or nil
-			if not parent then
-				return
-			end
-			local function_call_node = node:prev_sibling() or nil
-			if
-				parent:type() == "call_expression"
-				and function_call_node
-				and q.get_node_text(function_call_node, 0) == "describe"
-			then
-				local describe_arg_text = q.get_node_text(
-					node:child(0):next_sibling():child(0):next_sibling(),
-					0
-				)
-				table.insert(describes, describe_arg_text)
-			end
-			return find_describes(parent)
-		end
-		find_describes(closest_ancestor_node)
-
+		local immediate_describe_node = nodes[2]
+		local test_parent_nodes = get_all_parent_nodes(immediate_describe_node)
+		local function_nodes = filter(test_parent_nodes, function(node)
+			return node:type() == "call_expression"
+		end)
+		local function_call_nodes = map(function_nodes, function(node)
+			return node:child(0)
+		end)
+		local describe_nodes = filter(function_call_nodes, function(node)
+			return q.get_node_text(node, 0) == "describe"
+		end)
+		local describe_string_nodes = map(describe_nodes, function(node)
+			return node:next_sibling()
+				:child(0)
+				:next_sibling()
+				:child(0)
+				:next_sibling()
+		end)
+		local describe_strings = map(describe_string_nodes, function(node)
+			return q.get_node_text(node, 0)
+		end)
 		local test_arg = nodes[4]
 		local test_string = q.get_node_text(test_arg, 0)
 		local test_line_number = test_arg:range()
-		if
-			-- closest_describe_string == closest_ancestor_name and -- and again, node 2
-			test_string == input.title
-		then
-			return describes, test_line_number
+		if test_string == input.title then
+			return describe_strings, test_line_number
 		end
 	end
 	return {}, false
@@ -116,7 +124,6 @@ end
 M.test = function()
 	-- Get absolute filepath
 	local file_path = vim.fn.expand("%:p")
-	-- regex to see if test file .*\.test\.[tj]s$
 	local test_file_regex = vim.regex([[.*\.test\.[tj]s$]])
 	if vim.fn.expand("%:e") == "js" then
 		filetype = "javascript"
