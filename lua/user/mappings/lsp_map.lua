@@ -23,11 +23,11 @@ M.lsp_mappings = function(bufnr, client)
 	bkmap("n", "gr", "<Cmd>lua vim.lsp.buf.references()<CR>")
 	bkmap("n", "<leader>lr", "<Cmd>lua vim.lsp.buf.rename()<CR>")
 	bkmap("i", "<C-k>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>")
-	-- bkmap(
-	-- 	"n",
-	-- 	"K",
-	-- 	"<Cmd>lua require('user.mappings.lsp_map').hover_callback()<CR>"
-	-- )
+	bkmap(
+		"n",
+		"K",
+		"<Cmd>lua require('user.mappings.lsp_map').hover_callback()<CR>"
+	)
 	bkmap("n", "gr", "<Cmd>lua vim.lsp.buf.references()<CR>")
 	bkmap(
 		"n",

@@ -43,6 +43,29 @@ local find_test_line = function(input)
 	local root = tree:root()
 
 	for _, nodes in query:iter_matches(root, 0, 0, -1) do
+		local closest_ancestor_node = nodes[2]
+		local describes = {}
+		local function find_describes(node)
+			local parent = node:parent() or nil
+			if not parent then
+				return
+			end
+			local function_call_node = node:prev_sibling() or nil
+			if
+				parent:type() == "call_expression"
+				and function_call_node
+				and q.get_node_text(function_call_node, 0) == "describe"
+			then
+				local describe_arg_text = q.get_node_text(
+					node:child(0):next_sibling():child(0):next_sibling(),
+					0
+				)
+				table.insert(describes, describe_arg_text)
+			end
+			return find_describes(parent)
+		end
+		find_describes(closest_ancestor_node)
+
 		local test_arg = nodes[4]
 		local test_string = q.get_node_text(test_arg, 0)
 		local test_line_number = test_arg:range()
@@ -50,10 +73,10 @@ local find_test_line = function(input)
 			-- closest_describe_string == closest_ancestor_name and -- and again, node 2
 			test_string == input.title
 		then
-			return true, test_line_number
+			return describes, test_line_number
 		end
 	end
-	return false, false
+	return {}, false
 end
 
 local process_tests = function(_, data)
@@ -64,8 +87,15 @@ local process_tests = function(_, data)
 	-- All relevant information is contained in the assertionResults part of our json. This is a list
 	local jest_results = jest_output.testResults[1].assertionResults
 	local test_results = map(jest_results, function(result)
-		local found_test, test_line_number = find_test_line(result)
-		if found_test then
+		local describes, test_line_number = find_test_line(result)
+		table.sort(describes, function(x, y)
+			return x < y
+		end)
+		if
+			test_line_number
+			and table.concat(describes)
+				== table.concat(result.ancestorTitles)
+		then
 			return { line_num = test_line_number, test_status = result.status }
 		end
 	end)

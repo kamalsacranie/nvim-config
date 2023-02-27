@@ -24,7 +24,7 @@
   "nvim-colorizer.lua": { "branch": "master", "commit": "36c610a9717cc9ec426a07c8e6bf3b3abcb139d6" },
   "nvim-lspconfig": { "branch": "master", "commit": "649137cbc53a044bffde36294ce3160cb18f32c7" },
   "nvim-tree.lua": { "branch": "master", "commit": "59e65d88db177ad1e6a8cffaafd4738420ad20b6" },
-  "nvim-treesitter": { "branch": "master", "commit": "be26661417ae44ee11253e60afe86c51844a34ce" },
+  "nvim-treesitter": { "branch": "master", "commit": "a9f0b1c2ba1d70de9189e1ade0e65346ad08849b" },
   "nvim-ts-autotag": { "branch": "main", "commit": "fdefe46c6807441460f11f11a167a2baf8e4534b" },
   "nvim-ts-context-commentstring": { "branch": "main", "commit": "a0f89563ba36b3bacd62cf967b46beb4c2c29e52" },
   "nvim-ts-rainbow2": { "branch": "master", "commit": "99768947820b969bcd99c4252c6166a984f99be4" },
@@ -38,7 +38,6 @@
   "telescope.nvim": { "branch": "master", "commit": "203bf5609137600d73e8ed82703d6b0e320a5f36" },
   "toggleterm.nvim": { "branch": "main", "commit": "7f3ab9d214c8cf2855256f1002385fe44b01a50b" },
   "vim-matchup": { "branch": "master", "commit": "945e01e39fc137bd74bb3aa8c4f40e6ffb5be2dd" },
-  "vim-pandoc-syntax": { "branch": "master", "commit": "4268535e1d33117a680a91160d845cd3833dfe28" },
   "vim-python-pep8-indent": { "branch": "master", "commit": "60ba5e11a61618c0344e2db190210145083c91f8" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
   "vim-table-mode": { "branch": "master", "commit": "9555a3e6e5bcf285ec181b7fc983eea90500feb4" }

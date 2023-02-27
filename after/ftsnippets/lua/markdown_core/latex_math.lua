@@ -8,7 +8,7 @@ local is_math = function()
 	synlist = synlist:gsub("%]", "}")
 	synlist = "return " .. synlist
 	synlist = load(synlist)()
-	P(synlist)
+	-- P(synlist)
 	if not synlist then
 		P(1)
 		return false
