@@ -38,7 +38,6 @@
   "telescope.nvim": { "branch": "master", "commit": "203bf5609137600d73e8ed82703d6b0e320a5f36" },
   "toggleterm.nvim": { "branch": "main", "commit": "7f3ab9d214c8cf2855256f1002385fe44b01a50b" },
   "vim-matchup": { "branch": "master", "commit": "945e01e39fc137bd74bb3aa8c4f40e6ffb5be2dd" },
-  "vim-pandoc": { "branch": "master", "commit": "d4fc6f8234c37eef16b6de8055c5fe53b7d7316a" },
   "vim-pandoc-syntax": { "branch": "master", "commit": "4268535e1d33117a680a91160d845cd3833dfe28" },
   "vim-python-pep8-indent": { "branch": "master", "commit": "60ba5e11a61618c0344e2db190210145083c91f8" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },

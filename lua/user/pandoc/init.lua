@@ -9,12 +9,12 @@ vim.g["pandoc#modules#disabled"] = { "formatting", "folding" }
 -- vim.g["pandoc#folding#level"] = 2
 -- PANDOC SYNTAX
 vim.g["pandoc#syntax#conceal#urls"] = true
-vim.g["pandoc#syntax#codeblocks#embeds#langs"] = {
-	"python",
-	"javascript",
-	"bash",
-	"yaml",
-	"sql",
-	"r",
-	"lua",
-}
+-- vim.g["pandoc#syntax#codeblocks#ignore"] = {
+-- 	"python",
+-- 	"javascript",
+-- 	"bash",
+-- 	"yaml",
+-- 	"sql",
+-- 	"r",
+-- 	"lua",
+-- }

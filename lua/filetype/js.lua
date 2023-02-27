@@ -1,4 +1,4 @@
-local M = require("filetype.js_core")
+local M = rerequire("filetype.js_core")
 vim.keymap.set(
 	"n",
 	"<leader>r",

@@ -18,7 +18,7 @@ vim.cmd([[setlocal colorcolumn=81]])
 
 M.ts_config_extend = { -- Treesitter settings
 	highlight = {
-		enable = false,
+		enable = true,
 		additional_vim_regex_highlighting = false,
 	},
 }
