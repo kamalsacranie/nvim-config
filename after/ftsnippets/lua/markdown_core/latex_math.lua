@@ -7,6 +7,7 @@ local is_math = function()
 	if not cursor_node then
 		return false
 	end
+	P(cursor_node:type())
 	local node_text = q(cursor_node, 0)
 	if not node_text then
 		return false
