@@ -1,30 +1,25 @@
--- Not pretty but does the job. Will be so much better when we have treesitter grammar
--- Checks if we are in math syntax zone
+-- For some unknown reason, we are also matching inline math blocks...
 local is_math = function()
-	local synlist_raw = vim.api.nvim_command_output(
-		[[echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')]]
-	)
-	local synlist = synlist_raw:gsub("%[", "{")
-	synlist = synlist:gsub("%]", "}")
-	synlist = "return " .. synlist
-	synlist = load(synlist)()
-	-- P(synlist)
-	if not synlist then
-		P(1)
-		return false
-	elseif synlist[#synlist] == "texMathText" then
-		return false
-	elseif synlist_raw:match("Math") then
-		P(2)
-		return true
-	elseif synlist_raw:match("pandocLaTeXRegion") then
-		P(3)
-		return true
-	else
-		P(4)
+	local ts_utils = require("nvim-treesitter.ts_utils")
+	local q = require("vim.treesitter.query").get_node_text
+	-- local ts_helpers = require("utils.treesitter-helpers")
+	local cursor_node = ts_utils.get_node_at_cursor(0, false) -- for some reason we are not getting the latex injected nodes which is really annoying
+	if not cursor_node then
 		return false
 	end
+	local node_text = q(cursor_node, 0)
+	if not node_text then
+		return false
+	end
+	if
+		string.gmatch(node_text, [[^\\\\begin\{.*\}(\n?(.*))\n*\\\\end\{.*\}]])
+	then
+		return true
+	end
+	return false
 end
+
+vim.keymap.set("n", "<leader><leader>t", is_math)
 
 local wrap = function()
 	return f(function(_, snip)

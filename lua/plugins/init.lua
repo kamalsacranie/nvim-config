@@ -1,6 +1,8 @@
 return {
 	-- Surround things with things duh
 	"tpope/vim-surround",
+    -- Kitty config highlighting
+    "fladson/vim-kitty",
 	-- Devicons
 	"kyazdani42/nvim-web-devicons",
 	-- Highlight colour strings in nvim editr
@@ -118,14 +120,7 @@ return {
 -- 		-- Indent highlighting
 -- 		use()
 -- 		--it changes
--- 		use({
--- 			"lewis6991/gitsigns.nvim",
--- 			requires = "nvim-lua/plenary.nvim",
--- 			-- Only config required
--- 			config = function()
--- 				require("user.gitsigns")
--- 			end,
--- 		})
+-- 		use()
 -- 	end,
 --
 -- 	config = {

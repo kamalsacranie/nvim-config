@@ -1,4 +1,4 @@
-local M = require("filetype.js_core")
+local M = rerequire("filetype.js_core")
 
 M.buffer_options = {
 	-- Setting tabs,
@@ -18,5 +18,11 @@ M.luasnip_config_extend = {
 		return { "javascript" }
 	end,
 }
+
+vim.keymap.set(
+	"n",
+	"<leader>r",
+	"<Cmd>w<CR><Cmd>TermExec direction='horizontal' cmd='ts-node %' go_back=0<CR>"
+)
 
 return M

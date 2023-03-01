@@ -1,5 +1,6 @@
 local M = {}
 local q = require("vim.treesitter.query")
+local ts_helpers = require("utils.treesitter-helpers")
 local filetype = nil
 
 local test_function_query_string = function(ancestor_name)
@@ -32,16 +33,11 @@ local test_function_query_string = function(ancestor_name)
 ]]
 end
 
-local function get_all_parent_nodes(node)
-	local result = {}
-	local immediate_parent = node:parent() or nil
-	if not immediate_parent then
-		return result
-	end
-	table.insert(result, immediate_parent)
-	local ancestors = get_all_parent_nodes(immediate_parent)
-	for _, parent in ipairs(ancestors) do
-		table.insert(result, parent)
+local function reverse_list_table(list)
+	local len = #list
+	local result = vim.deepcopy(list)
+	for i = 1, math.floor(len / 2) do
+		result[i], result[len - i + 1] = result[len - i + 1], result[i]
 	end
 	return result
 end
@@ -57,7 +53,10 @@ local find_test_line = function(input)
 
 	for _, nodes in query:iter_matches(root, 0, 0, -1) do
 		local immediate_describe_node = nodes[2]
-		local test_parent_nodes = get_all_parent_nodes(immediate_describe_node)
+		local test_arg = nodes[4]
+
+		local test_parent_nodes =
+			ts_helpers.get_all_parent_nodes(immediate_describe_node)
 		local function_nodes = filter(test_parent_nodes, function(node)
 			return node:type() == "call_expression"
 		end)
@@ -68,23 +67,31 @@ local find_test_line = function(input)
 			return q.get_node_text(node, 0) == "describe"
 		end)
 		local describe_string_nodes = map(describe_nodes, function(node)
-			return node:next_sibling()
-				:child(0)
-				:next_sibling()
-				:child(0)
-				:next_sibling()
+			return node
+				:next_sibling() -- arguments node parent
+				:child(0) -- arguments node
+				:next_sibling() -- first argument
+				:child(0) -- opening bracket
+				:next_sibling() -- argument 1 substring
 		end)
 		local describe_strings = map(describe_string_nodes, function(node)
 			return q.get_node_text(node, 0)
 		end)
-		local test_arg = nodes[4]
+		local ordered_describe_strings = reverse_list_table(describe_strings)
+
 		local test_string = q.get_node_text(test_arg, 0)
 		local test_line_number = test_arg:range()
-		if test_string == input.title then
-			return describe_strings, test_line_number
+
+		-- if we match our test name and also all of it's title ancestors
+		if
+			test_string == input.title
+			and table.concat(ordered_describe_strings)
+				== table.concat(input.ancestorTitles)
+		then
+			return test_line_number
 		end
 	end
-	return {}, false
+	return false
 end
 
 local process_tests = function(_, data)
@@ -95,15 +102,8 @@ local process_tests = function(_, data)
 	-- All relevant information is contained in the assertionResults part of our json. This is a list
 	local jest_results = jest_output.testResults[1].assertionResults
 	local test_results = map(jest_results, function(result)
-		local describes, test_line_number = find_test_line(result)
-		table.sort(describes, function(x, y)
-			return x < y
-		end)
-		if
-			test_line_number
-			and table.concat(describes)
-				== table.concat(result.ancestorTitles)
-		then
+		local test_line_number = find_test_line(result)
+		if test_line_number then
 			return { line_num = test_line_number, test_status = result.status }
 		end
 	end)
@@ -145,10 +145,5 @@ M.test = function()
 		on_stdout = process_tests,
 	})
 end
-
--- TODO: make the treesitter query get all parent describe blocks so we can be 100% accurate
--- we could either do this by getting the parent of the describe node until it is no longer a describe node or
--- we could build a table of the strucutre of the test file by making a query for all describe nodes. Kind
--- the same thing?
 
 return M
