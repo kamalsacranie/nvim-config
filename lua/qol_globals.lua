@@ -1,6 +1,11 @@
 -- Quality of life global functions
 -- Defining some useful global functions we can use
 
+-- GLOBAL VARIABLES
+_G.luasnip_snippet_directories = {
+	"./after/ftsnippets/lua",
+}
+
 -- Making it easier to print tables
 P = function(table)
 	return print(vim.inspect(table))
