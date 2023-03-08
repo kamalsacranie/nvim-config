@@ -32,3 +32,45 @@ create_autocmd("BufWinEnter", {
 -- 	pattern = { "*.md", "*.anki", "*.rmd" },
 -- 	desc = "Markdown cleanup pre BufWinEnter",
 -- })
+
+local in_codeblock = function()
+	local node = require("nvim-treesitter.ts_utils").get_node_at_cursor(0)
+	-- prevents error if no node
+	if not node then
+		return false
+	end
+	local parents =
+		require("utils.treesitter-helpers").get_all_parent_nodes(node)
+	parents = map(parents, function(node)
+		return node:type()
+	end, true)
+	if parents == {} then
+		return
+	end
+	if next(parents) ~= nil then
+		local highest_parent = parents[#parents]
+		if
+			-- we can do this better
+			highest_parent ~= "inline"
+			and highest_parent ~= "document"
+			and highest_parent ~= "source_file"
+		then
+			return true
+		end
+	end
+	return false
+end
+
+local loaded, femaco = load_package("femaco.edit")
+if loaded then
+	local augroup = create_augroup("temp", { clear = true })
+	create_autocmd({ "InsertEnter" }, {
+		pattern = { "*.md", "*.qmd" },
+		group = augroup,
+		callback = function()
+			if in_codeblock() then
+				femaco.edit_code_block()
+			end
+		end,
+	})
+end
