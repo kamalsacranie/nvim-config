@@ -93,7 +93,6 @@ cmp.setup({
 		{ name = "nvim_lua" },
 		{ name = "pandoc_references" },
 		{ name = "luasnip" },
-		{ name = "otter" },
 		{ name = "emmet" },
 	},
 
