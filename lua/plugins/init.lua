@@ -1,8 +1,8 @@
 return {
 	-- Surround things with things duh
 	"tpope/vim-surround",
-    -- Kitty config highlighting
-    "fladson/vim-kitty",
+	-- Kitty config highlighting
+	"fladson/vim-kitty",
 	-- Devicons
 	"kyazdani42/nvim-web-devicons",
 	-- Highlight colour strings in nvim editr
@@ -62,17 +62,6 @@ return {
 -- 			event = "BufWinEnter",
 -- 		})
 -- 		-- ==================================
--- 		-- =================WRITING================
--- 		use({
--- 			"vim-pandoc/vim-pandoc",
--- 			setup = function()
--- 				require("user.pandoc")
--- 			end,
--- 			requires = "vim-pandoc/vim-pandoc-syntax",
--- 		})
---         -- Allows us to make ascii tables easily in markdown
--- 		use()
--- 		-- =========================================
 --
 --
 -- 		-- R
@@ -90,42 +79,3 @@ return {
 -- 				)
 -- 			end,
 -- 		})
--- 		use({
--- 			"vim-pandoc/vim-rmarkdown",
--- 			-- Thinks I can bring this back now???
--- 			-- cond = function()
--- 			-- 	return is_filetype({ "rmd" })
--- 			-- end,
--- 			requires = {
--- 				"vim-pandoc/vim-pandoc",
--- 			},
--- 		})
---
--- 		-- Customise fold asthetics
--- 		use({
--- 			"anuvyklack/pretty-fold.nvim",
--- 			config = function()
--- 				require("user.folding").pretty_fold()
--- 			end,
--- 		})
--- 		-- Allows us to preview closed folds
--- 		use({
--- 			"anuvyklack/fold-preview.nvim",
--- 			requires = "anuvyklack/keymap-amend.nvim",
--- 			config = function()
--- 				require("user.folding").fold_preview()
--- 			end,
--- 		})
---
--- 		-- Indent highlighting
--- 		use()
--- 		--it changes
--- 		use()
--- 	end,
---
--- 	config = {
--- 		display = {
--- 			open_fn = require("packer.util").float,
--- 		},
--- 	},
--- })
