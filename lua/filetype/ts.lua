@@ -1,28 +1,15 @@
-local M = rerequire("filetype.js_core")
-
-M.buffer_options = {
-	-- Setting tabs,
-	tabstop = 2,
-	softtabstop = 2,
-	shiftwidth = 0,
-	expandtab = true,
-	-- Setting width and colorcolumn,
-	textwidth = 80,
-}
-vim.schedule(function()
-	options_set(M.buffer_options, "bo")
-end)
+local M = rerequire("filetype.javascript_core")
 
 M.luasnip_config_extend = {
 	ft_func = function()
-		return { "javascript" }
+		return M.snippet_types
 	end,
 }
 
 vim.keymap.set(
 	"n",
 	"<leader>r",
-	"<Cmd>w<CR><Cmd>TermExec direction='horizontal' cmd='ts-node %' go_back=0<CR>"
+	"<Cmd>w<CR><Cmd>TermExec direction='horizontal' cmd='ts-node --esm %' go_back=0<CR>"
 )
 
 return M
