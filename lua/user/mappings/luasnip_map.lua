@@ -5,6 +5,13 @@ end
 local tabout_did_load, tabout = load_package("tabout")
 local neogen_did_load, neogen = load_package("neogen")
 
+-- temp forcing visual mode to allow tab visual snippet
+vim.keymap.set(
+	"v",
+	"<Tab>",
+	[[:'<,'>lua require('luasnip.util.util').store_selection()<CR>gvs]]
+)
+
 -- Temp location for tabout
 vim.keymap.set({ "i", "s" }, "<C-l>", function()
 	if tabout_did_load then

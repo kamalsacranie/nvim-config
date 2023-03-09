@@ -27,7 +27,7 @@ kmap("n", "<leader>fn", "<CMD>lua require('user.telescope').notes()<CR>")
 kmap("n", "<leader>fk", "<CMD>lua require('telescope.builtin').keymaps()<CR>")
 
 -- Show document symbols
-kmap("n", "<leader>fds", "<CMD>lua require('user.telescope').doc_symbols()<CR>")
+kmap("n", "<leader>fs", "<CMD>lua require('user.telescope').doc_symbols()<CR>")
 
 kmap("n", "<C-g>", "<CMD>lua pcall(require('telescope.builtin').git_files)<CR>")
 

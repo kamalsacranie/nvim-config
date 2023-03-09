@@ -16,15 +16,16 @@ local sources = {
 			"markdown",
 			"rmd",
 			"md",
-			"markdown.pandoc",
+			-- "markdown.pandoc",
 			"rmarkdown",
 		},
 	}),
 	-- Markdown linting with MD025 disbaled so we can have mutiple levle one
 	-- headings
-	formatting.markdownlint.with({
-		filetypes = { "markdown", "anki" },
-	}),
+	-- formatting.markdownlint.with({
+	-- 	filetypes = { "markdown", "anki" },
+	-- 	cmd = { "markdownlink", "-f" },
+	-- }),
 	diagnostics.markdownlint.with({
 		extra_args = { "--disable", "MD025" },
 		filetypes = { "markdown", "anki" },
