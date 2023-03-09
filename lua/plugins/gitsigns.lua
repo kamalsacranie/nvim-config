@@ -1,5 +1,5 @@
 local function setup()
-    local loaded, gs = load_package("gitsigns")
+	local loaded, gs = load_package("gitsigns")
 	if not loaded then
 		return
 	end

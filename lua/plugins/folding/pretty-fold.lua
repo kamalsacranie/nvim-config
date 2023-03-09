@@ -25,5 +25,6 @@ end
 
 return {
 	"anuvyklack/pretty-fold.nvim",
+	dependencies = "anuvyklack/keymap-amend.nvim",
 	config = setup,
 }
