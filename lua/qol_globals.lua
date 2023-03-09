@@ -1,11 +1,6 @@
 -- Quality of life global functions
 -- Defining some useful global functions we can use
 
--- GLOBAL VARIABLES
-_G.luasnip_snippet_directories = {
-	"./after/ftsnippets/lua",
-}
-
 -- Making it easier to print tables
 P = function(table)
 	return print(vim.inspect(table))
@@ -81,6 +76,9 @@ _G.get_filetype = function()
 	return vim.fn.expand("%:e"):lower()
 end
 
+--- Check if a file has an extension specified in a passed in table
+---@param filetypes string[]
+---@return boolean
 _G.is_filetype = function(filetypes)
 	local ext = get_filetype()
 	for _, target_ext in ipairs(filetypes) do
@@ -136,7 +134,7 @@ end
 
 --- Scan a directory for the files within
 ---@param directory string directory to scan
----@param exts string extension to look for
+---@param exts? string extension to look for
 ---@return Array of file names
 _G.scandir = function(directory, exts)
 	local file_list = vim.fn.split(vim.fn.system({ "ls", "-A", directory }))
