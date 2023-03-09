@@ -2,6 +2,11 @@ local wrap = function()
 	return f(function(_, snip)
 		-- allows us to return multiple lines
 		local response, env = {}, snip.env
+		P(env)
+		if next(env.LS_SELECT_RAW) == nil then
+			return {}
+		end
+		-- if env.LS_SELECT_RAW.
 		for _, v in ipairs(env.LS_SELECT_RAW) do
 			table.insert(response, v)
 		end

@@ -20,8 +20,6 @@ local is_math = function()
 	return false
 end
 
-vim.keymap.set("n", "<leader><leader>t", is_math)
-
 local wrap = function()
 	return f(function(_, snip)
 		-- allows us to return multiple lines
