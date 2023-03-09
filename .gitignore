@@ -1,5 +1,6 @@
 plugin/packer_compiled.lua
 **/packer
+**/lazy
 **/.DS_Store
 TODO
 **/1_py3_script
