@@ -5,9 +5,6 @@ M.on_attach = function(client, bufnr)
 	-- setting up our mappings
 	require("user.mappings.lsp_map").lsp_mappings(bufnr, client)
 	require("user.lsp.on_attach.format_on_save").enable_format_on_save()
-	require("lsp_signature").on_attach(
-		require("user.lsp.on_attach.lsp_signature")
-	)
 	if client.server_capabilities.document_highlight then
 		-- This is detailed in the docs under helpf for document_highlight()
 		vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
