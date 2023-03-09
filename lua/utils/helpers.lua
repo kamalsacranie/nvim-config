@@ -22,4 +22,15 @@ M.root_directory_from_pattern = function(dir, file_name)
 	return nil
 end
 
+--- Checks if we are in a git repo
+---@return boolean
+M.is_git_repo = function()
+	local bufnr = vim.fn.bufnr()
+	local dir, _ = M.root_directory_from_pattern(vim.fn.getcwd(bufnr), ".git")
+	if dir then
+		return true
+	end
+	return false
+end
+
 return M

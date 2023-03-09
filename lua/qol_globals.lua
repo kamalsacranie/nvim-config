@@ -99,18 +99,6 @@ _G.shell_command = function(command)
 	return response
 end
 
-_G.is_git_dir = function()
-	-- Getting the output from term
-	local result = shell_command("git rev-parse --show-toplevel 2>&1")
-	if not result then
-		return false
-	end
-	if string.find(result, "fatal:") then
-		return false
-	end
-	return true
-end
-
 _G.has_key = function(table, val)
 	for key, _ in pairs(table) do
 		if key == val then
