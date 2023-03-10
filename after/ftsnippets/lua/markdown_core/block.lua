@@ -40,4 +40,20 @@ return {
 		),
 		i(0)
 	),
+	aub(
+		{
+			trig = "cbl",
+			name = "codeblock",
+			dscr = "creates codeblock environment",
+		},
+		fmta(
+			[[
+            ```{<>}
+            <>
+            ```
+            ]],
+			{ i(1), i(2) }
+		),
+		i(0)
+	),
 }
