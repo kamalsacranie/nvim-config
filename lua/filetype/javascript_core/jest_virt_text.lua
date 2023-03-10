@@ -10,7 +10,7 @@ local test_function_query_string = function(ancestor_name)
     (identifier) @function-name
     (member_expression
       object: (identifier) @function-name
-      property: (property_identifier))
+      _*)
   ]
   arguments: (arguments
     (string
@@ -21,7 +21,12 @@ local test_function_query_string = function(ancestor_name)
       (statement_block
         (expression_statement
           (call_expression
-            function: (identifier) @function-call
+            function: [
+              (identifier) @function-call
+              (member_expression
+                object: (identifier) @function-call
+                _*)
+            ]
             arguments: (arguments
               (string
                 (string_fragment) @string-arg
