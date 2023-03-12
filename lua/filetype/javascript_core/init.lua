@@ -1,4 +1,5 @@
 local M = {}
+
 M.buffer_options = {
 	-- Setting tabs,
 	tabstop = 2,
@@ -10,7 +11,7 @@ vim.schedule(function()
 	options_set(M.buffer_options, "bo")
 end)
 
-M.snippet_types = { "javascript", "javascript_core" }
+M.snippet_types = { "javascript_core" }
 
 vim.keymap.set(
 	"n",

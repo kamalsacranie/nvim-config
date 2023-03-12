@@ -30,7 +30,7 @@ function M.remove_augroup(name)
 end
 
 vim.cmd(
-	[[ command! LspToggleAutoFormat execute 'lua require("user.lsp.format_on_save").toggle_format_on_save()' ]]
+	[[ command! LspToggleAutoFormat execute 'lua require("plugins.lsp.format_on_save").toggle_format_on_save()' ]]
 )
 
 return M

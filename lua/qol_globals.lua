@@ -81,6 +81,7 @@ end
 ---@return boolean
 _G.is_filetype = function(filetypes)
 	local ext = get_filetype()
+	print(ext)
 	for _, target_ext in ipairs(filetypes) do
 		if ext == target_ext:lower() then
 			return true
@@ -160,3 +161,17 @@ _G.EXTEND_CONFIG = function(config_defaults, config_table_name)
 	local filetype_opts = get_filetype_opts(config_table_name)
 	return generate_options(config_defaults or {}, filetype_opts)
 end
+
+--------- Temp because luasnip snipenv dont work
+_G.lsg = {
+	visual = function()
+		local f = require("luasnip.nodes.functionNode").F
+		return f(function(_, snip)
+			local visual = snip.env.LS_SELECT_RAW
+			if type(visual) == "string" then
+				return ""
+			end
+			return visual
+		end)
+	end,
+}

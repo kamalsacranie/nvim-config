@@ -59,4 +59,8 @@ return {
 	config = function()
 		require("femaco").setup(setup_options)
 	end,
+	event = "InsertEnter",
+	cond = function()
+		return is_filetype({ "md", "qmd" })
+	end,
 }

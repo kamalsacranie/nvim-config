@@ -1,5 +1,3 @@
--- in lua you use % to escape regex strings i think
-
 local jest_snippets = {
 	s(
 		{ trig = "desc", name = "Jest describe block" },
@@ -14,12 +12,6 @@ local jest_snippets = {
 		),
 		i(0)
 	),
-	-- s(
-	-- 	{ trig = "b(%d)", regTrig = true },
-	-- 	f(function(args, snip)
-	-- 		return "Captured Text: " .. snip.captures[1] .. "."
-	-- 	end, {})
-	-- ),
 	s(
 		{ trig = "([it][te]s?t?)", name = "Jest it test block", regTrig = true },
 		fmta(
@@ -40,6 +32,9 @@ local jest_snippets = {
 	),
 }
 
-if string.gmatch(vim.fn.expand("%"), "%.(test|spec)%.(ts|js)") then
+if
+	vim.fn.expand("%"):match("%.test.[jt]s")
+	or vim.fn.expand("%"):match("%.spec.[jt]s")
+then
 	return jest_snippets
 end

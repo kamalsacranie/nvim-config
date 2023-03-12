@@ -15,18 +15,18 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 	},
 }
 
-local pre_init = require("user.lsp.on_attach")
+local pre_init = require("plugins.lsp.on_attach")
 local base_opts = {
 	on_attach = pre_init.on_attach,
 	capabilities = capabilities,
 }
 
-require("user.lsp.visual") -- sets theme for diagnostics
+require("plugins.lsp.visual") -- sets theme for diagnostics
 
 -- loading ansilliary things
 local null_ls_did_load, _ = load_package("null-ls")
 if null_ls_did_load then
-	require("user.lsp.null_ls")
+	require("plugins.lsp.null_ls")
 end
 
 local mason_lsp_did_load, mason_lsp = load_package("mason-lspconfig")
@@ -47,7 +47,7 @@ local lsp_handlers = {
 -- dynamically calling our setting option files
 for _, server in pairs(servers) do
 	local is_server, settings =
-		pcall(require, "user.lsp.server_settings." .. server)
+		pcall(require, "plugins.lsp.server_settings." .. server)
 	local server_opts = {}
 	if is_server then
 		server_opts = vim.tbl_deep_extend("force", base_opts, settings or {})

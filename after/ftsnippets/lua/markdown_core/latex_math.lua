@@ -1,5 +1,6 @@
 -- For some unknown reason, we are also matching inline math blocks...
 local is_math = function()
+	print("math func")
 	local ts_utils = require("nvim-treesitter.ts_utils")
 	local q = require("vim.treesitter.query").get_node_text
 	-- local ts_helpers = require("utils.treesitter-helpers")
@@ -7,7 +8,6 @@ local is_math = function()
 	if not cursor_node then
 		return false
 	end
-	P(cursor_node:type())
 	local node_text = q(cursor_node, 0)
 	if not node_text then
 		return false
@@ -18,17 +18,6 @@ local is_math = function()
 		return true
 	end
 	return false
-end
-
-local wrap = function()
-	return f(function(_, snip)
-		-- allows us to return multiple lines
-		local response, env = {}, snip.env
-		for _, v in ipairs(env.LS_SELECT_RAW) do
-			table.insert(response, v)
-		end
-		return response or {}
-	end)
 end
 
 local ms = function(params, nodes, opts)
@@ -43,21 +32,29 @@ local ms = function(params, nodes, opts)
 	)
 end
 
-return {
-	ms({ trig = "substack" }, fmta([[\substack{<>}]], i(1)), i(0)),
-	-- should improve these with regex. simple match pattern
-	ms({ trig = "+" }, t(" + ")),
-	ms({ trig = "-" }, t(" - ")),
-	ms({ trig = "=" }, t(" = ")),
-	ms({ trig = "**" }, t([[\times ]])),
-	ms({ trig = "..." }, t([[\dots ]])),
-	ms(
-		{ trig = "frac" },
-		{ t([[\frac]]), t("{"), i(1), t("}"), t("{"), i(2), t("}") },
-		i(0)
-	),
-	ms({ trig = "text" }, { t([[\text]]), t("{"), wrap(), i(1), t("}") }, i(0)),
+return {}, {
+	s({
+		trig = "substack",
+		wordTrig = true,
+		condition = is_math,
+	}, fmta([[\substack{<>}]], i(1)), i(0)),
 }
+
+-- return {
+-- 	ms({ trig = "substack" }, fmta([[\substack{<>}]], i(1)), i(0)),
+-- 	-- should improve these with regex. simple match pattern
+-- 	ms({ trig = "+" }, t(" + ")),
+-- 	ms({ trig = "-" }, t(" - ")),
+-- 	ms({ trig = "=" }, t(" = ")),
+-- 	ms({ trig = "**" }, t([[\times ]])),
+-- 	ms({ trig = "..." }, t([[\dots ]])),
+-- 	ms(
+-- 		{ trig = "frac" },
+-- 		{ t([[\frac]]), t("{"), i(1), t("}"), t("{"), i(2), t("}") },
+-- 		i(0)
+-- 	),
+-- 	ms({ trig = "text" }, { t([[\text]]), t("{"), wrap(), i(1), t("}") }, i(0)),
+-- }
 
 --
 -- context "math()"

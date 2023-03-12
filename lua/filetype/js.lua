@@ -1,10 +1,7 @@
 local M = rerequire("filetype.javascript_core")
+local ls = require("luasnip")
 
-M.luasnip_config_extend = {
-	ft_func = function()
-		return M.snippet_types
-	end,
-}
+ls.filetype_extend("javascript", M.snippet_types)
 
 vim.keymap.set(
 	"n",

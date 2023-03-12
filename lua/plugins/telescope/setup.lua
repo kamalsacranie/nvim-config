@@ -35,7 +35,7 @@ telescope.setup({
 telescope.load_extension("fzf")
 
 -- returning our zones so it's easy to call them
-local M = require("user.telescope.telezones")
+local M = require("plugins.telescope.telezones")
 
 -- Sourcing our mappings
 require("user.mappings.telescope_map")

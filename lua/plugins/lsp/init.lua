@@ -1,12 +1,10 @@
 return {
 	"neovim/nvim-lspconfig",
 	config = function()
-		require("user.lsp")
+		require("plugins.lsp.setup")
 	end,
 	dependencies = {
-		"ray-x/lsp_signature.nvim",
 		"b0o/schemastore.nvim",
-		"j-hui/fidget.nvim",
 		{
 			"folke/neodev.nvim",
 			config = function()

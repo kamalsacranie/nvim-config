@@ -1,6 +1,7 @@
 local create_augroup = vim.api.nvim_create_augroup
 local create_autocmd = vim.api.nvim_create_autocmd
 
+print("jfksdlkamal")
 -- folding (make this into a lua function??)
 --[[ vim.cmd[[
 function! MarkdownLevel()
@@ -62,16 +63,17 @@ local in_codeblock = function()
 	return false
 end
 
-local loaded, femaco = load_package("femaco.edit")
-if loaded then
-	local augroup = create_augroup("temp", { clear = true })
-	create_autocmd({ "InsertEnter" }, {
-		pattern = { "*.md", "*.qmd" },
-		group = augroup,
-		callback = function()
-			if in_codeblock() then
-				femaco.edit_code_block()
-			end
-		end,
-	})
-end
+local augroup = create_augroup("temp", { clear = true })
+create_autocmd({ "InsertEnter" }, {
+	pattern = { "*.md", "*.qmd" },
+	group = augroup,
+	callback = function()
+		local loaded, femaco = load_package("femaco.edit")
+		if not loaded then
+			return
+		end
+		if in_codeblock() then
+			femaco.edit_code_block()
+		end
+	end,
+})

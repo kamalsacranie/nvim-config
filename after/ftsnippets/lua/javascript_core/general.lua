@@ -1,6 +1,8 @@
 local conds = require("luasnip.extras.conditions.expand")
+local tsh = require("utils.treesitter-helpers")
 
 return {
+	s({ trig = "clog" }, { t("console.log("), i(1), t(")") }),
 	s(
 		{ trig = "impo?r?t?", name = "Import statement", regTrig = true },
 		fmta( -- should use a functional snippet for * automatic adding as {}
@@ -25,7 +27,7 @@ return {
 		),
 		{
 			condition = function()
-				return is_child_of_node("template_string")
+				return tsh.is_child_of_node("template_string")
 			end,
 		}
 	),

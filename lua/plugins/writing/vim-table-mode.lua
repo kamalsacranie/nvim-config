@@ -5,4 +5,5 @@ return {
 		vim.cmd([[let g:table_mode_corner="+"]])
 		vim.cmd([[let g:table_mode_corner_corner="+"]])
 	end,
+	cmd = "TableModeToggle",
 }

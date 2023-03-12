@@ -58,7 +58,7 @@ local sources = {
 null_ls.setup({
 	sources = sources,
 	on_attach = function(client, bufnr)
-		local pre_init = require("user.lsp.on_attach")
+		local pre_init = require("plugins.lsp.on_attach")
 		-- Quick patch so that i can still use gqq in markdown. Should be done the same way as in regular lsp
 		if get_filetype() == "anki" or get_filetype() == "md" then
 			vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
