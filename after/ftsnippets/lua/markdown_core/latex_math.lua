@@ -32,13 +32,13 @@ local ms = function(params, nodes, opts)
 	)
 end
 
-return {}, {
-	s({
-		trig = "substack",
-		wordTrig = true,
-		condition = is_math,
-	}, fmta([[\substack{<>}]], i(1)), i(0)),
-}
+-- return {}, {
+-- 	s({
+-- 		trig = "substack",
+-- 		wordTrig = true,
+-- 		condition = is_math,
+-- 	}, fmta([[\substack{<>}]], i(1)), i(0)),
+-- }
 
 -- return {
 -- 	ms({ trig = "substack" }, fmta([[\substack{<>}]], i(1)), i(0)),

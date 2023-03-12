@@ -16,13 +16,6 @@ end)
 -- to set it manually
 vim.cmd([[setlocal colorcolumn=81]])
 
-M.ts_config_extend = { -- Treesitter settings
-	highlight = {
-		enable = true,
-		additional_vim_regex_highlighting = false,
-	},
-}
-
 M.snippet_types = { "markdown_core" }
 
 -- Causing issues with luasnip
@@ -30,8 +23,8 @@ M.snippet_types = { "markdown_core" }
 -- autopairs.remove_rule("```")
 -- autopairs.remove_rule("`")
 
-rerequire("utils.spell") -- Setting up spell
+require("utils.spell") -- Setting up spell
 require("filetype.markdown_core.autocmds") -- no need to rerequire autcmds as nvim stores them
-rerequire("filetype.markdown_core.mappings")
+require("filetype.markdown_core.mappings")
 
 return M

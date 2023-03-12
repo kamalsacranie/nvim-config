@@ -1,5 +1,5 @@
 return {
-	s({ trig = "imgi", name = "image", snippetType = "autosnippet" }, {
+	s({ trig = "imgi", name = "image" }, {
 		t("!["),
 		i(1),
 		t("]"),

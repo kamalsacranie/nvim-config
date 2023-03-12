@@ -9,7 +9,7 @@ end
 kmap("n", "<leader>ff", "<CMD>lua require('plugins.telescope.telezones').find_files()<CR>")
 
 -- grep text in files
-kmap("n", "<leader>fg", "<CMD>lua require('plugins.telescope').live_grep()<CR>")
+kmap("n", "<leader>fg", "<CMD>lua require('plugins.telescope.telezones').live_grep()<CR>")
 
 -- list buffers
 kmap("n", "<leader>fb", "<CMD>lua require('telescope.builtin.telezones').buffers()<CR>")

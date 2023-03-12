@@ -1,1 +1,1 @@
-rerequire("filetype.md")
+require("filetype.md")

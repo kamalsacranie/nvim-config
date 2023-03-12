@@ -1,6 +1,6 @@
 return {
 	"L3MON4D3/LuaSnip",
-	version = "<CurrentMajor>.*",
+	version = "1.2.1.*",
 	enabled = true,
 	build = "make install_jsregexp",
 	config = function()
