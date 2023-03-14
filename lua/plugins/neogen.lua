@@ -12,6 +12,6 @@ end
 
 return {
 	"danymat/neogen",
-	config = setup(),
+	config = setup,
 	dependencies = "nvim-treesitter/nvim-treesitter",
 }

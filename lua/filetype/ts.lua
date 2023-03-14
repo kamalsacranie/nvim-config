@@ -1,6 +1,7 @@
 local M = rerequire("filetype.javascript_core")
 
 local ls = require("luasnip")
+table.insert(M.snippet_types, "javascript_core")
 ls.filetype_extend("typescript", M.snippet_types)
 
 vim.keymap.set(

@@ -1,5 +1,6 @@
 local conds = require("luasnip.extras.conditions.expand")
 local tsh = require("utils.treesitter-helpers")
+local ts_utils = require("nvim-treesitter.ts_utils")
 
 return
 	{

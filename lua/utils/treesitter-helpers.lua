@@ -32,7 +32,6 @@ M.is_child_of_node = function(parent_node_type)
 		return node:type()
 	end, comparison_nodes)
 	if vim.tbl_contains(comparison_nodes, parent_node_type) then
-		print("wtf")
 		return true
 	end
 	return false

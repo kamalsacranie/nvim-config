@@ -15,6 +15,6 @@ end
 -- Commentary
 return {
 	"numToStr/Comment.nvim",
-	config = setup(),
+	config = setup,
 	dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
 }

@@ -22,7 +22,11 @@ local defaults = {
 	history = true,
 	update_events = "TextChanged,TextChangedI",
 	enable_autosnippets = true,
-	ft_func = ls_ft.from_cursor_pos,
+	ft_func = function()
+		local result = ls_ft.from_cursor_pos()
+		P({ "Resulting filetype", result })
+		return result
+	end,
 	load_ft_func = ls_ft.extend_load_ft({ tex = { "latex" } }),
 }
 

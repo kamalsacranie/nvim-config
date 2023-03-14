@@ -1,7 +1,6 @@
 local create_augroup = vim.api.nvim_create_augroup
 local create_autocmd = vim.api.nvim_create_autocmd
 
-print("jfksdlkamal")
 -- folding (make this into a lua function??)
 --[[ vim.cmd[[
 function! MarkdownLevel()
