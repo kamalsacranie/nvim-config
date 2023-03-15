@@ -1,17 +1,30 @@
 return {
+	s({ trig = "appen?d?i?x?(%d*)", name = "Appendix heading", regTrig = true }, {
+		f(function(_, snip)
+			local heading_level = tonumber(snip.captures[1]) or 1
+			heading_level = math.min(heading_level, 6)
+			return string.rep("#", heading_level) .. " "
+		end),
+		i(1),
+		t(" {.appendix}"),
+	}),
 	s({ trig = "c'", name = "inline code" }, {
 		t("`"),
-		t(some_global),
 		lsg.visual(),
 		i(1),
 		t("`"),
 	}),
 	s({ trig = "b'", name = "bold" }, { t("**"), lsg.visual(), i(1), t("**") }),
+	lsg.midword({ trig = "fn", name = "footnote" }, {
+		t("^["),
+		lsg.visual(),
+		i(1),
+		t("]"),
+	}),
 	s(
-		{ trig = "fn", name = "footnote", wordTrig = true },
-		{ t("^["), lsg.visual(), i(1), t("]") }
+		{ trig = "i'", name = "italics" },
+		{ t("*"), lsg.visual(), i(1), t("*") }
 	),
-	s({ trig = "i'", name = "italics" }, { t("*"), lsg.visual(), i(1), t("*") }),
 	s(
 		{ trig = "bi'", name = "bitalics" },
 		{ t("***"), lsg.visual(), i(1), t("***") }

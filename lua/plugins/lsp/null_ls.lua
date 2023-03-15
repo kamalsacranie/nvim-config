@@ -16,7 +16,6 @@ local sources = {
 			"markdown",
 			"rmd",
 			"md",
-			-- "markdown.pandoc",
 			"rmarkdown",
 		},
 	}),
@@ -26,10 +25,10 @@ local sources = {
 	-- 	filetypes = { "markdown", "anki" },
 	-- 	cmd = { "markdownlink", "-f" },
 	-- }),
-	diagnostics.markdownlint.with({
-		extra_args = { "--disable", "MD025" },
-		filetypes = { "markdown", "anki" },
-	}),
+	-- diagnostics.markdownlint.with({
+	-- 	extra_args = { "--disable", "MD025" },
+	-- 	filetypes = { "markdown", "anki" },
+	-- }),
 	-- Python formatting
 	--[[ Black seems to not want a "command" option which means i must install
 	black in every project instead of using the system black --]]

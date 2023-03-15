@@ -8,6 +8,6 @@ return {
 		"windwp/nvim-ts-autotag",
 		"nvim-treesitter/playground",
 		"JoosepAlviste/nvim-ts-context-commentstring",
-		"HiPhish/nvim-ts-rainbow2",
+		-- "HiPhish/nvim-ts-rainbow2",
 	},
 }

@@ -37,13 +37,3 @@ intuitive to me as you get all the information for that filetype in one location
 
 I am at odds whether I should organise my mappings for my plug-ins in the same
 manner. It feels right how it currently is but idk.
-
-+---------------------+----------+
-| Property            | Earth    |
-+=============+=======+==========+
-|             | min   | -89.2 °C |
-| Temperature +-------+----------+
-|             | mean  |          |
-|             +-------+ 14 °C    +
-|             | min   |          |
-+-------------+-------+----------+

@@ -30,7 +30,7 @@ end)
 
 -- allows us to either jump forward in snippet or tabout
 vim.keymap.set({ "i", "s" }, "<C-f>", function()
-	if ls.expand_or_jumpable() then
+	if ls.expand_or_locally_jumpable() then
 		ls.expand_or_jump()
 	elseif neogen_did_load and neogen.jumpable() then
 		neogen.jump_next()

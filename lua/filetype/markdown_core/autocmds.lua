@@ -45,19 +45,17 @@ local in_codeblock = function()
 	parents = map(parents, function(node)
 		return node:type()
 	end, true)
-	if parents == {} then
+	if parents == nil then
 		return
 	end
-	if next(parents) ~= nil then
-		local highest_parent = parents[#parents]
-		if
-			-- we can do this better
-			highest_parent ~= "inline"
-			and highest_parent ~= "document"
-			and highest_parent ~= "source_file"
-		then
-			return true
-		end
+	local highest_parent = parents[#parents]
+	if
+		-- we can do this better
+		highest_parent ~= "inline"
+		and highest_parent ~= "document"
+		and highest_parent ~= "source_file"
+	then
+		return true
 	end
 	return false
 end

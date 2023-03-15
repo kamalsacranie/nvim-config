@@ -10,7 +10,29 @@ local aub = function(params, nodes, opts)
 	)
 end
 
-return {}, {
+return {
+	s(
+		{
+			trig = "callout",
+			name = "Callout block",
+			condition = conds.line_begin,
+		},
+		fmta(
+			[[
+            ::: {.callout-<>}
+            ## <>
+            
+            <>
+            :::
+            ]],
+			{
+				c(1, { t("note"), t("important"), t("tip"), t("warning") }),
+				i(2, "Callout title"),
+				i(3),
+			}
+		)
+	),
+}, {
 	s(
 		{
 			trig = "cbl",
@@ -21,8 +43,8 @@ return {}, {
 		},
 		fmta(
 			[[
-                ```{<>}
-                  <>
+                ```<>
+                <>
                 ```
             ]],
 			{ i(1), i(2) }
@@ -63,17 +85,61 @@ return {}, {
 	),
 	aub(
 		{
-			trig = "cbl",
-			name = "codeblock",
+			trig = "ecb",
+			name = "Executable codeblock",
 			dscr = "creates codeblock environment",
 		},
 		fmta(
 			[[
-		           ```{<>}
-		           <>
-		           ```
-		           ]],
+            ```{<>}
+            <>
+            ```
+            ]],
 			{ i(1), i(2) }
+		),
+		i(0)
+	),
+	aub(
+		{
+			trig = "lcb",
+			name = "Executable codeblock",
+			dscr = "creates codeblock environment",
+		},
+		fmta(
+			[[
+            ```<> {#lst-<> lst-cap="<>"<>}
+            <>
+            ```
+            ]],
+			{
+				i(1),
+				i(2),
+				i(3),
+				c(4, { t(""), t(' code-line-numbers="true"') }),
+				i(5),
+			}
+		),
+		i(0)
+	),
+	aub(
+		{
+			trig = "lecb",
+			name = "Executable codeblock",
+			dscr = "creates codeblock environment",
+		},
+		fmta(
+			[[
+            ```{<> #lst-<> lst-cap="<>"<>}
+            <>
+            ```
+            ]],
+			{
+				i(1),
+				i(2),
+				i(3),
+				c(4, { t(""), t(' code-line-numbers="true"') }),
+				i(5),
+			}
 		),
 		i(0)
 	),

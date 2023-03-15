@@ -1,21 +1,21 @@
 -- For some unknown reason, we are also matching inline math blocks...
 local is_math = function()
-	local ts_utils = require("nvim-treesitter.ts_utils")
-	local q = require("vim.treesitter.query").get_node_text
-	-- local ts_helpers = require("utils.treesitter-helpers")
-	local cursor_node = ts_utils.get_node_at_cursor(0, false) -- for some reason we are not getting the latex injected nodes which is really annoying
-	if not cursor_node then
-		return false
-	end
-	local node_text = q(cursor_node, 0)
-	if not node_text then
-		return false
-	end
-	if
-		string.gmatch(node_text, [[^\\\\begin\{.*\}(\n?(.*))\n*\\\\end\{.*\}]])
-	then
-		return true
-	end
+	-- local ts_utils = require("nvim-treesitter.ts_utils")
+	-- local q = require("vim.treesitter.query").get_node_text
+	-- -- local ts_helpers = require("utils.treesitter-helpers")
+	-- local cursor_node = ts_utils.get_node_at_cursor(0, false) -- for some reason we are not getting the latex injected nodes which is really annoying
+	-- if not cursor_node then
+	-- 	return false
+	-- end
+	-- local node_text = q(cursor_node, 0)
+	-- if not node_text then
+	-- 	return false
+	-- end
+	-- if
+	-- 	string.gmatch(node_text, [[^\\\\begin\{.*\}(\n?(.*))\n*\\\\end\{.*\}]])
+	-- then
+	-- 	return true
+	-- end
 	return false
 end
 

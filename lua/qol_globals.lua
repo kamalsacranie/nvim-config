@@ -81,7 +81,6 @@ end
 ---@return boolean
 _G.is_filetype = function(filetypes)
 	local ext = get_filetype()
-	print(ext)
 	for _, target_ext in ipairs(filetypes) do
 		if ext == target_ext:lower() then
 			return true
@@ -165,7 +164,7 @@ end
 --------- Temp because luasnip snipenv dont work
 _G.lsg = {
 	visual = function()
-		local f = require("luasnip.nodes.functionNode").F
+		local f = require("luasnip").f
 		return f(function(_, snip)
 			local visual = snip.env.LS_SELECT_RAW
 			if type(visual) == "string" then
@@ -173,5 +172,22 @@ _G.lsg = {
 			end
 			return visual
 		end)
+	end,
+	midword = function(conf, nodes)
+		local s = require("luasnip").s
+		local f = require("luasnip").f
+		return s(
+			vim.tbl_extend(
+				"keep",
+				{ trig = "(.*)" .. conf["trig"], regTrig = true },
+				conf
+			),
+			vim.list_extend(
+				{ f(function(_, snip)
+					return snip.captures[1]
+				end) },
+				nodes
+			)
+		)
 	end,
 }
