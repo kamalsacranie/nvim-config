@@ -15,6 +15,12 @@ return
 			),
 			{ condition = conds.line_begin }
 		),
+		s({ trig = [[(d?)dir]], regTrig = true }, {
+			f(function(_, snip)
+				return (snip.captures[1] == "d" and "const __dirname = " or "")
+			end),
+			t("dirname(fileURLToPath(import.meta.url))"),
+		}),
 		s(
 			{
 				trig = "(.*)ts",
