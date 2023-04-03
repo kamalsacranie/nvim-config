@@ -1,65 +1,141 @@
 -- For some unknown reason, we are also matching inline math blocks...
 local is_math = function()
-	-- local ts_utils = require("nvim-treesitter.ts_utils")
-	-- local q = require("vim.treesitter.query").get_node_text
-	-- -- local ts_helpers = require("utils.treesitter-helpers")
-	-- local cursor_node = ts_utils.get_node_at_cursor(0, false) -- for some reason we are not getting the latex injected nodes which is really annoying
-	-- if not cursor_node then
-	-- 	return false
-	-- end
-	-- local node_text = q(cursor_node, 0)
-	-- if not node_text then
-	-- 	return false
-	-- end
-	-- if
-	-- 	string.gmatch(node_text, [[^\\\\begin\{.*\}(\n?(.*))\n*\\\\end\{.*\}]])
-	-- then
-	-- 	return true
-	-- end
-	return false
+	if vim.bo.filetype ~= "markdown" then
+		return false
+	end
+	local _, line_number, _, _ = unpack(vim.fn.getpos("."))
+	local line = vim.fn.getline(line_number)
+	local begins, ends = 0, 0
+	while line_number ~= 0 do
+		if line:match("\\begin") then
+			begins = begins + 1
+		end
+		if line:match("\\end") then
+			ends = ends + 1
+		end
+		line_number = line_number - 1
+		line = vim.fn.getline(line_number)
+	end
+	if begins - ends == 0 then
+		return false
+	end
+	return true
 end
 
-local ms = function(params, nodes, opts)
-	return s(
-		vim.tbl_extend(
-			"force",
-			params,
-			{ wordTrig = true, snippetType = "autosnippet" }
-		),
-		nodes,
-		vim.tbl_extend("force", opts or {}, { condition = is_math })
-	)
-end
-
--- return {}, {
--- 	s({
--- 		trig = "substack",
--- 		wordTrig = true,
--- 		condition = is_math,
--- 	}, fmta([[\substack{<>}]], i(1)), i(0)),
--- }
-
-return {
-	ms({ trig = "substack" }, fmta([[\substack{<>}]], i(1)), i(0)),
-	-- should improve these with regex. simple match pattern
-	ms({ trig = "+" }, t(" + ")),
-	ms({ trig = "-" }, t(" - ")),
-	ms({ trig = "=" }, t(" = ")),
-	ms({ trig = "**" }, t([[\times ]])),
-	ms({ trig = "..." }, t([[\dots ]])),
-	ms(
-		{ trig = "frac" },
-		{ t([[\frac]]), t("{"), i(1), t("}"), t("{"), i(2), t("}") },
-		i(0)
-	),
-	ms(
-		{ trig = "text" },
-		{ t([[\text]]), t("{"), lsg.visual(), i(1), t("}") },
-		i(0)
-	),
-}
-
+-- local ms = function(params, nodes)
+-- 	local all_nodes = {
+-- 		f(function(_, snip)
+-- 			return snip.captures[1]
+-- 		end),
+-- 		unpack(nodes),
+-- 	}
 --
+-- 	local all_params = {
+-- 		trig = [[(.*)]] .. params["trig"],
+-- 		regTrig = true,
+-- 		snippetType = "autosnippet",
+-- 		condition = is_math,
+-- 	}
+-- 	return s(all_params, all_nodes)
+-- end
+
+local spaced_operator = function(trig, delim)
+	return s({
+		trig = [[(.*)]] .. trig,
+		regTrig = true,
+		snippetType = "autosnippet",
+		condition = is_math,
+	}, {
+		f(function(_, snip)
+			local ends_with = function(str, delim)
+				return str:sub(-delim:len()) == delim
+			end
+			local ends_with_delim = function(str)
+				local delims = { "+", "-", "=", [[\times]] }
+				local delim_results = vim.tbl_map(function(delim)
+					return ends_with(str, delim .. " ")
+				end, delims)
+				return vim.tbl_contains(delim_results, true)
+			end
+
+			local cap = snip.captures[1]
+			local prev_char = cap:sub(-1)
+			local _, line_number, _, _ = unpack(vim.fn.getpos("."))
+			local column_number = 0 -- relative offset in the following func
+			local next_char = unpack(
+				vim.api.nvim_buf_get_text(
+					0,
+					line_number - 1,
+					column_number,
+					line_number - 1,
+					column_number + 1,
+					{}
+				)
+			)
+			if ends_with_delim(cap) and delim ~= "=" then
+				return cap .. delim
+			end
+			if
+				(prev_char == "" or prev_char:match("%s"))
+				and (
+					next_char == ""
+					or next_char:match("%S")
+					or next_char:match("%s")
+				)
+			then
+				return cap .. delim .. " "
+			elseif
+				prev_char:match("%S")
+				and (next_char == "" or next_char:match("%S"))
+			then
+				return cap .. " " .. delim .. " "
+			elseif prev_char:match("%S") and next_char:match("%s") then
+				return cap .. " " .. delim
+			elseif prev_char:match("%s") and next_char:match("%s") then
+				return cap .. delim
+			end
+		end),
+	})
+end
+
+return {},
+	{
+		spaced_operator("-", "-"),
+		spaced_operator("+", "+"),
+		spaced_operator("=", "="),
+		spaced_operator("%*%*", [[\times]]),
+		s({
+			trig = "(.*)_",
+			regTrig = true,
+			condition = is_math,
+		}, {
+			f(function(_, snip)
+				return snip.captures[1]
+			end),
+			t("_{"),
+			i(1),
+			t("}"),
+		}),
+		s(
+			{ trig = "sum", condition = is_math },
+			fmta(
+				[[
+              \sum_{<>}^{<>}<>
+            ]],
+				{ i(1), i(2), i(3) }
+			),
+			i(0)
+		),
+		-- ms({ trig = "..." }, t([[\dots ]])),
+		-- ms(
+		-- 	{ trig = "frac" },
+		-- 	{ t([[\frac]]), t("{"), i(1), t("}"), t("{"), i(2), t("}") }
+		-- ),
+		-- ms({ trig = "text" }, { t([[\text]]), t("{"), lsg.visual(), i(1), t("}") }),
+	}
+
+---OLD ULTISNIPS
+
 -- context "math()"
 -- snippet matrix "Matrix"
 -- \begin\{pmatrix\}

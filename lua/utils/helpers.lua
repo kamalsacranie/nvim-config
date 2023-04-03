@@ -4,14 +4,15 @@ local M = {}
 --- which contains a file/folder with th given filename
 ---@param dir string the directory in which you want the search to start
 ---@param file_name string file you want to match in a parent directory
----@return string | nil, string?) the root directory and the full filepath to the matched file or nil
+---@return string | nil) the root directory with no trailing slash if it exists
 M.root_directory_from_pattern = function(dir, file_name)
 	local file_path = dir .. "/" .. file_name
 	local open_file = io.open(file_path, "r")
 
 	if open_file then
 		open_file:close()
-		return dir, file_path
+		print(dir)
+		return dir
 	end
 
 	local parent_dir = dir:match("(.+)/[^/]+")

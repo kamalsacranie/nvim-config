@@ -11,7 +11,9 @@ M.find_files = function(opts)
 		no_ignore = true,
 	}
 	opts = opts or {}
-	builtin.find_files(vim.tbl_deep_extend("force", defaults, opts))
+	newopts = vim.tbl_deep_extend("force", defaults, opts)
+	P(newopts)
+	builtin.find_files(newopts)
 end
 
 -- Search vim config

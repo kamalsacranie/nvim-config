@@ -48,6 +48,9 @@ local in_codeblock = function()
 	if parents == nil then
 		return
 	end
+	if next(parents) == nil then
+		return false
+	end
 	local highest_parent = parents[#parents]
 	if
 		-- we can do this better

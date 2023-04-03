@@ -6,28 +6,54 @@ end
 
 -- Keymappings: f for find
 -- other files in cwd
-kmap("n", "<leader>ff", "<CMD>lua require('plugins.telescope.telezones').find_files()<CR>")
+vim.keymap.set("n", "<leader>ff", function()
+	require("plugins.telescope.telezones").find_files()
+end)
+vim.keymap.set("n", "<leader>fF", function()
+	require("plugins.telescope.telezones").find_files({
+		cwd = require("utils.helpers").root_directory_from_pattern(
+			vim.fn.getcwd(0),
+			".git"
+		),
+	})
+end)
 
 -- grep text in files
-kmap("n", "<leader>fg", "<CMD>lua require('plugins.telescope.telezones').live_grep()<CR>")
+kmap(
+	"n",
+	"<leader>fg",
+	"<CMD>lua require('plugins.telescope.telezones').live_grep()<CR>"
+)
 
 -- list buffers
-kmap("n", "<leader>fb", "<CMD>lua require('telescope.builtin.telezones').buffers()<CR>")
+kmap("n", "<leader>fb", "<CMD>lua require('telescope.builtin').buffers()<CR>")
 
 -- fuzzy search helptags
 kmap("n", "<leader>fh", "<CMD>lua require('telescope.builtin').help_tags()<CR>")
 
 -- Vimrc file searc
-kmap("n", "<leader>fv", "<CMD>lua require('plugins.telescope.telezones').nvim_config()<CR>")
+kmap(
+	"n",
+	"<leader>fv",
+	"<CMD>lua require('plugins.telescope.telezones').nvim_config()<CR>"
+)
 
 -- Notes search
-kmap("n", "<leader>fn", "<CMD>lua require('plugins.telescope.telezones').notes()<CR>")
+kmap(
+	"n",
+	"<leader>fn",
+	"<CMD>lua require('plugins.telescope.telezones').notes()<CR>"
+)
 
 -- Show all keymaps
 kmap("n", "<leader>fk", "<CMD>lua require('telescope.builtin').keymaps()<CR>")
 
 -- Show document symbols
-kmap("n", "<leader>fs", "<CMD>lua require('plugins.telescope.telezones').doc_symbols()<CR>")
+kmap(
+	"n",
+	"<leader>fs",
+	"<CMD>lua require('plugins.telescope.telezones').doc_symbols()<CR>"
+)
 
 kmap("n", "<C-g>", "<CMD>lua pcall(require('telescope.builtin').git_files)<CR>")
 

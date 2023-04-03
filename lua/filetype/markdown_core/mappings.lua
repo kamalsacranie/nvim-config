@@ -18,3 +18,24 @@ bkmap(
 vim.g.maplocalleader = [[\]]
 -- Reflowing a whole paragraph
 bkmap("n", "gqip", [[magqip`a]])
+vim.keymap.set("n", [[>h]], function()
+	local is_heading =
+		require("utils.treesitter-helpers").is_child_of_node("atx_heading")
+	local line = vim.fn.getline(".")
+	if is_heading then
+		vim.fn.setline(".", "#" .. line)
+	else
+		vim.fn.setline(
+			".",
+			(line:sub(1, 1) == " " and "#" .. line or "# " .. line)
+		)
+	end
+end)
+vim.keymap.set("n", [[<h]], function()
+	local is_heading =
+		require("utils.treesitter-helpers").is_child_of_node("atx_heading")
+	local line = vim.fn.getline("."):sub(2)
+	if is_heading then
+		vim.fn.setline(".", line)
+	end
+end)

@@ -25,7 +25,7 @@ require("lazy").setup("plugins")
 -- vim.keymap.set("n", "<leader><leader>p", function()
 -- 	vim.schedule(function()
 -- 		local dir, packjson =
--- 			require("utils.helpers").root_directory_from_pattern(
+			-- require("utils.helpers").root_directory_from_pattern(
 -- 				vim.fn.getcwd(0),
 -- 				"package.json"
 -- 			)

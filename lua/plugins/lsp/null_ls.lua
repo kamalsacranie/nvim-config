@@ -8,6 +8,7 @@ local hover = null_ls.builtins.hover
 -- We could have like, a nullls table which just specifies the builtin and maybe some options and then
 -- dynamically populate the list
 local sources = {
+	formatting.pg_format,
 	formatting.stylua.with({
 		extra_args = { "--column-width", "80" },
 	}),
