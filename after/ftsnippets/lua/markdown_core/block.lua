@@ -1,12 +1,10 @@
 -- Simplification for auto expand at begining
+local conds = require("luasnip.extras.conditions.expand")
 local aub = function(params, nodes, opts)
 	return s(
-		vim.tbl_extend(
-			"force",
-			params,
-			{ snippetType = "autosnippet", condition = conds.line_begin }
-		),
-		nodes
+		vim.tbl_extend("force", params, { snippetType = "autosnippet" }),
+		nodes,
+		{ condition = conds.line_begin }
 	)
 end
 
@@ -15,7 +13,6 @@ return {
 		{
 			trig = "callout",
 			name = "Callout block",
-			condition = conds.line_begin,
 		},
 		fmta(
 			[[
@@ -30,7 +27,8 @@ return {
 				i(2, "Callout title"),
 				i(3),
 			}
-		)
+		),
+		{ condition = conds.line_begin }
 	),
 }, {
 	s(
@@ -39,7 +37,6 @@ return {
 			name = "Codeblocks",
 			dscr = "Creates a codeblock",
 			priority = 1001,
-			condition = conds.line_begin,
 		},
 		fmta(
 			[[
@@ -49,7 +46,11 @@ return {
             ]],
 			{ i(1), i(2) }
 		),
-		i(0)
+		i(0),
+		{
+
+			condition = conds.line_begin,
+		}
 	),
 	aub(
 		{

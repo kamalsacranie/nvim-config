@@ -9,6 +9,12 @@ return {
 		"hrsh7th/cmp-nvim-lua",
 		"jc-doyle/cmp-pandoc-references",
 		"saadparwaiz1/cmp_luasnip",
+		{
+			"aspeddro/cmp-pandoc.nvim",
+			config = function()
+				require("cmp_pandoc").setup()
+			end,
+		},
 		-- temp completion sourse until we find something better for html emmet
 		{
 			"jackieaskins/cmp-emmet",

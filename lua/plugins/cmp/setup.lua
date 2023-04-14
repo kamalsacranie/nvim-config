@@ -94,6 +94,7 @@ cmp.setup({
 		{ name = "pandoc_references" },
 		{ name = "luasnip" },
 		{ name = "emmet" },
+		{ name = "cmp_pandoc" },
 	},
 
 	mapping = require("user.mappings.cmp_map"),

@@ -1,5 +1,9 @@
 -- For some unknown reason, we are also matching inline math blocks...
+local tsh = require("utils.treesitter-helpers")
 local is_math = function()
+	if tsh.is_child_of_node("inline_formula") then
+		return true
+	end
 	if vim.bo.filetype ~= "markdown" then
 		return false
 	end
@@ -34,9 +38,8 @@ end
 -- 		trig = [[(.*)]] .. params["trig"],
 -- 		regTrig = true,
 -- 		snippetType = "autosnippet",
--- 		condition = is_math,
 -- 	}
--- 	return s(all_params, all_nodes)
+-- 	return s(all_params, all_nodes, { condition = is_math })
 -- end
 
 local spaced_operator = function(trig, delim)
@@ -44,7 +47,6 @@ local spaced_operator = function(trig, delim)
 		trig = [[(.*)]] .. trig,
 		regTrig = true,
 		snippetType = "autosnippet",
-		condition = is_math,
 	}, {
 		f(function(_, snip)
 			local ends_with = function(str, delim)
@@ -95,7 +97,7 @@ local spaced_operator = function(trig, delim)
 				return cap .. delim
 			end
 		end),
-	})
+	}, { condition = is_math })
 end
 
 return {},
@@ -107,7 +109,6 @@ return {},
 		s({
 			trig = "(.*)_",
 			regTrig = true,
-			condition = is_math,
 		}, {
 			f(function(_, snip)
 				return snip.captures[1]
@@ -115,18 +116,42 @@ return {},
 			t("_{"),
 			i(1),
 			t("}"),
+		}, {
+			condition = is_math,
 		}),
 		s(
-			{ trig = "sum", condition = is_math },
+			{ trig = "sum" },
 			fmta(
 				[[
               \sum_{<>}^{<>}<>
             ]],
 				{ i(1), i(2), i(3) }
 			),
-			i(0)
+			i(0),
+			{
+				condition = is_math,
+			}
 		),
-		-- ms({ trig = "..." }, t([[\dots ]])),
+		s({ trig = "..." }, t([[\dots ]]), {
+			condition = is_math,
+		}),
+		s({ trig = "@b" }, t([[\beta]]), { condition = is_math }),
+		s(
+			{ trig = "{" },
+			{ t([[\{]]), i(1), t([[\}]]) },
+			{ condition = is_math }
+		),
+		s({
+			trig = "(.*),",
+			regTrig = true,
+		}, {
+			f(function(_, snip)
+				return snip.captures[1]
+			end),
+			t(", "),
+		}, {
+			condition = is_math,
+		}),
 		-- ms(
 		-- 	{ trig = "frac" },
 		-- 	{ t([[\frac]]), t("{"), i(1), t("}"), t("{"), i(2), t("}") }
