@@ -2,8 +2,10 @@
 -- Defining some useful global functions we can use
 
 -- Making it easier to print tables
-P = function(table)
-	return print(vim.inspect(table))
+---@param table table
+---@return nil
+_G.P = function(table)
+	return type(table) == "table" and print(vim.inspect(table)) or print(table)
 end
 
 --- Maps a function to a list-like table
