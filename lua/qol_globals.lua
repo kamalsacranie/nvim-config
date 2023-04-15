@@ -153,7 +153,7 @@ end
 ---@param config_table_name string
 ---@param config_defaults table|nil
 ---@return table
-_G.EXTEND_CONFIG = function(config_defaults, config_table_name)
+_G.extend_config = function(config_defaults, config_table_name)
 	---@return table
 	local get_filetype_opts = function(config_table_name)
 		-- Load "filetype.<ft>" which returns M which may have a ts_config table

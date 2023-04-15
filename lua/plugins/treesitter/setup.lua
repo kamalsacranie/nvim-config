@@ -40,7 +40,7 @@ vim.api.nvim_create_augroup("treesitter", { clear = true })
 vim.api.nvim_create_autocmd("BufWinEnter", {
 	group = "treesitter",
 	callback = function()
-		ts_config.setup(EXTEND_CONFIG(defaults, "ts_config_extend"))
+		ts_config.setup(extend_config(defaults, "ts_config_extend"))
 	end,
 	pattern = "*.*",
 	desc = "Treesitter setup",

@@ -7,7 +7,7 @@ local function setup()
 
 	local defaults = { enable = true }
 
-	neogen.setup(EXTEND_CONFIG(defaults, "neogen_config_extend"))
+	neogen.setup(extend_config(defaults, "neogen_config_extend"))
 end
 
 return {

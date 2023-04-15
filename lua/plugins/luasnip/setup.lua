@@ -29,5 +29,5 @@ local defaults = {
 }
 
 require("user.mappings.luasnip_map")
-ls.config.setup(EXTEND_CONFIG(defaults, "luasnip_config_extend"))
+ls.config.setup(extend_config(defaults, "luasnip_config_extend"))
 ls.config.setup(defaults)

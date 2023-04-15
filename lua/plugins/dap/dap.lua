@@ -20,7 +20,7 @@ for sign, symbol in pairs(dap_symbols) do
 end
 
 -- Get our dap tables form our filetype and return if they don't exist
-local dap_options_to_extend = EXTEND_CONFIG(nil, "dap_config_extend")
+local dap_options_to_extend = extend_config(nil, "dap_config_extend")
 if next(dap_options_to_extend) == nil then
 	return
 end

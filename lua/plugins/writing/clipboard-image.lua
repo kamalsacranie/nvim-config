@@ -21,7 +21,7 @@ local setup = function()
 
 	local clipboard_image_setup = function()
 		clipboard_image.setup({
-			default = EXTEND_CONFIG(defaults, "clipboard_image_config_extend"),
+			default = extend_config(defaults, "clipboard_image_config_extend"),
 		})
 	end
 
