@@ -8,9 +8,9 @@
 --optimal i don't think??]]
 -- The rerequire seems to have a performance overhead... Perhaps it is better
 -- to send back functions
--- rerequire("filetype.anki")
+-- rerequire("filetypes.anki")
 -- Our core file returns a table with shared markdown options
-local M = require("filetype.markdown_core")
+local M = require("filetypes.markdown_core")
 
 -- Using treesitter for our parser
 local is_loaded, ts_parser = load_package("nvim-treesitter.parsers")

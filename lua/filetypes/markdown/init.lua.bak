@@ -1,8 +1,8 @@
-local M = require("filetypes.markdown_core")
+local M = require("filetype.markdown_core")
 
 local ls = require("luasnip")
 ls.filetype_extend("markdown", M.snippet_types)
 
-require("filetypes.markdown.mappings")
+require("filetype.markdown.mappings")
 
 return M

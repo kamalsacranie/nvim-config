@@ -47,6 +47,6 @@ M.dap_config_extend = {
 	},
 }
 
-require("filetypes.python.mappings")
+require("filetype.python.mappings")
 
 return M

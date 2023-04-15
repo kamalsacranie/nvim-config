@@ -26,8 +26,8 @@ M.snippet_types = { "markdown_core" }
 -- autopairs.remove_rule("`")
 
 require("utils.spell") -- Setting up spell
-require("filetypes.markdown_core.autocmds") -- no need to rerequire autcmds as nvim stores them
-require("filetypes.markdown_core.mappings")
+require("filetype.markdown_core.autocmds") -- no need to rerequire autcmds as nvim stores them
+require("filetype.markdown_core.mappings")
 
 vim.cmd([[nnoremap <expr> j v:count ? 'jzz' : 'gjzz']])
 vim.cmd([[nnoremap <expr> k v:count ? 'kzz' : 'gkzz']])

@@ -1,5 +1,5 @@
 local M = {}
 
-require("filetype.lua.mappings")
+require("filetypes.lua.mappings")
 
 return M
