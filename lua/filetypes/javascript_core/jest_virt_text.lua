@@ -1,5 +1,5 @@
 local M = {}
-local q = require("vim.treesitter.query")
+local q = require("vim.treesitter")
 local ts_helpers = require("utils.treesitter-helpers")
 local filetype = nil
 
