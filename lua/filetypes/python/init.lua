@@ -10,8 +10,7 @@ M.neogen_config_extend = {
 				annotation_convention = "numpydoc",
 			},
 		},
-	},
-}
+	}, }
 
 -- Dap filetype specific configuration
 M.dap_config_extend = {
@@ -49,4 +48,4 @@ M.dap_config_extend = {
 
 require("filetypes.python.mappings")
 
-return M
+-- return M

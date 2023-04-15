@@ -5,7 +5,7 @@
 local default_opts = { noremap = true, silent = true }
 
 -- Making it easier to print tables
----@param table table
+---@param table any
 ---@return nil
 _G.P = function(table)
 	return type(table) == "table" and print(vim.inspect(table)) or print(table)
@@ -150,21 +150,24 @@ end
 ---@return table
 _G.extend_config = function(config_defaults, config_table_name)
 	---@return table
-	local get_filetype_opts = function(config_table_name)
-		-- Load "filetype.<ft>" which returns M which may have a ts_config table
-		-- This is specific to my filetype directory setup
-		local success, ft = pcall(require, "filetype" .. "." .. get_filetype())
-		if success then
-			return ft[config_table_name]
+	local get_filetype_opts = function()
+		local ft = vim.bo.filetype
+		local success, ftplugin = pcall(require, "filetypes" .. "." .. ft)
+		if success and type(ftplugin) == "table" then
+			return ftplugin[config_table_name]
 		end
 		return {}
 	end
-	local generate_options = function(config_defaults, filetype_opts)
-		return vim.tbl_extend("force", config_defaults, filetype_opts or {})
+	local generate_options = function(filetype_opts)
+		return vim.tbl_extend(
+			"force",
+			config_defaults or {},
+			filetype_opts or {}
+		)
 	end
 
-	local filetype_opts = get_filetype_opts(config_table_name)
-	return generate_options(config_defaults or {}, filetype_opts)
+	local filetype_opts = get_filetype_opts()
+	return generate_options(filetype_opts)
 end
 
 --------- Temp because luasnip snipenv dont work

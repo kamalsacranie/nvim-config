@@ -11,7 +11,6 @@ M.root_directory_from_pattern = function(dir, file_name)
 
 	if open_file then
 		open_file:close()
-		print(dir)
 		return dir
 	end
 

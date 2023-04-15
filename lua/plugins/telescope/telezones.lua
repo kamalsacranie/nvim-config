@@ -11,8 +11,7 @@ M.find_files = function(opts)
 		no_ignore = true,
 	}
 	opts = opts or {}
-	newopts = vim.tbl_deep_extend("force", defaults, opts)
-	P(newopts)
+	local newopts = vim.tbl_deep_extend("force", defaults, opts)
 	builtin.find_files(newopts)
 end
 
