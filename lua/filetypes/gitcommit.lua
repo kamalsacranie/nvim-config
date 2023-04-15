@@ -1,3 +1,5 @@
+local M = {}
+
 -- Can't use my QOL function here for some reason
 vim.cmd([[setlocal colorcolumn=73]])
 
@@ -15,3 +17,5 @@ create_autocmd("BufEnter", {
 })
 
 require("utils.spell")
+
+return M

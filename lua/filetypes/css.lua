@@ -1,3 +1,5 @@
+local M = {}
+
 local buffer_options = {
 	-- Setting tabs,
 	tabstop = 2,
@@ -11,3 +13,5 @@ local buffer_options = {
 vim.schedule(function()
 	options_set(buffer_options, "bo")
 end)
+
+return M

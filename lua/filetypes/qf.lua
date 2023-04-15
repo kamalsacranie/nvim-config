@@ -1,3 +1,5 @@
+local M = {}
+
 vim.api.nvim_buf_set_keymap(
 	0,
 	"n",
@@ -19,3 +21,5 @@ vim.api.nvim_buf_set_keymap(
 	"<CR>zz<C-w>w:q<CR>",
 	{ noremap = true, silent = true }
 )
+
+return M

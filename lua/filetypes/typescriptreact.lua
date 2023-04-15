@@ -1,4 +1,4 @@
-local M = rerequire("filetype.ts")
+local M = rerequire("filetype.typescript")
 
 local ls = require("luasnip")
 table.insert(M.snippet_types, "typescript")

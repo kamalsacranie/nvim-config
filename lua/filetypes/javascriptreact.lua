@@ -1,4 +1,4 @@
-local M = rerequire("filetype.js")
+local M = rerequire("filetype.javascript")
 
 local ls = require("luasnip")
 table.insert(M.snippet_types, "javascript")
