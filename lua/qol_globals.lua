@@ -1,6 +1,9 @@
 -- Quality of life global functions
 -- Defining some useful global functions we can use
 
+-- Local keymap options
+local default_opts = { noremap = true, silent = true }
+
 -- Making it easier to print tables
 ---@param table table
 ---@return nil
@@ -24,6 +27,7 @@ _G.map = function(tbl, f, list_like)
 	end
 	return t
 end
+
 ---@param tbl table
 ---@param f function which takes one parameter which is the element
 ---@return table
@@ -41,6 +45,7 @@ _G.filter = function(tbl, f, list_like)
 	end
 	return t
 end
+
 -- Checking if a package is loaded
 ---comment
 ---@param package_name string
@@ -48,12 +53,10 @@ end
 ---@return any
 _G.load_package = function(package_name)
 	-- Status okay is a boolean
-	local status_ok, package = pcall(require, package_name)
-	return status_ok, package
+	local status_ok, module = pcall(require, package_name)
+	return status_ok, module
 end
 
--- Local keymap options
-local default_opts = { noremap = true, silent = true }
 -- Making global aliases for keymapping
 _G.kmap = function(mode, lhs, rhs, opts)
 	-- Setting our default options for our keypamp
@@ -74,6 +77,8 @@ _G.bkmap = function(mode, lhs, rhs, opts, bufnr)
 	vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
 end
 
+--- Returns the file extension of a file without the leading "." in lowercase
+---@return string
 _G.get_filetype = function()
 	return vim.fn.expand("%:e"):lower()
 end
@@ -101,16 +106,17 @@ _G.shell_command = function(command)
 	return response
 end
 
-_G.has_key = function(table, val)
-	for key, _ in pairs(table) do
-		if key == val then
-			return true
-		end
-	end
-	return false
+--- Checks if a table contains a given key using the vim.fn.has_key(table, string) function
+---@param table table<string, any> A non list like table
+---@param key string A key to find within the table
+---@return boolean
+_G.has_key = function(table, key)
+	return vim.fn.has_key(table, key) ~= 0 and true or false
 end
 
--- Simplifying setting options
+--- Set a table of the same kind of options ("opt", "bo", "wo") all at once
+---@param options table<string, any>
+---@param kind string|nil a choice of "opt" | "bo" | "wo" | "go">
 _G.options_set = function(options, kind)
 	if type(options) ~= "table" then
 		error('options should be a type of "table"')
@@ -122,7 +128,7 @@ _G.options_set = function(options, kind)
 	end
 end
 
---- Scan a directory for the files within
+--- Scan a directory for the files within and return a list of those files
 ---@param directory string directory to scan
 ---@param exts? string extension to look for
 ---@return Array of file names
@@ -134,6 +140,9 @@ _G.scandir = function(directory, exts)
 	return vim.fn.split(vim.fn.system({ "sed", [[s/\.[^.]*$//]] }, file_list))
 end
 
+--- Reload a package from scratch
+---@param module string Module name
+---@return unknown
 _G.rerequire = function(module)
 	assert(type(module) == "string", "`module` must be a string")
 	package.loaded[module] = nil
@@ -166,6 +175,7 @@ end
 --------- Temp because luasnip snipenv dont work
 _G.lsg = {
 	visual = function()
+		-- returns a function snippet which returns the current visual selection
 		local f = require("luasnip").f
 		return f(function(_, snip)
 			local visual = snip.env.LS_SELECT_RAW
@@ -176,6 +186,7 @@ _G.lsg = {
 		end)
 	end,
 	midword = function(conf, nodes)
+		-- Returns a snippet which expands mid line
 		local s = require("luasnip").s
 		local f = require("luasnip").f
 		return s(
