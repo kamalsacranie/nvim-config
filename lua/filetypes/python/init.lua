@@ -7,10 +7,11 @@ M.neogen_config_extend = {
 	languages = {
 		python = {
 			template = {
-				annotation_convention = "numpydoc",
+				annotation_convention = "reST",
 			},
 		},
-	}, }
+	},
+}
 
 -- Dap filetype specific configuration
 M.dap_config_extend = {
@@ -48,4 +49,4 @@ M.dap_config_extend = {
 
 require("filetypes.python.mappings")
 
--- return M
+return M

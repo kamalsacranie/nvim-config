@@ -5,10 +5,12 @@ local function setup()
 		return
 	end
 
-	local defaults = { enable = true }
+	local defaults = { enable = true, snippet_engine = "luasnip" }
 
-	local extended_config = extend_config(defaults, "neogen_config_extend")
-	neogen.setup(extended_config)
+	-- ensures that the filetype loads before we extend our config
+	vim.schedule(function()
+		neogen.setup(extend_config(defaults, "neogen_config_extend"))
+	end)
 end
 
 return {
