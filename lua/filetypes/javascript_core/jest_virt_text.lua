@@ -70,24 +70,24 @@ local find_test_line = function(bufnr, input)
 		local function_nodes = filter(test_parent_nodes, function(node)
 			return node:type() == "call_expression"
 		end)
-		local function_call_nodes = map(function_nodes, function(node)
+		local function_call_nodes = vim.tbl_map(function(node)
 			return node:child(0)
-		end)
+		end, function_nodes)
 		local describe_nodes = filter(function_call_nodes, function(node)
 			local node_text = q.get_node_text(node, bufnr)
 			return node_text:match("^describe")
 		end)
-		local describe_string_nodes = map(describe_nodes, function(node)
+		local describe_string_nodes = vim.tbl_map(function(node)
 			return node
 				:next_sibling() -- arguments node parent
 				:child(0) -- arguments node
 				:next_sibling() -- first argument
 				:child(0) -- opening bracket
 				:next_sibling() -- argument 1 substring
-		end)
-		local describe_strings = map(describe_string_nodes, function(node)
+		end, describe_nodes)
+		local describe_strings = vim.tbl_map(function(node)
 			return q.get_node_text(node, bufnr)
-		end)
+		end, describe_string_nodes)
 		local ordered_describe_strings = reverse_list_table(describe_strings)
 
 		local test_string = q.get_node_text(test_arg, bufnr)
@@ -111,12 +111,12 @@ local process_tests = function(bufnr, data)
 	local jest_output = vim.json.decode(data[1])
 	-- All relevant information is contained in the assertionResults part of our json. This is a list
 	local jest_results = jest_output.testResults[1].assertionResults
-	local test_results = map(jest_results, function(result)
+	local test_results = vim.tbl_map(function(result)
 		local test_line_number = find_test_line(bufnr, result)
 		if test_line_number then
 			return { line_num = test_line_number, test_status = result.status }
 		end
-	end)
+	end, jest_results)
 	local ns = vim.api.nvim_create_namespace("jest-tests")
 	-- Clear the namespace every time we run the tests
 	vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)

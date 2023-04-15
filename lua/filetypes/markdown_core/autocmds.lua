@@ -42,9 +42,9 @@ local in_codeblock = function()
 	end
 	local parents =
 		require("utils.treesitter-helpers").get_all_parent_nodes(node)
-	parents = map(parents, function(node)
+	parents = tbl_kvp_map(function(node)
 		return node:type()
-	end, true)
+	end, parents)
 	if parents == nil then
 		return
 	end

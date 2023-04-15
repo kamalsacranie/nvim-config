@@ -15,15 +15,10 @@ end
 ---@param tbl table
 ---@param f function which takes one parameter which is the element
 ---@return table
-_G.map = function(tbl, f, list_like)
-	list_like = list_like or true
+_G.tbl_kvp_map = function(f, tbl)
 	local t = {}
 	for k, v in pairs(tbl) do
-		if list_like then
-			table.insert(t, f(v))
-		else
-			t[k] = f(v)
-		end
+		t[k] = f(v)
 	end
 	return t
 end
