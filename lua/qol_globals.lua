@@ -5,10 +5,15 @@
 local default_opts = { noremap = true, silent = true }
 
 -- Making it easier to print tables
----@param table any
+---@param ... table | string
 ---@return nil
-_G.P = function(table)
-	return type(table) == "table" and print(vim.inspect(table)) or print(table)
+_G.P = function(...)
+	local inputs = { ... }
+	inputs = vim.tbl_map(function(input)
+		return type(input) == "table" and print(vim.inspect(input))
+			or print(input)
+	end, inputs)
+	print(unpack(inputs))
 end
 
 --- Maps a function to a list-like table
