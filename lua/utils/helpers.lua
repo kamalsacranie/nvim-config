@@ -22,15 +22,37 @@ M.root_directory_from_pattern = function(dir, file_name)
 	return nil
 end
 
+--- Returns the current buffer directory or nil
+---@return string | nil
+M.current_buffer_dir = function()
+	local bufnr = vim.fn.bufnr()
+	return vim.fn.bufexists(bufnr) == 1 and vim.fn.getcwd(bufnr) or nil
+end
+
 --- Checks if we are in a git repo
 ---@return boolean
 M.is_git_repo = function()
-	local bufnr = vim.fn.bufnr()
-	local dir, _ = M.root_directory_from_pattern(vim.fn.getcwd(bufnr), ".git")
+	local cd = M.current_buffer_dir()
+	if not cd then
+		return false
+	end
+	local dir = M.root_directory_from_pattern(cd, ".git")
 	if dir then
 		return true
 	end
 	return false
+end
+
+--- Revers a list-like table
+---@param list List
+---@return List
+M.reverse_list_table = function(list)
+	local len = #list
+	local result = vim.deepcopy(list)
+	for i = 1, math.floor(len / 2) do
+		result[i], result[len - i + 1] = result[len - i + 1], result[i]
+	end
+	return result
 end
 
 return M

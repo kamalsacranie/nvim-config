@@ -14,7 +14,7 @@ local test_function_query_string = function(ancestor_name)
   arguments: (arguments
     (string
       (string_fragment) @test-name
-      (#eq? @test-name %s)
+      (#eq? @test-name "%s")
     ) 
     (arrow_function ; should probably change this to something general
       (statement_block

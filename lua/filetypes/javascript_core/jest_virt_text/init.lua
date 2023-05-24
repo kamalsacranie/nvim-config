@@ -1,3 +1,10 @@
+local Tester = require("filetypes.javascript_core.jest_virt_text.tester")
+local config = {
+	filetypes = { "javascript", "typescript" },
+	filename_matches = { [[.*\.test$]] },
+}
+local tester = Tester.new(config)
+
 local M = {}
 
 local query_string_factory =
@@ -9,7 +16,7 @@ local ts_helpers = require("utils.treesitter-helpers")
 local filetype = nil
 
 local test_result_ns = vim.api.nvim_create_namespace("jest-tests")
-local testing_status_ns = vim.api.nvim_create_namespace("jest-tests")
+local testing_status_ns = vim.api.nvim_create_namespace("jest-test-status")
 local status_codes = {
 	passed = { " ✅ ", "RedrawDebugComposed" },
 	failed = { " 💀 ", "RedrawDebugRecompose" },
@@ -25,7 +32,7 @@ end
 local find_test_line = function(bufnr, input)
 	local closest_ancestor_name = input.ancestorTitles[#input.ancestorTitles]
 	local query_string = query_string_factory(closest_ancestor_name)
-	local query = vim.treesitter.query.parse(filetype, query_string)
+	local query = vim.treesitter.query.parse(tester.filetype, query_string)
 	local root = get_buffer_root_node(bufnr)
 
 	for _, nodes in query:iter_matches(root, bufnr, 0, -1) do
@@ -75,12 +82,12 @@ end
 --- Return our parsed json test data
 ---@param json string
 ---@return table<string, any> | nil
-local function parese_jest_json(json)
+local function parse_jest_json(json)
 	local result = vim.json.decode(json)
 	return result and result.testResults[1].assertionResults
 end
 
-local build_test_retult = function(bufnr, result)
+local build_test_result = function(bufnr, result)
 	local test_line_number = find_test_line(bufnr, result)
 	if test_line_number then
 		return {
@@ -95,13 +102,14 @@ end
 ---@param bufnr integer buffer number to attach to
 ---@param data string json output data from our test
 local process_tests = function(bufnr, data)
-	local jest_results = parese_jest_json(data)
+	local jest_results = parse_jest_json(data)
 	if not jest_results then
 		return
 	end
 	local test_results = vim.tbl_map(function(jest_result)
-		return build_test_retult(bufnr, jest_result)
+		return build_test_result(bufnr, jest_result)
 	end, jest_results)
+	P(test_results)
 	for _, result in ipairs(test_results) do
 		vim.api.nvim_buf_set_extmark(bufnr, test_result_ns, result.line_num, 0, {
 			virt_text = { status_codes[result.test_status] },
@@ -109,38 +117,9 @@ local process_tests = function(bufnr, data)
 	end
 end
 
-local config = {
-	filetypes = { "javascript", "typescript" },
-	filename_matches = { [[.*\.test$]] },
-}
-
-local check_filetype = function(buffer_filetype)
-	if not vim.list_contains(config.filetypes, buffer_filetype) then
-		error(
-			"Attempted to test a file which has not been specified in the confit. Currently the only filteypse configured for testing are:"
-				.. vim.json.encode(config.filetypes)
-		)
-	end
-end
-
 M.test = function()
-	local bufnr = vim.fn.bufnr()
-	local file_path = vim.fn.expand("%:p")
-	local file_name_no_ext = vim.fn.expand("%:r")
-	local buffer_filetype = vim.filetype.match({ buf = bufnr })
-	check_filetype(buffer_filetype)
-
-	local filename_matchers = vim.tbl_map(vim.regex, config.filename_matches)
-	local filename_matches = vim.tbl_map(function(filename_matcher)
-		return filename_matcher:match_str(file_name_no_ext)
-	end, filename_matchers)
-	if #filename_matches == 0 then
-		error(
-			"Attempted to test a test file which did not match any of the filename regex patterns. The current filename patterns are:"
-				.. vim.json.encode(config.filename_matches)
-		)
-	end
-	vim.api.nvim_buf_set_extmark(bufnr, testing_status_ns, 0, 0, {
+	vim.api.nvim_buf_clear_namespace(tester.bufnr, test_result_ns, 0, -1)
+	vim.api.nvim_buf_set_extmark(tester.bufnr, testing_status_ns, 0, 0, {
 		virt_text = { { " TESTING ", "RedrawDebugComposed" } },
 		virt_text_pos = "right_align",
 	})
@@ -150,18 +129,24 @@ M.test = function()
 		"jest",
 		"--json",
 		"--silent",
-		file_path,
+		tester.file_path,
 	}, {
 		stdout_buffered = true,
 		on_stdout = function(_, data)
-			vim.api.nvim_buf_clear_namespace(bufnr, test_result_ns, 0, -1)
+			local test_data = data[1]
+			-- tester:set_test_data(test_data)
 			local success, result = pcall(function()
-				process_tests(bufnr, data[1])
+				process_tests(tester.bufnr, data[1])
 			end)
 			if not success then
 				print("your tests failed to run", result)
 			end
-			vim.api.nvim_buf_clear_namespace(bufnr, testing_status_ns, 0, -1)
+			vim.api.nvim_buf_clear_namespace(
+				tester.bufnr,
+				testing_status_ns,
+				0,
+				-1
+			)
 		end,
 	})
 end
