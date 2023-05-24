@@ -5,7 +5,7 @@
 local default_opts = { noremap = true, silent = true }
 
 -- Making it easier to print tables
----@param ... table | string
+---@param ... table | string | nil | boolean | integer
 ---@return nil
 _G.P = function(...)
 	local inputs = { ... }

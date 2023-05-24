@@ -30,6 +30,38 @@ return {
 		),
 		{ condition = conds.line_begin }
 	),
+	s(
+		{
+			trig = "env",
+			name = "Latex environemnt",
+		},
+		fmta(
+			[[
+            ::: {#<>-<>}
+            ## <>
+            
+            <>
+            :::
+            ]],
+			{
+				c(1, {
+
+					t("thm"),
+					t("lem"),
+					t("cor"),
+					t("prp"),
+					t("cnj"),
+					t("def"),
+					t("exm"),
+					t("exr"),
+				}),
+				i(2),
+				i(3, "Env title"),
+				i(4),
+			}
+		),
+		{ condition = conds.line_begin }
+	),
 }, {
 	s(
 		{

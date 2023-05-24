@@ -100,8 +100,31 @@ local spaced_operator = function(trig, delim)
 	}, { condition = is_math })
 end
 
-return {},
+return {
+	s(
+		{ trig = "real", description = "Real number symbol" },
+		{ t([[\mathbb{R}]]) },
+		{
+			condition = is_math,
+		}
+	),
+},
 	{
+		s(
+			{ trig = "lim", description = "Limit" },
+			fmta([[\mathrm{lim}_{<> \rightarrow <>}]], { i(1), i(2) }),
+			{
+				condition = is_math,
+			}
+		),
+		s({ trig = "(.*)sq", regTrig = true, description = "Exponential 2" }, {
+			f(function(_, snip)
+				return snip.captures[1]
+			end),
+			t([[^2]]),
+		}, {
+			condition = is_math,
+		}),
 		spaced_operator("-", "-"),
 		spaced_operator("+", "+"),
 		spaced_operator("=", "="),
@@ -109,6 +132,7 @@ return {},
 		s({
 			trig = "(.*)_",
 			regTrig = true,
+			description = "subscript",
 		}, {
 			f(function(_, snip)
 				return snip.captures[1]
@@ -119,6 +143,32 @@ return {},
 		}, {
 			condition = is_math,
 		}),
+		s({
+			trig = "(.*)^",
+			regTrig = true,
+			description = "superscript",
+		}, {
+			f(function(_, snip)
+				return snip.captures[1]
+			end),
+			t("^{"),
+			i(1),
+			t("}"),
+		}, {
+			condition = is_math,
+		}),
+		s(
+			{ trig = "frac" },
+			fmta(
+				[[
+              \dfrac{<>}{<>}<>
+            ]],
+				{ i(1), i(2), i(3) }
+			),
+			{
+				condition = is_math,
+			}
+		),
 		s(
 			{ trig = "sum" },
 			fmta(
