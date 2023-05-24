@@ -1,12 +1,17 @@
-local Tester = {
-	bufnr = nil,
-	file_path = nil,
-	file_name_no_ext = nil,
-	filetype = nil,
-	allowed_filetypes = nil,
-	filename_matches = nil,
-	test_data = nil,
-}
+local q = require("vim.treesitter")
+local ts_helpers = require("utils.treesitter-helpers")
+local tools = require("utils.helpers")
+
+local Tester = {}
+
+local get_buffer_root_node = function(bufnr, filetype)
+	local parser = vim.treesitter.get_parser(bufnr, filetype, {})
+	local tree = parser:parse()[1]
+	return tree:root()
+end
+
+local query_string_factory =
+	require("filetypes.javascript_core.jest_virt_text.query_string_factory")
 
 --- Tester class method to ensure the filetype we are running our tests on is valid
 function Tester:check_filetype()
@@ -32,8 +37,86 @@ function Tester:check_file_string()
 	end
 end
 
-function Tester:set_test_data(test_data)
-	self.test_data = test_data
+function Tester:_parse_jest_json(test_json_data)
+	local result = vim.json.decode(test_json_data)
+	return result and result.testResults[1].assertionResults
+end
+
+function Tester:process_test_data(test_json_data)
+	self.test_data = Tester._parse_jest_json(self, test_json_data)
+	Tester.process_tests(self)
+end
+
+function Tester:find_test_line(input)
+	local closest_ancestor_name = input.ancestorTitles[#input.ancestorTitles]
+	local query_string = query_string_factory(closest_ancestor_name)
+	local query = vim.treesitter.query.parse(self.filetype, query_string)
+	local root = get_buffer_root_node(self.bufnr, self.filetype)
+
+	for _, nodes in query:iter_matches(root, self.bufnr, 0, -1) do
+		local immediate_describe_node = nodes[2]
+		local test_arg = nodes[4]
+
+		local test_parent_nodes =
+			ts_helpers.get_all_parent_nodes(immediate_describe_node)
+		local function_nodes = vim.tbl_filter(function(node)
+			return node:type() == "call_expression"
+		end, test_parent_nodes)
+		local function_call_nodes = vim.tbl_map(function(node)
+			return node:child(0)
+		end, function_nodes)
+		local describe_nodes = vim.tbl_filter(function(node)
+			local node_text = q.get_node_text(node, self.bufnr)
+			return node_text:match("^describe")
+		end, function_call_nodes)
+		local describe_string_nodes = vim.tbl_map(function(node)
+			return node
+				:next_sibling() -- arguments node parent
+				:child(0) -- arguments node
+				:next_sibling() -- first argument
+				:child(0) -- opening bracket
+				:next_sibling() -- argument 1 substring
+		end, describe_nodes)
+		local describe_strings = vim.tbl_map(function(node)
+			return q.get_node_text(node, self.bufnr)
+		end, describe_string_nodes)
+		local ordered_describe_strings =
+			tools.reverse_list_table(describe_strings)
+
+		local test_string = q.get_node_text(test_arg, self.bufnr)
+		local test_line_number = test_arg:range()
+		-- if we match our test name and also all of it's title ancestors
+		if
+			test_string == input.title
+			and table.concat(ordered_describe_strings)
+				== table.concat(input.ancestorTitles)
+		then
+			return test_line_number
+		end
+	end
+	return false
+end
+
+function Tester:build_test_result(result)
+	local test_line_number = Tester.find_test_line(self, result)
+	if test_line_number then
+		local temp = {
+			line_num = test_line_number,
+			test_status = result.status,
+			failure_narrative = result.failureMessages,
+		}
+		return temp
+	end
+end
+
+function Tester:process_tests()
+	if not self.test_data then
+		return
+	end
+	local test_results = vim.tbl_map(function(data)
+		return Tester.build_test_result(self, data)
+	end, self.test_data)
+	self.test_results = test_results
 end
 
 function Tester:new()
