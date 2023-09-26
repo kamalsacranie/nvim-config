@@ -117,6 +117,13 @@ return {
 				condition = is_math,
 			}
 		),
+		s(
+			{ trig = "rarr", description = "Right arrow" },
+			{ t([[\rightarrow ]]) },
+			{
+				condition = is_math,
+			}
+		),
 		s({ trig = "(.*)sq", regTrig = true, description = "Exponential 2" }, {
 			f(function(_, snip)
 				return snip.captures[1]
@@ -205,7 +212,11 @@ return {
 		-- 	{ trig = "frac" },
 		-- 	{ t([[\frac]]), t("{"), i(1), t("}"), t("{"), i(2), t("}") }
 		-- ),
-		-- ms({ trig = "text" }, { t([[\text]]), t("{"), lsg.visual(), i(1), t("}") }),
+		s(
+			{ trig = "text", name = "Math text node" },
+			{ t([[\text{]]), i(1), t([[}]]) },
+			{ condition = is_math }
+		),
 	}
 
 ---OLD ULTISNIPS

@@ -88,13 +88,29 @@ return {
 		{
 			trig = "eqn",
 			name = "anonymous equation",
-			dscr = "Expands 'eq' into an equation environment",
+			dscr = "Expands 'eqn' into an equation environment",
 		},
 		fmta(
 			[[
 		               \begin{equation*}
 		                 <>
 		               \end{equation*}
+		           ]],
+			{ i(1) }
+		),
+		i(0)
+	),
+	aub(
+		{
+			trig = "aeqn",
+			name = "aligned anonymous equation",
+			dscr = "Expands 'aeqn' into an equation environment",
+		},
+		fmta(
+			[[
+		               \begin{align*}
+		                 <>
+		               \end{align*}
 		           ]],
 			{ i(1) }
 		),

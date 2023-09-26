@@ -34,12 +34,5 @@ return {
 		-- we don't have a config setup here because this is called in our lsp init
 		dependencies = "nvim-lua/plenary.nvim",
 	},
+	"kamalsacranie/nvim-jest-tester",
 }
-
--- 		-- Multicursor select
--- 		-- use("terryma/vim-multiple-cursors")
---
---
--- 		-- ============ debugging ===========
--- 		use()
--- 		-- ==================================

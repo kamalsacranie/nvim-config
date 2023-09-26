@@ -16,7 +16,7 @@ M.snippet_types = { "javascript_core" }
 vim.keymap.set(
 	"n",
 	"<leader><leader>t",
-	require("filetypes.javascript_core.jest_virt_text").test,
+	require("jest-tester").test,
 	{ buffer = true }
 )
 
