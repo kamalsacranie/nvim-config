@@ -1,5 +1,5 @@
 vim.keymap.set("n", "<leader>r", function()
-	-- Run subprocess command and capture output
+	-- Run subprocess command and capture output to see if we are in a poetry environment
 	local handle = io.popen("poetry show -v | head -n 1 | sed 's/^.*://g'")
 	local output = handle:read("*a")
 	handle:close()
