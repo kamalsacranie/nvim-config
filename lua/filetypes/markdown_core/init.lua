@@ -19,6 +19,7 @@ vim.cmd([[setlocal wrap]])
 vim.cmd([[setlocal linebreak]])
 
 M.snippet_types = { "markdown_core" }
+M.pastify_config_extend = { ft = { markdown = "![]($IMG$)" } }
 
 -- Causing issues with luasnip
 -- local autopairs = require("nvim-autopairs")
