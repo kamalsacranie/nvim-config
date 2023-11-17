@@ -25,7 +25,7 @@ require("lazy").setup("plugins")
 -- vim.keymap.set("n", "<leader><leader>p", function()
 -- 	vim.schedule(function()
 -- 		local dir, packjson =
-			-- require("utils.helpers").root_directory_from_pattern(
+-- require("utils.helpers").root_directory_from_pattern(
 -- 				vim.fn.getcwd(0),
 -- 				"package.json"
 -- 			)
@@ -43,13 +43,13 @@ require("lazy").setup("plugins")
 -- 		-- )
 -- 	end)
 -- end)
-vim.keymap.set("n", "<leader><leader>p", function()
-	local q = require("nvim-treesitter.ts_utils")
-	local nodes = require("utils.treesitter-helpers").get_all_parent_nodes(
-		q.get_node_at_cursor()
-	)
-	nodes = vim.tbl_map(function(node)
-		return node:type()
-	end, nodes)
-	P(nodes)
-end)
+-- vim.keymap.set("n", "<leader><leader>p", function()
+-- 	local q = require("nvim-treesitter.ts_utils")
+-- 	local nodes = require("utils.treesitter-helpers").get_all_parent_nodes(
+-- 		q.get_node_at_cursor()
+-- 	)
+-- 	nodes = vim.tbl_map(function(node)
+-- 		return node:type()
+-- 	end, nodes)
+-- 	P(nodes)
+-- end)

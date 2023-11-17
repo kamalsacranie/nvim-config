@@ -102,6 +102,24 @@ return {
 	),
 	aub(
 		{
+			trig = "optieq",
+			name = "max/min subject to",
+			dscr = "Maximum/minimum optimisation layout",
+		},
+		fmta(
+			[[
+                \begin{align}
+                    \<>_{<>} \quad & <> \nonumber\\
+                    \textrm{s.t.} \quad 
+                      & <>
+                \end{align}
+            ]],
+			{ c(1, { t("max"), t("min") }), i(2), i(3), i(4) }
+		),
+		i(0)
+	),
+	aub(
+		{
 			trig = "aeqn",
 			name = "aligned anonymous equation",
 			dscr = "Expands 'aeqn' into an equation environment",

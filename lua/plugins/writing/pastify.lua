@@ -9,7 +9,7 @@ local setup = function()
 			absolute_path = false, -- use absolute or relative path to the working directory
 			apikey = "", -- Api key, required for online saving
 			local_path = function()
-				return "/assets/" .. vim.fn.expand("%:t:r") .. "/img"
+				return "/assets/" .. vim.fn.expand("%:t:r") .. "/img/"
 			end,
 			save = "local", -- Either 'local' or 'online'
 		},

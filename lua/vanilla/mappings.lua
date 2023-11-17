@@ -16,6 +16,11 @@ kmap("n", "<A-Up>", ":resize -2<CR>")
 kmap("n", "<A-Down>", ":resize +2<CR>")
 kmap("n", "<A-Left>", ":vertical resize -2<CR>")
 kmap("n", "<A-Right>", ":vertical resize +2<CR>")
+
+-- moving lines around in visual mode
+kmap("v", "<C-n>", ":m '>+1<CR>gv=gv")
+kmap("v", "<C-p>", ":m '<-2<CR>gv=gv")
+
 -- Yank remap to yank to end of line not whole line
 kmap("n", "Y", "y$")
 -- Buffer switch also in insert mode

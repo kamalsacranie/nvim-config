@@ -35,4 +35,27 @@ return {
 		dependencies = "nvim-lua/plenary.nvim",
 	},
 	-- "kamalsacranie/nvim-jest-tester",
+	{
+		"3rd/image.nvim",
+		config = function()
+			package.path = package.path
+				.. ";"
+				.. vim.fn.stdpath("data")
+				.. "/luarocks/share/lua/5.1/?/init.lua;"
+			package.path = package.path
+				.. ";"
+				.. vim.fn.stdpath("data")
+				.. "/luarocks/share/lua/5.1/?.lua;"
+			require("image").setup()
+		end,
+		build = "luarocks --tree /Users/kamalsacranie/.local/share/nvim/lazy install magick",
+	},
+	{
+		dir = "/Users/kamalsacranie/Code/nvim-plugins/pandoc-preview",
+		config = function()
+			vim.keymap.set("v", "<leader><leader>p", function()
+				require("pandoc-preview").preview()
+			end)
+		end,
+	},
 }

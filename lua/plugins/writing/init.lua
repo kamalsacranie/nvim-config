@@ -8,6 +8,7 @@ return {
 		config = function()
 			require("hologram").setup({
 				auto_display = false,
+				enabled = false,
 			})
 		end,
 		cond = function()

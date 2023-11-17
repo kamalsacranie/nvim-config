@@ -26,6 +26,7 @@ if next(dap_options_to_extend) == nil then
 end
 
 -- Setup our dap config from our filetype dynamically (this plugin is only activateed after the buffer filetype has been defined)
+P(dap_options_to_extend)
 dap.adapters[vim.bo.filetype] = dap_options_to_extend.adapter or {}
 dap.configurations[vim.bo.filetype] = {
 	dap_options_to_extend.configuration or {},
