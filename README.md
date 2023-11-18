@@ -37,3 +37,10 @@ intuitive to me as you get all the information for that filetype in one location
 
 I am at odds whether I should organise my mappings for my plug-ins in the same
 manner. It feels right how it currently is but idk.
+
+---
+
+TODO:
+
+- see what client.workspace folder does
+- Add range formatting to lua ls capabilities 

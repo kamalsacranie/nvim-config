@@ -50,11 +50,14 @@ end
 ---comment
 ---@param package_name string
 ---@return boolean
----@return any
+---@return table | nil
 _G.load_package = function(package_name)
 	-- Status okay is a boolean
-	local status_ok, module = pcall(require, package_name)
-	return status_ok, module
+	local status, module = pcall(require, package_name)
+    if type(module) ~= "table" then
+        return status, nil
+    end
+	return status, module
 end
 
 -- Making global aliases for keymapping
