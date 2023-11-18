@@ -3,7 +3,7 @@ local themes = {
         "rebelot/kanagawa.nvim",
         config = function()
             require("kanagawa").setup({})
-            vim.cmd[[colorscheme kanagawa]]
+            vim.cmd [[colorscheme kanagawa]]
         end
     },
     catppuccin = {
@@ -12,11 +12,11 @@ local themes = {
         priority = 1000,
         config = function()
             require("catppuccin").setup({
-                term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
+                term_colors = false,         -- sets terminal colors (e.g. `g:terminal_color_0`)
                 dim_inactive = {
-                    enabled = true, -- dims the background color of inactive window
+                    enabled = true,          -- dims the background color of inactive window
                 },
-                styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+                styles = {                   -- Handles the styles of general hi groups (see `:h highlight-args`):
                     comments = { "italic" }, -- Change the style of comments
                     conditionals = { "italic" },
                     loops = {},
@@ -37,14 +37,14 @@ local themes = {
                     gitsigns = true,
                     nvimtree = true,
                     treesitter = true,
-                    notify = false,
+                    notify = true,
                     mini = {
                         enabled = true,
                         indentscope_color = "",
                     },
                 },
             })
-            vim.cmd[[colorscheme catppuccin]]
+            vim.cmd [[colorscheme catppuccin]]
         end
     }
 }
