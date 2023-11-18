@@ -44,3 +44,5 @@ TODO:
 
 - see what client.workspace folder does
 - Add range formatting to lua ls capabilities 
+- Change our `load_package` to not return the bool but just the table | null
+- Change toggle format on save command definition to be in lua

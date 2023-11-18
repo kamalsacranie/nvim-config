@@ -55,4 +55,34 @@ M.reverse_list_table = function(list)
 	return result
 end
 
+
+----- Coordinate structure
+---@class Keymap
+---@field mode string
+---@field left string
+---@field right string | function
+---@field opts table?
+---@param mappings table
+---@param ext_opts table?
+---@param callback function?
+---@return nil
+M.map_keymap_list = function(mappings, ext_opts, callback)
+    ext_opts = ext_opts or {}
+    vim.tbl_map(function(mapping)
+        local mode, left, right, opts = unpack(mapping)
+        local rhs;
+        if callback then
+            if type(right) == "string" then
+                print("Cannot provide callback when right hand side of keymap is string")
+            end
+            rhs = function()
+                callback(right)
+            end
+        else
+            rhs = right
+        end
+        vim.keymap.set(mode, left, rhs, vim.tbl_deep_extend("keep", opts or {}, ext_opts))
+    end, mappings)
+end
+
 return M
