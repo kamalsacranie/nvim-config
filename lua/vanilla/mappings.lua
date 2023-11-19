@@ -56,3 +56,5 @@ kmap("n", "S", "vS", { noremap = false })
 -- Making it easier to source files. SHOUT OUT % BABAYYYYY1
 kmap("n", "<leader><leader>x", "<Cmd>w | so %<CR>")
 vim.keymap.set({ "n" }, "<C-w>/", "<C-w>|<C-w>_")
+---
+kmap("i", "<C-l>", "<C-o>$")
