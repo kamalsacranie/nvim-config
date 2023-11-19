@@ -5,6 +5,7 @@ return {
             client.config.settings = vim.tbl_deep_extend('force', client.config.settings, {
                 Lua = {
                     diagnostics = {
+                        disable = { "missing-fields" },
                         globals = { "vim" },
                         neededFileStatus = {
                             ["codestyle-check"] = "Any"

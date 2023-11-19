@@ -17,5 +17,5 @@ return {
     config = setup,
     keys = { "gc", "gb" },
     event = "VeryLazy",
-    dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
+    dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
 }
