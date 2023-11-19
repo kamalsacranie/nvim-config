@@ -1,7 +1,7 @@
 local M = {}
 
 function M.ranged_format()
-    local coords = get_visual_selection_coordinates()
+    local coords = require("utils.helpers").get_visual_selection_coordinates()
     if not coords then
         return
     end

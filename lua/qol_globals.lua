@@ -4,28 +4,6 @@
 -- Local keymap options
 local default_opts = { noremap = true, silent = true }
 
------ Coordinate structure
----@class Coordinates
----@field start_row number
----@field start_col number
----@field end_row number
----@field end_col number
---- Returns start and end row col coordinates for visual selection
----@return Coordinates? -- TODO create coordinate struct
-_G.get_visual_selection_coordinates = function()
-    local start_pos, end_pos = vim.fn.getpos "'<", vim.fn.getpos "'>"
-    if not start_pos or not end_pos then
-        return nil
-    end
-    local coordinates = {
-        start_row = start_pos[2] - 1,
-        start_col = start_pos[3] - 1,
-        end_row = end_pos[2] - 1,
-        end_col = end_pos[3] - 1
-    }
-    return coordinates
-end
-
 -- Making it easier to print tables
 ---@param ... table | string | nil | boolean | integer | function
 ---@return nil
@@ -71,15 +49,14 @@ end
 -- Checking if a package is loaded
 ---comment
 ---@param package_name string
----@return boolean
 ---@return table | nil
 _G.load_package = function(package_name)
     -- Status okay is a boolean
     local status, module = pcall(require, package_name)
-    if type(module) ~= "table" then
-        return status, nil
+    if not status then
+        return nil
     end
-    return status, module
+    return module
 end
 
 -- Making global aliases for keymapping

@@ -5,7 +5,7 @@ vim.keymap.set({ "n" }, "<leader>r", function()
 	if not cd then
 		return
 	end
-	if h.root_directory_from_pattern(cd, "Cargo.toml") then
+	if h.root_directory_from_patterns(cd, "Cargo.toml") then
 		vim.cmd(
 			[[:TermExec direction='horizontal' cmd='cargo run' go_back=0<CR>"]]
 		)
