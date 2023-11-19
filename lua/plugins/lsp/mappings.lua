@@ -1,4 +1,4 @@
--- same as the signature for vim.keymap.set
+---@type Keymap[]
 return {
     lsp = {
         { "n", "gd",          vim.lsp.buf.definition },

@@ -3,7 +3,7 @@ return {
     config = require("plugins.lsp.setup"),
     enabled = true,
     dependencies = {
-        { "neovim/nvim-lspconfig",   enabled = true },
-        { "williamboman/mason.nvim", enabled = true },
+        { "neovim/nvim-lspconfig" },
+        { "williamboman/mason.nvim" },
     }
 }

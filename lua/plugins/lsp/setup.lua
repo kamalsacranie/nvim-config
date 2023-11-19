@@ -49,7 +49,9 @@ end
 return function()
     local mason = load_package("mason")
     local masonlsp = load_package("mason-lspconfig")
-    if not masonlsp or not mason then return end
+    if not masonlsp or not mason then
+        return
+    end
     mason.setup()
     masonlsp.setup()
     masonlsp.setup_handlers(
