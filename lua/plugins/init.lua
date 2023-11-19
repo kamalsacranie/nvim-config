@@ -1,6 +1,4 @@
 return {
-    -- Surround things with things duh
-    { "tpope/vim-surround",           enabled = false },
     -- Kitty config highlighting
     { "fladson/vim-kitty",            enabled = false },
     -- Devicons

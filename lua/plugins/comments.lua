@@ -16,5 +16,6 @@ return {
     "numToStr/Comment.nvim",
     config = setup,
     keys = { "gc", "gb" },
+    event = "VeryLazy",
     dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
 }
