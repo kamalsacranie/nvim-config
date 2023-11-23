@@ -5,5 +5,6 @@ return {
     dependencies = {
         { "neovim/nvim-lspconfig" },
         { "williamboman/mason.nvim" },
+        { "creativenull/efmls-configs-nvim" },
     }
 }

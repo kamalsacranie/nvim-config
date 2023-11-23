@@ -1,14 +1,18 @@
 local M = {}
 
-function M.ranged_format()
+function M.ranged_format(fallback)
+    P(fallback)
     local coords = require("utils.helpers").get_visual_selection_coordinates()
     if not coords then
         return
     end
+    if fallback then
+        return fallback(coords)
+    end
     vim.lsp.buf.format({
         async = true,
         range = {
-            start = { coords.start_row, coords.start_row },
+            start = { coords.start_row, coords.start_col },
             ["end"] = { coords.end_row, coords.end_col }
         }
     })

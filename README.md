@@ -46,3 +46,18 @@ TODO:
 - Add range formatting to lua ls capabilities 
 - Change our `load_package` to not return the bool but just the table | null
 - Change toggle format on save command definition to be in lua
+
+file strucure for a plugin:
+
+- init.lua (only lazy related stuff)
+- setup.lua (setup stuff)
+- mappings.lua (key maps in list)
+
+I kind of want to make a plugin that can take a link to a tar.gz and put it in
+nvim path so it's completely portable. Kind of like mason but for programmes
+
+- Only allow treesitter to load when we have a parser available for the filetype
+- Write plugin that makes it so that we go to end of next delimitor
+- get efm to publish diagnostics for linters
+- Deactivate lsp depending on treesitter language
+- use stylelua and disable luals formatting

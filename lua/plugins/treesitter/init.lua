@@ -1,6 +1,6 @@
 local utils = require("utils.helpers")
 local defaults = {
-    ensure_installed = "all",
+    ensure_installed = {"markdown", "markdown_inline"},
     sync_install = false,
     highlight = {
         enable = true,

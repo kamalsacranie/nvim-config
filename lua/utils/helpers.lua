@@ -68,10 +68,17 @@ M.reverse_list_table = function(list)
     return result
 end
 
+---@param behavior "error"|"keep"|"force" (string) Decides what to do if a key is found in more than one map:
+---      - "error": raise an error
+---      - "keep":  use value from the leftmost map
+---      - "force": use value from the rightmost map
 
+
+---@class Mode
+---@field[1] "n"|"v"|"i"|"x"
 ----- Coordinate structure
 ---@class Keymap
----@field[1] string: mode
+---@field[1]  Mode[]|"n"|"v"|"i"|"x": mode
 ---@field[2] string: left
 ---@field[3] string | function: right
 ---@field[4] table?: opts
@@ -96,6 +103,29 @@ M.map_keymap_list = function(mappings, ext_opts, callback)
         end
         vim.keymap.set(mode, left, rhs, vim.tbl_deep_extend("keep", opts or {}, ext_opts))
     end, mappings)
+end
+
+M.get_path_of_lua_script = function()
+    local str = debug.getinfo(2, "S").source:sub(2)
+    return str:match("(.*/)")
+end
+
+M.get_items_in_directory = function(path, error_callback, success_callback)
+    vim.loop.fs_opendir(path, function(error, data)
+        vim.schedule(function()
+            if error then
+                vim.api.nvim_echo({ { error, "WarningMsg" } }, true, {})
+                return error_callback(error)
+            end
+            local files = {}
+            local file = vim.loop.fs_readdir(data)
+            while file ~= nil do
+                table.insert(files, file)
+                file = vim.loop.fs_readdir(data)
+            end
+            return success_callback(files)
+        end)
+    end)
 end
 
 return M

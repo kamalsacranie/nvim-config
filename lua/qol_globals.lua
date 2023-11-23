@@ -59,26 +59,6 @@ _G.load_package = function(package_name)
     return module
 end
 
--- Making global aliases for keymapping
-_G.kmap = function(mode, lhs, rhs, opts)
-    -- Setting our default options for our keypamp
-    opts = opts or default_opts
-    vim.api.nvim_set_keymap(mode, lhs, rhs, opts)
-end
-
----Less verbose key mapping
----@param mode string String for which mode you want the map in
----@param lhs string The keys you want to remap
----@param rhs string The action you want to remap to
----@param opts table|nil
----@param bufnr integer|nil
-_G.bkmap = function(mode, lhs, rhs, opts, bufnr)
-    opts = opts or default_opts
-    -- setting default buffernumber
-    bufnr = bufnr or 0
-    vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
-end
-
 --- Returns the file extension of a file without the leading "." in lowercase
 ---@return string
 _G.get_filetype = function()
