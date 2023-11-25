@@ -68,7 +68,7 @@ return function()
     masonlsp.setup_handlers({
         function(server_name)
             local server_cfg = load_package("plugins.lsp.server_configs." ..
-            server_name)
+                server_name)
             local lspconfig = load_package("lspconfig")
             if not lspconfig then
                 return

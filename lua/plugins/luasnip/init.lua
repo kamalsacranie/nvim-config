@@ -1,3 +1,5 @@
+local utils = require("utils.helpers")
+
 local setup = function()
     local ls = load_package("luasnip")
     if not ls then
@@ -26,6 +28,7 @@ local setup = function()
         enable_autosnippets = true,
         ft_func = ls_ft.from_filetype,
     }
+    utils.map_keymap_list(require("plugins.luasnip.mappings"))
 
     -- require("user.mappings.luasnip_map")
     -- ls.config.setup(extend_config(defaults, "luasnip_config_extend"))
@@ -37,5 +40,5 @@ return {
     version = "v2.*",
     config = setup,
     build = "make install_jsregexp",
-    dependecies = { "rafamadriz/friendly-snippets" }
+    dependencies = { "rafamadriz/friendly-snippets" }
 }

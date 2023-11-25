@@ -1,7 +1,6 @@
 local M = {}
 
 function M.ranged_format(fallback)
-    P(fallback)
     local coords = require("utils.helpers").get_visual_selection_coordinates()
     if not coords then
         return

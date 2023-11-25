@@ -1,3 +1,10 @@
+local has_words_before = function()
+    unpack = unpack or table.unpack
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and
+        vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col)
+        :match("%s") == nil
+end
 local cmp = require("cmp")
 
 return {
@@ -17,10 +24,8 @@ return {
     end,
     ["<C-c>"] = function(fallback)
         if cmp.visible() then
-            cmp.mapping({
-                i = cmp.mapping.abort(),
-                c = cmp.mapping.close(),
-            })
+            cmp.abort()
+            cmp.close()
         else
             fallback()
         end
@@ -46,6 +51,8 @@ return {
     ["<Tab>"] = function(fallbalck)
         if cmp.visible() then
             cmp.confirm({ select = true })
+        elseif has_words_before() then
+            cmp.complete()
         else
             fallbalck()
         end

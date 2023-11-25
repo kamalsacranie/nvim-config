@@ -1,6 +1,6 @@
 local utils = require("utils.helpers")
 local defaults = {
-    ensure_installed = {"markdown", "markdown_inline"},
+    ensure_installed = { "markdown", "markdown_inline", "lua" },
     sync_install = false,
     highlight = {
         enable = true,
@@ -10,7 +10,8 @@ local defaults = {
     ignore_install = {},
 }
 
-local setup = utils.get_items_in_directory(utils.get_path_of_lua_script() .. "modules",
+local setup = utils.get_items_in_directory(
+    utils.get_path_of_lua_script() .. "/modules",
     function()
         require "nvim-treesitter.configs".setup(defaults)
     end,
@@ -23,8 +24,11 @@ local setup = utils.get_items_in_directory(utils.get_path_of_lua_script() .. "mo
         end, data)
         local config = defaults
         for _, module_file_name in ipairs(data) do
-            config = vim.tbl_deep_extend("force", defaults,
-                { [module_file_name] = require("plugins.treesitter.modules." .. module_file_name) })
+            config = vim.tbl_deep_extend("force", config,
+                {
+                    [module_file_name] = require("plugins.treesitter.modules." ..
+                        module_file_name)
+                })
         end
         require "nvim-treesitter.configs".setup(config)
     end)

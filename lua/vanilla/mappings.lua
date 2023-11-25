@@ -2,7 +2,8 @@
 
 -- remapping leader to space
 vim.keymap.set("", "<Space>", "<Nop>")
-vim.g.mapleader = " " -- I know these are technically options, but I'd argue they are mappings
+vim.g.mapleader =
+" " -- I know these are technically options, but I'd argue they are mappings
 vim.g.maplocalleader = " "
 -- Mapping WQ to wqa
 vim.cmd([[command! -bar -bang WQ wqa<bang>]])
@@ -22,8 +23,8 @@ local mappings = {
     { "n", "<A-Right>",         ":vertical resize +2<CR>" },
 
     -- moving lines around in visual mode
-    { "v", "<C-n>",             ":m '>+1<CR>gv=gv" },
     { "v", "<C-p>",             ":m '<-2<CR>gv=gv" },
+    { "v", "<C-n>",             ":m '>+1<CR>gv=gv" },
 
     -- Yank remap to yank to end of line not whole line
     { "n", "Y",                 "y$" },
@@ -61,7 +62,7 @@ local mappings = {
     { "n", "<leader><leader>x", "<Cmd>w | so %<CR>" },
     { "n", "<C-w>/",            "<C-w>|<C-w>_" },
     -- Going to end of line. perhaps we can see if we can make it soe that we go to the end of the next delimitor
-    { "i", "<C-l>",             "<C-o>$" },
+    { "i", "<C-L>",             "<C-o>$" },
 }
 
 require("utils.helpers").map_keymap_list(mappings)
