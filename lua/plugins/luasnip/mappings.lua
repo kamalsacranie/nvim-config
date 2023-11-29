@@ -5,14 +5,8 @@ return {
     { { "i", "s" }, "<C-f>", function(fallback)
         if ls.jumpable(1) then
             ls.jump(1)
-        elseif fallback then
-            fallback()
         else
-            local keys = vim.api.nvim_replace_termcodes("<C-f>", true, false,
-                true)
-            vim.api.nvim_feedkeys(keys, "n",
-                false)
-            return
+            fallback()
         end
     end },
     { { "i", "s" }, "<C-b>", function(fallback)

@@ -30,7 +30,7 @@ local setup = utils.get_items_in_directory(
                         module_file_name)
                 })
         end
-        require "nvim-treesitter.configs".setup(config)
+        require("nvim-treesitter.configs").setup(config)
     end)
 
 return {

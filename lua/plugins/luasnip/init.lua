@@ -1,4 +1,4 @@
-local utils = require("utils.helpers")
+local utils = require("nvim-mapper")
 
 local setup = function()
     local ls = load_package("luasnip")
@@ -39,6 +39,7 @@ return {
     "L3MON4D3/LuaSnip",
     version = "v2.*",
     config = setup,
+    event = { "InsertEnter" },
     build = "make install_jsregexp",
     dependencies = { "rafamadriz/friendly-snippets" }
 }

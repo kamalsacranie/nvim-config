@@ -40,6 +40,6 @@ local M = require("plugins.telescope.telezones")
 
 -- Sourcing our mappings
 local mappings = require("plugins.telescope.mappings")
-require("utils.helpers").map_keymap_list(mappings)
+require("nvim-mapper").map_keymap_list(mappings)
 
 return M

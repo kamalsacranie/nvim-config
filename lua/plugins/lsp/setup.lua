@@ -1,4 +1,4 @@
-local map_keymap_list = require("utils.helpers").map_keymap_list
+local map_keymap_list = require("nvim-mapper").map_keymap_list
 local mappings = require("plugins.lsp.mappings")
 
 local on_attach_aucmd_callback = function(env)
@@ -11,6 +11,9 @@ local on_attach_aucmd_callback = function(env)
     -- look into how we might define a callback. perhaps in the same file as our settings,
     -- we could have keys for the capabilities with callbacks
     local client = vim.lsp.get_client_by_id(env.data.client_id)
+    if not client then
+        return
+    end
     local cmp = load_package("cmp")
     local cmp_lsp = load_package("cmp_nvim_lsp")
     if cmp and cmp_lsp then
@@ -29,23 +32,17 @@ local on_attach_aucmd_callback = function(env)
             { clear = true })
         vim.api.nvim_create_autocmd("CursorHold", {
             group = doc_h_augroup,
-            callback = function()
-                vim.lsp.buf.document_highlight()
-            end,
+            callback = vim.lsp.buf.document_highlight,
             buffer = bufnr,
         })
         vim.api.nvim_create_autocmd("CursorHoldI", {
             group = doc_h_augroup,
-            callback = function()
-                vim.lsp.buf.document_highlight()
-            end,
+            callback = vim.lsp.buf.document_highlight,
             buffer = bufnr,
         })
         vim.api.nvim_create_autocmd("CursorMoved", {
             group = doc_h_augroup,
-            callback = function()
-                vim.lsp.buf.clear_references()
-            end,
+            callback = vim.lsp.buf.clear_references,
             buffer = bufnr,
         })
     end

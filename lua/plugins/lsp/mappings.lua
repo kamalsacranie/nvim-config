@@ -9,7 +9,7 @@ return {
         { "n", "[d",          vim.diagnostic.goto_prev },
         { "n", "]d",          vim.diagnostic.goto_next },
         { "n", "gh",          vim.diagnostic.open_float },
-        { "n", "K",           require("user.mappings.lsp_map").hover_callback },
+        { "n", "K",           vim.lsp.buf.hover },
         { "n", "<leader>lca", vim.lsp.buf.code_action },
     },
     ranged_formatting = {

@@ -1,10 +1,3 @@
--- mappings only get set once on entry so like, if we were to make them buffer specific, we would need to reset them with an autocmd everytime
-
--- remapping leader to space
-vim.keymap.set("", "<Space>", "<Nop>")
-vim.g.mapleader =
-" " -- I know these are technically options, but I'd argue they are mappings
-vim.g.maplocalleader = " "
 -- Mapping WQ to wqa
 vim.cmd([[command! -bar -bang WQ wqa<bang>]])
 ---@type Keymap[]
@@ -38,8 +31,6 @@ local mappings = {
     -- Centering our line in the middle of the screen
     { "n", "j",                 "jzz" },
     { "n", "k",                 "kzz" },
-    { "n", "{",                 "{zz" },
-    { "n", "}",                 "}zz" },
     { "n", "G",                 "Gzz" },
     { "n", "<C-o>",             "<C-o>zz" },
     { "n", "<C-i>",             "<C-i>zz" },
@@ -53,11 +44,11 @@ local mappings = {
     { "n", "vv",                "V" },
     { "n", "V",                 "v$h" },
     -- Stop contiguous code jumping from leaving marks
-    { "n", "}",                 "<Cmd>keepjumps normal! }<CR>" },
-    { "n", "{",                 "<Cmd>keepjumps normal! {<CR>" },
+    { "n", "}",                 "<Cmd>keepjumps normal! }<CR>zz" },
+    { "n", "{",                 "<Cmd>keepjumps normal! {<CR>zz" },
     -- remapping so that when we use surround in insert, we autohighlight under
     -- cursor
-    { "n", "S",                 "vS",                          { noremap = false } },
+    { "n", "S",                 "vS",                            { noremap = false } },
     -- Making it easier to source files. SHOUT OUT % BABAYYYYY1
     { "n", "<leader><leader>x", "<Cmd>w | so %<CR>" },
     { "n", "<C-w>/",            "<C-w>|<C-w>_" },
@@ -65,4 +56,4 @@ local mappings = {
     { "i", "<C-L>",             "<C-o>$" },
 }
 
-require("utils.helpers").map_keymap_list(mappings)
+return mappings

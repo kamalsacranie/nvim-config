@@ -4,12 +4,12 @@ local M = {}
 -- Figure out if there are any treesitter events that i might listen to
 -- to call otter setup.
 local otter_languages = { "python", "html", "latex" }
-local keymap_options = { silent = true }
-local utils = require("utils.helpers")
+local keymap_options = { silent = true, buffer = true }
+local mapper = require("nvim-mapper")
 local mappings = require("plugins.writing.otter.mappings")
 
 M.setup = function()
-    utils.map_keymap_list(mappings, keymap_options)
+    mapper.map_keymap_list(mappings, keymap_options) -- do a check to only do this when we are in a viable otter space. otherwise we literally do it perpetually...
     vim.api.nvim_create_autocmd({ "CursorMovedI", "CursorMoved" }, {
         pattern = { "*.md", "*.qmd" },
         callback = function()

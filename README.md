@@ -61,3 +61,4 @@ nvim path so it's completely portable. Kind of like mason but for programmes
 - get efm to publish diagnostics for linters
 - Deactivate lsp depending on treesitter language
 - use stylelua and disable luals formatting
+- Fix md indenting on non standard list numbers

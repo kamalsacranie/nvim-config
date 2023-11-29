@@ -1,6 +1,6 @@
-local pastify_did_load, _ = load_package("pastify")
-if not pastify_did_load then
+local pastify = load_package("pastify")
+if not pastify then
 	return
 end
 
-kmap("n", "<leader>p", "<Cmd>Pastify<CR>")
+vim.keymap.set("n", "<leader>p", "<Cmd>Pastify<CR>")
