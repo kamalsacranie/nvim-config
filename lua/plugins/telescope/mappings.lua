@@ -20,6 +20,12 @@ end
 
 ---@type Keymap[]
 return {
+    { "n", "*", function()
+        require("telescope.builtin").grep_string({
+            cwd = require(
+                "telescope.utils").buffer_dir()
+        })
+    end },
     { "n", "<leader>ff", telezones.find_files },
     { "n", "<leader>fF", function()
         telezones.find_files({
