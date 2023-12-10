@@ -134,7 +134,7 @@ end
 --- Returns the secified table from the export of after/ftplugin/{filetyp}
 ---@param filetype string?
 _G.get_table_from_ftplugin_filtype = function(config_table_name, filetype)
-    local ft = filetype or vim.bo.filetype
+    local ft = filetype or vim.filetype.match({ buf = 0 })
     local success, ftplugin = pcall(require, "ftplugin" .. "." .. ft)
     return success and type(ftplugin) == "table" and
         ftplugin[config_table_name] or {}
