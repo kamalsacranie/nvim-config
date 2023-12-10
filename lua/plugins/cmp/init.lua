@@ -1,21 +1,25 @@
--- Set configuration for specific filetype.
--- cmp.setup.filetype("gitcommit", {
---     sources = cmp.config.sources({
---         { name = "git" }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
---     }, {
---         { name = "buffer" },
---     })
--- })
+local all_sources = require("plugins.cmp.sources")
+
+local source_names = {}
+for key, _ in pairs(all_sources) do
+    source_names[key] = "[" .. key .. "]"
+end
 
 local default_sources = {
-    { name = "nvim_lsp" },
-    { name = "luasnip" },
-    { name = "path" }
+    all_sources.nvim_lsp,
+    all_sources.luasnip,
+    all_sources.path,
 }
 
 local setup = function()
     local cmp = require("cmp")
     local defaults = {
+        formatting = {
+            format = function(entry, vim_item)
+                vim_item.menu = (source_names)[entry.source.name]
+                return vim_item
+            end
+        },
         snippet = {
             expand = function(args)
                 require("luasnip").lsp_expand(args.body)
@@ -27,14 +31,13 @@ local setup = function()
     cmp.setup(defaults)
 end
 
--- figure out how to only load this if we require completion. not sure how we are going to do this
 return {
     "hrsh7th/nvim-cmp",
     config = setup,
     event = { "InsertEnter" },
     dependencies = {
-        { "hrsh7th/cmp-nvim-lsp" },
         { "L3MON4D3/LuaSnip" },
+        { "hrsh7th/cmp-nvim-lsp" },
         { "saadparwaiz1/cmp_luasnip" },
         { "hrsh7th/cmp-path" }
     }
