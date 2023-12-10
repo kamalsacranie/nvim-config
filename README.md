@@ -16,9 +16,9 @@ We name them with the **actual file actual file extensions** of our files as
 opposed to vim's inside ft. We can set up the following filetype specific
 settings from within `<ft>.lua`:
 
-- `M.ts_config_extend`: extends the `treesitter` config with the documented
+- `M.treesitter`: extends the `treesitter` config with the documented
   options
-- `M.clipboard_image_config_extend`: alters how we create image paths for when
+- `M.pastify`: alters how we create image paths for when
   we paste images from our clipboard
 - `M.luasnip_config_extend`: extends `luasnip` config with the documented config
   options
@@ -62,3 +62,11 @@ nvim path so it's completely portable. Kind of like mason but for programmes
 - Deactivate lsp depending on treesitter language
 - use stylelua and disable luals formatting
 - Fix md indenting on non standard list numbers
+- Make ts exit silently and default back to vim highlighting if not parser
+- Figure out how to unravel cmp and luasnip so we can require luasnip later
+- Make git vimdiff a toggle
+- fallback gd and di for quickfix
+- Git command for ammending current staged to previous commit
+- Figure out good folding. Maybe that means making an autocommand for every time
+  we go into the buffer, i dont care
+- one i leave the snippet environemnt i want that shit deactivated

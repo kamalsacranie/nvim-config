@@ -131,30 +131,13 @@ _G.rerequire = function(module)
     return require(module)
 end
 
--- Dynamically generating opts based on what is in our ftplugin file to reduce coupling with ts
----@param config_table_name string
----@param config_defaults table|nil
----@return table
-_G.extend_config = function(config_defaults, config_table_name)
-    ---@return table
-    local get_filetype_opts = function()
-        local ft = vim.bo.filetype
-        local success, ftplugin = pcall(require, "filetypes" .. "." .. ft)
-        if success and type(ftplugin) == "table" then
-            return ftplugin[config_table_name]
-        end
-        return {}
-    end
-    local generate_options = function(filetype_opts)
-        return vim.tbl_extend(
-            "force",
-            config_defaults or {},
-            filetype_opts or {}
-        )
-    end
-
-    local filetype_opts = get_filetype_opts()
-    return generate_options(filetype_opts)
+--- Returns the secified table from the export of after/ftplugin/{filetyp}
+---@param filetype string?
+_G.get_table_from_ftplugin_filtype = function(config_table_name, filetype)
+    local ft = filetype or vim.bo.filetype
+    local success, ftplugin = pcall(require, "ftplugin" .. "." .. ft)
+    return success and type(ftplugin) == "table" and
+        ftplugin[config_table_name] or {}
 end
 
 --------- Temp because luasnip snipenv dont work
