@@ -22,6 +22,7 @@ local setup = utils.get_items_in_directory(
                 return vim.fn.split(entry.name, [[\.]])[1]
             end
         end, data)
+        ---@type table|nil
         local config = defaults
         for _, module_file_name in ipairs(data) do
             config = vim.tbl_deep_extend("force", config,
@@ -30,7 +31,9 @@ local setup = utils.get_items_in_directory(
                         module_file_name)
                 })
         end
-        require("nvim-treesitter.configs").setup(config)
+        local ft_specific_config = get_table_from_ftplugin_filtype("treesitter")
+        config = vim.tbl_deep_extend("force", config, ft_specific_config)
+        require("nvim-treesitter.configs").setup(config or {})
     end)
 
 return {
