@@ -2,18 +2,27 @@ local M = {}
 
 ---@type Keymap
 M.paste_keymap = { "n", "<leader>p", function()
-    vim.cmd [[Pastify]]
+    vim.cmd([[Pastify]])
 end,
     { buffer = true }
 }
 
+M.init = function()
+    local mapper = load_package("nvim-mapper")
+    if not mapper then
+        return print(
+            "You tried to may your key with mapper and it is not installed")
+    end
+    mapper.map_keymap(unpack(M.paste_keymap))
+    vim.api.nvim_create_autocmd("BufWinEnter", {
+        group = vim.api.nvim_create_augroup("pastify", { clear = true }),
+        callback = M.setup,
+        pattern = { "*.md", "*.quarto" },
+        desc = "pastify setup",
+    })
+end
 
 M.setup = function()
-    local pastify = load_package("pastify")
-    local mapper = load_package("mapper")
-    if not pastify or not mapper then
-        return
-    end
     local defaults = {
         opts = {
             absolute_path = false, -- use absolute or relative path to the working directory
@@ -21,15 +30,7 @@ M.setup = function()
             save = "local",        -- Either 'local' or 'online'
         },
     }
-    pastify.setup(extend_config(defaults, "pastify_config_extend"))
-    mapper.map_keymap(unpack(M.paste_keymap))
+    require("pastify").setup(defaults)
 end
-
-vim.api.nvim_create_autocmd("BufWinEnter", {
-    group = vim.api.nvim_create_augroup("pastify", { clear = true }),
-    callback = M.setup,
-    pattern = { "*.md", "*.quarto" },
-    desc = "pastify setup",
-})
 
 return M
