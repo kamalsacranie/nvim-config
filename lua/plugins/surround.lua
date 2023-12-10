@@ -2,8 +2,9 @@ return {
     "kylechui/nvim-surround",
     event = "VeryLazy",
     config = function()
-        require("nvim-surround").setup({
+        local config = {
             highlight = { duration = 0 }
-        })
+        }
+        require("nvim-surround").setup(config)
     end
 }
