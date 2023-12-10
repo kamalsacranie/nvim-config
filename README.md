@@ -4,8 +4,7 @@ format: pdf
 
 # Kamal's Neovim config
 
-This is my pride and joy, I try to make it as functional as
-possible
+This is my pride and joy, I try to make it as functional as possible
 
 > This document is mostly for reminding me how to do things
 
@@ -16,10 +15,9 @@ We name them with the **actual file actual file extensions** of our files as
 opposed to vim's inside ft. We can set up the following filetype specific
 settings from within `<ft>.lua`:
 
-- `M.treesitter`: extends the `treesitter` config with the documented
-  options
-- `M.pastify`: alters how we create image paths for when
-  we paste images from our clipboard
+- `M.treesitter`: extends the `treesitter` config with the documented options
+- `M.pastify`: alters how we create image paths for when we paste images from
+  our clipboard
 - `M.luasnip_config_extend`: extends `luasnip` config with the documented config
   options
 - `M.neogen_config_extend`: extends `neogen` config with the documented config
@@ -38,12 +36,12 @@ intuitive to me as you get all the information for that filetype in one location
 I am at odds whether I should organise my mappings for my plug-ins in the same
 manner. It feels right how it currently is but idk.
 
----
+______________________________________________________________________
 
 TODO:
 
 - see what client.workspace folder does
-- Add range formatting to lua ls capabilities 
+- Add range formatting to lua ls capabilities
 - Change our `load_package` to not return the bool but just the table | null
 - Change toggle format on save command definition to be in lua
 
