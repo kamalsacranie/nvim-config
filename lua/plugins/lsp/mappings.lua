@@ -1,9 +1,16 @@
 ---@type Keymap[]
 return {
     lsp = {
-        { "n", "gd",          vim.lsp.buf.definition },
+        { "n", "gd", function()
+            return require("telescope.builtin").lsp_definitions()
+        end },
+        { "n", "gi", function()
+            return require("telescope.builtin").lsp_implementations()
+        end },
         { "n", "gD",          vim.lsp.buf.declaration },
-        { "n", "gr",          vim.lsp.buf.references },
+        { "n", "gr", function()
+            return require("telescope.builtin").lsp_references()
+        end },
         { "n", "<leader>lr",  vim.lsp.buf.rename },
         { "i", "<C-k>",       vim.lsp.buf.signature_help },
         { "n", "[d",          vim.diagnostic.goto_prev },

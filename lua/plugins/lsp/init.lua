@@ -6,5 +6,6 @@ return {
         { "neovim/nvim-lspconfig" },
         { "williamboman/mason.nvim" },
         { "creativenull/efmls-configs-nvim" },
+        { "nvim-telescope/telescope.nvim" }
     }
 }

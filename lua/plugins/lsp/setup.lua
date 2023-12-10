@@ -5,7 +5,7 @@ local on_attach_aucmd_callback = function(env)
     local bufnr = env.buf
 
     -- Keymaps
-    map_keymap_list(mappings.lsp, { buffer = bufnr })
+    map_keymap_list(mappings.lsp, { buffer = bufnr, fallback = false })
 
     -- Capability specific setups
     -- look into how we might define a callback. perhaps in the same file as our settings,
@@ -46,12 +46,12 @@ local on_attach_aucmd_callback = function(env)
             buffer = bufnr,
         })
     end
-    -- if client.server_capabilities.completionProvider then
-    --     vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
-    -- end
-    -- if client.server_capabilities.definitionProvider then
-    --     vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
-    -- end
+    if client.server_capabilities.completionProvider then
+        vim.bo[bufnr].complete = ""
+    end
+    --[[ if client.server_capabilities.definitionProvider then
+        vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
+    end ]]
 end
 
 return function()
