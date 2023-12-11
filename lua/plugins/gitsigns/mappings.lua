@@ -15,9 +15,21 @@ if not gs then
     return
 end
 
+local amend_prev_commit = function()
+    vim.fn.system("git commit --amend --no-edit")
+end
+
 ---@type Keymap[]
 local mappings = {
     { "n", "<leader>hs", gs.stage_hunk },
+    { "n", "<leader>hA", function()
+        gs.stage_hunk()
+        amend_prev_commit()
+    end },
+    { "v", "<leader>hA", function()
+        gs.stage_hunk { vim.fn.line("."), vim.fn.line("v") }
+        amend_prev_commit()
+    end },
     { "n", "<leader>hr", gs.reset_hunk },
     { "v", "<leader>hs", function() gs.stage_hunk { vim.fn.line("."), vim.fn.line("v") } end },
     { "v", "<leader>hr", function() gs.reset_hunk { vim.fn.line("."), vim.fn.line("v") } end },
