@@ -34,6 +34,19 @@ local setup = utils.get_items_in_directory(
         local ft_specific_config = get_table_from_ftplugin_filtype("treesitter")
         config = vim.tbl_deep_extend("force", config, ft_specific_config)
         require("nvim-treesitter.configs").setup(config or {})
+        -- this likely needs to be changed to be done for every buffer so maybe put it in a aucmd
+        --[[ vim.api.nvim_set_option_value("foldmethod", "expr",
+            { win = 0, scope = "local" })
+        vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" },
+            {
+                group = vim.api.nvim_create_augroup("folding", { clear = true }),
+                pattern = { "*" },
+                callback = function()
+                    vim.api.nvim_set_option_value("foldexpr",
+                        "nvim_treesitter#foldexpr()",
+                        { win = 0, scope = "local" })
+                end
+            }) ]]
     end)
 
 return {

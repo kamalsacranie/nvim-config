@@ -4,7 +4,7 @@ local lg_term_cfg = {
     direction = "float",
     close_on_exit = true,
     name = "LazyGit",
-    dir = "git_dir",
+    dir = "git_dir", -- what to do if not in
     display_name = "LazyGit",
     on_open = function() end,
 }
@@ -15,7 +15,7 @@ return {
         { "n", "<leader>lg", function()
             local t = require("toggleterm.terminal").Terminal:new(lg_term_cfg)
             t:toggle()
-        end }
+        end, { buffer = false } }
     },
     terminal = {
         { "t", "<C-h>", function() vim.cmd [[wincmd h]] end },

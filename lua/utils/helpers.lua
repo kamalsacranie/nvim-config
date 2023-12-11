@@ -73,6 +73,12 @@ M.get_path_of_lua_script = function()
     return str:match("(.*/)")
 end
 
+---@class DirEntry
+---@field name string
+---@field type string
+---@param path string
+---@param error_callback fun(error: any)
+---@param success_callback fun(data: DirEntry[][]): any
 M.get_items_in_directory = function(path, error_callback, success_callback)
     vim.loop.fs_opendir(path, function(error, data)
         vim.schedule(function()

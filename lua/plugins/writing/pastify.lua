@@ -17,7 +17,7 @@ M.init = function()
     vim.api.nvim_create_autocmd("BufWinEnter", {
         group = vim.api.nvim_create_augroup("pastify", { clear = true }),
         callback = M.setup,
-        pattern = { "*.md", "*.quarto" },
+        pattern = { "*.md", "*.qmd" },
         desc = "pastify setup",
     })
 end

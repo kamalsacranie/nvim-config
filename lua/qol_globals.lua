@@ -135,8 +135,17 @@ end
 ---@param filetype string?
 _G.get_table_from_ftplugin_filtype = function(config_table_name, filetype)
     local ft = filetype or vim.filetype.match({ buf = 0 })
-    local success, ftplugin = pcall(require, "ftplugin" .. "." .. ft)
-    return success and type(ftplugin) == "table" and
+    local reqpath = "ftplugin" .. "." .. ft .. ".config"
+
+    if type(package.loaded[reqpath]) == table then -- sometimes it can be a tiny random number
+        return (package.loaded[reqpath][config_table_name])
+    end
+
+    package.loaded[reqpath] = nil -- things can get confusing fi we dont reset this package
+
+    local success, ftplugin = pcall(require,
+        "ftplugin" .. "." .. ft .. ".config")
+    return (success and type(ftplugin) == "table") and
         ftplugin[config_table_name] or {}
 end
 

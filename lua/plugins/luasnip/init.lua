@@ -31,14 +31,16 @@ local setup = function()
     mapper.map_keymap_list(require("plugins.luasnip.mappings"))
 
     local config = vim.tbl_deep_extend("force", defaults,
-        get_table_from_ftplugin_filtype("luasnip"))
+        get_table_from_ftplugin_filtype("luasnip", "markdown"))
     ls.config.setup(config)
 end
 
 return {
     "L3MON4D3/LuaSnip",
     version = "v2.*",
-    config = setup,
+    config = function()
+        setup()
+    end,
     event = { "InsertEnter" },
     build = "make install_jsregexp",
     dependencies = { { "rafamadriz/friendly-snippets" }, { "nvim-treesitter/nvim-treesitter" } }
