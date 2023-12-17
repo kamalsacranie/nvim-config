@@ -1,5 +1,4 @@
 return {
-    s("temp", { t(some_global) }),
     s("link", { t("["), i(1), t("]("), lsg.visual(), i(2), t(")"), i(0) }),
     s({ trig = "appen?d?i?x?(%d*)", name = "Appendix heading", regTrig = true },
         {
