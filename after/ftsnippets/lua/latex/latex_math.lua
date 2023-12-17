@@ -2,16 +2,12 @@
 local tsh = require("utils.treesitter-helpers")
 
 local is_math = function()
-    print("is mathing")
-    if tsh.is_child_of_node("math_environment") then
-        print("Is child of math env")
-        return true
-    end
     -- if we are in markdown or quarto we assume always  math. this is not ideal
     -- but i will do this until I encounter a problem
-    P(vim.filetype.match({ buf = 0 }))
     if vim.filetype.match({ buf = 0 }) == "markdown" then
-        print("markdownn file")
+        return true
+    end
+    if tsh.is_child_of_node("math_environment") then
         return true
     end
 end
