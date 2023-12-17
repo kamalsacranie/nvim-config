@@ -20,17 +20,4 @@ for key, value in pairs(options.buffer) do
     vim.api.nvim_set_option_value(key, value, { buf = vim.fn.bufnr() })
 end
 
-local cmp = load_package("cmp")
-if cmp then
-    local all_sources = require("plugins.cmp.sources")
-    cmp.setup.filetype("markdown", {
-        sources = cmp.config.sources({
-            all_sources.otter,
-            all_sources.nvim_lsp,
-            all_sources.luasnip,
-            all_sources.path,
-        })
-    })
-end
-
 require("nvim-mapper").map_keymap_list(require("ftplugin.markdown.mappings"))
