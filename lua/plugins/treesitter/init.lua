@@ -1,6 +1,7 @@
 local utils = require("utils.helpers")
 local defaults = {
-    ensure_installed = { "markdown", "markdown_inline", "lua" },
+    ensure_installed = { "markdown", "markdown_inline", "latex", "html" },
+    indent = { enable = true },
     sync_install = false,
     highlight = {
         enable = true,
@@ -35,7 +36,7 @@ local setup = utils.get_items_in_directory(
         config = vim.tbl_deep_extend("force", config, ft_specific_config)
         require("nvim-treesitter.configs").setup(config or {})
         -- this likely needs to be changed to be done for every buffer so maybe put it in a aucmd
-        --[[ vim.api.nvim_set_option_value("foldmethod", "expr",
+        vim.api.nvim_set_option_value("foldmethod", "expr",
             { win = 0, scope = "local" })
         vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" },
             {
@@ -46,7 +47,7 @@ local setup = utils.get_items_in_directory(
                         "nvim_treesitter#foldexpr()",
                         { win = 0, scope = "local" })
                 end
-            }) ]]
+            })
     end)
 
 return {

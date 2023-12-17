@@ -4,8 +4,12 @@ return {
         config = function()
             require("plugins.writing.otter").setup()
         end,
-        ft = { "markdown", "quarto" },
-        enabled = false
+        event = function()
+            if vim.tbl_contains({ "markdown", "quarto" }, vim.filetype.match({ buf = 0 })) then
+                return "InsertEnter"
+            end
+        end,
+        enabled = true
     },
     {
         "TobinPalmer/pastify.nvim",

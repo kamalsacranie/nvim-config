@@ -3,6 +3,7 @@ return {
         "kamalsacranie/nvim-mapper",
         config = function()
             local mapper = require("nvim-mapper")
+            mapper.setup({ debug = true })
             mapper.map_keymap_list(require(
                 "vanilla.mappings"))
         end,
