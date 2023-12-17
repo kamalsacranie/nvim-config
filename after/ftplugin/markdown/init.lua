@@ -32,3 +32,5 @@ if cmp then
         })
     })
 end
+
+require("nvim-mapper").map_keymap_list(require("ftplugin.markdown.mappings"))

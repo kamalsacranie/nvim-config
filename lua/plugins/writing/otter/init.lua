@@ -3,7 +3,7 @@ local M = {}
 -- Need to inject formatting with tree sitter. pretty sure I can do this
 -- Figure out if there are any treesitter events that i might listen to
 -- to call otter setup.
-local otter_languages = { "python", "html", "lua", "haskell" }
+local otter_languages = { "python", "tex", "html", "lua", "haskell" }
 local keymap_options = { silent = true, buffer = true }
 local mapper = require("nvim-mapper")
 local mappings = require("plugins.writing.otter.mappings")

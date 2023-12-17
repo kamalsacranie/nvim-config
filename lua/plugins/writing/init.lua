@@ -5,6 +5,7 @@ return {
             require("plugins.writing.otter").setup()
         end,
         ft = { "markdown", "quarto" },
+        enabled = false
     },
     {
         "TobinPalmer/pastify.nvim",

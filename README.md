@@ -56,10 +56,6 @@ nvim path so it's completely portable. Kind of like mason but for programmes
 
 - Only allow treesitter to load when we have a parser available for the filetype
 - Write plugin that makes it so that we go to end of next delimitor
-- get efm to publish diagnostics for linters
-- Deactivate lsp depending on treesitter language
-- use stylelua and disable luals formatting
-- Fix md indenting on non standard list numbers
 - Make ts exit silently and default back to vim highlighting if not parser
 - Figure out how to unravel cmp and luasnip so we can require luasnip later
 - Make git vimdiff a toggle
