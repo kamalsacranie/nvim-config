@@ -5,6 +5,8 @@ function M.ranged_format(fallback)
     if not coords then
         return
     end
+    -- this is in the case we aren't using the LSP to format but rather a
+    -- different formatter
     if fallback then
         return fallback(coords)
     end
@@ -17,38 +19,50 @@ function M.ranged_format(fallback)
     })
 end
 
--- Autoformat toggle from chris@machine
-function M.enable_format_on_save()
-    vim.cmd([[
-    augroup format_on_save
-      autocmd!
-      autocmd BufWritePre * lua vim.lsp.buf.format { async = true }
-    augroup end
-  ]])
-end
+local augroup = vim.api.nvim_create_augroup("format_on_save_lsp",
+    { clear = true })
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = augroup,
+    callback = function(env)
+        local writing = false
+        local format = true
+        local bufnr = env.buf
+        local client = vim.lsp.get_client_by_id(env.data.client_id)
+        if client == nil then
+            return
+        end
 
-function M.disable_format_on_save()
-    M.remove_augroup("format_on_save")
-    vim.notify("Disabled format on save")
-end
+        if not client.server_capabilities.documentFormattingProvider then
+            return
+        end
 
-function M.toggle_format_on_save()
-    if vim.fn.exists("#format_on_save#BufWritePre") == 0 then
-        M.enable_format_on_save()
-        vim.notify("Enabled format on save")
-    else
-        M.disable_format_on_save()
+        local params = vim.lsp.util.make_formatting_params({})
+        local handler = function(err, result, _)
+            if err ~= nil or result == nil then
+                return
+            end
+            vim.lsp.util.apply_text_edits(result, bufnr, client.offset_encoding)
+            writing = true
+            vim.cmd [[write]]
+            -- center the screen (would have to change this if I ever dont have curline centered)
+            require("utils.helpers").send_keys_to_nvim("zz")
+            writing = false
+        end
+
+        vim.api.nvim_create_autocmd("BufWritePost", {
+            group = augroup,
+            callback = function()
+                if vim.fn.bufnr() ~= bufnr or writing or not format then
+                    return
+                end
+                client.request("textDocument/formatting", params, handler,
+                    bufnr)
+            end,
+        })
+
+        require("nvim-mapper").map_keymap("n", "<leader>ltf",
+            function() format = false end)
     end
-end
-
-function M.remove_augroup(name)
-    if vim.fn.exists("#" .. name) == 1 then
-        vim.cmd("au! " .. name)
-    end
-end
-
-vim.cmd(
-    [[ command! LspToggleAutoFormat execute 'lua require("plugins.lsp.format").toggle_format_on_save()' ]]
-)
+})
 
 return M
