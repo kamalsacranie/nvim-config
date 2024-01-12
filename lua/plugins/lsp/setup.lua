@@ -14,16 +14,7 @@ local on_attach_aucmd_callback = function(env)
     if not client then
         return
     end
-    -- local cmp = load_package("cmp")
-    -- local cmp_lsp = load_package("cmp_nvim_lsp")
-    -- if cmp and cmp_lsp then
-    --     client.server_capabilities =
-    --         vim.tbl_deep_extend("force", client.server_capabilities,
-    --             cmp_lsp.default_capabilities())
-    -- end
-    if client.server_capabilities.documentFormattingProvider then
-        require("plugins.lsp.format").enable_format_on_save()
-    end
+
     if client.server_capabilities.documentRangeFormattingProvider then
         map_keymap_list(mappings.ranged_formatting, { buffer = bufnr })
     end
