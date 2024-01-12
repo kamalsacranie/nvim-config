@@ -39,35 +39,32 @@ return {
             }
         )
     end,
-    lsg = {
-        visual = function()
-            -- returns a function snippet which returns the current visual selection
-            local f = require("luasnip").f
-            return f(function(_, snip)
-                local visual = snip.env.LS_SELECT_RAW
-                if type(visual) == "string" then
-                    return ""
-                end
-                return visual
-            end)
-        end,
-        midword = function(conf, nodes)
-            -- Returns a snippet which expands mid line
-            local s = require("luasnip").s
-            local f = require("luasnip").f
-            return s(
-                vim.tbl_extend(
-                    "keep",
-                    { trig = "(.*)" .. conf["trig"], regTrig = true },
-                    conf
-                ),
-                vim.list_extend(
-                    { f(function(_, snip)
-                        return snip.captures[1]
-                    end) },
-                    nodes
-                )
+    visual = function()
+        -- returns a function snippet which returns the current visual selection
+        return f(function(_, snip)
+            local visual = snip.env.LS_SELECT_RAW
+            if type(visual) == "string" then
+                return ""
+            end
+            return visual
+        end)
+    end,
+    midword = function(conf, nodes)
+        -- Returns a snippet which expands mid line
+        local s = require("luasnip").s
+        local f = require("luasnip").f
+        return s(
+            vim.tbl_extend(
+                "keep",
+                { trig = "(.*)" .. conf["trig"], regTrig = true },
+                conf
+            ),
+            vim.list_extend(
+                { f(function(_, snip)
+                    return snip.captures[1]
+                end) },
+                nodes
             )
-        end,
-    }
+        )
+    end,
 }
