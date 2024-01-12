@@ -28,11 +28,13 @@ local setup = utils.get_items_in_directory(
         for _, module_file_name in ipairs(data) do
             config = vim.tbl_deep_extend("force", config,
                 {
-                    [module_file_name] = require("plugins.treesitter.modules." ..
+                    [module_file_name] = require(
+                        "plugins.treesitter.modules." ..
                         module_file_name)
                 })
         end
-        local ft_specific_config = get_table_from_ftplugin_filtype("treesitter")
+        local ft_specific_config = get_table_from_ftplugin_filtype(
+            "treesitter")
         config = vim.tbl_deep_extend("force", config, ft_specific_config)
         require("nvim-treesitter.configs").setup(config or {})
         -- this likely needs to be changed to be done for every buffer so maybe put it in a aucmd
@@ -40,7 +42,8 @@ local setup = utils.get_items_in_directory(
             { win = 0, scope = "local" })
         vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" },
             {
-                group = vim.api.nvim_create_augroup("folding", { clear = true }),
+                group = vim.api.nvim_create_augroup("folding",
+                    { clear = true }),
                 pattern = { "*" },
                 callback = function()
                     vim.api.nvim_set_option_value("foldexpr",
@@ -54,6 +57,10 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = setup,
-    dependencies = { "JoosepAlviste/nvim-ts-context-commentstring", "hiphish/rainbow-delimiters.nvim" },
+    dependencies = {
+        "JoosepAlviste/nvim-ts-context-commentstring",
+        "hiphish/rainbow-delimiters.nvim",
+        "nvim-treesitter/nvim-treesitter-textobjects"
+    },
     enabled = true,
 }
