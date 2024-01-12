@@ -3,6 +3,7 @@ local M = {}
 ---@class opts
 ---@field buf vim.bo
 ---@field win vim.wo
+---@field glob vim.bo
 
 ---@param default_opts vim.api.keyset.option
 ---@return fun(key: string, value: any, opts?: vim.api.keyset.option)
@@ -58,12 +59,26 @@ M.set_global_options = function(global_options, opts)
 end
 
 ---Batch set options table. Both window and buffer set with local as default
+---@class all_setting_options
+---@field buf? vim.api.keyset.option
+---@field win? vim.api.keyset.option
+---@field glob? vim.api.keyset.option
 ---@param options opts
----@param buf_opts? vim.api.keyset.option
----@param win_opts? vim.api.keyset.option
-M.set_all_options = function(options, buf_opts, win_opts)
-    if options.buf ~= nil then M.set_buf_options(options.buf, buf_opts) end
-    if options.win ~= nil then M.set_window_options(options.win, win_opts) end
+---@param setting_options? all_setting_options
+M.set_all_options = function(options, setting_options)
+    setting_options = setting_options or {}
+    if options.buf ~= nil then
+        M.set_buf_options(options.buf, setting_options
+            .buf)
+    end
+    if options.win ~= nil then
+        M.set_window_options(options.win,
+            setting_options.win)
+    end
+    if options.glob ~= nil then
+        M.set_global_options(options.glob,
+            setting_options.glob)
+    end
 end
 
 return M

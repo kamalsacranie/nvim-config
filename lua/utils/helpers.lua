@@ -113,4 +113,14 @@ M.get_source_code = function(f)
     return table.concat(text, "\n")
 end
 
+M.send_keys_to_nvim = function(string)
+    local keys = vim.api.nvim_replace_termcodes(string, true, false,
+        true)
+    if vim.api.nvim_get_mode().mode == "niI" then
+        return vim.cmd("normal " .. keys)
+    end
+    return vim.api.nvim_feedkeys(keys, "n",
+        false)
+end
+
 return M
