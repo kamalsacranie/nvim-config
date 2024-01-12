@@ -8,12 +8,6 @@ end,
 }
 
 M.init = function()
-    local mapper = load_package("nvim-mapper")
-    if not mapper then
-        return print(
-            "You tried to may your key with mapper and it is not installed")
-    end
-    mapper.map_keymap(unpack(M.paste_keymap))
     vim.api.nvim_create_autocmd("BufWinEnter", {
         group = vim.api.nvim_create_augroup("pastify", { clear = true }),
         callback = M.setup,
@@ -23,6 +17,12 @@ M.init = function()
 end
 
 M.setup = function()
+    local mapper = load_package("nvim-mapper")
+    if not mapper then
+        return print(
+            "You tried to may your key with mapper and it is not installed")
+    end
+    mapper.map_keymap(unpack(M.paste_keymap))
     local defaults = {
         opts = {
             absolute_path = false, -- use absolute or relative path to the working directory
