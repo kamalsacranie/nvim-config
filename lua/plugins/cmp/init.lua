@@ -47,7 +47,10 @@ local setup = function()
                     "cmp", filetype)
                 if success then
                     cmp.setup.filetype(filetype,
-                        { sources = cmp.config.sources(ftopts) })
+                        {
+                            sources = cmp.config.sources(#ftopts == 0 and
+                                default_sources or ftopts)
+                        })
                 end
             end
         end)

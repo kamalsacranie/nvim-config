@@ -33,60 +33,7 @@ _G.load_package = function(package_name)
     return module
 end
 
--- _G.shell_command = function(command)
---     local file = io.popen(command) or nil
---     if not file then
---         return false
---     end
---     local response = file:read("a")
---     file:close()
---     return response
--- end
-
--- --- Checks if a table contains a given key using the vim.fn.has_key(table, string) function
--- ---@param table table<string, any> A non list like table
--- ---@param key string A key to find within the table
--- ---@return boolean
--- _G.has_key = function(table, key)
---     return vim.fn.has_key(table, key) ~= 0 and true or false
--- end
-
---- Set a table of the same kind of options ("opt", "bo", "wo") all at once
----@param options table<string, any>
----@param kind string|nil a choice of "opt" | "bo" | "wo" | "go">
-_G.options_set = function(options, kind)
-    if type(options) ~= "table" then
-        error('options should be a type of "table"')
-        return
-    end
-    kind = kind or "opt"
-    for opt_key, opt_value in pairs(options) do
-        vim[kind][opt_key] = opt_value
-    end
-end
-
--- --- Scan a directory for the files within and return a list of those files
--- ---@param directory string directory to scan
--- ---@param exts? string extension to look for
--- ---@return Array of file names
--- _G.scandir = function(directory, exts)
---     local file_list = vim.fn.split(vim.fn.system({ "ls", "-A", directory }))
---     if exts then
---         return file_list
---     end
---     return vim.fn.split(vim.fn.system({ "sed", [[s/\.[^.]*$//]] }, file_list))
--- end
-
--- --- Reload a package from scratch
--- ---@param module string Module name
--- ---@return unknown
--- _G.rerequire = function(module)
---     assert(type(module) == "string", "`module` must be a string")
---     package.loaded[module] = nil
---     return require(module)
--- end
-
---- Returns the secified table from the export of after/ftplugin/{filetyp}
+--- Returns the secified table from the export of after/ftplugin/{filetype}/config.lua
 ---@param filetype string?
 _G.get_table_from_ftplugin_filtype = function(config_table_name, filetype)
     local ft = filetype or vim.filetype.match({ buf = 0 }) or
