@@ -26,7 +26,7 @@ local create_or_reload_ghci = function()
         local lg_term_cfg = {
             cmd = "ghci " .. vim.fn.escape(vim.fn.expand("%:p"), " "), -- uses the latest ghci by default. I'll change this when the time comes
             dir = require("lspconfig.util").root_pattern("makefile")(vim.api
-                .nvim_buf_get_name(0)) or vim.loop.cwd(),
+                .nvim_buf_get_name(0)) or vim.uv.cwd(),
             name = runtermname,
             display_name = runtermname,
             direction = require("plugins.toggleterm.utils")

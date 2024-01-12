@@ -1,5 +1,7 @@
 local M = {}
 
+M.treesitter = { indent = { enable = false }, }
+
 M.cmp = function()
     local all_sources = require("plugins.cmp.sources")
     return {
@@ -7,6 +9,7 @@ M.cmp = function()
         all_sources.nvim_lsp,
         all_sources.luasnip,
         all_sources.path,
+        { name = "md_cmp" }
     }
 end
 

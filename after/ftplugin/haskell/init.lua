@@ -1,3 +1,4 @@
+---@type vim.bo
 local options = {
     tabstop = 2,
     softtabstop = 2,
@@ -5,8 +6,6 @@ local options = {
     expandtab = true,
 }
 
-for key, value in pairs(options) do
-    vim.api.nvim_set_option_value(key, value, { buf = vim.fn.bufnr() })
-end
+require("utils.options").set_buf_options(options)
 
 require("nvim-mapper").map_keymap_list(require("ftplugin.haskell.mappings"))
