@@ -1,5 +1,5 @@
 -- Mapping WQ to wqa
-vim.cmd([[command! -bar -bang WQ wqa<bang>]])
+vim.cmd([[command! -bar -bang WQ wqall<bang>]])
 ---@type Keymap[]
 local mappings = {
     -- Yank to my system clipboard

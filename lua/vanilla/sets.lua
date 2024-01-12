@@ -1,8 +1,9 @@
-options_set({
+---@type vim.bo
+local global_options = {
     termguicolors = true,
     -- shada = vim.opt.shada + "n~/.cache/nvim/viminfo", -- this is how we append
     updatetime = 500, -- For code word highlighting
-    shell = vim.fn.getenv("HOMEBREW_PREFIX") .. "/bin/zsh",
+    -- shell = vim.fn.getenv("HOMEBREW_PREFIX") .. "/bin/zsh",
     -- Numbers,
     number = true,
     relativenumber = true,
@@ -21,6 +22,7 @@ options_set({
     -- Casing,
     ignorecase = true,
     smartcase = true,
+    smartindent = true,
     -- Fold settings,
     foldlevelstart = 9, -- All folds start open
     -- Setting a cursorline
@@ -28,4 +30,6 @@ options_set({
     mouse = "a",
     swapfile = false,
     complete = "",
-})
+}
+
+require("utils.options").set_global_options(global_options)
