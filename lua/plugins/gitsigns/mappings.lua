@@ -40,6 +40,8 @@ local mappings = {
     { "n", "<leader>hb", function() gs.blame_line { full = true } end },
     { "n", "<leader>hd", gs.toggle_deleted },
     { "n", "<leader>hD", gs.diffthis },
+    { "n", "[h",         gs.prev_hunk },
+    { "n", "]h",         gs.next_hunk },
 }
 
 ---@param mapping Keymap
