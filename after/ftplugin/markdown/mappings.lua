@@ -102,6 +102,28 @@ local md_toc = function()
     })
 end
 
+local toggle_checkmark = function(_)
+    local list_marker_node = vim.treesitter.get_node():parent()
+        :prev_named_sibling()
+    if not list_marker_node then
+        return
+    end
+    local node_type = list_marker_node:type()
+    local valid_nodes = {
+        "task_list_marker_unchecked",
+        "task_list_marker_checked",
+    }
+    if not vim.tbl_contains(valid_nodes, node_type) then
+        return
+    end
+    local node_range = { vim.treesitter.get_node_range(list_marker_node) }
+    local node_text = vim.treesitter.get_node_text(list_marker_node,
+        vim.fn.bufnr())
+    vim.api.nvim_buf_set_text(0, node_range[1], node_range[2], node_range[3],
+        node_range[4],
+        { string.format("[%s]", node_text:sub(2, 2) == " " and "x" or " ") })
+end
+
 ---@type Keymap[]
 return {
     { "n", "<leader>P",   function() quarto_preview() end },
@@ -115,5 +137,6 @@ return {
             vim.notify("No Quarto executable found")
         end
     end },
-    { "n", "<leader>toc", md_toc }
+    { "n", "<leader>toc", md_toc },
+    { "n", "<leader>tc",  toggle_checkmark }
 }
