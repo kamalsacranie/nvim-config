@@ -9,8 +9,7 @@ return {
         end,
         enabled = true,
     },
-    -- Kitty config highlighting -- config bool just for kitty file path
-    -- cant figure out how to check the condition every buffer
+    { "folke/neoconf.nvim" },
     {
         "fladson/vim-kitty",
         enabled = false,

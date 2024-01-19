@@ -1,0 +1,17 @@
+{
+    "diagnostics": {
+        "neededFileStatus": {
+            "codestyle-check": "Any"
+        }
+    },
+    "format": {
+        "enable": true,
+        "defaultConfig": {
+            "indent_style": "space",
+            "indent_size": "4",
+            "quote_style": "double",
+            "max_line_length": "80",
+            "call_arg_parentheses": "keep"
+        }
+    }
+}

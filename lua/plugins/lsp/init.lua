@@ -4,6 +4,12 @@ return {
     enabled = true,
     dependencies = {
         { "neovim/nvim-lspconfig" },
+        {
+            "folke/neodev.nvim",
+            config = function()
+                require("neodev").setup()
+            end
+        },
         { "williamboman/mason.nvim" },
         { "creativenull/efmls-configs-nvim" },
         { "nvim-telescope/telescope.nvim" }
