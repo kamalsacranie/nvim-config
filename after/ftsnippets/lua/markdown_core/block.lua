@@ -22,6 +22,13 @@ return {
         { condition = conds.line_begin }
     ),
     s(
+        { trig = "hr", name = "Horizontal rule" },
+        { f(function(_, _, _)
+            return ("-"):rep(vim.bo.tw)
+        end) },
+        { condition = conds.line_begin }
+    ),
+    s(
         {
             trig = "env",
             name = "Latex environemnt",
