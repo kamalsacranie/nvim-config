@@ -47,16 +47,34 @@ local function open_file(...)
     end
 end
 
-local function open_file_(prev, path, mode, perms, callback)
+
+local intercept = function(callback, state, next, err, data)
+    err, data, state = callback(err, data, state)
+    return next(err, data, state)
+end
+
+local function arrange(action, prev, callback)
     return function(next)
-        return prev(function(a, b, c)
-            return vim.uv.fs_open(path, mode, perms,
-                function(err, file_descriptor)
-                    callback(err, file_descriptor)
-                    next(err, file_descriptor, file_descriptor)
-                end)
+        return prev(function(err, data, state)
+            local cb = curry(intercept, callback, state, next)
+            return action(err, data, state, cb)
         end)
     end
+end
+
+local function open_file_(prev, path, mode, perms, callback)
+    return arrange(
+        function(err, data, state, cb)
+            return vim.uv.fs_open(path, mode, perms,
+                cb)
+        end,
+        prev, callback)
+    -- return function(next)
+    --     return prev(function(err, data, state)
+    --         local cb = curry(intercept, callback, state, next)
+    --         return vim.uv.fs_open(path, mode, perms, cb)
+    --     end)
+    -- end
 end
 
 -- local function write_file(data, `file`, callback, next)
@@ -74,38 +92,49 @@ local function write_file(...)
     end
 end
 
-local function write_file_(prev, data, callback)
-    return function(next)
-        return prev(function(_, _, fd)
-            return vim.uv.fs_write(fd, data, nil, function(err, data)
-                callback(err, data)
-                next(err, data, fd)
-            end)
-        end)
-    end
+local function write_file_(prev, text, callback)
+    return arrange(
+        function(err, data, state, cb)
+            return vim.uv.fs_write(data, text, nil, cb)
+        end,
+        prev, callback)
+    -- return function(next)
+    --     return prev(function(err, data, state)
+    --         local cb = curry(intercept, callback, state, next)
+    --         return vim.uv.fs_write(data, text, nil, cb)
+    --     end)
+    -- end
 end
 
 local function close_file(prev, callback)
-    return function(next)
-        return prev(function(_, data, fd)
-            return vim.uv.fs_close(fd, function(err, data)
-                callback(err, data)
-                next(err, data, fd)
-            end)
-        end)
-    end
+    return arrange(
+        function(err, data, state, cb)
+            return vim.uv.fs_close(data,
+                cb)
+        end,
+        prev, callback)
+    -- return function(next)
+    --     return prev(function(err, data, state)
+    --         local cb = curry(intercept, callback, state, next)
+    --         return vim.uv.fs_close(data, cb)
+    --     end)
+    -- end
 end
 
-local startProc = function(id) return id() end
+local startProc = function(id) return id(nil, nil, {}) end
 local endProc = function() end
 
 -- for state, we can just pass through an empty table which can be modified in
 -- the callbacks and is what should be returned. we can do err, val
--- local file = open_file_(startProc, "./temp.txt", "a+",
---     bit.bor(0000200, 0000400),
---     function() print("opening") end)
--- file = write_file_(file, "text to write\n", function() print("writing") end)
--- file = write_file_(file, "text to write 2\n",
---     function() print("writing again!!") end)
--- file = close_file(file, function() print("closed file") end)
--- file(endProc)
+local file = open_file_(startProc, "./temp.txt", "a+",
+    bit.bor(0000200, 0000400),
+    function(err, data, state)
+        state.fd = data
+        return err, data, state
+    end)
+file = write_file_(file, "text to write\n",
+    function(err, _, state) return err, state.fd, state end)
+file = write_file_(file, "text to write 2\n",
+    function(err, _, state) return err, state.fd, state end)
+file = close_file(file, function() print("closed file") end)
+file(endProc)
