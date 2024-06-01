@@ -1,6 +1,17 @@
 local M = {}
 
-M.treesitter = { indent = { enable = false }, }
+M.treesitter = {
+    indent = { enable = false },
+    textobjects = {
+        select = {
+            keymaps = {
+                ["ic"] = "@code_block.inner",
+                ["ac"] = "@code_block.outer",
+                ["as"] = "@section.outer",
+            },
+        }
+    }
+}
 
 M.cmp = function()
     local all_sources = require("plugins.cmp.sources")
@@ -9,7 +20,7 @@ M.cmp = function()
         all_sources.nvim_lsp,
         all_sources.luasnip,
         all_sources.path,
-        { name = "md_cmp" }
+        all_sources.pandoc,
     }
 end
 

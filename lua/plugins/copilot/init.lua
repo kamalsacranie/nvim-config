@@ -4,15 +4,15 @@ return {
         require("copilot").setup({
             suggestion = {
                 enabled = true,
-                auto_trigger = true,
+                auto_trigger = false,
                 debounce = 75,
                 keymap = {
                     accept = "<C-f>",
                     accept_word = false,
                     accept_line = false,
-                    next = "<D-]>",
-                    prev = "<D-[>",
-                    dismiss = "<D-[><D-]>",
+                    next = "<M-]>",
+                    prev = "<M-[>",
+                    dismiss = "<M-[><M-]>",
                 },
             },
             filetypes = {
@@ -28,6 +28,8 @@ return {
             },
             copilot_node_command = "node",
         })
+        require("nvim-mapper").map_keymap_list(
+            require("plugins.copilot.mappings"), {})
     end,
     event = "InsertEnter",
 }

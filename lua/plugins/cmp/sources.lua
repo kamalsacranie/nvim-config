@@ -3,4 +3,5 @@ return {
     luasnip = { name = "luasnip" },
     path = { name = "path" },
     otter = { name = "otter" },
+    pandoc = { name = "cmp_pandoc" },
 }

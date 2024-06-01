@@ -26,7 +26,10 @@ return {
                 "telescope.utils").buffer_dir()
         })
     end },
-    { "n", "<leader>ff", telezones.find_files },
+    { "n", "<leader>ff", function()
+        P(vim.fn.getcwd())
+        telezones.find_files({ cwd = vim.fn.getcwd() })
+    end },
     { "n", "<leader>fF", function()
         telezones.find_files({
             cwd = require("utils.helpers").root_directory_from_patterns(

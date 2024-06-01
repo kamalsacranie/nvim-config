@@ -1,7 +1,11 @@
 local get_python_path = function(lsp_root_dir)
-    if vim.env.VIRTUAL_ENV then -- if venve is active
+    if vim.env.VIRTUAL_ENV then
         return require("lspconfig.util").path.join(vim.env.VIRTUAL_ENV ..
             "/bin/python")
+    end
+
+    if lsp_root_dir == nil then
+        lsp_root_dir = vim.fn.getcwd()
     end
     local result = vim.fs.find({ ".venv", "poetry.lock", "Pipfile" },
         {
@@ -27,11 +31,14 @@ local get_python_path = function(lsp_root_dir)
     return "python"
 end
 
+
 return {
     on_init = function(client)
         client.config.settings = vim.tbl_deep_extend("force",
             client.config.settings, {
-                python = { pythonPath = get_python_path(client.config.root_dir) }
+                python = {
+                    pythonPath = get_python_path(client.config.root_dir),
+                },
             })
 
         client.notify("workspace/didChangeConfiguration",
@@ -44,5 +51,4 @@ return {
             fname
         ) or util.path.dirname(fname)
     end,
-
 }

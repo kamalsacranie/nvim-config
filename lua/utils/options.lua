@@ -1,9 +1,9 @@
 local M = {}
 
 ---@class opts
----@field buf vim.bo
----@field win vim.wo
----@field glob vim.bo
+---@field buf  vim.bo
+---@field win  vim.wo?
+---@field glob vim.bo?
 
 ---@param default_opts vim.api.keyset.option
 ---@return fun(key: string, value: any, opts?: vim.api.keyset.option)
@@ -63,6 +63,7 @@ end
 ---@field buf? vim.api.keyset.option
 ---@field win? vim.api.keyset.option
 ---@field glob? vim.api.keyset.option
+
 ---@param options opts
 ---@param setting_options? all_setting_options
 M.set_all_options = function(options, setting_options)

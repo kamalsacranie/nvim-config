@@ -61,7 +61,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
         })
 
         require("nvim-mapper").map_keymap("n", "<leader>ltf",
-            function() format = false end)
+            function()
+                format = not format
+                vim.notify(
+                    "Format on save " .. (format and "enabled" or "disabled"),
+                    "info",
+                    {
+                        title = "Format on save"
+                    })
+            end)
     end
 })
 

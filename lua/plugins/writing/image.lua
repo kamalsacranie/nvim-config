@@ -15,12 +15,12 @@ M.setup = function()
         backend = "kitty",
         max_width = 100,
         max_height = 40,
-        editor_only_render_when_focused = false, -- auto show/hide images when the editor gains/looses focus
+        editor_only_render_when_focused = true, -- auto show/hide images when the editor gains/looses focus
         window_overlap_clear_enabled = true,
         integrations = {
             markdown = {
                 enabled = true,
-                only_render_at_cursor = true,
+                only_render_image_at_cursor = true,
                 filetypes = { "markdown", "quarto" }
             }
         }

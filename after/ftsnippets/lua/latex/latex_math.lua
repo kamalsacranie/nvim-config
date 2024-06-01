@@ -69,6 +69,67 @@ local spaced_operator = function(trig, delim)
         end),
     }, { condition = is_math })
 end
+local greek = {
+    { "Alpha",   "A" },
+    { "Beta",    "B" },
+    { "Gamma",   "G" },
+    { "Delta",   "D" },
+    { "Epsilon", "Ep" },
+    { "Zeta",    "Z" },
+    { "Eta",     "E" },
+    { "Theta",   "Th" },
+    { "Iota",    "I" },
+    { "Kappa",   "K" },
+    { "Lambda",  "L" },
+    { "Mu",      "M" },
+    { "Nu",      "N" },
+    { "Xi",      "X" },
+    { "Omicron", "Om" },
+    { "Pi",      "P" },
+    { "Rho",     "R" },
+    { "Sigma",   "S" },
+    { "Tau",     "T" },
+    { "Upsilon", "U" },
+    { "Phi",     "Ph" },
+    { "Chi",     "Kh" },
+    { "Psi",     "Ps" },
+    { "Omega",   "O" }
+}
+
+local upper_greek_snips = vim.tbl_map(function(letter)
+        local actual = letter[1]
+        local shorthand = letter[2]
+
+        return s(
+            {
+                trig = "@" .. shorthand,
+                description = "Greek letter " .. actual,
+                name = "Greek letter " .. actual,
+            },
+            { t("\\" .. actual) },
+            { condition = is_math }
+        )
+    end,
+    greek
+)
+
+local lower_greek_snips = vim.tbl_map(function(letter)
+        local actual = letter[1]:lower()
+        local shorthand = letter[2]:lower()
+
+        return s(
+            {
+                trig = "@" .. shorthand,
+                regTrig = false,
+                name = "Greek letter " .. actual,
+                description = "Greek letter " .. actual
+            },
+            { t("\\" .. actual) },
+            { condition = is_math }
+        )
+    end,
+    greek
+)
 
 return {
         s(
@@ -78,6 +139,8 @@ return {
                 condition = is_math,
             }
         ),
+        unpack(lower_greek_snips),
+        unpack(upper_greek_snips),
     },
     {
         s(
@@ -163,7 +226,6 @@ return {
         s({ trig = "..." }, t([[\dots ]]), {
             condition = is_math,
         }),
-        s({ trig = "@b" }, t([[\beta]]), { condition = is_math }),
         s(
             { trig = "{" },
             { t([[\{]]), i(1), t([[\}]]) },
@@ -180,309 +242,9 @@ return {
         }, {
             condition = is_math,
         }),
-        -- ms(
-        -- 	{ trig = "frac" },
-        -- 	{ t([[\frac]]), t("{"), i(1), t("}"), t("{"), i(2), t("}") }
-        -- ),
         s(
             { trig = "text", name = "Math text node" },
             { t([[\text{]]), i(1), t([[}]]) },
             { condition = is_math }
-        ),
+        )
     }
-
----OLD ULTISNIPS
-
--- context "math()"
--- snippet matrix "Matrix"
--- \begin\{pmatrix\}
--- 	$1
--- \end\{pmatrix\}
--- endsnippet
---
--- context "math()"
--- snippet ... "dots" iA
--- \\dots
--- endsnippet
---
--- context "math()"
--- snippet frac "fraction" iA
--- \\dfrac\{${1}\}\{${2}\}${3}
--- endsnippet
---
--- context "math()"
--- snippet bar "bar" iA
--- \\overline\{${1}\}${2}
--- endsnippet
---
--- context "math()"
--- snippet hat "hat" iA
--- \\hat\{${1}\}${2}
--- endsnippet
---
--- context "math()"
--- snippet check "check" iA
--- \\check\{${1}\}${2}
--- endsnippet
---
--- context "math()"
--- snippet tilde "tilde" iA
--- \\widetilde\{${1}\}${2}
--- endsnippet
---
--- context "math()"
--- snippet sq "square" iA
--- ^\{2\}${1}
--- endsnippet
---
--- context "math()"
--- snippet = "equals" iA
---  =
--- endsnippet
---
--- context "math()"
--- snippet + "plus" iA
---  +
--- endsnippet
---
--- context "math()"
--- snippet - "minus" iA
---  -
--- endsnippet
---
--- context "math()"
--- snippet ** "times" iA
--- \\times
--- endsnippet
---
--- context "math()"
--- snippet rarr "rightarrow" iA
--- \\rightarrow
--- endsnippet
---
--- context "math()"
--- snippet Rarr "eqrightarrow" iA
--- \\Rightarrow
--- endsnippet
---
--- context "math()"
--- snippet ^ "superscript" iA
--- ^\{${1}\}${2}
--- endsnippet
---
--- context "math()"
--- snippet _ "subscript" iA
--- _\{${1}\}${2}
--- endsnippet
---
--- context "math()"
--- snippet sum "sum" iA
--- \sum_\{${1}\}^\{${2}\}${3}
--- endsnippet
---
--- context "math()"
--- snippet max "max" iA
--- \\underset\{${1:undertext}\}\max $0
--- endsnippet
---
--- context "math()"
--- snippet min "min" iA
--- \\underset\{${1:undertext}\}\min $0
--- endsnippet
---
--- context "math()"
--- snippet root "squareroot" iA
--- \\sqrt\{${1:underroot}\}$0
--- endsnippet
---
--- context "math()"
--- snippet left) "(brakcets" iA
--- \\left($1\\right)$2
--- endsnippet
---
--- context "math()"
--- snippet left] "[brakcets" iA
--- \\left[$1\\right]$2
--- endsnippet
---
--- context "math()"
--- snippet left} "{brakcets" iA
--- \\left\\{$1\\right\\}$2
--- endsnippet
---
--- snippet big) "big)" iA
--- \\big($1\\big)$2
--- endsnippet
---
--- context "math()"
--- snippet big] "big]" iA
--- \\big[$1\\big]$2
--- endsnippet
---
--- context "math()"
--- snippet big} "big}" iA
--- \\big\\{$1\\big\\}$2
--- endsnippet
---
--- context "math()"
--- snippet text "inmathtext" iA
--- \text\{ ${1:${VISUAL}} \}$2
--- endsnippet
---
--- context "math()"
--- snippet underbrace "undersetbrace" iA
--- \\underbrace\{$1\}_\{$2\}
--- endsnippet
---
--- context "math()"
--- snippet overbrace "oversetbrace" iA
--- \\overbrace\{$1\}^\{$2\}
--- endsnippet
---
--- context "math()"
--- snippet bold "boldface" i
--- \\mathbf{$1}
--- endsnippet
---
--- context "math()"
--- snippet geq "Greater than or equal to" iA
---  \\geq
--- endsnippet
---
--- context "math()"
--- snippet leq "Less than or equal to" iA
---  \\leq
--- endsnippet
---
--- context "math()"
--- snippet > "Greater than" iA
---  >
--- endsnippet
---
--- context "math()"
--- snippet < "Greater than" iA
---  <
--- endsnippet
---
--- context "math()"
--- snippet expected "Expected value operator" iA
--- \\mathbb E[$1]$2
--- endsnippet
---
--- context "math()"
--- snippet `` "Prime" iA
---  \\prime
--- endsnippet
---
---
--- # Letters
---
--- context "math()"
--- snippet @p "pi" iA
--- \pi
--- endsnippet
---
--- context "math()"
--- snippet @P "Pi" iA
--- \Pi
--- endsnippet
---
--- context "math()"
--- snippet @g "gamma" iA
--- \gamma
--- endsnippet
---
--- context "math()"
--- snippet @G "Gamma" iA
--- \Gamma
--- endsnippet
---
--- context "math()"
--- snippet @s "sigma" iA
--- \sigma
--- endsnippet
---
--- context "math()"
--- snippet @S "Sigma" iA
--- \Sigma
--- endsnippet
---
--- context "math()"
--- snippet @t "theta" iA
--- \theta
--- endsnippet
---
--- context "math()"
--- snippet @T "Theta" iA
--- \Theta
--- endsnippet
---
--- context "math()"
--- snippet @b "beta" iA
--- \beta
--- endsnippet
---
--- context "math()"
--- snippet @B "Beta" iA
--- \Beta
--- endsnippet
---
--- context "math()"
--- snippet @a "alpha" iA
--- \alpha
--- endsnippet
---
--- context "math()"
--- snippet @A "Alpha" iA
--- \Alpha
--- endsnippet
---
--- context "math()"
--- snippet @l "lambda" iA
--- \lambda
--- endsnippet
---
--- context "math()"
--- snippet @L "Lambda" iA
--- \Lambda
--- endsnippet
---
--- context "math()"
--- snippet @e "epsilon" iA
--- \epsilon
--- endsnippet
---
--- context "math()"
--- snippet @E "Epsilon" iA
--- \Epsilon
--- endsnippet
---
--- context "math()"
--- snippet @d "delta" iA
--- \delta
--- endsnippet
---
--- context "math()"
--- snippet @D "Delta" iA
--- \Delta
--- endsnippet
---
--- context "math()"
--- snippet @f "phi" iA
--- \phi
--- endsnippet
---
--- context "math()"
--- snippet @F "Phi" iA
--- \Phi
--- endsnippet
---
--- context "math()"
--- snippet @r "rho" iA
--- \rho
--- endsnippet
---
--- context "math()"
--- snippet @m "mu" iA
--- \mu
--- endsnippet

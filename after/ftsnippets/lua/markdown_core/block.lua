@@ -2,6 +2,14 @@
 return {
     s(
         {
+            trig = "pdiv",
+            name = "Pandoc div",
+        },
+        {},
+        { condition = conds.line_begin }
+    ),
+    s(
+        {
             trig = "callout",
             name = "Callout block",
         },

@@ -9,7 +9,7 @@ local start_mlab_repl = function()
             .determine_term_direction(),
         on_open = require("plugins.toggleterm.setup").map_term_nav_keys
     }
-    local cmd = "matlab -nosplash -nodesktop -r 'clc'"
+    local cmd = "matlab -nosplash -nodesktop -r 'clc' 2> /dev/null & echo $! "
     mlab_repl = require("plugins.toggleterm.utils").exec_or_create_term(cmd,
         term_cfg,
         "")

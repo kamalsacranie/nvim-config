@@ -55,6 +55,9 @@ return function()
     masonlsp.setup()
     masonlsp.setup_handlers({
         function(server_name)
+            -- change this to be a pcall and only pass if the module is not
+            -- found. This is because the pcall can fail if something in the
+            -- returned table fails too.
             local server_cfg = load_package("plugins.lsp.server_configs." ..
                 server_name)
             local lspconfig = load_package("lspconfig")
@@ -69,4 +72,7 @@ return function()
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = on_attach_aucmd_callback
     })
+    require("lspconfig").sourcekit.setup {
+        filetypes = { "swift" },
+    }
 end

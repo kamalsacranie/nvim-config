@@ -40,9 +40,9 @@ local mappings = {
     { "n", "ml",                "o<ESC>zz" },
     { "n", "ML",                "O<ESC>zz" },
     -- Changing how our highlihgting works
-    { "v", "$",                 "$h" },
-    { "n", "vv",                "V" },
-    { "n", "V",                 "v$h" },
+    -- { "v", "$",                 "$h" },
+    -- { "n", "vv",                "V" },
+    { "n", "vv",                [[v$h]] },
     -- Stop contiguous code jumping from leaving marks
     { "n", "}",                 "<Cmd>keepjumps normal! }<CR>zz" },
     { "n", "{",                 "<Cmd>keepjumps normal! {<CR>zz" },

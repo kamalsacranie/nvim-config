@@ -12,6 +12,7 @@ return {
         },
         { "williamboman/mason.nvim" },
         { "creativenull/efmls-configs-nvim" },
-        { "nvim-telescope/telescope.nvim" }
+        { "nvim-telescope/telescope.nvim" },
+        { "b0o/schemastore.nvim" }
     }
 }

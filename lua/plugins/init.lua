@@ -1,5 +1,11 @@
 return {
     {
+        "stevearc/oil.nvim",
+        config = function() require("oil").setup() end,
+        event = "VeryLazy",
+        dependencies = { "nvim-tree/nvim-web-devicons" }
+    },
+    {
         "kamalsacranie/nvim-mapper",
         config = function()
             local mapper = require("nvim-mapper")
@@ -15,7 +21,7 @@ return {
         enabled = false,
     },
     -- Devicons
-    { "kyazdani42/nvim-web-devicons",  enabled = false },
+    { "kyazdani42/nvim-web-devicons", enabled = false },
     -- Highlight colour strings in nvim editr
     {
         "norcalli/nvim-colorizer.lua",
@@ -32,6 +38,7 @@ return {
     {
         dir = "/Users/kamalsacranie/Code/nvim-plugins/pandoc-preview",
         config = function()
+            require("pandoc-preview").setup({})
             vim.keymap.set("v", "<leader><leader>p", function()
                 require("pandoc-preview").preview()
             end)
