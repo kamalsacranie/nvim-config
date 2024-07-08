@@ -20,12 +20,6 @@ end
 
 ---@type Keymap[]
 return {
-    { "n", "*", function()
-        require("telescope.builtin").grep_string({
-            cwd = require(
-                "telescope.utils").buffer_dir()
-        })
-    end },
     { "n", "<leader>ff", function()
         P(vim.fn.getcwd())
         telezones.find_files({ cwd = vim.fn.getcwd() })
