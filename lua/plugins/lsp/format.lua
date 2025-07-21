@@ -19,12 +19,14 @@ function M.ranged_format(fallback)
     })
 end
 
+local dispatch = {}
+local should_write = true
+
 local augroup = vim.api.nvim_create_augroup("format_on_save_lsp",
     { clear = true })
 vim.api.nvim_create_autocmd("LspAttach", {
     group = augroup,
     callback = function(env)
-        local writing = false
         local format = true
         local bufnr = env.buf
         local client = vim.lsp.get_client_by_id(env.data.client_id)
@@ -42,21 +44,25 @@ vim.api.nvim_create_autocmd("LspAttach", {
                 return
             end
             vim.lsp.util.apply_text_edits(result, bufnr, client.offset_encoding)
-            writing = true
             vim.cmd [[write]]
-            -- center the screen (would have to change this if I ever dont have curline centered)
-            require("utils.helpers").send_keys_to_nvim("zz")
-            writing = false
         end
 
-        vim.api.nvim_create_autocmd("BufWritePost", {
+        vim.api.nvim_create_autocmd("BufWritePre", {
             group = augroup,
             callback = function()
-                if vim.fn.bufnr() ~= bufnr or writing or not format then
+                if not should_write then
                     return
                 end
-                client.request("textDocument/formatting", params, handler,
-                    bufnr)
+
+                if dispatch[bufnr] == nil then
+                    dispatch[bufnr] = {}
+                end
+
+                table.insert(dispatch[bufnr], vim.schedule_wrap(function()
+                    client.request("textDocument/formatting", params,
+                        handler,
+                        bufnr)
+                end))
             end,
         })
 
@@ -71,6 +77,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
                     })
             end)
     end
+})
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+    group = augroup,
+    callback = function(ev)
+        local bufnr = ev.buf
+        should_write = false
+
+        local success, cb = pcall(table.remove, dispatch[bufnr])
+        if not success then return end
+        if cb then
+            cb()
+        else
+            require("utils.helpers").send_keys_to_nvim("zz")
+            should_write = true
+        end
+    end,
 })
 
 return M

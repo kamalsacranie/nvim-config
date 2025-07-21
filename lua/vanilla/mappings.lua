@@ -55,7 +55,7 @@ local mappings = {
     -- Going to end of line. perhaps we can see if we can make it soe that we go to the end of the next delimitor
     { "i", "<C-L>",             "<C-o>$" },
     -- Replicate highlight down
-    { "v", "<C-j>",             ":co '><CR>V'[=gv" }
+    { "v", "<C-j>",             ":co '><CR>V'[=gv" },
 }
 
 

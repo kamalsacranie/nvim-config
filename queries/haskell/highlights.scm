@@ -1,6 +1,6 @@
 ;; inherits: haskell
 ;; extends
 
-( "\\" @conceal (#set! conceal "λ"))
+; ( "\\" @conceal (#set! conceal "λ"))
 
-(((operator) @neq (#contains? @neq "/=")) @conceal (#set! conceal "≠"))
+; (((operator) @neq (#contains? @neq "/=")) @conceal (#set! conceal "≠"))

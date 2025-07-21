@@ -1,4 +1,4 @@
 ;; inherits: markdown
 ;; extends
 
-(minus_metadata) @fold
+; (minus_metadata) @fold

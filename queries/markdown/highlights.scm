@@ -1,4 +1,4 @@
 ;; inherits: markdown
 ;; extends
 
-(block_quote) @comment
+; (block_quote) @comment

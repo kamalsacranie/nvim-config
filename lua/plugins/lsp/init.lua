@@ -10,7 +10,16 @@ return {
                 require("neodev").setup()
             end
         },
-        { "williamboman/mason.nvim" },
+        {
+            "williamboman/mason.nvim",
+            config = function()
+                require("mason").setup({
+                    registries = {
+                        "file:~/Desktop/mason-registry"
+                    }
+                })
+            end
+        },
         { "creativenull/efmls-configs-nvim" },
         { "nvim-telescope/telescope.nvim" },
         { "b0o/schemastore.nvim" }

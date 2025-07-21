@@ -1,12 +1,13 @@
 local M = {}
 
-M.efm = function()
-    return {
-        -- {
-        --     formatCommand = "ocamlformat",
-        --     formatStdin = false
-        -- }
+M.treesitter = {
+    textobjects = {
+        select = {
+            keymaps = {
+                ["am"] = "@module.outer",
+            },
+        }
     }
-end
+}
 
 return M

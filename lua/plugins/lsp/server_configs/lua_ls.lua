@@ -17,7 +17,7 @@ local fallback_defaults = {
             enable = false,
         },
         format = {
-            enable = true,
+            enable = false,
             defaultConfig = {
                 indent_style = "space",
                 indent_size = "4",
@@ -31,7 +31,8 @@ local fallback_defaults = {
 
 return {
     on_init = function(client)
-        local path = client.workspace_folders[1].name
+        local path = type(client.workspace_folders) == "table" and
+            client.workspace_folders[1].name or vim.fn.getcwd()
         if not vim.uv.fs_stat(path .. "/.luarc.json") and not vim.uv.fs_stat(path .. "/.luarc.jsonc") then
             client.config.settings = vim.tbl_deep_extend("force",
                 client.config.settings, fallback_defaults)

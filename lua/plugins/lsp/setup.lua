@@ -37,6 +37,21 @@ local on_attach_aucmd_callback = function(env)
             buffer = bufnr,
         })
     end
+    if client.server_capabilities.codeLensProvider then
+        local codelens = vim.api.nvim_create_augroup(
+            "LSPCodeLens",
+            { clear = true }
+        )
+        vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "CursorHold" },
+            {
+                group = codelens,
+                callback = function()
+                    vim.lsp.inlay_hint.enable(true)
+                    vim.lsp.codelens.refresh { bufnr = 0 }
+                end,
+                buffer = bufnr,
+            })
+    end
     if client.server_capabilities.completionProvider then
         vim.bo[bufnr].complete = ""
     end
@@ -52,21 +67,22 @@ return function()
         return
     end
     mason.setup()
-    masonlsp.setup()
-    masonlsp.setup_handlers({
-        function(server_name)
-            -- change this to be a pcall and only pass if the module is not
-            -- found. This is because the pcall can fail if something in the
-            -- returned table fails too.
-            local server_cfg = load_package("plugins.lsp.server_configs." ..
-                server_name)
-            local lspconfig = load_package("lspconfig")
-            if not lspconfig then
-                return
-            end
-            local lsp_server = lspconfig[server_name]
-            lsp_server.setup(server_cfg or {})
-        end,
+    masonlsp.setup({ PATH = "append" })
+    masonlsp.setup_handlers({ function(server_name)
+        -- change this to be a pcall and only pass if the module is not
+        -- found. This is because the pcall can fail if something in the
+        -- returned table fails too.
+        local server_cfg = load_package("plugins.lsp.server_configs." ..
+            server_name)
+        local lspconfig = load_package("lspconfig")
+        if not lspconfig then
+            return
+        end
+        local lsp_server = lspconfig[server_name]
+        lsp_server.setup(vim.tbl_deep_extend("force",
+            lsp_server.document_config.default_config,
+            server_cfg or {}))
+    end,
     })
     vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -74,5 +90,11 @@ return function()
     })
     require("lspconfig").sourcekit.setup {
         filetypes = { "swift" },
+    }
+    require("lspconfig").ocamllsp.setup {
+        filetypes = { "ocaml" },
+        settings = {
+            ocaml = { codelens = { enable = true } },
+        }
     }
 end

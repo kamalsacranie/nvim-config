@@ -1,4 +1,4 @@
 ;; inherits: markdown
 ;; extends
 
-(((inline) @latex (#match? @latex "\\\\begin\\{.*\\}(\\n|.|\\r|\\r\\n)*\\\\end\\{.*\\}")) @injection.content (#set! injection.language "latex"))
+; (((inline) @latex (#match? @latex "\\\\begin\\{.*\\}(\\n|.|\\r|\\r\\n)*\\\\end\\{.*\\}")) @injection.content (#set! injection.language "latex"))
