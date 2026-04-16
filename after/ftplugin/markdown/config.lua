@@ -1,7 +1,7 @@
 local M = {}
 
 M.treesitter = {
-    indent = { enable = false },
+    indent = { enable = true },
     textobjects = {
         select = {
             keymaps = {

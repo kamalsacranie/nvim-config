@@ -1,9 +1,9 @@
----@type vim.bo
-local global_options = {
+--- vim.opt is the global default for all buffers
+---@type table<[vim.opt], any>
+return {
     termguicolors = true,
-    -- shada = vim.opt.shada + "n~/.cache/nvim/viminfo", -- this is how we append
-    updatetime = 500, -- For code word highlighting
-    -- shell = vim.fn.getenv("HOMEBREW_PREFIX") .. "/bin/zsh",
+    -- For code word highlighting
+    updatetime = 0,
     -- Numbers,
     number = true,
     relativenumber = true,
@@ -31,5 +31,3 @@ local global_options = {
     swapfile = false,
     complete = "",
 }
-
-require("utils.options").set_global_options(global_options)

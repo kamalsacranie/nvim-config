@@ -1,6 +1,4 @@
--- syntax match ConcealedDetails /\s\s$/ conceal cchar=·
-
----@type opts
+---@type table<[vim.bo], any>
 local md_opts = {
     buf = {
         tabstop = 2,
@@ -16,7 +14,11 @@ local md_opts = {
 
 require("utils.spell")
 
-require("utils.options").set_all_options(md_opts)
-
-require("nvim-mapper").map_keymap_list(require("ftplugin.markdown.mappings"),
-    { buffer = true })
+local bufnr = vim.api.nvim_get_current_buf()
+for opt, value in pairs(md_opts.buf) do
+    vim.bo[bufnr][opt] = value
+end
+local winid = vim.api.nvim_get_current_win()
+for opt, value in pairs(md_opts.win) do
+    vim.wo[winid][opt] = value
+end

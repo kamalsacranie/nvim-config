@@ -8,4 +8,4 @@ local options = {
 
 require("utils.options").set_buf_options(options)
 
-require("nvim-mapper").map_keymap_list(require("ftplugin.haskell.mappings"))
+require("nvim-mapper").map_keymap_list(require("haskell.mappings"))

@@ -2,7 +2,7 @@ local utils = require("utils.helpers")
 local defaults = {
     ensure_installed = { "markdown", "markdown_inline", "latex", "html" },
     indent = { enable = true },
-    sync_install = false,
+    sync_install = true,
     highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,
@@ -37,7 +37,8 @@ local setup = utils.get_items_in_directory(
             "treesitter")
         config = vim.tbl_deep_extend("force", config, ft_specific_config)
         require("nvim-treesitter.configs").setup(config or {})
-    end)
+    end
+)
 
 ---@type LazySpec
 return {

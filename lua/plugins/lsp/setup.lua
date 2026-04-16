@@ -61,40 +61,34 @@ local on_attach_aucmd_callback = function(env)
 end
 
 return function()
-    local mason = load_package("mason")
-    local masonlsp = load_package("mason-lspconfig")
-    if not masonlsp or not mason then
-        return
-    end
-    mason.setup()
-    masonlsp.setup({ PATH = "append" })
-    masonlsp.setup_handlers({ function(server_name)
-        -- change this to be a pcall and only pass if the module is not
-        -- found. This is because the pcall can fail if something in the
-        -- returned table fails too.
-        local server_cfg = load_package("plugins.lsp.server_configs." ..
-            server_name)
-        local lspconfig = load_package("lspconfig")
-        if not lspconfig then
-            return
-        end
-        local lsp_server = lspconfig[server_name]
-        lsp_server.setup(vim.tbl_deep_extend("force",
-            lsp_server.document_config.default_config,
-            server_cfg or {}))
-    end,
-    })
-    vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-        callback = on_attach_aucmd_callback
-    })
-    require("lspconfig").sourcekit.setup {
-        filetypes = { "swift" },
-    }
-    require("lspconfig").ocamllsp.setup {
-        filetypes = { "ocaml" },
-        settings = {
-            ocaml = { codelens = { enable = true } },
-        }
-    }
+    -- masonlsp.setup({ PATH = "append" })
+    -- masonlsp.setup_handlers({ function(server_name)
+    --     -- change this to be a pcall and only pass if the module is not
+    --     -- found. This is because the pcall can fail if something in the
+    --     -- returned table fails too.
+    --     local server_cfg = load_package("plugins.lsp.server_configs." ..
+    --         server_name)
+    --     local lspconfig = load_package("lspconfig")
+    --     if not lspconfig then
+    --         return
+    --     end
+    --     local lsp_server = lspconfig[server_name]
+    --     lsp_server.setup(vim.tbl_deep_extend("force",
+    --         lsp_server.document_config.default_config,
+    --         server_cfg or {}))
+    -- end,
+    -- })
+    -- vim.api.nvim_create_autocmd("LspAttach", {
+    --     group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+    --     callback = on_attach_aucmd_callback
+    -- })
+    -- require("lspconfig").sourcekit.setup {
+    --     filetypes = { "swift" },
+    -- }
+    -- require("lspconfig").ocamllsp.setup {
+    --     filetypes = { "ocaml" },
+    --     settings = {
+    --         ocaml = { codelens = { enable = true } },
+    --     }
+    -- }
 end

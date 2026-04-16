@@ -1,8 +1,7 @@
 local M = {}
 
-local stylua = require("efmls-configs.formatters.stylua")
-
 M.efm = function()
+    local stylua = require("efmls-configs.formatters.stylua")
     return { stylua }
 end
 

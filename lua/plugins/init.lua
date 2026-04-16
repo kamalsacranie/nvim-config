@@ -3,21 +3,19 @@ return {
         "rmagatti/auto-session",
         lazy = false,
         dependencies = {
-            "nvim-telescope/telescope.nvim", -- Only needed if you want to use sesssion lens
+            "nvim-telescope/telescope.nvim",
         },
         config = function()
             local opts = {
-                auto_session_enabled = true,
-                auto_session_root_dir = vim.fn.stdpath("data") .. "/sessions/",
-                auto_save_enabled = true,
-                auto_restore_enabled = true,
-                auto_session_suppress_dirs = nil,
-                auto_session_allowed_dirs = nil,
-                auto_session_create_enabled = true,
-                auto_session_enable_last_session = false,
-                auto_session_use_git_branch = false,
-                auto_restore_lazy_delay_enabled = true,
+                auto_create = true,
+                auto_restore = true,
+                auto_restore_last_session = false,
+                auto_save = true,
+                enabled = true,
+                git_use_branch_name = false,
+                lazy_support = true,
                 log_level = "error",
+                root_dir = vim.fn.stdpath("data") .. "/sessions/",
             }
 
             vim.o.sessionoptions =
@@ -39,21 +37,14 @@ return {
     { "folke/neoconf.nvim" },
     {
         "fladson/vim-kitty",
-        enabled = false,
     },
     -- Highlight colour strings in nvim editr
     {
-        "norcalli/nvim-colorizer.lua",
+        "brenoprata10/nvim-highlight-colors",
         config = function()
-            require("colorizer").setup()
+            require("nvim-highlight-colors").setup({})
         end,
-        enabled = false
     },
-    -- Document highlighting
-    { "andymass/vim-matchup",          enabled = false },
-    -- Good python indenting (might be obselete now)
-    { "Vimjas/vim-python-pep8-indent", enabled = false },
-    -- "kamalsacranie/nvim-jest-tester",
     {
         dir = "/Users/kamalsacranie/Code/nvim-plugins/pandoc-preview",
         config = function()

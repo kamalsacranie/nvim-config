@@ -10,5 +10,5 @@ local python_opts = {
 
 require("utils.options").set_all_options(python_opts)
 
-require("nvim-mapper").map_keymap_list(require("ftplugin.python.mappings"),
-    { buffer = true })
+-- require("nvim-mapper").map_keymap_list(require("ftplugin.python.mappings"),
+--     { buffer = true })
